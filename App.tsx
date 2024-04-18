@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 function App(): React.JSX.Element {
   return (
     <View style={styles.root}>
-      <Text>SALAM</Text>
+      <Text>Test Text</Text>
     </View>
   );
 }
