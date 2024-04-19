@@ -18,7 +18,7 @@ module.exports = {
           '.png',
         ],
         alias: {
-          assets: './src/assets',
+          assets: './assets',
           components: './src/components',
           configs: './src/configs',
           hooks: './src/hooks',

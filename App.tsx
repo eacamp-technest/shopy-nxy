@@ -1,5 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {SvgImage} from 'components/SvgImage';
+import {ImageResources} from 'assets/VectorResources.g';
 
 const App = () => {
   return (
@@ -13,6 +15,7 @@ const App = () => {
       <Text style={styles.ralewayItalicBebasLigh}>
         This text uses a thin italic raleway font
       </Text>
+      <SvgImage source={ImageResources.test} />
     </View>
   );
 };
