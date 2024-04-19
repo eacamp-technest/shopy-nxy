@@ -73,4 +73,7 @@ export const colors = {
     main: '#1DA1F2',
     dark: '#0C90E1',
   },
+  white: {
+    main: '#FFFFFF',
+  },
 };
