@@ -19,21 +19,6 @@ const App = () => {
       <Text style={TypographyStyles.smallRegular}>
         This text uses a thin italic raleway font
       </Text>
-      <Text style={styles.ralewayItalicBebasReg}>
-        This text uses a thin italic raleway font
-      </Text>
-      <Text style={styles.ralewayItalicBebasLigh}>
-        This text uses a thin italic raleway font
-      </Text>
-      <Text style={styles.ralewayItalicBebas}>
-        This text uses a thin italic raleway font
-      </Text>
-      <Text style={styles.ralewayItalicBebasReg}>
-        This text uses a thin italic raleway font
-      </Text>
-      <Text style={styles.ralewayItalicBebasLigh}>
-        This text uses a thin italic raleway font
-      </Text>
       <SvgImage source={ImageResources.test} />
     </View>
   );
@@ -48,19 +33,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  ralewayItalicBebas: {
-    fontFamily: 'BebasNeue-Bold',
-    fontSize: 30,
-  },
-
-  ralewayItalicBebasReg: {
-    fontFamily: 'BebasNeue-Regular',
-    fontSize: 30,
-  },
-  ralewayItalicBebasLigh: {
-    fontFamily: 'BebasNeue-Light',
-    fontSize: 30,
   },
 });
