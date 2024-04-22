@@ -17,10 +17,10 @@ export class ImageResources {
   static settings = require('./vectors/settings.svg');
   static edit2 = require('./vectors/edit2.svg');
   static star = require('./vectors/star.svg');
-  static camera = require('./vectors/.svg');
+  static camera = require('./vectors/camera.svg');
   static user = require('./vectors/user.svg');
   static mapPin = require('./vectors/mapPin.svg');
-  static shoppingCad = require('./vectors/shoppingCart.svg');
+  static shoppingCat = require('./vectors/shoppingCart.svg');
   static creditCard = require('./vectors/creditCard.svg');
   static info = require('./vectors/info.svg');
   static logOut = require('./vectors/logOut.svg');
@@ -33,6 +33,4 @@ export class ImageResources {
   static check = require('./vectors/check.svg');
   static minus = require('./vectors/minus.svg');
   static plusCircle = require('./vectors/plusCircle.svg');
-
-  // ---
 }
