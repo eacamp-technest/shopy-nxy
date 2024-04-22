@@ -33,4 +33,6 @@ export class ImageResources {
   static check = require('./vectors/check.svg');
   static minus = require('./vectors/minus.svg');
   static plusCircle = require('./vectors/plusCircle.svg');
+
+  // ---
 }
