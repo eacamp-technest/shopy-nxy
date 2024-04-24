@@ -11,10 +11,10 @@
     "android-clean": "cd android; ./gradlew clean ; cd ..  "
   },
   "dependencies": {
-    "react": "18.2.0",
+    "react": "^18.2.0",
     "react-native": "0.73.6",
     "react-native-bootsplash": "^5.5.3",
-    "react-native-svg": "^15.1.0"
+    "react-native-svg": "^15.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
