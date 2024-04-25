@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {TypographyStyles} from 'theme/typography';
+import {StatusBar, StyleSheet, View} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
 import {colors} from 'theme/colors';
+import Router from 'router';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   useEffect(() => {
@@ -16,11 +17,12 @@ const App = () => {
     });
   }, []);
   return (
-    <View style={styles.container}>
-      <Text style={TypographyStyles.title1}>
-        This text uses a thin italic raleway font
-      </Text>
-    </View>
+    <SafeAreaProvider>
+      <StatusBar barStyle={'dark-content'} />
+      <View style={styles.root}>
+        <Router />
+      </View>
+    </SafeAreaProvider>
   );
 };
 export default App;
@@ -28,10 +30,8 @@ export default App;
 // ! Styles
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.lavender.light,
+  root: {
+    backgroundColor: colors.white,
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
