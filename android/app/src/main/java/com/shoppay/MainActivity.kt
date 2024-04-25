@@ -26,4 +26,5 @@ class MainActivity : ReactActivity() {
       RNBootSplash.init(this, R.style.BootTheme) 
       super.onCreate(null) 
       }
+      
 }

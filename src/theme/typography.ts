@@ -6,7 +6,7 @@ export const bebasFonts = {
   700: 'BebasNeue-Bold',
 };
 
-export const montseratFonts = {
+export const montserratFonts = {
   400: 'Montserrat-Regular',
   600: 'Montserrat-SemiBold',
   700: 'Montserrat-Bold',
@@ -54,52 +54,52 @@ export const TypographyStyles = StyleSheet.create({
     ...commonFontStyling,
   } as TextStyle,
   smallNormal: {
-    fontFamily: montseratFonts[400],
+    fontFamily: montserratFonts[400],
     fontSize: fontSize12,
     lineHeight: lineHeight16,
   },
   mediumNormal: {
-    fontFamily: montseratFonts[400],
+    fontFamily: montserratFonts[400],
     fontSize: fontSize14,
     lineHeight: lineHeight16,
   },
   mediumLarge: {
-    fontFamily: montseratFonts[400],
+    fontFamily: montserratFonts[400],
     fontSize: fontSize14,
     lineHeight: lineHeight20,
   },
   normalNormal: {
-    fontFamily: montseratFonts[400],
+    fontFamily: montserratFonts[400],
     fontSize: fontSize16,
     lineHeight: lineHeight16,
   },
   normalLarge: {
-    fontFamily: montseratFonts[400],
+    fontFamily: montserratFonts[400],
     fontSize: fontSize16,
     lineHeight: lineHeight20,
   },
   normalXLarge: {
-    fontFamily: montseratFonts[400],
+    fontFamily: montserratFonts[400],
     fontSize: fontSize16,
     lineHeight: lineHeight24,
   },
   smallSemiBold: {
-    fontFamily: montseratFonts[600],
+    fontFamily: montserratFonts[600],
     fontSize: fontSize12,
     lineHeight: lineHeight12,
   },
   mediumSemiBold: {
-    fontFamily: montseratFonts[600],
+    fontFamily: montserratFonts[600],
     fontSize: fontSize14,
     lineHeight: lineHeight14,
   },
   normalSemiBold: {
-    fontFamily: montseratFonts[600],
+    fontFamily: montserratFonts[600],
     fontSize: fontSize16,
     lineHeight: lineHeight16,
   },
   largeSemiBold: {
-    fontFamily: montseratFonts[600],
+    fontFamily: montserratFonts[600],
     fontSize: fontSize16,
     lineHeight: lineHeight20,
   },
