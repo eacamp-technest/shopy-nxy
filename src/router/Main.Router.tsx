@@ -1,13 +1,15 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen} from 'screens/Home.Screen';
+import {Routes} from './routes';
+import {NavigationParamList} from 'types/navigation.types';
 
-const MainStack = createNativeStackNavigator();
+const MainStack = createNativeStackNavigator<NavigationParamList>();
 
 export const MainRouter = () => {
   return (
     <MainStack.Navigator>
-      <MainStack.Screen name="Home" component={HomeScreen} />
+      <MainStack.Screen name={Routes.home} component={HomeScreen} />
     </MainStack.Navigator>
   );
 };

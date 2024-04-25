@@ -8,8 +8,8 @@ import {
 /**
  * Layout height and width from design
  */
-const layoutWidth = 390;
-const layoutHeight = 844;
+const layoutWidth = 375;
+const layoutHeight = 812;
 
 const widthScaleFactor = deviceWidth / layoutWidth;
 const heightScaleFactor = deviceHeight / layoutHeight;

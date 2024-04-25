@@ -9,10 +9,12 @@ const screenHeight = Dimensions[1].height;
 
 const activeOpacityIndex = 0.8;
 const standardHitSlopSize = 12;
+const smallHitSlopSize = 8;
 
 export {
   activeOpacityIndex,
   standardHitSlopSize,
+  smallHitSlopSize,
   screenHeight,
   screenWidth,
   windowHeight,

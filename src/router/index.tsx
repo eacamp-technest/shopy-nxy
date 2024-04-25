@@ -4,6 +4,7 @@ import {MainRouter} from './Main.Router';
 import {NavigationContainer} from '@react-navigation/native';
 
 const isAuth = false;
+
 const Router = () => {
   return (
     <NavigationContainer>
