@@ -77,6 +77,3 @@ export const colors = {
     main: '#FFFFFF',
   },
 };
-
-
-
