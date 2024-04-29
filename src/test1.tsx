@@ -1,12 +1,34 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+// import {TouchableOpacity, View} from 'react-native';
+// import React, {useState} from 'react';
+// import {SvgImage} from 'components/SvgImage';
+// import {VectorResources} from 'assets/VectorResources';
 
-const test1 = () => {
-  return (
-    <View>
-      <Text>test1</Text>
-    </View>
-  );
-};
+// export interface IRadioButton {
+//   checked?: boolean;
+//   onPress?: () => void;
+// }
 
-export default test1;
+// export const RadioButton: React.FC<IRadioButton> = ({}) => {
+//   const [checkedState, setCheckedState] = useState<boolean>(false);
+//   const getChangedIcon = (check: boolean) => {
+//     setCheckedState(!check);
+//   };
+
+//   return (
+//     <View>
+//       <TouchableOpacity
+//         activeOpacity={0.5}
+//         onPress={() => {
+//           getChangedIcon(checkedState);
+//         }}>
+//         <SvgImage
+//           source={
+//             checkedState
+//               ? VectorResources.radioTrue
+//               : VectorResources.radioFalseDefault
+//           }
+//         />
+//       </TouchableOpacity>
+//     </View>
+//   );
+// };
