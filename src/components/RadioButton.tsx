@@ -1,4 +1,4 @@
-import {View, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, Pressable} from 'react-native';
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
@@ -16,21 +16,21 @@ export const RadioButton = ({checked, disabled}: IRadioButton) => {
   };
 
   return (
-    <TouchableOpacity onPress={() => getChangedIcon(checkedState)}>
+    <Pressable onPress={() => getChangedIcon(checkedState)}>
       {checked ? (
-        <View style={styles.buttonIconTrue}>
+        <TouchableOpacity style={styles.buttonIconTrue}>
           <View style={styles.buttonIconCircle} />
-        </View>
+        </TouchableOpacity>
       ) : disabled ? (
         <View style={styles.buttonIconDisabled}>
           <View style={styles.buttonDisabledCircle} />
         </View>
       ) : (
-        <View style={styles.buttonIconFalse}>
+        <TouchableOpacity style={styles.buttonIconFalse}>
           <View style={styles.buttonFalseCircle} />
-        </View>
+        </TouchableOpacity>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
