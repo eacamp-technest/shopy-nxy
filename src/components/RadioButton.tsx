@@ -1,7 +1,6 @@
 import {View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
-import {} from 'theme/consts.styles';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 
