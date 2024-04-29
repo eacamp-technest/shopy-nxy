@@ -4,6 +4,7 @@ import {Button} from 'components/Button';
 import {ImageResources} from 'assets/VectorResources.g';
 import {standardHitSlopSize} from 'theme/consts.styles';
 import {CommonStyles} from 'theme/commonStyles';
+import {RadioButton} from 'components/RadioButton';
 
 export const OnboardingScreen = () => {
   return (
@@ -99,7 +100,7 @@ export const OnboardingScreen = () => {
         loading={false}
         onPress={() => console.log('Pressed')}
       />
-      <Button
+      {/* <Button
         hitSlop={standardHitSlopSize}
         icon={ImageResources.messageCircle}
         text={'large'}
@@ -109,9 +110,9 @@ export const OnboardingScreen = () => {
         position={'left'}
         loading={false}
         onPress={() => console.log('Pressed')}
-      />
+      /> */}
       {/* Transparent */}
-      <Button
+      {/* <Button
         hitSlop={standardHitSlopSize}
         icon={ImageResources.messageCircle}
         text={'block'}
@@ -120,8 +121,8 @@ export const OnboardingScreen = () => {
         position={'left'}
         loading={false}
         onPress={() => console.log('Pressed')}
-      />
-      <Button
+      /> */}
+      {/* <Button
         hitSlop={standardHitSlopSize}
         icon={ImageResources.messageCircle}
         text={'Disabled'}
@@ -131,7 +132,10 @@ export const OnboardingScreen = () => {
         loading={false}
         disabled={true}
         onPress={() => console.log('Pressed')}
-      />
+      /> */}
+      <RadioButton checked={true} />
+      <RadioButton checked={false} />
+      <RadioButton disabled={true} />
     </View>
   );
 };

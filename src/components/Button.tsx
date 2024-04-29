@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react';
 import {
   Text as NativeText,
@@ -135,4 +134,3 @@ const styles = StyleSheet.create({
     padding: normalize('vertical', 15),
   },
 });
-

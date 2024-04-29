@@ -77,4 +77,5 @@ export const colors = {
   skyLight: '#DADADC',
   skyDark: '#8D8D8E',
   skyBase: '#CFCFD1',
+  skyLighter: '#E3E3E4',
 };
