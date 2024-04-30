@@ -2,6 +2,7 @@ import {TextStyle, ViewStyle} from 'react-native';
 import {colors} from 'theme/colors';
 
 export type TTypesButton = 'primary' | 'secondary' | 'outlined' | 'transparent';
+
 type TStates = {
   press?: boolean;
   disabled?: boolean;
@@ -18,7 +19,7 @@ type ButtonTheme = {
 const normal = {
   primary: {
     component: {
-      backgroundColor: colors.primary.main,
+      backgroundColor: colors.primary.base,
       borderWidth: 0,
     } as ViewStyle,
     text: {
@@ -31,17 +32,17 @@ const normal = {
       backgroundColor: colors.primary.lightest,
     } as ViewStyle,
     text: {
-      color: colors.primary.main,
+      color: colors.primary.base,
     } as TextStyle,
   },
   outlined: {
     component: {
       backgroundColor: colors.white,
       borderWidth: 1,
-      borderColor: colors.primary.main,
+      borderColor: colors.primary.base,
     } as ViewStyle,
     text: {
-      color: colors.primary.main,
+      color: colors.primary.base,
     } as TextStyle,
   },
   transparent: {
@@ -50,7 +51,7 @@ const normal = {
       borderWidth: 0,
     } as ViewStyle,
     text: {
-      color: colors.primary.main,
+      color: colors.primary.base,
     } as TextStyle,
   },
 };
@@ -92,7 +93,7 @@ const pressed = {
       borderWidth: 0,
     } as ViewStyle,
     text: {
-      color: colors.primary.main,
+      color: colors.primary.base,
     } as TextStyle,
   },
 };
@@ -154,11 +155,11 @@ const determineStateIndex = (state: TStates) => {
   return 'normal';
 };
 
-export const getButtonTheme = (types: TTypesButton, state: TStates) => {
+export const getButtonTheme = (type: TTypesButton, state: TStates) => {
   const index = determineStateIndex(state);
 
   const styles = {
-    ...buttonTheme[index][types],
+    ...buttonTheme[index][type],
   };
 
   return styles;

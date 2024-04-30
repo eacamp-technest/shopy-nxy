@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {Button} from 'components/Button';
 
 export const OnboardingScreen = () => {
   return (
     <View style={styles.root}>
-      <Text>TEST</Text>
+      <Button position={'center'} text={'Create'} type={'secondary'} />
     </View>
   );
 };

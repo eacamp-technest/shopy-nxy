@@ -2,7 +2,7 @@
 
 export const colors = {
   gray: {
-    main: '#383B50',
+    base: '#383B50',
     lighter: '#6E707F',
     light: '#666878',
     dark: '#2B2D3D',
@@ -10,35 +10,35 @@ export const colors = {
     darkest: '#14151D',
   },
   primary: {
-    main: '#DE6053',
+    base: '#DE6053',
     lightest: '#F8DFDD',
     lighter: '#ECA199',
     light: '#E6857B',
     darkest: '#974138',
   },
   secondary: {
-    main: '#2C5385',
+    base: '#2C5385',
     lightest: '#D5DDE7',
     lighter: '#8299B7',
     light: '#5D7BA1',
     darkest: '#1E385A',
   },
   lavender: {
-    main: '#B671DB',
+    base: '#B671DB',
     lightest: '#F0E3F8',
     lighter: '#D4ABEA',
     light: '#C792E3',
     darkest: '#7C4D95',
   },
   mellow: {
-    main: '#F2B36D',
+    base: '#F2B36D',
     lightest: '#FCF0E2',
     lighter: '#F7D2A9',
     light: '#F5C48F',
     darkest: '#A57A4A',
   },
   blue: {
-    main: '#5D8DEA',
+    base: '#5D8DEA',
     lightest: '#DFE8FB',
     lighter: '#9FBCF3',
     light: '#82A7EF',
@@ -59,7 +59,7 @@ export const colors = {
     darkest: '#A48932',
   },
   red: {
-    main: '#FF5247',
+    base: '#FF5247',
     lightest: '#FFE5E5',
     lighter: '#FF9898',
     light: '#FF6D6D',
