@@ -13,19 +13,19 @@ import {TypographyStyles} from 'theme/typography';
 import {normalize} from 'theme/metrics';
 import {colors} from 'theme/colors';
 import {CommonStyles} from 'theme/commonStyles';
-import {TTypesButton, getButtonTheme} from 'helpers/buttonColors';
+import {TTypesButton, getButtonTheme} from 'helpers/buttonTheme';
 
 // ! Interface
 
 type TSize = 'small' | 'block' | 'large';
-type TPosition = 'left' | 'right';
+type TPosition = 'left' | 'right' | 'center';
 
 interface IButton {
   text: string;
   disabled?: boolean;
   loading?: boolean;
   size?: TSize;
-  types?: TTypesButton;
+  type?: TTypesButton;
   icon?: NodeRequire | any;
   position?: TPosition;
   style?: StyleProp<ViewStyle>;
@@ -40,7 +40,7 @@ export const Button: React.FC<IButton> = ({
   disabled,
   loading,
   size = 'block',
-  types = 'primary',
+  type = 'primary',
   icon,
   position = 'left',
   style,
@@ -54,7 +54,7 @@ export const Button: React.FC<IButton> = ({
   const onPressIn = () => setPress(true);
   const onPressOut = () => setPress(false);
 
-  const {component: componentStyle, text: textStyle} = getButtonTheme(types, {
+  const {component: componentStyle, text: textStyle} = getButtonTheme(type, {
     press,
     disabled,
   });
@@ -77,7 +77,7 @@ export const Button: React.FC<IButton> = ({
         styles[size],
         styles[position],
         componentStyle,
-        !icon ? style : null,
+        style,
       ]}
       disabled={disabled || loading}
       onPress={onPress}
@@ -115,6 +115,10 @@ const styles = StyleSheet.create({
 
   left: {
     flexDirection: 'row-reverse',
+  },
+
+  center: {
+    ...CommonStyles.alignJustifyCenter,
   },
 
   right: {},
