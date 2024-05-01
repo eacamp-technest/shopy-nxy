@@ -2,16 +2,8 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "src/assets/fonts/BebasNeue-Bold.ttf",
+      "path": "src/assets/fonts/BebasNeue Bold.ttf",
       "sha1": "a2d8f7db6af5eac2cada57b6f24720be9fbad4bb"
-    },
-    {
-      "path": "src/assets/fonts/BebasNeue-Light.ttf",
-      "sha1": "14bc06548200294b4f0b3cc539f9525684e8a563"
-    },
-    {
-      "path": "src/assets/fonts/BebasNeue-Regular.ttf",
-      "sha1": "0cab0d91dacbeef5fb42d08f0e2f62b5a5cf9767"
     },
     {
       "path": "src/assets/fonts/Montserrat-Bold.ttf",
