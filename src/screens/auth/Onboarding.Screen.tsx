@@ -1,6 +1,14 @@
-
 import React, {Fragment} from 'react';
-import {View, StyleSheet, FlatList, Text, Image} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Text,
+  Image,
+  ViewStyle,
+  TextStyle,
+  ImageStyle,
+} from 'react-native';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {onboarding} from 'constants/onboarding';
 import {CommonStyles} from 'theme/commonStyles';
@@ -12,8 +20,13 @@ import {TypographyStyles} from 'theme/typography';
 import {Pagination} from 'components/Pagination';
 import {SvgImage} from 'components/SvgImage';
 import {ImageResources} from 'assets/VectorResources.g';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {NavigationParamList} from 'types/navigation.types';
+import {Routes} from 'router/routes';
 
-export const OnboardingScreen = () => {
+export const OnboardingScreen: React.FC<
+  NativeStackScreenProps<NavigationParamList, Routes.onboarding>
+> = ({navigation}) => {
   const renderItem = ({item}: {item: any}) => {
     return item.id === 0 ? (
       <Fragment>
@@ -31,11 +44,17 @@ export const OnboardingScreen = () => {
           <Pagination selectedIndex={item.id} style={styles.pagination} />
           <View style={styles.buttons}>
             <Button
-              position={'center'}
               type={'primary'}
+              position={'center'}
               text={'Create an account'}
+              onPress={() => navigation.navigate(Routes.login)}
             />
-            <Button position={'center'} type={'dark'} text={'Log in Instead'} />
+            <Button
+              type={'dark'}
+              position={'center'}
+              text={'Log in Instead'}
+              onPress={() => navigation.navigate(Routes.singUp)}
+            />
           </View>
         </View>
       </Fragment>
@@ -44,7 +63,7 @@ export const OnboardingScreen = () => {
         <View style={styles.logo}>
           <Text style={styles.logoText}>{item.logo}</Text>
         </View>
-        <View style={[styles.secondary]}>
+        <View style={styles.secondary}>
           {item.id === 1 ? (
             <Fragment>
               <Image style={styles.smallImage} source={item.image} />
@@ -77,11 +96,17 @@ export const OnboardingScreen = () => {
           )}
           <View style={styles.buttons}>
             <Button
-              position={'center'}
               type={'primary'}
+              position={'center'}
               text={'Create an account'}
+              onPress={() => navigation.navigate(Routes.login)}
             />
-            <Button position={'center'} type={'dark'} text={'Log in Instead'} />
+            <Button
+              type={'dark'}
+              position={'center'}
+              text={'Log in Instead'}
+              onPress={() => navigation.navigate(Routes.singUp)}
+            />
           </View>
           <View style={styles.termContainer}>
             <Text style={styles.textHelpTerms}>Help</Text>
@@ -93,7 +118,6 @@ export const OnboardingScreen = () => {
     );
   };
   return (
-
     <SafeTopProvider>
       <View style={styles.root}>
         <FlatList
@@ -108,7 +132,6 @@ export const OnboardingScreen = () => {
         />
       </View>
     </SafeTopProvider>
-
   );
 };
 
@@ -118,24 +141,24 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: colors.skyLightest,
-  },
+  } as ViewStyle,
   logo: {
     width: '100%',
     position: 'absolute',
     zIndex: 1,
     alignItems: 'center',
     paddingTop: normalize('vertical', 32),
-  },
+  } as ViewStyle,
   logoText: {
     color: colors.primary.base,
     ...TypographyStyles.title3,
-  },
+  } as TextStyle,
   background: {
     width: windowWidth,
     justifyContent: 'flex-end',
     paddingBottom: normalize('vertical', 37),
     paddingHorizontal: normalize('horizontal', 24),
-  },
+  } as ViewStyle,
   round: {
     width: 461,
     height: 461,
@@ -144,14 +167,14 @@ const styles = StyleSheet.create({
     right: 0,
     position: 'absolute',
     backgroundColor: colors.white,
-  },
+  } as ViewStyle,
   image: {
     width: '100%',
     height: '100%',
     position: 'absolute',
     right: 0,
     bottom: 0,
-  },
+  } as ImageStyle,
   secondary: {
     flex: 1,
     width: windowWidth,
@@ -159,50 +182,50 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingBottom: normalize('vertical', 37),
     paddingHorizontal: normalize('horizontal', 24),
-  },
+  } as ViewStyle,
   smallImage: {
     width: '100%',
     height: normalize('height', 248),
-  },
+  } as ImageStyle,
   title: {
     ...TypographyStyles.title2,
-  },
+  } as TextStyle,
   buttons: {
     gap: normalize('vertical', 16),
-  },
+  } as ViewStyle,
   pagination: {
     paddingTop: normalize('vertical', 24),
     paddingBottom: normalize('vertical', 32),
-  },
+  } as ViewStyle,
   main: {
-    gap: 24,
+    gap: normalize('vertical', 24),
     marginTop: normalize('vertical', 32),
     marginBottom: normalize('vertical', 24),
-  },
+  } as ViewStyle,
   termContainer: {
-    gap: 8,
+    gap: normalize('horizontal', 8),
     paddingTop: normalize('vertical', 54),
     ...CommonStyles.alignJustifyCenterRow,
-  },
+  } as ViewStyle,
   textHelpTerms: {
     ...TypographyStyles.mediumLarge,
     color: colors.gray.lighter,
-  },
+  } as TextStyle,
   divider: {
     width: 1,
     height: normalize('height', 15),
     backgroundColor: colors.gray.lighter,
-  },
+  } as ViewStyle,
   brands: {
     gap: normalize('horizontal', 24),
     ...CommonStyles.justifyCenterRow,
-  },
+  } as ViewStyle,
   nike: {
     gap: normalize('vertical', 24),
     marginBottom: normalize('vertical', 30),
-  },
+  } as ViewStyle,
   adidas: {
     gap: normalize('vertical', 24),
     justifyContent: 'flex-end',
-  },
+  } as ViewStyle,
 });
