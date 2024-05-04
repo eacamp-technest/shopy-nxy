@@ -1,7 +1,12 @@
 import {TextStyle, ViewStyle} from 'react-native';
 import {colors} from 'theme/colors';
 
-export type TTypesButton = 'primary' | 'secondary' | 'outlined' | 'transparent';
+export type TTypesButton =
+  | 'primary'
+  | 'secondary'
+  | 'outlined'
+  | 'transparent'
+  | 'dark';
 
 type TStates = {
   press?: boolean;
@@ -54,6 +59,16 @@ const normal = {
       color: colors.primary.base,
     } as TextStyle,
   },
+
+  dark: {
+    component: {
+      backgroundColor: colors.inkBase,
+      borderWidth: 0,
+    } as ViewStyle,
+    text: {
+      color: colors.white,
+    } as TextStyle,
+  },
 };
 
 // ! Pressed
@@ -96,6 +111,16 @@ const pressed = {
       color: colors.primary.base,
     } as TextStyle,
   },
+
+  dark: {
+    component: {
+      backgroundColor: colors.inkPress,
+      borderWidth: 0,
+    } as ViewStyle,
+    text: {
+      color: colors.white,
+    } as TextStyle,
+  },
 };
 
 // ! Disabled
@@ -135,6 +160,16 @@ const disabled = {
     } as ViewStyle,
     text: {
       color: colors.skyBase,
+    } as TextStyle,
+  },
+
+  dark: {
+    component: {
+      borderWidth: 0,
+      backgroundColor: colors.inkDisabled,
+    } as ViewStyle,
+    text: {
+      color: colors.white,
     } as TextStyle,
   },
 };

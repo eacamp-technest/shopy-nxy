@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* shoppayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* shoppayTests.m */; };
-		035F353025E740E7BCC320A7 /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F85AE285CF674EBB92EED841 /* BebasNeue-Regular.ttf */; };
+		0B29CF93FAF84104BF96D9B4 /* BebasNeue Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EB60079F42E4F7EB353EE71 /* BebasNeue Bold.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-shoppay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-shoppay.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		36CA067F42F3428AB948E172 /* BebasNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD5022F74DCD48F8A11EBF97 /* BebasNeue-Bold.ttf */; };
-		58B4B48CE4424A6999FCA5FC /* BebasNeue-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B02FFC7450F140538DC6FD80 /* BebasNeue-Light.ttf */; };
 		65A1C836BFF44877A92C828C /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68C3037DF68C4E46AFF59BA2 /* Montserrat-Bold.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-shoppay-shoppayTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-shoppay-shoppayTests.a */; };
 		77EBA14601D3412D9AEEBB04 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA57D7BF4BA048A59AF17CA1 /* BootSplash.storyboard */; };
@@ -44,6 +42,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = shoppay/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = shoppay/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-shoppay-shoppayTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-shoppay-shoppayTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EB60079F42E4F7EB353EE71 /* BebasNeue Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "BebasNeue Bold.ttf"; path = "../src/assets/fonts/BebasNeue Bold.ttf"; sourceTree = "<group>"; };
 		32F371919AA34A3AB676DA31 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../src/assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-shoppay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoppay.debug.xcconfig"; path = "Target Support Files/Pods-shoppay/Pods-shoppay.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-shoppay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoppay.release.xcconfig"; path = "Target Support Files/Pods-shoppay/Pods-shoppay.release.xcconfig"; sourceTree = "<group>"; };
@@ -52,11 +51,8 @@
 		68C3037DF68C4E46AFF59BA2 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = shoppay/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-shoppay-shoppayTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-shoppay-shoppayTests.release.xcconfig"; path = "Target Support Files/Pods-shoppay-shoppayTests/Pods-shoppay-shoppayTests.release.xcconfig"; sourceTree = "<group>"; };
-		AD5022F74DCD48F8A11EBF97 /* BebasNeue-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "BebasNeue-Bold.ttf"; path = "../src/assets/fonts/BebasNeue-Bold.ttf"; sourceTree = "<group>"; };
-		B02FFC7450F140538DC6FD80 /* BebasNeue-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "BebasNeue-Light.ttf"; path = "../src/assets/fonts/BebasNeue-Light.ttf"; sourceTree = "<group>"; };
 		B1A9D7135E4D423AAC254DB6 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F85AE285CF674EBB92EED841 /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "BebasNeue-Regular.ttf"; path = "../src/assets/fonts/BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
 		FA57D7BF4BA048A59AF17CA1 /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = shoppay/BootSplash.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,12 +152,10 @@
 		9738DA78D9C7495EAD2EDF07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AD5022F74DCD48F8A11EBF97 /* BebasNeue-Bold.ttf */,
-				B02FFC7450F140538DC6FD80 /* BebasNeue-Light.ttf */,
-				F85AE285CF674EBB92EED841 /* BebasNeue-Regular.ttf */,
 				68C3037DF68C4E46AFF59BA2 /* Montserrat-Bold.ttf */,
 				B1A9D7135E4D423AAC254DB6 /* Montserrat-Regular.ttf */,
 				32F371919AA34A3AB676DA31 /* Montserrat-SemiBold.ttf */,
+				1EB60079F42E4F7EB353EE71 /* BebasNeue Bold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -273,12 +267,10 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				77EBA14601D3412D9AEEBB04 /* BootSplash.storyboard in Resources */,
-				36CA067F42F3428AB948E172 /* BebasNeue-Bold.ttf in Resources */,
-				58B4B48CE4424A6999FCA5FC /* BebasNeue-Light.ttf in Resources */,
-				035F353025E740E7BCC320A7 /* BebasNeue-Regular.ttf in Resources */,
 				65A1C836BFF44877A92C828C /* Montserrat-Bold.ttf in Resources */,
 				C403A63A500240DA90AECCC7 /* Montserrat-Regular.ttf in Resources */,
 				DC32C10511F94518BCC318A5 /* Montserrat-SemiBold.ttf in Resources */,
+				0B29CF93FAF84104BF96D9B4 /* BebasNeue Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

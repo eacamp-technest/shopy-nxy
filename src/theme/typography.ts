@@ -1,9 +1,8 @@
 import {StyleSheet, TextStyle} from 'react-native';
-// import {colors} from './colors';
 import {normalize} from './metrics';
 
 export const bebasFonts = {
-  700: 'BebasNeue-Bold',
+  700: 'BebasNeue',
 };
 
 export const montserratFonts = {
@@ -15,7 +14,6 @@ export const montserratFonts = {
 export const commonFontStyling: TextStyle = {
   includeFontPadding: false,
   padding: 0,
-  //   color: colors.gray[800],
 };
 
 const fontSize48 = normalize('font', 48);
@@ -112,5 +110,9 @@ export const TypographyStyles = StyleSheet.create({
     fontSize: fontSize16,
     lineHeight: lineHeight20,
     ...commonFontStyling,
+  },
+
+  textAlignCenter: {
+    textAlign: 'center',
   },
 });
