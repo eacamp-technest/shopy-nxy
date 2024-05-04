@@ -1,80 +1,64 @@
-import {View, TouchableOpacity, Pressable} from 'react-native';
+import {View, Pressable} from 'react-native';
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {CommonStyles} from 'theme/commonStyles';
+import {standardHitSlopSize} from 'theme/consts.styles';
 
 interface IRadioButton {
-  checked?: boolean;
   disabled?: boolean;
   onPress?: () => void;
 }
-export const RadioButton = ({checked, disabled}: IRadioButton) => {
+
+export const RadioButton: React.FC<IRadioButton> = ({disabled}) => {
   const [checkedState, setCheckedState] = useState<boolean>(false);
-  const getChangedIcon = (check: boolean) => {
-    setCheckedState(!check);
-  };
+
+  const handleRadioButton = () => setCheckedState(!checkedState);
 
   return (
-    <Pressable onPress={() => getChangedIcon(checkedState)}>
-      {checked ? (
-        <TouchableOpacity style={styles.buttonIconTrue}>
-          <View style={styles.buttonIconCircle} />
-        </TouchableOpacity>
-      ) : disabled ? (
-        <View style={styles.buttonIconDisabled}>
-          <View style={styles.buttonDisabledCircle} />
-        </View>
-      ) : (
-        <TouchableOpacity style={styles.buttonIconFalse}>
-          <View style={styles.buttonFalseCircle} />
-        </TouchableOpacity>
-      )}
+    <Pressable
+      hitSlop={standardHitSlopSize}
+      onPress={handleRadioButton}
+      disabled={disabled}
+      style={[
+        styles.normal,
+        checkedState && styles.press,
+        disabled && styles.disabledNormal,
+      ]}>
+      <View style={[styles.pressVariant, disabled && styles.disabled]} />
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  buttonIconTrue: {
+  normal: {
+    borderWidth: 1,
+    borderRadius: 32,
+    borderColor: colors.skyBase,
     height: normalize('height', 24),
     width: normalize('width', 24),
-    borderRadius: 12,
-    backgroundColor: colors.primary.base,
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...CommonStyles.alignJustifyCenter,
   },
-  buttonIconCircle: {
-    height: normalize('height', 8),
-    width: normalize('width', 8),
-    borderRadius: 12,
-    backgroundColor: colors.white,
-  },
-  buttonIconFalse: {
-    height: normalize('height', 24),
-    width: normalize('width', 24),
-    borderRadius: 12,
-    backgroundColor: colors.skyBase,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonFalseCircle: {
-    height: normalize('height', 20),
-    width: normalize('width', 20),
-    borderRadius: 12,
-    backgroundColor: colors.white,
-  },
-  buttonIconDisabled: {
-    height: normalize('height', 24),
-    width: normalize('width', 24),
-    borderRadius: 12,
+
+  disabledNormal: {
+    borderWidth: 0,
     backgroundColor: colors.skyLight,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  buttonDisabledCircle: {
+
+  press: {
+    borderWidth: 0,
+    backgroundColor: colors.primary.base,
+  },
+
+  pressVariant: {
+    borderRadius: 32,
+    backgroundColor: colors.white,
     height: normalize('height', 8),
     width: normalize('width', 8),
-    borderRadius: 12,
+  },
+
+  disabled: {
     backgroundColor: colors.skyLighter,
   },
 });

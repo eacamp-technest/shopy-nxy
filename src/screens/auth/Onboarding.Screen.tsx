@@ -1,3 +1,4 @@
+
 import React, {Fragment} from 'react';
 import {View, StyleSheet, FlatList, Text, Image} from 'react-native';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
@@ -92,6 +93,7 @@ export const OnboardingScreen = () => {
     );
   };
   return (
+
     <SafeTopProvider>
       <View style={styles.root}>
         <FlatList
@@ -106,6 +108,7 @@ export const OnboardingScreen = () => {
         />
       </View>
     </SafeTopProvider>
+
   );
 };
 
