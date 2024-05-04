@@ -76,6 +76,7 @@ export const colors = {
   skyDark: '#8D8D8E',
   skyBase: '#CFCFD1',
   skyLighter: '#E3E3E4',
+  skyLightest: '#F5F5F6',
   inkBase: '#383B50',
   inkPress: '#505687',
   inkDisabled: '#8d92b5',

@@ -4,6 +4,7 @@ import BootSplash from 'react-native-bootsplash';
 import {colors} from 'theme/colors';
 import Router from 'router';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 
 const App = () => {
   useEffect(() => {
@@ -25,7 +26,7 @@ const App = () => {
     </SafeAreaProvider>
   );
 };
-export default App;
+export default gestureHandlerRootHOC(App);
 
 // ! Styles
 

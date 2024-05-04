@@ -1,67 +1,96 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, FlatList, Text, ImageBackground} from 'react-native';
-import {NativeSyntheticEvent, NativeScrollEvent} from 'react-native';
+import React, {Fragment} from 'react';
+import {View, StyleSheet, FlatList, Text, Image} from 'react-native';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
-import {onboardingDate} from 'mock/onboarding.date';
+import {onboarding} from 'constants/onboarding';
 import {CommonStyles} from 'theme/commonStyles';
-import {screenWidth, windowWidth} from 'theme/consts.styles';
+import {windowWidth} from 'theme/consts.styles';
 import {Button} from 'components/Button';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {TypographyStyles} from 'theme/typography';
+import {Pagination} from 'components/Pagination';
+import {SvgImage} from 'components/SvgImage';
+import {ImageResources} from 'assets/VectorResources.g';
 
 export const OnboardingScreen = () => {
-  const [currentSliderIndex, setCurrentSliderIndex] = useState<number>(0);
-
-  const updateCurrentSliderIndex = (
-    event: NativeSyntheticEvent<NativeScrollEvent>,
-  ) => {
-    const contentOffsetX = event.nativeEvent.contentOffset.x;
-    const currentIndex = Math.round(contentOffsetX / screenWidth);
-    setCurrentSliderIndex(currentIndex);
-  };
-
   const renderItem = ({item}: {item: any}) => {
-    return (
-      <View style={styles.root}>
+    return item.id === 0 ? (
+      <Fragment>
         <View style={styles.logo}>
-          <Text style={styles.textLogo}>{item.logo}</Text>
+          <Text style={styles.logoText}>{item.logo}</Text>
         </View>
-        <ImageBackground
-          resizeMode="contain"
-          style={styles.imageBackground}
-          source={item.image}>
-          <View style={styles.container}>
-            <Text style={styles.text}>{item.title}</Text>
-            <View style={styles.indicatorContainer}>
-              {onboardingDate.map((_, index) => (
-                <View
-                  key={index}
-                  style={[
-                    styles.indicator,
-                    currentSliderIndex === index && styles.currentIndicator,
-                  ]}
-                />
-              ))}
-            </View>
-            <View style={styles.buttons}>
-              <Button
-                position={'center'}
-                type={'primary'}
-                text={'Create an account'}
-              />
-              <Button
-                position={'center'}
-                type={'dark'}
-                text={'Log in Instead'}
-              />
-            </View>
+        <View style={styles.background}>
+          <View style={styles.round} />
+          <Image
+            style={styles.image}
+            source={item.image}
+            resizeMode={'center'}
+          />
+          <Text style={styles.title}>{item.title}</Text>
+          <Pagination selectedIndex={item.id} style={styles.pagination} />
+          <View style={styles.buttons}>
+            <Button
+              position={'center'}
+              type={'primary'}
+              text={'Create an account'}
+            />
+            <Button position={'center'} type={'dark'} text={'Log in Instead'} />
           </View>
-        </ImageBackground>
-      </View>
+        </View>
+      </Fragment>
+    ) : (
+      <Fragment>
+        <View style={styles.logo}>
+          <Text style={styles.logoText}>{item.logo}</Text>
+        </View>
+        <View style={[styles.secondary]}>
+          {item.id === 1 ? (
+            <Fragment>
+              <Image style={styles.smallImage} source={item.image} />
+              <View style={styles.main}>
+                <Text style={[TypographyStyles.textAlignCenter, styles.title]}>
+                  {item.title}
+                </Text>
+                <Pagination selectedIndex={item.id} />
+              </View>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <View style={styles.brands}>
+                <View style={styles.nike}>
+                  <SvgImage source={ImageResources.nike} />
+                  <SvgImage source={ImageResources.brand} />
+                </View>
+                <View style={styles.adidas}>
+                  <SvgImage source={ImageResources.adidas} />
+                  <SvgImage source={ImageResources.vans} />
+                </View>
+              </View>
+              <View style={styles.main}>
+                <Text style={[TypographyStyles.textAlignCenter, styles.title]}>
+                  {item.title}
+                </Text>
+                <Pagination selectedIndex={item.id} />
+              </View>
+            </Fragment>
+          )}
+          <View style={styles.buttons}>
+            <Button
+              position={'center'}
+              type={'primary'}
+              text={'Create an account'}
+            />
+            <Button position={'center'} type={'dark'} text={'Log in Instead'} />
+          </View>
+          <View style={styles.termContainer}>
+            <Text style={styles.textHelpTerms}>Help</Text>
+            <View style={styles.divider} />
+            <Text style={styles.textHelpTerms}>Terms</Text>
+          </View>
+        </View>
+      </Fragment>
     );
   };
-
   return (
     <SafeTopProvider>
       <View style={styles.root}>
@@ -70,73 +99,107 @@ export const OnboardingScreen = () => {
           pagingEnabled
           initialScrollIndex={0}
           initialNumToRender={1}
-          data={onboardingDate}
+          data={onboarding}
           renderItem={renderItem}
           style={CommonStyles.flex}
           showsHorizontalScrollIndicator={false}
-          onMomentumScrollEnd={updateCurrentSliderIndex}
-          contentContainerStyle={styles.contentContainerStyle}
         />
       </View>
     </SafeTopProvider>
   );
 };
 
-// ! Styles
+// !Styles
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+    backgroundColor: colors.skyLightest,
   },
-
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-  },
-
   logo: {
+    width: '100%',
+    position: 'absolute',
+    zIndex: 1,
     alignItems: 'center',
     paddingTop: normalize('vertical', 32),
   },
-
-  textLogo: {
+  logoText: {
     color: colors.primary.base,
     ...TypographyStyles.title3,
   },
-
-  text: {
-    textAlign: 'center',
-    ...TypographyStyles.title2,
+  background: {
+    width: windowWidth,
+    justifyContent: 'flex-end',
+    paddingBottom: normalize('vertical', 37),
+    paddingHorizontal: normalize('horizontal', 24),
   },
-
-  contentContainerStyle: {},
-
-  imageBackground: {
+  round: {
+    width: 461,
+    height: 461,
+    borderRadius: 999,
+    top: -197,
+    right: 0,
+    position: 'absolute',
+    backgroundColor: colors.white,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+  },
+  secondary: {
     flex: 1,
     width: windowWidth,
-    paddingBottom: 50,
-    paddingHorizontal: 24,
+    backgroundColor: colors.white,
+    justifyContent: 'flex-end',
+    paddingBottom: normalize('vertical', 37),
+    paddingHorizontal: normalize('horizontal', 24),
   },
-
-  indicatorContainer: {
-    gap: normalize('horizontal', 8),
-    paddingVertical: normalize('vertical', 10),
-    ...CommonStyles.alignJustifyCenterRow,
+  smallImage: {
+    width: '100%',
+    height: normalize('height', 248),
   },
-
+  title: {
+    ...TypographyStyles.title2,
+  },
   buttons: {
     gap: normalize('vertical', 16),
   },
-
-  indicator: {
-    height: normalize('height', 8),
-    width: normalize('width', 8),
-    borderRadius: 999,
-    backgroundColor: colors.skyLight,
+  pagination: {
+    paddingTop: normalize('vertical', 24),
+    paddingBottom: normalize('vertical', 32),
   },
-
-  currentIndicator: {
-    backgroundColor: colors.primary.base,
+  main: {
+    gap: 24,
+    marginTop: normalize('vertical', 32),
+    marginBottom: normalize('vertical', 24),
+  },
+  termContainer: {
+    gap: 8,
+    paddingTop: normalize('vertical', 54),
+    ...CommonStyles.alignJustifyCenterRow,
+  },
+  textHelpTerms: {
+    ...TypographyStyles.mediumLarge,
+    color: colors.gray.lighter,
+  },
+  divider: {
+    width: 1,
+    height: normalize('height', 15),
+    backgroundColor: colors.gray.lighter,
+  },
+  brands: {
+    gap: normalize('horizontal', 24),
+    ...CommonStyles.justifyCenterRow,
+  },
+  nike: {
+    gap: normalize('vertical', 24),
+    marginBottom: normalize('vertical', 30),
+  },
+  adidas: {
+    gap: normalize('vertical', 24),
+    justifyContent: 'flex-end',
   },
 });

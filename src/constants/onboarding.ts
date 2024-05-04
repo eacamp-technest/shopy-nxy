@@ -1,4 +1,4 @@
-export const onboardingDate = [
+export const onboarding = [
   {
     id: 0,
     title: 'Shop top brands online \n and in-store',
@@ -12,7 +12,7 @@ export const onboardingDate = [
     logo: 'SHOPPAY',
   },
   {
-    id: 3,
+    id: 2,
     title: 'Shop top brands online \n and in-store',
     image: require('../assets/images/onboarding_2.png'),
     logo: 'SHOPPAY',

@@ -111,4 +111,8 @@ export const TypographyStyles = StyleSheet.create({
     lineHeight: lineHeight20,
     ...commonFontStyling,
   },
+
+  textAlignCenter: {
+    textAlign: 'center',
+  },
 });

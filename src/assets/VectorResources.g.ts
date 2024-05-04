@@ -34,4 +34,8 @@ export class ImageResources {
   static minus = require('./vectors/minus.svg');
   static plusCircle = require('./vectors/plusCircle.svg');
   static messageCircle = require('./vectors/message-circle.svg');
+  static nike = require('./vectors/nike.svg');
+  static adidas = require('./vectors/adidas.svg');
+  static brand = require('./vectors/brand.svg');
+  static vans = require('./vectors/vans.svg');
 }

@@ -1,14 +1,18 @@
 import React, {useEffect} from 'react';
-import {Pressable, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {colors} from 'theme/colors';
 import {CommonStyles} from 'theme/commonStyles';
 import {normalize} from 'theme/metrics';
-import {SvgImage} from './SvgImage';
-import {onboardingDate} from 'mock/onboarding.date';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
+  interpolate,
+  interpolateColor,
+  Extrapolation,
+  withTiming,
+  SharedValue,
 } from 'react-native-reanimated';
+import {onboarding} from 'constants/onboarding';
 
 interface IDot {
   index: number;
@@ -17,7 +21,6 @@ interface IDot {
 
 interface IPagination {
   selectedIndex: number;
-  listRef: any;
   style?: StyleProp<ViewStyle>;
 }
 
@@ -27,13 +30,13 @@ const Dot: React.FC<IDot> = ({index, animatedIndex}) => {
       width: interpolate(
         animatedIndex.value,
         [index - 1, index, index + 1],
-        [dotSize, 22, dotSize],
+        [dotSize, dotSize, dotSize],
         Extrapolation.CLAMP,
       ),
       backgroundColor: interpolateColor(
         animatedIndex.value,
         [index - 1, index, index + 1],
-        [shadowWhite, colors.white, shadowWhite],
+        [colors.skyLighter, colors.blue.base, colors.skyLighter],
       ),
     };
   });
@@ -41,14 +44,8 @@ const Dot: React.FC<IDot> = ({index, animatedIndex}) => {
   return <Animated.View style={[styles.dot, animatedDot]} />;
 };
 
-export const Pagination: React.FC<IPagination> = ({
-  selectedIndex,
-  listRef,
-  style,
-}) => {
+export const Pagination: React.FC<IPagination> = ({selectedIndex, style}) => {
   const animatedIndex = useSharedValue(selectedIndex);
-  const isFirst = selectedIndex === 0;
-  const isLast = selectedIndex === onboardingDate.length - 1;
 
   useEffect(() => {
     animatedIndex.value = withTiming(selectedIndex, {duration: 200});
@@ -58,55 +55,16 @@ export const Pagination: React.FC<IPagination> = ({
     <Dot key={index} index={index} animatedIndex={animatedIndex} />
   );
 
-  const scrollToBack = () => {
-    if (isFirst) {
-      return;
-    }
-
-    listRef?.current?.scrollToIndex({
-      animated: true,
-      index: selectedIndex - 1,
-    });
-  };
-
-  const scrollToForward = () => {
-    if (isLast) {
-      return;
-    }
-
-    listRef?.current?.scrollToIndex({
-      animated: true,
-      index: selectedIndex + 1,
-    });
-  };
-
   return (
     <View style={[CommonStyles.alignCenterJustifyBetweenRow, style]}>
-      <Pressable
-        disabled={isFirst}
-        style={[styles.controller, isFirst && styles.hide]}
-        onPress={scrollToBack}>
-        <SvgImage
-          source={require('../assets/vectors/arrow_back.svg')}
-          color={colors.skyLight}
-        />
-      </Pressable>
-      <View style={styles.dots}>{onboardingDate.map(renderDots)}</View>
-      <Pressable
-        disabled={isLast}
-        style={[styles.controller, isLast && styles.hide]}
-        onPress={scrollToForward}>
-        <SvgImage
-          color={colors.skyLight}
-          source={require('../assets/vectors/arrow_forward.svg')}
-        />
-      </Pressable>
+      <View style={styles.dots}>{onboarding.map(renderDots)}</View>
     </View>
   );
 };
 
+// ! Styles
+
 const dotSize = normalize('width', 8);
-const shadowWhite = 'rgba(255, 255, 255, 0.32)';
 
 const styles = StyleSheet.create({
   dots: {
