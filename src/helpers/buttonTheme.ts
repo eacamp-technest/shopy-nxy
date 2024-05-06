@@ -59,7 +59,6 @@ const normal = {
       color: colors.primary.base,
     } as TextStyle,
   },
-
   dark: {
     component: {
       backgroundColor: colors.inkBase,
@@ -111,7 +110,6 @@ const pressed = {
       color: colors.primary.base,
     } as TextStyle,
   },
-
   dark: {
     component: {
       backgroundColor: colors.inkPress,
@@ -162,7 +160,6 @@ const disabled = {
       color: colors.skyBase,
     } as TextStyle,
   },
-
   dark: {
     component: {
       borderWidth: 0,

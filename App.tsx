@@ -32,7 +32,7 @@ export default gestureHandlerRootHOC(App);
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: colors.white,
     flex: 1,
+    backgroundColor: colors.white,
   },
 });
