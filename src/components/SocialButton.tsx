@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, StyleSheet} from 'react-native';
+import {Pressable, StyleSheet, ViewStyle} from 'react-native';
 import {Resources, SvgImage} from './SvgImage';
 import {normalize} from 'theme/metrics';
 import {colors} from 'theme/colors';
@@ -34,5 +34,5 @@ const styles = StyleSheet.create({
     width: normalize('width', 60),
     height: normalize('height', 60),
     ...CommonStyles.alignJustifyCenter,
-  },
+  } as ViewStyle,
 });

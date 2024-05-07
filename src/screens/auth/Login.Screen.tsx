@@ -17,7 +17,6 @@ export const LoginScreen: React.FC = () => {
         <NavBar
           largeTitle={'Welcome!'}
           leftIcon={ImageResources.chevronLeft}
-          style={styles.largeText}
           leftColor={colors.gray.base}
         />
         <View style={styles.loginContainer}>
@@ -42,10 +41,6 @@ export const LoginScreen: React.FC = () => {
 // ! Styles
 
 const styles = StyleSheet.create({
-  largeText: {
-    paddingTop: normalize('vertical', 16),
-    paddingBottom: normalize('vertical', 24),
-  },
   loginContainer: {
     gap: normalize('vertical', 32),
   },
