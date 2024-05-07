@@ -9,8 +9,14 @@ import {SocialButton} from 'components/SocialButton';
 import {CommonStyles} from 'theme/commonStyles';
 import {Button} from 'components/Button';
 import {TypographyStyles} from 'theme/typography';
+import {TextLink} from 'components/TextLink';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {NavigationParamList} from 'types/navigation.types';
+import {Routes} from 'router/routes';
 
-export const LoginScreen: React.FC = () => {
+export const LoginScreen: React.FC<
+  NativeStackScreenProps<NavigationParamList, Routes.login>
+> = ({navigation}) => {
   return (
     <SafeMainProvider>
       <View style={CommonStyles.flex}>
@@ -18,6 +24,7 @@ export const LoginScreen: React.FC = () => {
           largeTitle={'Welcome!'}
           leftIcon={ImageResources.chevronLeft}
           leftColor={colors.gray.base}
+          onPress={navigation.goBack}
         />
         <View style={styles.loginContainer}>
           <Button
@@ -32,6 +39,18 @@ export const LoginScreen: React.FC = () => {
             <SocialButton icon={ImageResources.facebookButton} />
             <SocialButton icon={ImageResources.twitterButton} />
           </View>
+        </View>
+        <View style={styles.footer}>
+          <TextLink
+            content="Already have an account? Log in"
+            center
+            highlighted={[
+              {
+                text: 'Log in',
+                callback: () => console.log('conditions'),
+              },
+            ]}
+          />
         </View>
       </View>
     </SafeMainProvider>
@@ -52,5 +71,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.gray.dark,
     ...TypographyStyles.smallNormal,
+  },
+  footer: {
+    flex: 1,
+    justifyContent: 'flex-end',
   },
 });
