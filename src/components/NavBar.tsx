@@ -1,9 +1,10 @@
 import React, {Fragment} from 'react';
-import {View, Text, Pressable, ViewStyle, StyleProp} from 'react-native';
+import {View, Text, Pressable, StyleSheet, TextStyle} from 'react-native';
 import {TypographyStyles} from 'theme/typography';
 import {SvgImage, Resources} from './SvgImage';
 import {standardHitSlopSize} from 'theme/consts.styles';
 import {CommonStyles} from 'theme/commonStyles';
+import {normalize} from 'theme/metrics';
 
 // ! Interface
 
@@ -12,7 +13,6 @@ interface INavBar {
   largeTitle?: string;
   leftIcon?: Resources;
   rightIcon?: Resources;
-  style?: StyleProp<ViewStyle>;
   disabled?: boolean;
   leftColor?: string;
   rightColor?: string;
@@ -25,7 +25,6 @@ export const NavBar: React.FC<INavBar> = ({
   rightIcon,
   largeTitle,
   onPress,
-  style,
   rightColor,
   leftColor,
 }) => {
@@ -59,8 +58,19 @@ export const NavBar: React.FC<INavBar> = ({
         )}
       </View>
       {largeTitle ? (
-        <Text style={[TypographyStyles.title2, style]}>{largeTitle}</Text>
+        <Text style={[TypographyStyles.title2, styles.largeText]}>
+          {largeTitle}
+        </Text>
       ) : null}
     </Fragment>
   );
 };
+
+// ! Styles
+
+const styles = StyleSheet.create({
+  largeText: {
+    paddingTop: normalize('vertical', 16),
+    paddingBottom: normalize('vertical', 24),
+  } as TextStyle,
+});
