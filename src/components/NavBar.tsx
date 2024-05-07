@@ -1,5 +1,12 @@
 import React, {Fragment} from 'react';
-import {View, Text, Pressable, StyleSheet, TextStyle} from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 import {TypographyStyles} from 'theme/typography';
 import {SvgImage, Resources} from './SvgImage';
 import {standardHitSlopSize} from 'theme/consts.styles';
@@ -16,7 +23,8 @@ interface INavBar {
   disabled?: boolean;
   leftColor?: string;
   rightColor?: string;
-  onPress?: () => void;
+  leftOnPress?: () => void;
+  rightOnPress?: () => void;
 }
 
 export const NavBar: React.FC<INavBar> = ({
@@ -24,18 +32,19 @@ export const NavBar: React.FC<INavBar> = ({
   leftIcon,
   rightIcon,
   largeTitle,
-  onPress,
+  leftOnPress,
+  rightOnPress,
   rightColor,
   leftColor,
 }) => {
   return (
     <Fragment>
-      <View style={CommonStyles.alignCenterJustifyBetweenRow}>
+      <View style={styles.root}>
         {leftIcon ? (
           <Pressable
             hitSlop={standardHitSlopSize}
             style={({pressed}) => [{opacity: pressed ? 0.5 : 1}]}
-            onPress={onPress}>
+            onPress={leftOnPress}>
             <SvgImage source={leftIcon} color={leftColor} />
           </Pressable>
         ) : (
@@ -50,7 +59,7 @@ export const NavBar: React.FC<INavBar> = ({
           <Pressable
             hitSlop={standardHitSlopSize}
             style={({pressed}) => [{opacity: pressed ? 0.5 : 1}]}
-            onPress={onPress}>
+            onPress={rightOnPress}>
             <SvgImage source={rightIcon} color={rightColor} />
           </Pressable>
         ) : (
@@ -69,8 +78,12 @@ export const NavBar: React.FC<INavBar> = ({
 // ! Styles
 
 const styles = StyleSheet.create({
+  root: {
+    paddingVertical: normalize('vertical', 12),
+    ...CommonStyles.alignCenterJustifyBetweenRow,
+  } as ViewStyle,
   largeText: {
     paddingTop: normalize('vertical', 16),
-    paddingBottom: normalize('vertical', 24),
+    paddingBottom: normalize('vertical', 8),
   } as TextStyle,
 });

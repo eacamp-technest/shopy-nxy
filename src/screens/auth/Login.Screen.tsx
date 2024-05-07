@@ -24,7 +24,7 @@ export const LoginScreen: React.FC<
           largeTitle={'Welcome!'}
           leftIcon={ImageResources.chevronLeft}
           leftColor={colors.gray.base}
-          onPress={navigation.goBack}
+          leftOnPress={navigation.goBack}
         />
         <View style={styles.loginContainer}>
           <Button
