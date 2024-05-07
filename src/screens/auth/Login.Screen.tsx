@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, ViewStyle, TextStyle} from 'react-native';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
 import {NavBar} from 'components/NavBar';
 import {ImageResources} from 'assets/VectorResources.g';
@@ -62,18 +62,18 @@ export const LoginScreen: React.FC<
 const styles = StyleSheet.create({
   loginContainer: {
     gap: normalize('vertical', 32),
-  },
+  } as ViewStyle,
   socialButton: {
     gap: normalize('horizontal', 24),
     ...CommonStyles.alignJustifyCenterRow,
-  },
+  } as ViewStyle,
   singInText: {
     textAlign: 'center',
     color: colors.gray.dark,
     ...TypographyStyles.smallNormal,
-  },
+  } as TextStyle,
   footer: {
     flex: 1,
     justifyContent: 'flex-end',
-  },
+  } as ViewStyle,
 });
