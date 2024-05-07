@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 import {CommonStyles} from 'theme/commonStyles';
 import {NavBar} from 'components/NavBar';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
@@ -23,7 +23,11 @@ export const SignUpScreen: React.FC<
           leftColor={colors.gray.base}
           onPress={navigation.goBack}
         />
-        <Button text={'Create an account'} position={'center'} />
+        <Button
+          text={'Create an account'}
+          position={'center'}
+          onPress={() => navigation.navigate(Routes.verification)}
+        />
         <View style={styles.footer}>
           <TextLink
             content="By signing up you agree to our Terms and Conditions of Use"
@@ -51,5 +55,5 @@ const styles = StyleSheet.create({
   footer: {
     flex: 1,
     justifyContent: 'flex-end',
-  },
+  } as ViewStyle,
 });
