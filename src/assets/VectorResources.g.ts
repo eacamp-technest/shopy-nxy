@@ -38,4 +38,7 @@ export class ImageResources {
   static adidas = require('./vectors/adidas.svg');
   static brand = require('./vectors/brand.svg');
   static vans = require('./vectors/vans.svg');
+  static googleButton = require('./vectors/google.svg');
+  static facebookButton = require('./vectors/facebookk.svg');
+  static twitterButton = require('./vectors/twitterr.svg');
 }

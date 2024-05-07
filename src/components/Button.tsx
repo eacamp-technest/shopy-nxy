@@ -8,7 +8,7 @@ import {
   PressableProps,
   ViewStyle,
 } from 'react-native';
-import {SvgImage} from 'components/SvgImage';
+import {SvgImage, Resources} from 'components/SvgImage';
 import {TypographyStyles} from 'theme/typography';
 import {normalize} from 'theme/metrics';
 import {colors} from 'theme/colors';
@@ -26,7 +26,7 @@ interface IButton {
   loading?: boolean;
   size?: TSize;
   type?: TTypesButton;
-  icon?: NodeRequire | any;
+  icon?: Resources;
   position?: TPosition;
   style?: StyleProp<ViewStyle>;
   hitSlop?: PressableProps['hitSlop'];
