@@ -1,10 +1,9 @@
 import React, {Fragment} from 'react';
 import {View, Text, Pressable, ViewStyle, StyleProp} from 'react-native';
 import {TypographyStyles} from 'theme/typography';
-import {SvgImage} from './SvgImage';
+import {SvgImage, Resources} from './SvgImage';
 import {standardHitSlopSize} from 'theme/consts.styles';
 import {CommonStyles} from 'theme/commonStyles';
-import {Resources} from './SvgImage';
 
 // ! Interface
 
