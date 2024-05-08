@@ -26,7 +26,7 @@ export const TextLink: React.FC<TextLinkProps> = ({
   const createHighlightedText = useCallback(
     (text: string, callback?: () => void, index?: number) => {
       const key = callback ? `${text}-${index}-highlighted` : 'remaining';
-      const color = callback ? fontColor : colors.gray.lighter;
+      const color = callback ? fontColor : colors.ink.lighter;
 
       return (
         <Text

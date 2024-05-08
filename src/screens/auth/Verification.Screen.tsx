@@ -19,9 +19,9 @@ export const VerificationScreen: React.FC<
       <View>
         <NavBar
           leftIcon={ImageResources.chevronLeft}
-          leftColor={colors.gray.base}
+          leftColor={colors.ink.base}
           largeTitle={'ENTER SMS CODE'}
-          onPress={navigation.goBack}
+          leftOnPress={navigation.goBack}
         />
         <View style={styles.resentText}>
           <TextLink

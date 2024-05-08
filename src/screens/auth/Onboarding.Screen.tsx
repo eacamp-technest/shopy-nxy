@@ -209,12 +209,12 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   textHelpTerms: {
     ...TypographyStyles.mediumLarge,
-    color: colors.gray.lighter,
+    color: colors.ink.lighter,
   } as TextStyle,
   divider: {
     width: 1,
     height: normalize('height', 15),
-    backgroundColor: colors.gray.lighter,
+    backgroundColor: colors.ink.lighter,
   } as ViewStyle,
   brands: {
     gap: normalize('horizontal', 24),
