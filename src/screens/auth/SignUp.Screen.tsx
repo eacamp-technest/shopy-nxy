@@ -10,6 +10,8 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {NavigationParamList} from 'types/navigation.types';
 import {Routes} from 'router/routes';
 import {TextLink} from 'components/TextLink';
+import {Input} from 'components/Input';
+import {normalize} from 'theme/metrics';
 
 export const SignUpScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.singUp>
@@ -20,9 +22,45 @@ export const SignUpScreen: React.FC<
         <NavBar
           largeTitle={'Create Account'}
           leftIcon={ImageResources.chevronLeft}
-          leftColor={colors.gray.base}
-          onPress={navigation.goBack}
+          leftColor={colors.ink.base}
+          leftOnPress={navigation.goBack}
         />
+        <View style={styles.inputs}>
+          <Input
+            type={'text'}
+            variant={'default'}
+            position={'right'}
+            icon={ImageResources.mapPin}
+            placeholder={'Placeholder text'}
+            label={'Text Label'}
+            disabled={false}
+            errorMessage={'Error Message'}
+            maxLength={50}
+          />
+          <Input
+            type={'text'}
+            variant={'floating'}
+            icon={ImageResources.mapPin}
+            placeholder={'Placeholder text'}
+            label={'Text Label'}
+            position={'default'}
+            disabled={false}
+            errorMessage={'Error Message'}
+            // caption={'Caption'}
+            maxLength={50}
+          />
+          <Input
+            type={'text'}
+            variant={'floating'}
+            // icon={ImageResources.mapPin}
+            placeholder={'Placeholder text'}
+            label={'Text Label'}
+            position={'right'}
+            disabled={true}
+            errorMessage={'Error Message'}
+            maxLength={50}
+          />
+        </View>
         <Button
           text={'Create an account'}
           position={'center'}
@@ -55,5 +93,9 @@ const styles = StyleSheet.create({
   footer: {
     flex: 1,
     justifyContent: 'flex-end',
+  } as ViewStyle,
+  inputs: {
+    gap: normalize('vertical', 24),
+    paddingBottom: normalize('vertical', 32),
   } as ViewStyle,
 });

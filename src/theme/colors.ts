@@ -1,5 +1,5 @@
 export const colors = {
-  gray: {
+  ink: {
     base: '#383B50',
     lighter: '#6E707F',
     light: '#666878',

@@ -23,7 +23,7 @@ export const LoginScreen: React.FC<
         <NavBar
           largeTitle={'Welcome!'}
           leftIcon={ImageResources.chevronLeft}
-          leftColor={colors.gray.base}
+          leftColor={colors.ink.base}
           leftOnPress={navigation.goBack}
         />
         <View style={styles.loginContainer}>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   singInText: {
     textAlign: 'center',
-    color: colors.gray.dark,
+    color: colors.ink.dark,
     ...TypographyStyles.smallNormal,
   } as TextStyle,
   footer: {
