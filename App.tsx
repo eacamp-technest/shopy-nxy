@@ -2,9 +2,8 @@ import React, {useEffect} from 'react';
 import {StatusBar, StyleSheet, View} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
 import {colors} from 'theme/colors';
-// import Router from 'router';
+import Router from 'router';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {Switch} from 'components/Switch';
 
 const App = () => {
   useEffect(() => {
@@ -21,8 +20,7 @@ const App = () => {
     <SafeAreaProvider>
       <StatusBar barStyle={'dark-content'} />
       <View style={styles.root}>
-        {/* <Router /> */}
-        <Switch />
+        <Router />
       </View>
     </SafeAreaProvider>
   );
