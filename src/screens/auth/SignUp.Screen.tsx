@@ -10,8 +10,8 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {NavigationParamList} from 'types/navigation.types';
 import {Routes} from 'router/routes';
 import {TextLink} from 'components/TextLink';
-import {Input} from 'components/Input';
 import {normalize} from 'theme/metrics';
+import {Input} from 'components/Input';
 
 export const SignUpScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.singUp>
@@ -27,40 +27,23 @@ export const SignUpScreen: React.FC<
         />
         <View style={styles.inputs}>
           <Input
-            type={'text'}
-            variant={'default'}
-            position={'right'}
-            icon={ImageResources.mapPin}
-            placeholder={'Placeholder text'}
             label={'Text Label'}
-            disabled={false}
-            errorMessage={'Error Message'}
-            maxLength={50}
+            icon={ImageResources.mapPin}
+            // type={'password'}
+            caption={'caption'}
+            errorMessage={'Error message'}
+            placeholder={'Placeholder'}
           />
           <Input
-            type={'text'}
-            variant={'floating'}
+            label={'Text Label'}
             icon={ImageResources.mapPin}
-            placeholder={'Placeholder text'}
-            label={'Text Label'}
-            position={'default'}
-            disabled={false}
-            errorMessage={'Error Message'}
-            // caption={'Caption'}
-            maxLength={50}
-          />
-          <Input
-            type={'text'}
-            variant={'floating'}
-            // icon={ImageResources.mapPin}
-            placeholder={'Placeholder text'}
-            label={'Text Label'}
-            position={'right'}
-            disabled={true}
-            errorMessage={'Error Message'}
-            maxLength={50}
+            // type={'password'}
+            caption={'caption'}
+            errorMessage={'Error message'}
+            placeholder={'Placeholder'}
           />
         </View>
+
         <Button
           text={'Create an account'}
           position={'center'}

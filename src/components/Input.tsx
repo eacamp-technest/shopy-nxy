@@ -1,145 +1,183 @@
 import React, {useState} from 'react';
 import {
   View,
-  TextInput,
-  StyleProp,
-  ViewStyle,
   Text,
   StyleSheet,
+  TextInput,
   KeyboardTypeOptions,
+  StyleProp,
+  ViewStyle,
+  Pressable,
 } from 'react-native';
-import {Resources, SvgImage} from './SvgImage';
-import {normalize} from 'theme/metrics';
+import {SvgImage, Resources} from './SvgImage';
+import {TypographyStyles} from 'theme/typography';
 import {colors} from 'theme/colors';
-import {TInputVariants, useInputTheme} from 'hook/useInputTheme';
+import {standardHitSlopSize} from 'theme/consts.styles';
 import {CommonStyles} from 'theme/commonStyles';
+import {ImageResources} from 'assets/VectorResources.g';
+import {normalize} from 'theme/metrics';
 
-// ! Interface
-
-type TState = 'default' | 'focused' | 'disabled';
-type TInputTypes = 'text' | 'numberMobile';
-type TPosition = 'left' | 'right' | 'default';
+type TIcon = {
+  source: Resources;
+  color?: string;
+  width?: number;
+  height?: number;
+  position?: 'left' | 'right';
+};
 
 interface IInput {
-  variant?: TInputVariants;
+  type?: 'text' | 'phone' | 'password' | 'select';
   label?: string;
-  position?: TPosition;
-  icon?: Resources;
-  disabled?: boolean;
-  errorMessage?: string;
-  placeholder?: string;
-  value?: string;
   caption?: string;
-  state?: TState;
-  style?: StyleProp<ViewStyle>;
-  type: TInputTypes;
-  maxLength?: number;
+  value?: string;
+  placeholder?: string;
+  disabled?: boolean;
   keyboardType?: KeyboardTypeOptions;
-  onChange?: (value: string) => void;
+  icon?: TIcon | Resources;
+  errorMessage?: string;
+  style?: StyleProp<ViewStyle>;
+  setValue?: (value: string) => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }
 
 export const Input: React.FC<IInput> = ({
-  disabled,
-  errorMessage,
   value,
-  label,
-  placeholder,
-  //   type = 'text',
-  position = 'default',
-  maxLength,
-  onChange,
+  type = 'text',
+  setValue,
   icon,
-  keyboardType,
-  variant = 'default',
+  ...props
 }) => {
-  const [focus, setFocus] = useState<boolean>(false);
+  const [focused, setFocused] = useState<boolean>(false);
+  const [secureTextEntry, setSecureTextEntry] = useState<boolean>(true);
 
-  const handleInputOnBlur = () => setFocus(false);
-  const handleInputOnFocus = () => setFocus(true);
+  const placeholderColor = props.disabled ? colors.skyBase : colors.ink.lighter;
 
-  const inputState = disabled
-    ? 'disabled'
-    : focus
-    ? 'focus'
-    : errorMessage
-    ? 'error'
-    : 'state';
+  const renderIcon = () => {
+    if (type === 'password') {
+      return (
+        <Pressable hitSlop={standardHitSlopSize}>
+          <SvgImage
+            source={
+              secureTextEntry ? ImageResources.eyeOff : ImageResources.eye
+            }
+            color={colors.ink.base}
+            width={24}
+            height={24}
+            onPress={() => setSecureTextEntry(state => !state)}
+          />
+        </Pressable>
+      );
+    }
 
-  const {
-    input: inputStyles,
-    label: labelStyles,
-    errorText: errorStyles,
-    wrapper: wrapperStyles,
-    noIcon: noIconStyles,
-  } = useInputTheme(variant, inputState);
+    if (!icon) {
+      return null;
+    }
 
-  const iconColor = disabled ? colors.skyBase : colors.ink.base;
-  const placeholderColor = disabled ? colors.skyBase : colors.ink.base;
-  const errorVariant = errorMessage && !focus && !disabled;
-  const labelDefault = variant === 'default' && label;
+    if ('source' in icon) {
+      return (
+        <SvgImage
+          source={icon.source}
+          width={icon.width}
+          color={icon.color}
+          height={icon.height}
+        />
+      );
+    }
+
+    return (
+      <SvgImage
+        source={icon}
+        color={props.disabled ? colors.skyBase : colors.inkBase}
+      />
+    );
+  };
+
+  const handleOnFocused = () => {
+    setFocused(true);
+    props?.onFocus?.();
+  };
+  const handleOnBlur = () => {
+    setFocused(false);
+    props?.onBlur?.();
+  };
 
   return (
-    <View style={styles.root}>
-      {labelDefault ? <Text style={labelStyles}>{label}</Text> : null}
+    <View style={[styles.root, props?.style]}>
+      {props.label ? (
+        <Text style={TypographyStyles.normalSemiBold}>{props.label}</Text>
+      ) : null}
       <View
-        style={[styles[position], wrapperStyles, !icon ? noIconStyles : null]}>
-        {icon ? <SvgImage source={icon} color={iconColor} /> : null}
-        <View style={[CommonStyles.flex, !labelDefault ? styles.main : null]}>
-          {!labelDefault ? <Text style={labelStyles}>{label}</Text> : null}
-          <TextInput
-            autoCorrect={false}
-            keyboardType={keyboardType}
-            value={value}
-            editable={!disabled}
-            maxLength={maxLength}
-            placeholder={placeholder}
-            style={[inputStyles, labelDefault ? styles.input : styles.floating]}
-            placeholderTextColor={placeholderColor}
-            onFocus={handleInputOnFocus}
-            onBlur={handleInputOnBlur}
-            onChangeText={onChange}
-          />
-        </View>
+        style={[
+          styles.wrapper,
+          focused && styles.focused,
+          props.disabled && styles.wrapperDisabled,
+          (('position' in (icon ?? {}) && icon?.position === 'right') ||
+            type === 'password') &&
+            CommonStyles.rowReverse,
+        ]}>
+        {renderIcon()}
+        <TextInput
+          placeholder={props.placeholder}
+          keyboardType={props.keyboardType}
+          value={value}
+          onFocus={handleOnFocused}
+          onBlur={handleOnBlur}
+          autoCapitalize="none"
+          editable={!props.disabled}
+          secureTextEntry={secureTextEntry}
+          onChangeText={setValue}
+          placeholderTextColor={placeholderColor}
+          style={styles.input}
+        />
       </View>
-      {errorVariant ? <Text style={errorStyles}>{errorMessage}</Text> : null}
+      {props.caption || props.errorMessage ? (
+        <Text
+          style={[
+            styles.caption,
+            props?.errorMessage ? styles.error : undefined,
+          ]}>
+          {props.errorMessage ?? props.caption}
+        </Text>
+      ) : null}
     </View>
   );
 };
 
-// ! Styles
-
 const styles = StyleSheet.create({
   root: {
     gap: normalize('vertical', 12),
-  } as ViewStyle,
-  default: {
+  },
+  focused: {
+    borderWidth: 2,
+    borderColor: colors.primary.base,
+  },
+  wrapperDisabled: {
+    color: colors.skyBase,
+    borderColor: colors.skyLighter,
+    backgroundColor: colors.skyLighter,
+  },
+  error: {
+    color: colors.primary.base,
+  },
+  caption: {
+    color: colors.ink.lighter,
+    ...TypographyStyles.mediumLarge,
+  },
+  wrapper: {
     borderWidth: 1,
     borderRadius: 8,
-    borderColor: colors.skyLight,
-    gap: normalize('horizontal', 4),
-    paddingLeft: normalize('horizontal', 12),
-    paddingRight: normalize('horizontal', 16),
-    ...CommonStyles.alignCenterRow,
-  } as ViewStyle,
-  right: {
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: colors.skyLight,
-    flexDirection: 'row-reverse',
     alignItems: 'center',
-    gap: normalize('horizontal', 4),
-    paddingLeft: normalize('horizontal', 12),
-    paddingRight: normalize('horizontal', 16),
-  } as ViewStyle,
-  left: {} as ViewStyle,
+    flexDirection: 'row',
+    borderColor: colors.skyLight,
+    height: normalize('height', 48),
+    gap: normalize('horizontal', 12),
+    paddingHorizontal: normalize('horizontal', 16),
+  },
   input: {
-    width: '90%',
-    paddingVertical: normalize('vertical', 16),
-  } as ViewStyle,
-  main: {
-    paddingVertical: normalize('vertical', 8),
-  } as ViewStyle,
-  floating: {
-    paddingTop: normalize('vertical', 4),
-  } as ViewStyle,
+    flex: 1,
+    flexGrow: 1,
+    height: '100%',
+    ...TypographyStyles.normalNormal,
+  },
 });
