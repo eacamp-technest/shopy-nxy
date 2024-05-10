@@ -71,6 +71,7 @@ export const colors = {
     main: '#1DA1F2',
     dark: '#0C90E1',
   },
+  mellowApricot: '#FCF0E2',
   white: '#ffff',
   skyLight: '#DADADC',
   skyDark: '#8D8D8E',

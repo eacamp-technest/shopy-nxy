@@ -8,6 +8,7 @@ import {
   StyleProp,
   ViewStyle,
   Pressable,
+  TextStyle,
 } from 'react-native';
 import {SvgImage, Resources} from './SvgImage';
 import {TypographyStyles} from 'theme/typography';
@@ -17,6 +18,8 @@ import {CommonStyles} from 'theme/commonStyles';
 import {ImageResources} from 'assets/VectorResources.g';
 import {normalize} from 'theme/metrics';
 
+//  ! Interface
+
 type TIcon = {
   source: Resources;
   color?: string;
@@ -25,15 +28,20 @@ type TIcon = {
   position?: 'left' | 'right';
 };
 
+type TLabel = {
+  variant?: 'default' | 'floating';
+};
+
 interface IInput {
   type?: 'text' | 'phone' | 'password' | 'select';
   label?: string;
+  variant?: TLabel | string;
   caption?: string;
   value?: string;
   placeholder?: string;
   disabled?: boolean;
   keyboardType?: KeyboardTypeOptions;
-  icon?: TIcon | Resources;
+  icon?: TIcon;
   errorMessage?: string;
   style?: StyleProp<ViewStyle>;
   setValue?: (value: string) => void;
@@ -41,17 +49,27 @@ interface IInput {
   onBlur?: () => void;
 }
 
+// ! Component
+
 export const Input: React.FC<IInput> = ({
   value,
   type = 'text',
   setValue,
   icon,
+  variant = 'default',
+  disabled,
   ...props
 }) => {
   const [focused, setFocused] = useState<boolean>(false);
-  const [secureTextEntry, setSecureTextEntry] = useState<boolean>(true);
+  const [secureTextEntry, setSecureTextEntry] = useState<boolean>(false);
+  const placeholderColor = disabled ? colors.skyBase : colors.ink.lighter;
 
-  const placeholderColor = props.disabled ? colors.skyBase : colors.ink.lighter;
+  const handleSecurityIcon = () => {
+    if (disabled) {
+      return;
+    }
+    setSecureTextEntry(state => !state);
+  };
 
   const renderIcon = () => {
     if (type === 'password') {
@@ -61,10 +79,10 @@ export const Input: React.FC<IInput> = ({
             source={
               secureTextEntry ? ImageResources.eyeOff : ImageResources.eye
             }
-            color={colors.ink.base}
+            color={disabled ? colors.skyBase : colors.inkBase}
             width={24}
             height={24}
-            onPress={() => setSecureTextEntry(state => !state)}
+            onPress={handleSecurityIcon}
           />
         </Pressable>
       );
@@ -88,7 +106,7 @@ export const Input: React.FC<IInput> = ({
     return (
       <SvgImage
         source={icon}
-        color={props.disabled ? colors.skyBase : colors.inkBase}
+        color={disabled ? colors.skyBase : colors.inkBase}
       />
     );
   };
@@ -102,21 +120,16 @@ export const Input: React.FC<IInput> = ({
     props?.onBlur?.();
   };
 
-  return (
-    <View style={[styles.root, props?.style]}>
-      {props.label ? (
-        <Text style={TypographyStyles.normalSemiBold}>{props.label}</Text>
-      ) : null}
-      <View
-        style={[
-          styles.wrapper,
-          focused && styles.focused,
-          props.disabled && styles.wrapperDisabled,
-          (('position' in (icon ?? {}) && icon?.position === 'right') ||
-            type === 'password') &&
-            CommonStyles.rowReverse,
-        ]}>
-        {renderIcon()}
+  const renderFloatingLabel = () => {
+    return (
+      <View style={styles.floating}>
+        <Text
+          style={[
+            styles.floatingText,
+            disabled ? styles.floatingTextDisabled : null,
+          ]}>
+          {props.label}
+        </Text>
         <TextInput
           placeholder={props.placeholder}
           keyboardType={props.keyboardType}
@@ -124,12 +137,47 @@ export const Input: React.FC<IInput> = ({
           onFocus={handleOnFocused}
           onBlur={handleOnBlur}
           autoCapitalize="none"
-          editable={!props.disabled}
+          editable={!disabled}
           secureTextEntry={secureTextEntry}
           onChangeText={setValue}
           placeholderTextColor={placeholderColor}
-          style={styles.input}
         />
+      </View>
+    );
+  };
+
+  return (
+    <View style={[styles.root, props?.style]}>
+      {props.label && variant === 'default' ? (
+        <Text style={TypographyStyles.RegularNoneSemibold}>{props.label}</Text>
+      ) : null}
+      <View
+        style={[
+          styles.wrapper,
+          focused && styles.focused,
+          disabled && styles.wrapperDisabled,
+          (('position' in (icon ?? {}) && icon?.position === 'right') ||
+            type === 'password') &&
+            CommonStyles.rowReverse,
+        ]}>
+        {renderIcon()}
+        {variant === 'floating' ? (
+          renderFloatingLabel()
+        ) : (
+          <TextInput
+            placeholder={props.placeholder}
+            keyboardType={props.keyboardType}
+            value={value}
+            onFocus={handleOnFocused}
+            onBlur={handleOnBlur}
+            autoCapitalize="none"
+            editable={!disabled}
+            secureTextEntry={secureTextEntry}
+            onChangeText={setValue}
+            placeholderTextColor={placeholderColor}
+            style={styles.input}
+          />
+        )}
       </View>
       {props.caption || props.errorMessage ? (
         <Text
@@ -144,40 +192,54 @@ export const Input: React.FC<IInput> = ({
   );
 };
 
+// ! Styles
+
 const styles = StyleSheet.create({
   root: {
     gap: normalize('vertical', 12),
-  },
+  } as ViewStyle,
   focused: {
     borderWidth: 2,
     borderColor: colors.primary.base,
-  },
+  } as ViewStyle,
   wrapperDisabled: {
     color: colors.skyBase,
     borderColor: colors.skyLighter,
     backgroundColor: colors.skyLighter,
-  },
+  } as ViewStyle,
   error: {
     color: colors.primary.base,
-  },
+  } as TextStyle,
   caption: {
     color: colors.ink.lighter,
-    ...TypographyStyles.mediumLarge,
-  },
+    ...TypographyStyles.SmallNormalRegular,
+  } as TextStyle,
   wrapper: {
     borderWidth: 1,
     borderRadius: 8,
-    alignItems: 'center',
-    flexDirection: 'row',
     borderColor: colors.skyLight,
     height: normalize('height', 48),
     gap: normalize('horizontal', 12),
     paddingHorizontal: normalize('horizontal', 16),
-  },
+    ...CommonStyles.alignCenterRow,
+  } as ViewStyle,
   input: {
     flex: 1,
     flexGrow: 1,
     height: '100%',
-    ...TypographyStyles.normalNormal,
-  },
+    ...TypographyStyles.RegularNoneRegular,
+  } as ViewStyle,
+  floating: {
+    flexGrow: 1,
+    flex: 1,
+    width: '100%',
+    gap: normalize('vertical', 4),
+  } as ViewStyle,
+  floatingText: {
+    color: colors.ink.lighter,
+    ...TypographyStyles.TinyNoneRegular,
+  } as TextStyle,
+  floatingTextDisabled: {
+    color: colors.skyBase,
+  } as TextStyle,
 });

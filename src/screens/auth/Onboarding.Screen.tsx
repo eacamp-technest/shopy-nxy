@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     ...CommonStyles.alignJustifyCenterRow,
   } as ViewStyle,
   textHelpTerms: {
-    ...TypographyStyles.mediumLarge,
+    ...TypographyStyles.SmallNormalRegular,
     color: colors.ink.lighter,
   } as TextStyle,
   divider: {

@@ -29,6 +29,7 @@ export const SignUpScreen: React.FC<
           <Input
             label={'Text Label'}
             icon={ImageResources.mapPin}
+            variant={'default'}
             // type={'password'}
             caption={'caption'}
             errorMessage={'Error message'}
@@ -37,13 +38,14 @@ export const SignUpScreen: React.FC<
           <Input
             label={'Text Label'}
             icon={ImageResources.mapPin}
+            variant={'floating'}
             // type={'password'}
             caption={'caption'}
-            errorMessage={'Error message'}
+            // errorMessage={'Error message'}
             placeholder={'Placeholder'}
+            // disabled={true}
           />
         </View>
-
         <Button
           text={'Create an account'}
           position={'center'}
