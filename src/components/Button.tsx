@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   text: {
     color: colors.white,
     alignSelf: 'center',
-    ...TypographyStyles.normalSemiBold,
+    ...TypographyStyles.RegularNoneSemibold,
   },
 
   left: {

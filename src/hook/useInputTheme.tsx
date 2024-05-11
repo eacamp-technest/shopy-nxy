@@ -5,7 +5,7 @@ import {TypographyStyles} from 'theme/typography';
 const defaultStyles = {
   state: {
     label: {
-      ...TypographyStyles.normalSemiBold,
+      ...TypographyStyles.RegularNoneSemibold,
     } as TextStyle,
     wrapper: {
       borderWidth: 1,
@@ -17,7 +17,7 @@ const defaultStyles = {
   },
   focus: {
     label: {
-      ...TypographyStyles.normalSemiBold,
+      ...TypographyStyles.RegularNoneSemibold,
     } as TextStyle,
     wrapper: {
       borderWidth: 1,
@@ -29,7 +29,7 @@ const defaultStyles = {
   },
   disabled: {
     label: {
-      ...TypographyStyles.normalSemiBold,
+      ...TypographyStyles.RegularNoneSemibold,
     } as TextStyle,
     wrapper: {
       borderWidth: 0,
@@ -45,14 +45,14 @@ const defaultStyles = {
   },
   error: {
     label: {
-      ...TypographyStyles.normalSemiBold,
+      ...TypographyStyles.RegularNoneSemibold,
     } as TextStyle,
     wrapper: {
       borderColor: colors.red.base,
     } as ViewStyle,
     errorText: {
       color: colors.red.base,
-      ...TypographyStyles.normalLarge,
+      ...TypographyStyles.RegularTightRegular,
     } as TextStyle,
     noIcon: {} as ViewStyle,
     input: {} as TextStyle,
@@ -62,7 +62,7 @@ const defaultStyles = {
 const floatingStyles = {
   state: {
     label: {
-      ...TypographyStyles.tinyNoneRegular,
+      ...TypographyStyles.TinyNoneRegular,
     } as TextStyle,
     wrapper: {
       borderWidth: 1,
@@ -74,7 +74,7 @@ const floatingStyles = {
   },
   focus: {
     label: {
-      ...TypographyStyles.tinyNoneRegular,
+      ...TypographyStyles.TinyNoneRegular,
     } as TextStyle,
     wrapper: {
       borderWidth: 1,
@@ -87,7 +87,7 @@ const floatingStyles = {
   disabled: {
     label: {
       color: colors.skyBase,
-      ...TypographyStyles.tinyNoneRegular,
+      ...TypographyStyles.TinyNoneRegular,
     } as TextStyle,
     wrapper: {
       borderWidth: 0,
@@ -103,14 +103,14 @@ const floatingStyles = {
   },
   error: {
     label: {
-      ...TypographyStyles.tinyNoneRegular,
+      ...TypographyStyles.TinyNoneRegular,
     } as TextStyle,
     wrapper: {
       borderColor: colors.red.base,
     } as ViewStyle,
     errorText: {
       color: colors.red.base,
-      ...TypographyStyles.normalLarge,
+      ...TypographyStyles.RegularTightRegular,
     } as TextStyle,
     noIcon: {} as ViewStyle,
     input: {} as TextStyle,

@@ -11,6 +11,10 @@ export const montserratFonts = {
   700: 'Montserrat-Bold',
 };
 
+export const InterFonts = {
+  500: 'Inter-Medium',
+};
+
 export const commonFontStyling: TextStyle = {
   includeFontPadding: false,
   padding: 0,
@@ -30,6 +34,7 @@ const lineHeight24 = normalize('font', 24);
 const lineHeight20 = normalize('font', 20);
 const lineHeight16 = normalize('font', 16);
 const lineHeight14 = normalize('font', 14);
+const lineHeight14_52 = normalize('font', 14.52);
 const lineHeight12 = normalize('font', 12);
 
 export const TypographyStyles = StyleSheet.create({
@@ -51,7 +56,7 @@ export const TypographyStyles = StyleSheet.create({
     lineHeight: lineHeight32,
     ...commonFontStyling,
   } as TextStyle,
-  smallNormal: {
+  TinyNormalRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize12,
     lineHeight: lineHeight16,
@@ -63,19 +68,19 @@ export const TypographyStyles = StyleSheet.create({
     lineHeight: lineHeight16,
     ...commonFontStyling,
   },
-  mediumLarge: {
+  SmallNormalRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize14,
     lineHeight: lineHeight20,
     ...commonFontStyling,
   },
-  normalNormal: {
+  RegularNoneRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize16,
     lineHeight: lineHeight16,
     ...commonFontStyling,
   },
-  normalLarge: {
+  RegularTightRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize16,
     lineHeight: lineHeight20,
@@ -87,34 +92,46 @@ export const TypographyStyles = StyleSheet.create({
     lineHeight: lineHeight24,
     ...commonFontStyling,
   },
-  tinyNoneRegular: {
+  TinyNoneRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize12,
     lineHeight: lineHeight12,
     ...commonFontStyling,
   },
-  smallSemiBold: {
+  TinyNoneSemibold: {
     fontFamily: montserratFonts[600],
     fontSize: fontSize12,
     lineHeight: lineHeight12,
     ...commonFontStyling,
   },
-  mediumSemiBold: {
+  SmallNoneSemibold: {
     fontFamily: montserratFonts[600],
     fontSize: fontSize14,
     lineHeight: lineHeight14,
     ...commonFontStyling,
   },
-  normalSemiBold: {
+  RegularNoneSemibold: {
     fontFamily: montserratFonts[600],
     fontSize: fontSize16,
     lineHeight: lineHeight16,
     ...commonFontStyling,
   },
-  largeSemiBold: {
+  SmallNormalSemibold: {
+    fontFamily: montserratFonts[600],
+    fontSize: fontSize14,
+    lineHeight: lineHeight20,
+    ...commonFontStyling,
+  },
+  RegularTightSemibold: {
     fontFamily: montserratFonts[600],
     fontSize: fontSize16,
     lineHeight: lineHeight20,
+    ...commonFontStyling,
+  },
+  Inter: {
+    fontFamily: InterFonts[500],
+    fontSize: fontSize12,
+    lineHeight: lineHeight14_52,
     ...commonFontStyling,
   },
 

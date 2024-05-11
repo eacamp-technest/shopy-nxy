@@ -41,4 +41,6 @@ export class ImageResources {
   static googleButton = require('./vectors/google.svg');
   static facebookButton = require('./vectors/facebookk.svg');
   static twitterButton = require('./vectors/twitterr.svg');
+  static eye = require('./vectors/eye.svg');
+  static eyeOff = require('./vectors/eye_off.svg');
 }

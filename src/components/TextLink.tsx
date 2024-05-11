@@ -33,7 +33,7 @@ export const TextLink: React.FC<TextLinkProps> = ({
           key={key}
           onPress={callback}
           disabled={!callback}
-          style={[TypographyStyles.mediumSemiBold, {color}]}>
+          style={[TypographyStyles.SmallNoneSemibold, {color}]}>
           {text}
         </Text>
       );
