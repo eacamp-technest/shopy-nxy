@@ -4,7 +4,7 @@ import {StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {CommonStyles} from 'theme/commonStyles';
-import {standardHitSlopSize} from 'theme/consts.styles';
+import {standardHitSlopSize} from 'theme/const.styles';
 
 interface IRadioButton {
   disabled?: boolean;

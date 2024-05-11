@@ -12,7 +12,7 @@ import {
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {onboarding} from 'constants/onboarding';
 import {CommonStyles} from 'theme/commonStyles';
-import {windowWidth} from 'theme/consts.styles';
+import {windowWidth} from 'theme/const.styles';
 import {Button} from 'components/Button';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
@@ -36,9 +36,12 @@ export const OnboardingScreen: React.FC<
         <View style={styles.background}>
           <View style={styles.round} />
           <Image
-            style={styles.image}
+            // style={styles.image}
+            // source={item.image}
+            // resizeMode={'center'}
             source={item.image}
-            resizeMode={'center'}
+            resizeMode={item.id === 0 ? 'cover' : 'contain'}
+            style={styles.image}
           />
           <Text style={styles.title}>{item.title}</Text>
           <Pagination selectedIndex={item.id} style={styles.pagination} />
@@ -174,6 +177,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     bottom: 0,
+    flex: 1,
   } as ImageStyle,
   secondary: {
     flex: 1,
