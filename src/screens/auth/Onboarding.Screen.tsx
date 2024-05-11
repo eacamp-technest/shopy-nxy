@@ -47,13 +47,13 @@ export const OnboardingScreen: React.FC<
               type={'primary'}
               position={'center'}
               text={'Create an account'}
-              onPress={() => navigation.navigate(Routes.login)}
+              onPress={() => navigation.navigate(Routes.singUp)}
             />
             <Button
               type={'dark'}
               position={'center'}
               text={'Log in Instead'}
-              onPress={() => navigation.navigate(Routes.singUp)}
+              onPress={() => navigation.navigate(Routes.login)}
             />
           </View>
         </View>
@@ -99,13 +99,13 @@ export const OnboardingScreen: React.FC<
               type={'primary'}
               position={'center'}
               text={'Create an account'}
-              onPress={() => navigation.navigate(Routes.login)}
+              onPress={() => navigation.navigate(Routes.singUp)}
             />
             <Button
               type={'dark'}
               position={'center'}
               text={'Log in Instead'}
-              onPress={() => navigation.navigate(Routes.singUp)}
+              onPress={() => navigation.navigate(Routes.login)}
             />
           </View>
           <View style={styles.termContainer}>

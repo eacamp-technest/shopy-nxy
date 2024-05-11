@@ -32,7 +32,7 @@ type TLabel = {
   variant?: 'default' | 'floating';
 };
 
-interface IInput {
+export interface IInput {
   type?: 'text' | 'phone' | 'password' | 'select';
   label?: string;
   variant?: TLabel | string;

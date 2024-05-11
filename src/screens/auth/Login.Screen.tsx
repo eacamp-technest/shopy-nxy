@@ -1,5 +1,13 @@
 import React from 'react';
-import {View, StyleSheet, Text, ViewStyle, TextStyle} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  ViewStyle,
+  TextStyle,
+  ScrollView,
+  Linking,
+} from 'react-native';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
 import {NavBar} from 'components/NavBar';
 import {ImageResources} from 'assets/VectorResources.g';
@@ -13,14 +21,37 @@ import {TextLink} from 'components/TextLink';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {NavigationParamList} from 'types/navigation.types';
 import {Routes} from 'router/routes';
-import {Input} from 'components/Input';
+import {useForm} from 'react-hook-form';
+import {InputControlled} from 'components/InputControlled';
+import {FormRules} from 'constants/formRules';
+
+// ! Interface
+
+interface ILoginForm {
+  email?: string;
+  password?: string;
+}
 
 export const LoginScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.login>
 > = ({navigation}) => {
+  const {
+    control,
+    handleSubmit,
+    formState: {errors, isSubmitting},
+  } = useForm<ILoginForm>();
+  const onSubmit = (data: ILoginForm) => {
+    console.log(data);
+    return new Promise(resolve => setTimeout(resolve, 2000));
+  };
+
   return (
     <SafeMainProvider>
-      <View style={CommonStyles.flex}>
+      <ScrollView
+        scrollEnabled={false}
+        style={CommonStyles.flex}
+        keyboardShouldPersistTaps={'handled'}
+        contentContainerStyle={CommonStyles.flex}>
         <NavBar
           largeTitle={'Welcome!'}
           leftIcon={ImageResources.chevronLeft}
@@ -28,21 +59,51 @@ export const LoginScreen: React.FC<
           leftOnPress={navigation.goBack}
         />
         <View style={styles.inputs}>
-          <Input placeholder={'Enter your email'} label={'Email'} />
-          <Input placeholder={'Enter your password'} label={'Password'} />
+          <InputControlled
+            control={control}
+            name={'email'}
+            label={'Email'}
+            errorMessage={errors.email?.message}
+            rules={FormRules.email}
+            type={'text'}
+            keyboardType={'email-address'}
+            placeholder={'Enter your email'}
+          />
+          <InputControlled
+            control={control}
+            name={'password'}
+            label={'Password'}
+            errorMessage={errors.password?.message}
+            rules={FormRules.password}
+            type={'password'}
+            caption={'Caption'}
+            placeholder={'Enter your password'}
+          />
         </View>
         <View style={styles.loginContainer}>
           <Button
             text={'Login'}
             type={'primary'}
             size={'block'}
+            disabled={isSubmitting}
+            loading={isSubmitting}
             position={'center'}
+            onPress={handleSubmit(onSubmit)}
           />
           <Text style={styles.singInText}>or sign in with</Text>
           <View style={styles.socialButton}>
-            <SocialButton icon={ImageResources.googleButton} />
-            <SocialButton icon={ImageResources.facebookButton} />
-            <SocialButton icon={ImageResources.twitterButton} />
+            <SocialButton
+              onPress={() => Linking.openSettings()}
+              icon={ImageResources.googleButton}
+            />
+            <SocialButton
+              onPress={() => Linking.openSettings()}
+              icon={ImageResources.facebookButton}
+            />
+            <SocialButton
+              onPress={() => Linking.openSettings()}
+              icon={ImageResources.twitterButton}
+            />
           </View>
         </View>
         <View style={styles.footer}>
@@ -57,7 +118,7 @@ export const LoginScreen: React.FC<
             ]}
           />
         </View>
-      </View>
+      </ScrollView>
     </SafeMainProvider>
   );
 };

@@ -62,7 +62,7 @@ export const Button: React.FC<IButton> = ({
   const renderLoading = () => {
     return loading ? (
       <ActivityIndicator
-        color={textStyle.color}
+        color={colors.primary.base}
         size={'small'}
         style={StyleSheet.absoluteFillObject}
       />
