@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   singInText: {
     textAlign: 'center',
     color: colors.ink.dark,
-    ...TypographyStyles.smallNormal,
+    ...TypographyStyles.TinyNormalRegular,
   } as TextStyle,
   footer: {
     flex: 1,

@@ -63,6 +63,9 @@ export const Input: React.FC<IInput> = ({
   const [focused, setFocused] = useState<boolean>(false);
   const [secureTextEntry, setSecureTextEntry] = useState<boolean>(false);
   const placeholderColor = disabled ? colors.skyBase : colors.ink.lighter;
+  const isMoreIcon =
+    ('position' in (icon ?? {}) && icon?.position === 'right') ||
+    type === 'password';
 
   const handleSecurityIcon = () => {
     if (disabled) {
@@ -156,9 +159,7 @@ export const Input: React.FC<IInput> = ({
           styles.wrapper,
           focused && styles.focused,
           disabled && styles.wrapperDisabled,
-          (('position' in (icon ?? {}) && icon?.position === 'right') ||
-            type === 'password') &&
-            CommonStyles.rowReverse,
+          isMoreIcon && CommonStyles.rowReverse,
         ]}>
         {renderIcon()}
         {variant === 'floating' ? (
