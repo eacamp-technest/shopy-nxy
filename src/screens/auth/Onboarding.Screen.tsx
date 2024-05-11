@@ -36,9 +36,6 @@ export const OnboardingScreen: React.FC<
         <View style={styles.background}>
           <View style={styles.round} />
           <Image
-            // style={styles.image}
-            // source={item.image}
-            // resizeMode={'center'}
             source={item.image}
             resizeMode={item.id === 0 ? 'cover' : 'contain'}
             style={styles.image}
