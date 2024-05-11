@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {TypographyStyles} from 'theme/typography';
 import {SvgImage, Resources} from './SvgImage';
-import {standardHitSlopSize} from 'theme/consts.styles';
+import {standardHitSlopSize} from 'theme/const.styles';
 import {CommonStyles} from 'theme/commonStyles';
 import {normalize} from 'theme/metrics';
 

@@ -3,7 +3,7 @@ import {Pressable, StyleSheet, ViewStyle} from 'react-native';
 import {Resources, SvgImage} from './SvgImage';
 import {normalize} from 'theme/metrics';
 import {colors} from 'theme/colors';
-import {standardHitSlopSize} from 'theme/consts.styles';
+import {standardHitSlopSize} from 'theme/const.styles';
 import {CommonStyles} from 'theme/commonStyles';
 
 // ! Interface
