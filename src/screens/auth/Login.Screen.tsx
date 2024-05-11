@@ -13,6 +13,7 @@ import {TextLink} from 'components/TextLink';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {NavigationParamList} from 'types/navigation.types';
 import {Routes} from 'router/routes';
+import {Input} from 'components/Input';
 
 export const LoginScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.login>
@@ -26,6 +27,10 @@ export const LoginScreen: React.FC<
           leftColor={colors.ink.base}
           leftOnPress={navigation.goBack}
         />
+        <View style={styles.inputs}>
+          <Input placeholder={'Enter your email'} label={'Email'} />
+          <Input placeholder={'Enter your password'} label={'Password'} />
+        </View>
         <View style={styles.loginContainer}>
           <Button
             text={'Login'}
@@ -75,5 +80,10 @@ const styles = StyleSheet.create({
   footer: {
     flex: 1,
     justifyContent: 'flex-end',
+  } as ViewStyle,
+  inputs: {
+    paddingTop: normalize('vertical', 24),
+    paddingBottom: normalize('vertical', 32),
+    gap: normalize('vertical', 24),
   } as ViewStyle,
 });
