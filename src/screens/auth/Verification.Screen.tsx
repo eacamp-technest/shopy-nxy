@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, TextStyle} from 'react-native';
+import {View, StyleSheet, TextStyle, Pressable, Keyboard} from 'react-native';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
 import {NavBar} from 'components/NavBar';
 import {ImageResources} from 'assets/VectorResources.g';
@@ -12,22 +12,26 @@ import {normalize} from 'theme/metrics';
 import {TextLink} from 'components/TextLink';
 import {ModalWindow} from 'components/Modal';
 import {verification} from 'constants/textLink';
+import {OTPInputField} from 'components/OTPInputField';
+import {CommonStyles} from 'theme/commonStyles';
 
 export const VerificationScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.verification>
 > = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [disabled, setDisabled] = useState<boolean>(true);
+
   return (
     <SafeMainProvider>
-      <View>
+      <Pressable style={CommonStyles.flex} onPress={Keyboard.dismiss}>
         <NavBar
           leftIcon={ImageResources.chevronLeft}
           leftColor={colors.ink.base}
           largeTitle={'ENTER SMS CODE'}
           leftOnPress={navigation.goBack}
         />
-
+        <OTPInputField setDisabled={setDisabled} length={4} />
         <View style={styles.resentText}>
           <TextLink
             center
@@ -36,17 +40,19 @@ export const VerificationScreen: React.FC<
           />
         </View>
         <Button
-          disabled={false}
+          disabled={disabled}
           text={'Continue'}
           position={'center'}
           type={'primary'}
           onPress={() => setModalVisible(true)}
         />
-        <ModalWindow
-          setModalVisible={setModalVisible}
-          modalVisible={modalVisible}
-        />
-      </View>
+        <View>
+          <ModalWindow
+            setModalVisible={setModalVisible}
+            modalVisible={modalVisible}
+          />
+        </View>
+      </Pressable>
     </SafeMainProvider>
   );
 };
