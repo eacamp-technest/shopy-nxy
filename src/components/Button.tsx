@@ -106,33 +106,26 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     ...CommonStyles.alignCenterJustifyBetweenRow,
   },
-
   text: {
     color: colors.white,
     alignSelf: 'center',
     ...TypographyStyles.RegularNoneSemibold,
   },
-
   left: {
     flexDirection: 'row-reverse',
   },
-
   center: {
     ...CommonStyles.alignJustifyCenter,
   },
-
   right: {},
-
   small: {
     borderWidth: 1,
     padding: normalize('vertical', 7),
   },
-
   block: {
     borderWidth: 1,
     padding: normalize('vertical', 15),
   },
-
   large: {
     borderWidth: 1,
     padding: normalize('vertical', 15),
