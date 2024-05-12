@@ -50,7 +50,10 @@ export const LoginScreen: React.FC<
     navigation.navigate(Routes.verification);
   };
 
-  // handleSubmit(onSubmit);
+
+  const handleValidation = () => {
+    navigation.navigate(Routes.verification);
+  };
 
   return (
     <SafeMainProvider>

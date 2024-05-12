@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, TextStyle} from 'react-native';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
 import {NavBar} from 'components/NavBar';
@@ -10,30 +10,48 @@ import {Routes} from 'router/routes';
 import {Button} from 'components/Button';
 import {normalize} from 'theme/metrics';
 import {TextLink} from 'components/TextLink';
-import {OTPInputField} from 'components/OTPInputField';
+import {ModalWindow} from 'components/Modal';
+
 
 export const VerificationScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.verification>
 > = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <SafeMainProvider>
-      <NavBar
-        leftIcon={ImageResources.chevronLeft}
-        leftColor={colors.ink.base}
-        largeTitle={'ENTER SMS CODE'}
-        leftOnPress={navigation.goBack}
-      />
-      <OTPInputField length={4} />
-      <View style={styles.resentText}>
-        <TextLink
-          content="Didn’t receive code? Resend Code"
-          center
-          highlighted={[
-            {
-              text: 'Resend Code',
-              callback: () => console.log('conditions'),
-            },
-          ]}
+
+      <View>
+        <NavBar
+          leftIcon={ImageResources.chevronLeft}
+          leftColor={colors.ink.base}
+          largeTitle={'ENTER SMS CODE'}
+          leftOnPress={navigation.goBack}
+        />
+
+        <View style={styles.resentText}>
+          <TextLink
+            content="Didn’t receive code? Resend Code"
+            center
+            highlighted={[
+              {
+                text: 'Resend Code',
+                callback: () => console.log('conditions'),
+              },
+            ]}
+          />
+        </View>
+        <Button
+          // disabled={true}
+          text={'Continue'}
+          position={'center'}
+          type={'primary'}
+          onPress={() => setModalVisible(true)}
+        />
+        <ModalWindow
+          setModalVisible={setModalVisible}
+          modalVisible={modalVisible}
+
         />
       </View>
       <Button

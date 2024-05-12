@@ -33,12 +33,12 @@ export const TextLink: React.FC<TextLinkProps> = ({
           key={key}
           onPress={callback}
           disabled={!callback}
-          style={[TypographyStyles.SmallNoneSemibold, {color}]}>
+          style={[TypographyStyles.SmallNoneSemibold, {color}, style]}>
           {text}
         </Text>
       );
     },
-    [fontColor],
+    [fontColor, style],
   );
 
   const renderElements = useMemo(() => {

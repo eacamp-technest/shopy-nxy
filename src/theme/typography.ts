@@ -92,7 +92,7 @@ export const TypographyStyles = StyleSheet.create({
     lineHeight: lineHeight20,
     ...commonFontStyling,
   },
-  normalXLarge: {
+  RegularNormalRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize16,
     lineHeight: lineHeight24,
