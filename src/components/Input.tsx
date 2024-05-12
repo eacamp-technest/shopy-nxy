@@ -13,7 +13,7 @@ import {
 import {SvgImage, Resources} from './SvgImage';
 import {TypographyStyles} from 'theme/typography';
 import {colors} from 'theme/colors';
-import {standardHitSlopSize} from 'theme/consts.styles';
+import {standardHitSlopSize} from 'theme/const.styles';
 import {CommonStyles} from 'theme/commonStyles';
 import {ImageResources} from 'assets/VectorResources.g';
 import {normalize} from 'theme/metrics';

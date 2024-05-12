@@ -45,6 +45,10 @@ export const LoginScreen: React.FC<
     return new Promise(resolve => setTimeout(resolve, 2000));
   };
 
+  const handleValidation = () => {
+    navigation.navigate(Routes.verification);
+  };
+
   return (
     <SafeMainProvider>
       <ScrollView
@@ -88,7 +92,7 @@ export const LoginScreen: React.FC<
             disabled={isSubmitting}
             loading={isSubmitting}
             position={'center'}
-            onPress={handleSubmit(onSubmit)}
+            onPress={handleValidation}
           />
           <Text style={styles.singInText}>or sign in with</Text>
           <View style={styles.socialButton}>
