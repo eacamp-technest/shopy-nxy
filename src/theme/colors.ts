@@ -1,5 +1,3 @@
-import {ViewStyle} from 'react-native';
-
 export const colors = {
   ink: {
     base: '#383B50',
