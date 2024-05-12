@@ -1,3 +1,5 @@
+import {ViewStyle} from 'react-native';
+
 export const colors = {
   ink: {
     base: '#383B50',
@@ -81,4 +83,5 @@ export const colors = {
   inkBase: '#383B50',
   inkPress: '#505687',
   inkDisabled: '#8d92b5',
+  modal: '#131515CC',
 };
