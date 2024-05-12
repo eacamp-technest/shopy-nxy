@@ -12,6 +12,7 @@ import {normalize} from 'theme/metrics';
 import {TextLink} from 'components/TextLink';
 import {ModalWindow} from 'components/Modal';
 
+
 export const VerificationScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.verification>
 > = ({navigation}) => {
@@ -19,6 +20,7 @@ export const VerificationScreen: React.FC<
 
   return (
     <SafeMainProvider>
+
       <View>
         <NavBar
           leftIcon={ImageResources.chevronLeft}
@@ -49,8 +51,15 @@ export const VerificationScreen: React.FC<
         <ModalWindow
           setModalVisible={setModalVisible}
           modalVisible={modalVisible}
+
         />
       </View>
+      <Button
+        disabled={true}
+        text={'Continue'}
+        position={'center'}
+        type={'primary'}
+      />
     </SafeMainProvider>
   );
 };

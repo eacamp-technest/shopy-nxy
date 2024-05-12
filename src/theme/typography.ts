@@ -56,6 +56,12 @@ export const TypographyStyles = StyleSheet.create({
     lineHeight: lineHeight32,
     ...commonFontStyling,
   } as TextStyle,
+  RegularNoneBold: {
+    fontFamily: montserratFonts[700],
+    fontSize: fontSize16,
+    lineHeight: lineHeight16,
+    ...commonFontStyling,
+  } as TextStyle,
   TinyNormalRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize12,

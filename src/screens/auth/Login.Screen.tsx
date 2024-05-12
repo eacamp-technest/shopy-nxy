@@ -37,13 +37,19 @@ export const LoginScreen: React.FC<
 > = ({navigation}) => {
   const {
     control,
-    handleSubmit,
+    // handleSubmit,
     formState: {errors, isSubmitting},
   } = useForm<ILoginForm>();
-  const onSubmit = (data: ILoginForm) => {
-    console.log(data);
-    return new Promise(resolve => setTimeout(resolve, 2000));
+  // const onSubmit = (data: ILoginForm) => {
+  //   console.log(data);
+
+  //   return new Promise(resolve => setTimeout(resolve, 2000));
+  // };
+
+  const handleValidation = () => {
+    navigation.navigate(Routes.verification);
   };
+
 
   const handleValidation = () => {
     navigation.navigate(Routes.verification);
