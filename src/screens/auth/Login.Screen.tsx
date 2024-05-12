@@ -50,11 +50,6 @@ export const LoginScreen: React.FC<
     navigation.navigate(Routes.verification);
   };
 
-
-  const handleValidation = () => {
-    navigation.navigate(Routes.verification);
-  };
-
   return (
     <SafeMainProvider>
       <ScrollView

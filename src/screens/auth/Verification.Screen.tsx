@@ -11,7 +11,7 @@ import {Button} from 'components/Button';
 import {normalize} from 'theme/metrics';
 import {TextLink} from 'components/TextLink';
 import {ModalWindow} from 'components/Modal';
-
+import {verification} from 'constants/textLink';
 
 export const VerificationScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.verification>
@@ -20,7 +20,6 @@ export const VerificationScreen: React.FC<
 
   return (
     <SafeMainProvider>
-
       <View>
         <NavBar
           leftIcon={ImageResources.chevronLeft}
@@ -31,18 +30,13 @@ export const VerificationScreen: React.FC<
 
         <View style={styles.resentText}>
           <TextLink
-            content="Didn’t receive code? Resend Code"
             center
-            highlighted={[
-              {
-                text: 'Resend Code',
-                callback: () => console.log('conditions'),
-              },
-            ]}
+            content={verification.content}
+            highlighted={verification.highlighted}
           />
         </View>
         <Button
-          // disabled={true}
+          disabled={false}
           text={'Continue'}
           position={'center'}
           type={'primary'}
@@ -51,15 +45,8 @@ export const VerificationScreen: React.FC<
         <ModalWindow
           setModalVisible={setModalVisible}
           modalVisible={modalVisible}
-
         />
       </View>
-      <Button
-        disabled={true}
-        text={'Continue'}
-        position={'center'}
-        type={'primary'}
-      />
     </SafeMainProvider>
   );
 };

@@ -5,7 +5,7 @@ import {TextLink} from './TextLink';
 import {colors} from 'theme/colors';
 import {TypographyStyles} from 'theme/typography';
 import {normalize} from 'theme/metrics';
-import {highlighted} from 'constants/textLink';
+import {modal} from 'constants/textLink';
 import {CommonStyles} from 'theme/commonStyles';
 
 // ! Interface
@@ -29,10 +29,10 @@ export const ModalWindow: React.FC<IModal> = ({
         <View style={styles.root}>
           <View style={styles.modal}>
             <TextLink
-              content={highlighted.content}
               center
+              content={modal.content}
+              highlighted={modal.highlighted}
               style={TypographyStyles.RegularNormalRegular}
-              highlighted={[highlighted]}
             />
             <View style={styles.buttons}>
               <Button
