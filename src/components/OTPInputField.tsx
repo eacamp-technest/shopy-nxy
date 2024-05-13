@@ -23,7 +23,7 @@ interface OTPInput {
 }
 
 export const OTPInputField: React.FC<OTPInput> = ({length, setDisabled}) => {
-  const [focus, setFocus] = useState<number>(-1);
+  const [focus, setFocus] = useState<number | null>(null);
 
   const inputRefs = useRef<Array<TextInput | null>>([]);
 
@@ -50,14 +50,6 @@ export const OTPInputField: React.FC<OTPInput> = ({length, setDisabled}) => {
     }
   };
 
-  const setFocusAtIndex = (index: number) => {
-    setFocus(index);
-
-    if (inputRefs.current[index]) {
-      inputRefs.current[index]?.focus();
-    }
-  };
-
   return (
     <View style={[styles.root]}>
       {[...new Array(length)].map((_, index) => (
@@ -69,7 +61,7 @@ export const OTPInputField: React.FC<OTPInput> = ({length, setDisabled}) => {
           style={[styles.input, focus === index ? styles.boxFocus : null]}
           testID={`OTPInput-${index}`}
           keyboardType={'decimal-pad'}
-          onFocus={() => setFocusAtIndex(index)}
+          onFocus={() => setFocus(index)}
           onSubmitEditing={Keyboard.dismiss}
           placeholderTextColor={colors.ink.base}
           ref={ref => {

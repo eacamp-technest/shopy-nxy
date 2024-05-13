@@ -5,4 +5,6 @@ export const Regex = {
   numbers: /^[0-9]*$/,
   phone: /^\d{3} \d{3} \d{2} \d{2}$/,
   includeNumber: /\d/,
+  fullName:
+    /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/,
 };

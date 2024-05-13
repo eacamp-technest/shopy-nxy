@@ -1,5 +1,5 @@
-import {RegisterOptions} from 'react-hook-form';
 import {Regex} from './regex';
+import {RegisterOptions} from 'react-hook-form';
 
 export const FormRules = {
   email: {
@@ -20,6 +20,16 @@ export const FormRules = {
     pattern: {
       value: Regex.password,
       message: 'Password is not valid',
+    },
+  } as RegisterOptions,
+  fullName: {
+    required: {
+      message: 'Full name is required',
+      value: true,
+    },
+    pattern: {
+      value: Regex.fullName,
+      message: 'Full name is not valid',
     },
   } as RegisterOptions,
 };
