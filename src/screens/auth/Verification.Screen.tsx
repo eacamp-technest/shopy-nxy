@@ -26,10 +26,10 @@ export const VerificationScreen: React.FC<
     <SafeMainProvider>
       <Pressable style={CommonStyles.flex} onPress={Keyboard.dismiss}>
         <NavBar
-          leftIcon={ImageResources.chevronLeft}
           leftColor={colors.ink.base}
           largeTitle={'ENTER SMS CODE'}
           leftOnPress={navigation.goBack}
+          leftIcon={ImageResources.chevronLeft}
         />
         <OTPInputField setDisabled={setDisabled} length={4} />
         <View style={styles.resentText}>
@@ -40,10 +40,10 @@ export const VerificationScreen: React.FC<
           />
         </View>
         <Button
-          disabled={disabled}
           text={'Continue'}
-          position={'center'}
           type={'primary'}
+          position={'center'}
+          disabled={disabled}
           onPress={() => setModalVisible(true)}
         />
         <View>

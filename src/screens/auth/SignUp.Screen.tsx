@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ViewStyle} from 'react-native';
+import {View, StyleSheet, ViewStyle, ScrollView} from 'react-native';
 import {CommonStyles} from 'theme/commonStyles';
 import {NavBar} from 'components/NavBar';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
@@ -11,63 +11,91 @@ import {NavigationParamList} from 'types/navigation.types';
 import {Routes} from 'router/routes';
 import {TextLink} from 'components/TextLink';
 import {normalize} from 'theme/metrics';
-import {Input} from 'components/Input';
+import {InputControlled} from 'components/InputControlled';
+import {FormRules} from 'constants/formRules';
+import {useForm} from 'react-hook-form';
+import {signUp} from 'constants/textLink';
+
+interface ISigUpForm {
+  email?: string;
+  password?: string;
+  fullName?: string;
+}
 
 export const SignUpScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.singUp>
 > = ({navigation}) => {
+  const {
+    control,
+    handleSubmit,
+    formState: {errors, isSubmitting},
+  } = useForm<ISigUpForm>();
+  const onSubmit = () => {
+    navigation.navigate(Routes.login);
+    return new Promise(resolve => setTimeout(resolve, 2000));
+  };
   return (
     <SafeMainProvider>
-      <View style={CommonStyles.flex}>
+      <ScrollView
+        scrollEnabled={false}
+        style={CommonStyles.flex}
+        keyboardShouldPersistTaps={'handled'}
+        contentContainerStyle={CommonStyles.flex}>
         <NavBar
-          largeTitle={'Create Account'}
-          leftIcon={ImageResources.chevronLeft}
           leftColor={colors.ink.base}
+          largeTitle={'Create Account'}
           leftOnPress={navigation.goBack}
+          leftIcon={ImageResources.chevronLeft}
         />
         <View style={styles.inputs}>
-          <Input
-            label={'Text Label'}
-            icon={ImageResources.mapPin}
-            variant={'default'}
-            // type={'password'}
-            caption={'caption'}
-            errorMessage={'Error message'}
-            placeholder={'Placeholder'}
+          <InputControlled
+            type={'text'}
+            name={'fullName'}
+            control={control}
+            label={'Full Name'}
+            caption={'Caption'}
+            keyboardType={'default'}
+            rules={FormRules.fullName}
+            placeholder={'Enter your full name'}
+            errorMessage={errors.fullName?.message}
           />
-          <Input
-            label={'Text Label'}
-            icon={ImageResources.mapPin}
-            variant={'floating'}
-            // type={'password'}
-            caption={'caption'}
-            // errorMessage={'Error message'}
-            placeholder={'Placeholder'}
-            // disabled={true}
+          <InputControlled
+            type={'text'}
+            name={'email'}
+            label={'Email'}
+            control={control}
+            caption={'Caption'}
+            rules={FormRules.email}
+            keyboardType={'email-address'}
+            placeholder={'Enter your email'}
+            errorMessage={errors.email?.message}
+          />
+          <InputControlled
+            control={control}
+            name={'password'}
+            label={'Password'}
+            type={'password'}
+            caption={'Caption'}
+            rules={FormRules.password}
+            placeholder={'Enter your password'}
+            errorMessage={errors.password?.message}
           />
         </View>
         <Button
-          text={'Create an account'}
           position={'center'}
-          onPress={() => navigation.navigate(Routes.verification)}
+          loading={isSubmitting}
+          disabled={isSubmitting}
+          text={'Create an account'}
+          onPress={handleSubmit(onSubmit)}
         />
         <View style={styles.footer}>
           <TextLink
-            content="By signing up you agree to our Terms and Conditions of Use"
             center
-            highlighted={[
-              {
-                text: 'Terms',
-                callback: () => console.log('terns'),
-              },
-              {
-                text: 'Conditions of Use',
-                callback: () => console.log('conditions'),
-              },
-            ]}
+            content={signUp.content}
+            highlighted={signUp.highlighted}
           />
         </View>
-      </View>
+      </ScrollView>
     </SafeMainProvider>
   );
 };
@@ -80,7 +108,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   } as ViewStyle,
   inputs: {
-    gap: normalize('vertical', 24),
+    paddingTop: normalize('vertical', 24),
     paddingBottom: normalize('vertical', 32),
+    gap: normalize('vertical', 24),
   } as ViewStyle,
 });

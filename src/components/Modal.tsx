@@ -12,6 +12,7 @@ import {CommonStyles} from 'theme/commonStyles';
 
 interface IModal {
   modalVisible?: boolean;
+  onPress?: () => void;
   setModalVisible: (visible: boolean) => void;
 }
 
@@ -36,16 +37,16 @@ export const ModalWindow: React.FC<IModal> = ({
             />
             <View style={styles.buttons}>
               <Button
-                position={'center'}
                 type={'primary'}
+                position={'center'}
                 text={'Agree and continue'}
               />
               <Button
-                onPress={() => setModalVisible(!modalVisible)}
                 size={'block'}
                 position={'center'}
                 type={'transparent'}
                 text={'Disagree and close'}
+                onPress={() => setModalVisible(!modalVisible)}
               />
             </View>
           </View>

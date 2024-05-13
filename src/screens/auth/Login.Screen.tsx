@@ -24,6 +24,7 @@ import {Routes} from 'router/routes';
 import {useForm} from 'react-hook-form';
 import {InputControlled} from 'components/InputControlled';
 import {FormRules} from 'constants/formRules';
+import {login} from 'constants/textLink';
 
 // ! Interface
 
@@ -54,68 +55,63 @@ export const LoginScreen: React.FC<
         contentContainerStyle={CommonStyles.flex}>
         <NavBar
           largeTitle={'Welcome!'}
-          leftIcon={ImageResources.chevronLeft}
           leftColor={colors.ink.base}
           leftOnPress={navigation.goBack}
+          leftIcon={ImageResources.chevronLeft}
         />
         <View style={styles.inputs}>
           <InputControlled
-            control={control}
+            type={'text'}
             name={'email'}
             label={'Email'}
-            errorMessage={errors.email?.message}
+            control={control}
             rules={FormRules.email}
-            type={'text'}
             keyboardType={'email-address'}
             placeholder={'Enter your email'}
+            errorMessage={errors.email?.message}
           />
           <InputControlled
             control={control}
             name={'password'}
-            label={'Password'}
-            errorMessage={errors.password?.message}
-            rules={FormRules.password}
             type={'password'}
+            label={'Password'}
             caption={'Caption'}
+            rules={FormRules.password}
             placeholder={'Enter your password'}
+            errorMessage={errors.password?.message}
           />
         </View>
         <View style={styles.loginContainer}>
           <Button
             text={'Login'}
-            type={'primary'}
             size={'block'}
-            disabled={isSubmitting}
-            loading={isSubmitting}
+            type={'primary'}
             position={'center'}
+            loading={isSubmitting}
+            disabled={isSubmitting}
             onPress={handleSubmit(onSubmit)}
           />
           <Text style={styles.singInText}>or sign in with</Text>
           <View style={styles.socialButton}>
             <SocialButton
-              onPress={() => Linking.openSettings()}
               icon={ImageResources.googleButton}
+              onPress={() => Linking.openSettings()}
             />
             <SocialButton
-              onPress={() => Linking.openSettings()}
               icon={ImageResources.facebookButton}
+              onPress={() => Linking.openSettings()}
             />
             <SocialButton
-              onPress={() => Linking.openSettings()}
               icon={ImageResources.twitterButton}
+              onPress={() => Linking.openSettings()}
             />
           </View>
         </View>
         <View style={styles.footer}>
           <TextLink
-            content="Already have an account? Log in"
             center
-            highlighted={[
-              {
-                text: 'Log in',
-                callback: () => console.log('conditions'),
-              },
-            ]}
+            content={login.content}
+            highlighted={login.highlighted}
           />
         </View>
       </ScrollView>
