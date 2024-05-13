@@ -69,7 +69,7 @@ export const OTPInputField: React.FC<OTPInput> = ({length, setDisabled}) => {
               inputRefs.current = [...inputRefs.current, ref];
             }
           }}
-          onChange={text => handleChange(text, index)}
+          onChangeText={text => handleChange(text, index)}
           onKeyPress={event => handleBackSpace(event, index)}
         />
       ))}

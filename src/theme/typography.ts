@@ -2,7 +2,7 @@ import {StyleSheet, TextStyle} from 'react-native';
 import {normalize} from './metrics';
 
 export const bebasFonts = {
-  700: 'BebasNeue',
+  700: 'Bebas Neue',
 };
 
 export const montserratFonts = {
@@ -67,81 +67,80 @@ export const TypographyStyles = StyleSheet.create({
     fontSize: fontSize12,
     lineHeight: lineHeight16,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   mediumNormal: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize14,
     lineHeight: lineHeight16,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   SmallNormalRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize14,
     lineHeight: lineHeight20,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   RegularNoneRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize16,
     lineHeight: lineHeight16,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   RegularTightRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize16,
     lineHeight: lineHeight20,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   RegularNormalRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize16,
     lineHeight: lineHeight24,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   TinyNoneRegular: {
     fontFamily: montserratFonts[400],
     fontSize: fontSize12,
     lineHeight: lineHeight12,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   TinyNoneSemibold: {
     fontFamily: montserratFonts[600],
     fontSize: fontSize12,
     lineHeight: lineHeight12,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   SmallNoneSemibold: {
     fontFamily: montserratFonts[600],
     fontSize: fontSize14,
     lineHeight: lineHeight14,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   RegularNoneSemibold: {
     fontFamily: montserratFonts[600],
     fontSize: fontSize16,
     lineHeight: lineHeight16,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   SmallNormalSemibold: {
     fontFamily: montserratFonts[600],
     fontSize: fontSize14,
     lineHeight: lineHeight20,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   RegularTightSemibold: {
     fontFamily: montserratFonts[600],
     fontSize: fontSize16,
     lineHeight: lineHeight20,
     ...commonFontStyling,
-  },
+  } as TextStyle,
   Inter: {
     fontFamily: InterFonts[500],
     fontSize: fontSize12,
     lineHeight: lineHeight14_52,
     ...commonFontStyling,
-  },
-
+  } as TextStyle,
   textAlignCenter: {
     textAlign: 'center',
-  },
+  } as TextStyle,
 });
