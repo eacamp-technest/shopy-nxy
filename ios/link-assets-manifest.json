@@ -6,6 +6,14 @@
       "sha1": "a2d8f7db6af5eac2cada57b6f24720be9fbad4bb"
     },
     {
+      "path": "src/assets/fonts/BebasNeue-Regular.ttf",
+      "sha1": "0cab0d91dacbeef5fb42d08f0e2f62b5a5cf9767"
+    },
+    {
+      "path": "src/assets/fonts/Inter-Medium.ttf",
+      "sha1": "e76f580811e031813e7150131a0724811cdd737a"
+    },
+    {
       "path": "src/assets/fonts/Montserrat-Bold.ttf",
       "sha1": "98c66622226025f539568865af96df5175e2979c"
     },

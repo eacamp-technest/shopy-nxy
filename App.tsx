@@ -19,7 +19,7 @@ const App = () => {
   }, []);
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={'dark-content'} />
+      <StatusBar translucent={true} barStyle={'dark-content'} />
       <View style={styles.root}>
         <Router />
       </View>
