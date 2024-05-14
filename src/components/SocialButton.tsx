@@ -6,8 +6,6 @@ import {colors} from 'theme/colors';
 import {standardHitSlopSize} from 'theme/const.styles';
 import {CommonStyles} from 'theme/commonStyles';
 
-// ! Interface
-
 interface ISocialButton {
   icon: Resources;
   onPress?: () => void;
@@ -23,8 +21,6 @@ export const SocialButton: React.FC<ISocialButton> = ({icon, onPress}) => {
     </Pressable>
   );
 };
-
-// ! Styles
 
 const styles = StyleSheet.create({
   root: {

@@ -13,8 +13,6 @@ import {standardHitSlopSize} from 'theme/const.styles';
 import {CommonStyles} from 'theme/commonStyles';
 import {normalize} from 'theme/metrics';
 
-// ! Interface
-
 interface INavBar {
   title?: string;
   largeTitle?: string;
@@ -74,8 +72,6 @@ export const NavBar: React.FC<INavBar> = ({
     </Fragment>
   );
 };
-
-// ! Styles
 
 const styles = StyleSheet.create({
   root: {

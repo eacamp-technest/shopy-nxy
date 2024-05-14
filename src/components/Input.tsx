@@ -18,8 +18,6 @@ import {CommonStyles} from 'theme/commonStyles';
 import {ImageResources} from 'assets/VectorResources.g';
 import {normalize} from 'theme/metrics';
 
-//  ! Interface
-
 type TIcon = {
   source: Resources;
   color?: string;
@@ -48,8 +46,6 @@ export interface IInput {
   onFocus?: () => void;
   onBlur?: () => void;
 }
-
-// ! Component
 
 export const Input: React.FC<IInput> = ({
   value,
@@ -192,8 +188,6 @@ export const Input: React.FC<IInput> = ({
     </View>
   );
 };
-
-// ! Styles
 
 const styles = StyleSheet.create({
   root: {

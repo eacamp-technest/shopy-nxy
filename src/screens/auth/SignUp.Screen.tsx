@@ -100,8 +100,6 @@ export const SignUpScreen: React.FC<
   );
 };
 
-// ! Styles
-
 const styles = StyleSheet.create({
   footer: {
     flex: 1,
