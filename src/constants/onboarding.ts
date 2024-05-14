@@ -1,7 +1,7 @@
 export const onboarding = [
   {
     id: 0,
-    title: 'Shop top brands online \n and in-store',
+    title: 'Shop top brands online \nand in-store',
     image: require('../assets/images/onboarding_1.png'),
     logo: 'SHOPPAY',
   },

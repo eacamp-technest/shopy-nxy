@@ -1,8 +1,9 @@
 import {StyleSheet, TextStyle} from 'react-native';
 import {normalize} from './metrics';
+import {colors} from './colors';
 
 export const bebasFonts = {
-  700: 'Bebas Neue',
+  700: 'BebasNeue Bold',
 };
 
 export const montserratFonts = {
@@ -18,6 +19,7 @@ export const InterFonts = {
 export const commonFontStyling: TextStyle = {
   includeFontPadding: false,
   padding: 0,
+  color: colors.ink.darkest,
 };
 
 const fontSize48 = normalize('font', 48);
