@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
     paddingTop: normalize('vertical', 32),
   } as ViewStyle,
   logoText: {
-    color: colors.primary.base,
     ...TypographyStyles.title3,
+    color: colors.primary.base,
   } as TextStyle,
   background: {
     width: windowWidth,

@@ -1,9 +1,9 @@
-import {StyleSheet, TextStyle} from 'react-native';
+import {StyleSheet, TextStyle, Platform} from 'react-native';
 import {normalize} from './metrics';
 import {colors} from './colors';
 
 export const bebasFonts = {
-  700: 'BebasNeue Bold',
+  700: Platform.OS === 'ios' ? 'BebasNeue' : 'BebasNeue Bold',
 };
 
 export const montserratFonts = {
