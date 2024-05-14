@@ -77,7 +77,6 @@ export const LoginScreen: React.FC<
             name={'password'}
             type={'password'}
             label={'Password'}
-            caption={'Caption'}
             rules={FormRules.password}
             placeholder={'Enter your password'}
             errorMessage={errors.password?.message}
@@ -137,6 +136,7 @@ const styles = StyleSheet.create({
   footer: {
     flex: 1,
     justifyContent: 'flex-end',
+    paddingVertical: normalize('vertical', 14),
   } as ViewStyle,
   inputs: {
     paddingTop: normalize('vertical', 24),

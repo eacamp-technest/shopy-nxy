@@ -53,7 +53,6 @@ export const SignUpScreen: React.FC<
             name={'fullName'}
             control={control}
             label={'Full Name'}
-            caption={'Caption'}
             keyboardType={'default'}
             rules={FormRules.fullName}
             placeholder={'Enter your full name'}
@@ -64,7 +63,6 @@ export const SignUpScreen: React.FC<
             name={'email'}
             label={'Email'}
             control={control}
-            caption={'Caption'}
             rules={FormRules.email}
             keyboardType={'email-address'}
             placeholder={'Enter your email'}
@@ -75,7 +73,6 @@ export const SignUpScreen: React.FC<
             name={'password'}
             label={'Password'}
             type={'password'}
-            caption={'Caption'}
             rules={FormRules.password}
             placeholder={'Enter your password'}
             errorMessage={errors.password?.message}
@@ -104,6 +101,7 @@ const styles = StyleSheet.create({
   footer: {
     flex: 1,
     justifyContent: 'flex-end',
+    paddingVertical: normalize('vertical', 12),
   } as ViewStyle,
   inputs: {
     paddingTop: normalize('vertical', 24),
