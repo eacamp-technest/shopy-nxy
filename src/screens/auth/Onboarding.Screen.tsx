@@ -135,8 +135,6 @@ export const OnboardingScreen: React.FC<
   );
 };
 
-// !Styles
-
 const styles = StyleSheet.create({
   root: {
     flex: 1,

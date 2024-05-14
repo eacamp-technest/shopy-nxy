@@ -70,8 +70,6 @@ export const VerificationScreen: React.FC<
   );
 };
 
-// ! Styles
-
 const styles = StyleSheet.create({
   resentText: {
     paddingVertical: normalize('vertical', 32),

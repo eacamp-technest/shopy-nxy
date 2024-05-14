@@ -15,8 +15,6 @@ import {colors} from 'theme/colors';
 import {CommonStyles} from 'theme/commonStyles';
 import {TTypesButton, getButtonTheme} from 'helpers/buttonTheme';
 
-// ! Interface
-
 type TSize = 'small' | 'block' | 'large';
 type TPosition = 'left' | 'right' | 'center';
 
@@ -32,8 +30,6 @@ interface IButton {
   hitSlop?: PressableProps['hitSlop'];
   onPress?: () => void;
 }
-
-// ! Component
 
 export const Button: React.FC<IButton> = ({
   text,
@@ -96,8 +92,6 @@ export const Button: React.FC<IButton> = ({
     </Pressable>
   );
 };
-
-// ! Styles
 
 const styles = StyleSheet.create({
   root: {

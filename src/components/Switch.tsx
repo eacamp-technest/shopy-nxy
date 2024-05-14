@@ -16,12 +16,14 @@ type TRightCircle =
   | 'rightCircle'
   | 'rightMiniKnopCircle'
   | 'rightMaterialCircle';
+
 interface ISwitch {
   size?: TSize;
   style?: StyleProp<ViewProps>;
   circleSize?: TCircle;
   rightCircles?: TRightCircle;
 }
+
 export const Switch: React.FC<ISwitch> = ({
   size = 'switch',
   style,

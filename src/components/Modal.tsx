@@ -8,8 +8,6 @@ import {normalize} from 'theme/metrics';
 import {modal} from 'constants/textLink';
 import {CommonStyles} from 'theme/commonStyles';
 
-// ! Interface
-
 interface IModal {
   modalVisible?: boolean;
   onPress?: () => void;
@@ -55,8 +53,6 @@ export const ModalWindow: React.FC<IModal> = ({
     </View>
   );
 };
-
-// ! Styles
 
 const styles = StyleSheet.create({
   root: {

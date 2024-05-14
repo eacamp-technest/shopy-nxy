@@ -62,8 +62,6 @@ export const Pagination: React.FC<IPagination> = ({selectedIndex, style}) => {
   );
 };
 
-// ! Styles
-
 const dotSize = normalize('width', 8);
 
 const styles = StyleSheet.create({
