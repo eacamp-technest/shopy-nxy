@@ -12,6 +12,7 @@ import {SvgImage, Resources} from './SvgImage';
 import {standardHitSlopSize} from 'theme/const.styles';
 import {CommonStyles} from 'theme/commonStyles';
 import {normalize} from 'theme/metrics';
+import {colors} from 'theme/colors';
 
 interface INavBar {
   title?: string;
@@ -21,6 +22,7 @@ interface INavBar {
   disabled?: boolean;
   leftColor?: string;
   rightColor?: string;
+  textRight?: string;
   leftOnPress?: () => void;
   rightOnPress?: () => void;
 }
@@ -34,6 +36,7 @@ export const NavBar: React.FC<INavBar> = ({
   rightOnPress,
   rightColor,
   leftColor,
+  textRight,
 }) => {
   return (
     <Fragment>
@@ -53,12 +56,16 @@ export const NavBar: React.FC<INavBar> = ({
         ) : (
           <View />
         )}
-        {rightIcon ? (
+        {rightIcon || textRight ? (
           <Pressable
             hitSlop={standardHitSlopSize}
             style={({pressed}) => [{opacity: pressed ? 0.5 : 1}]}
             onPress={rightOnPress}>
-            <SvgImage source={rightIcon} color={rightColor} />
+            {rightIcon ? (
+              <SvgImage source={rightIcon} color={rightColor} />
+            ) : (
+              <Text style={styles.textRight}>{textRight}</Text>
+            )}
           </Pressable>
         ) : (
           <View />
@@ -81,5 +88,9 @@ const styles = StyleSheet.create({
   largeText: {
     paddingTop: normalize('vertical', 16),
     paddingBottom: normalize('vertical', 8),
+  } as TextStyle,
+  textRight: {
+    ...TypographyStyles.LargeNoneSemibold,
+    color: colors.primary.base,
   } as TextStyle,
 });
