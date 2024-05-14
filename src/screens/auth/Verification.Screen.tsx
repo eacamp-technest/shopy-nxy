@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, TextStyle, Pressable, Keyboard} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TextStyle,
+  Pressable,
+  Keyboard,
+  ViewStyle,
+} from 'react-native';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
 import {NavBar} from 'components/NavBar';
 import {ImageResources} from 'assets/VectorResources.g';
@@ -12,7 +19,7 @@ import {normalize} from 'theme/metrics';
 import {TextLink} from 'components/TextLink';
 import {ModalWindow} from 'components/Modal';
 import {verification} from 'constants/textLink';
-import {OTPInputField} from 'components/OTPInputField';
+import {OTPCodeField} from 'components/OTPInputField';
 import {CommonStyles} from 'theme/commonStyles';
 
 export const VerificationScreen: React.FC<
@@ -20,7 +27,7 @@ export const VerificationScreen: React.FC<
 > = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const [disabled, setDisabled] = useState<boolean>(true);
+  const [code, setCode] = React.useState<string>('');
 
   return (
     <SafeMainProvider>
@@ -31,7 +38,13 @@ export const VerificationScreen: React.FC<
           leftOnPress={navigation.goBack}
           leftIcon={ImageResources.chevronLeft}
         />
-        <OTPInputField setDisabled={setDisabled} length={4} />
+        <OTPCodeField
+          setCode={setCode}
+          code={code}
+          style={styles.otp}
+          triggerOnFinish={Keyboard.dismiss}
+          length={4}
+        />
         <View style={styles.resentText}>
           <TextLink
             center
@@ -43,7 +56,7 @@ export const VerificationScreen: React.FC<
           text={'Continue'}
           type={'primary'}
           position={'center'}
-          disabled={disabled}
+          disabled={code.length !== 4}
           onPress={() => setModalVisible(true)}
         />
         <View>
@@ -63,4 +76,9 @@ const styles = StyleSheet.create({
   resentText: {
     paddingVertical: normalize('vertical', 32),
   } as TextStyle,
+  otp: {
+    paddingHorizontal: 32,
+    marginTop: 16,
+    marginBottom: 32,
+  } as ViewStyle,
 });

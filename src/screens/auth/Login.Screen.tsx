@@ -26,11 +26,9 @@ import {InputControlled} from 'components/InputControlled';
 import {FormRules} from 'constants/formRules';
 import {login} from 'constants/textLink';
 
-// ! Interface
-
-interface ILoginForm {
-  email?: string;
-  password?: string;
+export interface ILoginForm {
+  email: string;
+  password: string;
 }
 
 export const LoginScreen: React.FC<
@@ -40,10 +38,14 @@ export const LoginScreen: React.FC<
     control,
     handleSubmit,
     formState: {errors, isSubmitting},
-  } = useForm<ILoginForm>();
-  const onSubmit = () => {
-    navigation.navigate(Routes.verification);
-    return new Promise(resolve => setTimeout(resolve, 2000));
+  } = useForm<ILoginForm>({
+    defaultValues: {
+      email: __DEV__ ? 'nadir.musayevv@gmail.com' : '',
+      password: __DEV__ ? '123456XX!' : '',
+    },
+  });
+  const onSubmit = (data: ILoginForm) => {
+    navigation.navigate(Routes.verification, data);
   };
 
   return (
@@ -118,8 +120,6 @@ export const LoginScreen: React.FC<
     </SafeMainProvider>
   );
 };
-
-// ! Styles
 
 const styles = StyleSheet.create({
   loginContainer: {
