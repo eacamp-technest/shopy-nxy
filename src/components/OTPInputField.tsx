@@ -37,9 +37,7 @@ export const OTPCodeField: React.FC<IOtpCodeField> = ({
 
     return (
       <View style={[styles.box, focus && styles.focusedBox]} key={index}>
-        <Text style={TypographyStyles.RegularNoneBold}>
-          {focus ? '|' : digit}
-        </Text>
+        <Text style={styles.text}>{focus ? '|' : digit}</Text>
       </View>
     );
   };
@@ -74,6 +72,10 @@ export const OTPCodeField: React.FC<IOtpCodeField> = ({
 };
 
 const styles = StyleSheet.create({
+  text: {
+    ...TypographyStyles.RegularNoneBold,
+    lineHeight: 0,
+  } as TextStyle,
   textInput: {
     opacity: 0,
     ...StyleSheet.absoluteFillObject,
