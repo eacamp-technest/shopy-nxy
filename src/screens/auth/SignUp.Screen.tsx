@@ -32,7 +32,6 @@ export const SignUpScreen: React.FC<
   } = useForm<ISigUpForm>();
   const onSubmit = (data: ISigUpForm) => {
     navigation.navigate(Routes.verification, data);
-    return new Promise(resolve => setTimeout(resolve, 2000));
   };
   return (
     <SafeMainProvider>
