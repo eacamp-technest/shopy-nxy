@@ -25,6 +25,7 @@ export const commonFontStyling: TextStyle = {
 const fontSize48 = normalize('font', 48);
 const fontSize32 = normalize('font', 32);
 const fontSize24 = normalize('font', 24);
+const fontSize18 = normalize('font', 18);
 const fontSize16 = normalize('font', 16);
 const fontSize14 = normalize('font', 14);
 const fontSize12 = normalize('font', 12);
@@ -34,6 +35,7 @@ const lineHeight36 = normalize('font', 36);
 const lineHeight32 = normalize('font', 32);
 const lineHeight24 = normalize('font', 24);
 const lineHeight20 = normalize('font', 20);
+const lineHeight18 = normalize('font', 18);
 const lineHeight16 = normalize('font', 16);
 const lineHeight14 = normalize('font', 14);
 const lineHeight14_52 = normalize('font', 14.52);
@@ -56,6 +58,12 @@ export const TypographyStyles = StyleSheet.create({
     fontFamily: bebasFonts[700],
     fontSize: fontSize24,
     lineHeight: lineHeight32,
+    ...commonFontStyling,
+  } as TextStyle,
+  LargeNoneSemibold: {
+    fontFamily: montserratFonts[600],
+    fontSize: fontSize18,
+    lineHeight: lineHeight18,
     ...commonFontStyling,
   } as TextStyle,
   RegularNoneBold: {

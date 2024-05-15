@@ -51,3 +51,16 @@ export const login = {
   ],
   content: 'Already have an account? Log in',
 };
+
+// ! Method Payment
+
+export const methodPayment = {
+  highlighted: [
+    {
+      text: 'Learn more',
+      callback: () => console.log('conditions'),
+    },
+  ],
+  content:
+    'You have stored your card to make shopping with Shoppay even smoother. To enroll in Connected card, view card detail. Learn more',
+};

@@ -7,6 +7,8 @@ import {TypographyStyles} from 'theme/typography';
 import {normalize} from 'theme/metrics';
 import {modal} from 'constants/textLink';
 import {CommonStyles} from 'theme/commonStyles';
+import {useNavigation} from '@react-navigation/native';
+import {Routes} from 'router/routes';
 
 interface IModal {
   modalVisible?: boolean;
@@ -18,6 +20,13 @@ export const ModalWindow: React.FC<IModal> = ({
   modalVisible,
   setModalVisible,
 }) => {
+  const {navigate} = useNavigation();
+
+  const handleNavigate = () => {
+    setModalVisible(false);
+    navigate(Routes.paymentMethod as never);
+  };
+
   return (
     <View style={styles.root}>
       <Modal
@@ -39,6 +48,7 @@ export const ModalWindow: React.FC<IModal> = ({
                 type={'primary'}
                 position={'center'}
                 text={'Agree and continue'}
+                onPress={handleNavigate}
               />
               <Button
                 size={'block'}
