@@ -113,6 +113,7 @@ export const LoginScreen: React.FC<
             center
             content={login.content}
             highlighted={login.highlighted}
+            fontColor={colors.primary.base}
           />
         </View>
       </ScrollView>

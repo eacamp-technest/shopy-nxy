@@ -50,6 +50,7 @@ export const VerificationScreen: React.FC<
             center
             content={verification.content}
             highlighted={verification.highlighted}
+            fontColor={colors.primary.base}
           />
         </View>
         <Button

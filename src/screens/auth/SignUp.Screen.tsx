@@ -29,7 +29,13 @@ export const SignUpScreen: React.FC<
     control,
     handleSubmit,
     formState: {errors, isSubmitting},
-  } = useForm<ISigUpForm>();
+  } = useForm<ISigUpForm>({
+    defaultValues: {
+      fullName: __DEV__ ? 'Nadir Musayev' : '',
+      email: __DEV__ ? 'nadir.musayevv@gmail.com' : '',
+      password: __DEV__ ? '123456XX!' : '',
+    },
+  });
   const onSubmit = (data: ISigUpForm) => {
     navigation.navigate(Routes.verification, data);
   };
@@ -89,6 +95,7 @@ export const SignUpScreen: React.FC<
             center
             content={signUp.content}
             highlighted={signUp.highlighted}
+            fontColor={colors.primary.base}
           />
         </View>
       </ScrollView>
