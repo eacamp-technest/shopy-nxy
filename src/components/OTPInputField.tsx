@@ -74,7 +74,7 @@ export const OTPCodeField: React.FC<IOtpCodeField> = ({
 const styles = StyleSheet.create({
   text: {
     ...TypographyStyles.RegularNoneBold,
-    lineHeight: 22,
+    lineHeight: 20,
   } as TextStyle,
   textInput: {
     opacity: 0,

@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     height: '100%',
     ...TypographyStyles.RegularNoneRegular,
-    lineHeight: 22,
+    lineHeight: 20,
   } as TextStyle,
   floating: {
     flexGrow: 1,
