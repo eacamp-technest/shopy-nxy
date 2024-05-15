@@ -30,9 +30,8 @@ export const SignUpScreen: React.FC<
     handleSubmit,
     formState: {errors, isSubmitting},
   } = useForm<ISigUpForm>();
-  const onSubmit = () => {
-    navigation.navigate(Routes.login);
-    return new Promise(resolve => setTimeout(resolve, 2000));
+  const onSubmit = (data: ISigUpForm) => {
+    navigation.navigate(Routes.verification, data);
   };
   return (
     <SafeMainProvider>
