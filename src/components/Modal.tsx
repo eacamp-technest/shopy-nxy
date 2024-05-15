@@ -32,6 +32,7 @@ export const ModalWindow: React.FC<IModal> = ({
               content={modal.content}
               highlighted={modal.highlighted}
               style={TypographyStyles.RegularNormalRegular}
+              fontColor={colors.primary.base}
             />
             <View style={styles.buttons}>
               <Button

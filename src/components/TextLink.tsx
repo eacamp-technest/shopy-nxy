@@ -19,7 +19,7 @@ interface TextLinkProps {
 export const TextLink: React.FC<TextLinkProps> = ({
   content,
   highlighted,
-  fontColor = colors.primary.base,
+  fontColor,
   center,
   style,
 }: TextLinkProps) => {
@@ -33,12 +33,12 @@ export const TextLink: React.FC<TextLinkProps> = ({
           key={key}
           onPress={callback}
           disabled={!callback}
-          style={[TypographyStyles.SmallNoneSemibold, {color}, style]}>
+          style={[TypographyStyles.RegularNormalSemibold, {color}]}>
           {text}
         </Text>
       );
     },
-    [fontColor, style],
+    [fontColor],
   );
 
   const renderElements = useMemo(() => {
