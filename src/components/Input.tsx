@@ -57,7 +57,7 @@ export const Input: React.FC<IInput> = ({
   ...props
 }) => {
   const [focused, setFocused] = useState<boolean>(false);
-  const [secureTextEntry, setSecureTextEntry] = useState<boolean>(false);
+  const [secureTextEntry, setSecureTextEntry] = useState<boolean>(true);
   const placeholderColor = disabled ? colors.skyBase : colors.ink.lighter;
   const isMoreIcon =
     ('position' in (icon ?? {}) && icon?.position === 'right') ||

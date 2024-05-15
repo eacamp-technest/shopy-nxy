@@ -27,13 +27,15 @@ export const TextLink: React.FC<TextLinkProps> = ({
     (text: string, callback?: () => void, index?: number) => {
       const key = callback ? `${text}-${index}-highlighted` : 'remaining';
       const color = callback ? fontColor : colors.ink.lighter;
-
+      const font = callback
+        ? TypographyStyles.SmallNormalSemibold
+        : TypographyStyles.SmallNormalRegular;
       return (
         <Text
           key={key}
           onPress={callback}
           disabled={!callback}
-          style={[TypographyStyles.RegularNormalSemibold, {color}]}>
+          style={[font, {color}]}>
           {text}
         </Text>
       );
