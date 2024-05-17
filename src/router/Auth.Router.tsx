@@ -11,6 +11,7 @@ import {
   authStackScreenOption,
   defaultScreenOptions,
 } from 'configs/navigation.configs';
+import {PaymentAddCardScreen} from 'screens/auth/PaymentAddCard.Screen';
 
 const AuthStack = createNativeStackNavigator<NavigationParamList>();
 
@@ -27,12 +28,16 @@ export const AuthRouter = () => {
       <AuthStack.Screen name={Routes.login} component={LoginScreen} />
       <AuthStack.Screen name={Routes.singUp} component={SignUpScreen} />
       <AuthStack.Screen
+        name={Routes.verification}
+        component={VerificationScreen}
+      />
+      <AuthStack.Screen
         name={Routes.paymentMethod}
         component={PaymentMethodScreen}
       />
       <AuthStack.Screen
-        name={Routes.verification}
-        component={VerificationScreen}
+        name={Routes.paymentAddCard}
+        component={PaymentAddCardScreen}
       />
     </AuthStack.Navigator>
   );
