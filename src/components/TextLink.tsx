@@ -28,8 +28,8 @@ export const TextLink: React.FC<TextLinkProps> = ({
       const key = callback ? `${text}-${index}-highlighted` : 'remaining';
       const color = callback ? fontColor : colors.ink.lighter;
       const font = callback
-        ? TypographyStyles.SmallNormalSemibold
-        : TypographyStyles.SmallNormalRegular;
+        ? TypographyStyles.RegularNormalSemibold
+        : TypographyStyles.RegularNormalRegular;
       return (
         <Text
           key={key}

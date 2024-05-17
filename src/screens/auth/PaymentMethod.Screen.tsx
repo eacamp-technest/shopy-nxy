@@ -29,6 +29,7 @@ export const PaymentMethodScreen: React.FC<
         <Text style={styles.text}>STORED CARD</Text>
         <TextLink
           content={methodPayment.content}
+          fontColor={colors.primary.base}
           highlighted={methodPayment.highlighted}
         />
       </View>
