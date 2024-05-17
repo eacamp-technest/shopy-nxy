@@ -4,9 +4,9 @@ import {
   StyleSheet,
   Pressable,
   StyleProp,
-  ActivityIndicator,
-  PressableProps,
   ViewStyle,
+  PressableProps,
+  ActivityIndicator,
 } from 'react-native';
 import {SvgImage, Resources} from 'components/SvgImage';
 import {TypographyStyles} from 'theme/typography';
@@ -18,8 +18,8 @@ import {TTypesButton, getButtonTheme} from 'helpers/buttonTheme';
 type TSize = 'small' | 'block' | 'large';
 type TPosition = 'left' | 'right' | 'center';
 
-interface IButton {
-  text: string;
+export interface IButton {
+  text?: string;
   disabled?: boolean;
   loading?: boolean;
   size?: TSize;

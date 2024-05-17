@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -7,27 +7,46 @@ import {
   Keyboard,
   ViewStyle,
 } from 'react-native';
-import {SafeMainProvider} from 'containers/SafeMainProvider';
-import {NavBar} from 'components/NavBar';
-import {ImageResources} from 'assets/VectorResources.g';
 import {colors} from 'theme/colors';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {NavigationParamList} from 'types/navigation.types';
 import {Routes} from 'router/routes';
-import {Button} from 'components/Button';
 import {normalize} from 'theme/metrics';
+import {Button} from 'components/Button';
+import {NavBar} from 'components/NavBar';
 import {TextLink} from 'components/TextLink';
-import {ModalWindow} from 'components/Modal';
-import {verification} from 'constants/textLink';
-import {OTPCodeField} from 'components/OTPInputField';
 import {CommonStyles} from 'theme/commonStyles';
+import {OTPCodeField} from 'components/OTPInputField';
+import {modal, verification} from 'constants/textLink';
+import {ImageResources} from 'assets/VectorResources.g';
+import {NavigationParamList} from 'types/navigation.types';
+import Modal, {IModalRefCallbacks} from 'components/Modal';
+import {SafeMainProvider} from 'containers/SafeMainProvider';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {IButton} from 'components/Button';
 
 export const VerificationScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.verification>
 > = ({navigation}) => {
-  const [modalVisible, setModalVisible] = useState(false);
-
   const [code, setCode] = React.useState<string>('');
+
+  const modalRef = useRef<IModalRefCallbacks>(null);
+
+  const buttonsArray: IButton[] = [
+    {
+      text: 'Agree and continue',
+      type: 'primary',
+      position: 'center',
+      onPress: () => {
+        modalRef?.current?.close();
+        navigation.navigate(Routes.paymentMethod);
+      },
+    },
+    {
+      text: 'Disagree and close',
+      type: 'transparent',
+      position: 'center',
+      onPress: () => modalRef?.current?.close(),
+    },
+  ];
 
   return (
     <SafeMainProvider>
@@ -58,12 +77,22 @@ export const VerificationScreen: React.FC<
           type={'primary'}
           position={'center'}
           disabled={code.length !== 4}
-          onPress={() => setModalVisible(true)}
+          onPress={() => modalRef?.current?.open()}
         />
         <View>
-          <ModalWindow
-            setModalVisible={setModalVisible}
-            modalVisible={modalVisible}
+          <Modal
+            subTitle={
+              <TextLink
+                center
+                content={modal.content}
+                fontColor={colors.primary.base}
+                highlighted={modal.highlighted}
+              />
+            }
+            closeable
+            buttons={buttonsArray}
+            ref={modalRef}
+            wrapperStyle={styles.wrapper}
           />
         </View>
       </Pressable>
@@ -80,4 +109,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 32,
   } as ViewStyle,
+  wrapper: {
+    gap: normalize('vertical', 24),
+  },
 });

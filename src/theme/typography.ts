@@ -1,9 +1,10 @@
-import {StyleSheet, TextStyle, Platform} from 'react-native';
+import {StyleSheet, TextStyle} from 'react-native';
 import {normalize} from './metrics';
 import {colors} from './colors';
+import {isIos} from 'constants/common.consts';
 
 export const bebasFonts = {
-  700: Platform.OS === 'ios' ? 'BebasNeue' : 'BebasNeue Bold',
+  700: isIos ? 'BebasNeue' : 'BebasNeue Bold',
 };
 
 export const montserratFonts = {
@@ -149,6 +150,11 @@ export const TypographyStyles = StyleSheet.create({
     fontSize: fontSize16,
     lineHeight: lineHeight24,
   } as TextStyle,
+  RegularNormalSemiBold: {
+    fontSize: fontSize16,
+    fontFamily: montserratFonts[600],
+    ...commonFontStyling,
+  },
   Inter: {
     fontFamily: InterFonts[500],
     fontSize: fontSize12,
