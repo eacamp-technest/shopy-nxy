@@ -7,12 +7,12 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
-import {TypographyStyles} from 'theme/typography';
-import {SvgImage, Resources} from './SvgImage';
-import {standardHitSlopSize} from 'theme/const.styles';
-import {CommonStyles} from 'theme/commonStyles';
-import {normalize} from 'theme/metrics';
 import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
+import {SvgImage, Resources} from './SvgImage';
+import {CommonStyles} from 'theme/commonStyles';
+import {TypographyStyles} from 'theme/typography';
+import {standardHitSlopSize} from 'theme/const.styles';
 
 interface INavBar {
   title?: string;
@@ -44,31 +44,32 @@ export const NavBar: React.FC<INavBar> = ({
         {leftIcon ? (
           <Pressable
             hitSlop={standardHitSlopSize}
-            style={({pressed}) => [{opacity: pressed ? 0.5 : 1}]}
+            style={({pressed}) => [
+              {opacity: pressed ? 0.5 : 1},
+              styles.leftContainer,
+            ]}
             onPress={leftOnPress}>
             <SvgImage source={leftIcon} color={leftColor} />
           </Pressable>
         ) : (
           <View />
         )}
-        {title ? (
-          <Text style={TypographyStyles.title3}>{title}</Text>
-        ) : (
-          <View />
-        )}
+        {title ? <Text style={styles.title}>{title}</Text> : <View />}
         {rightIcon || textRight ? (
-          <Pressable
-            hitSlop={standardHitSlopSize}
-            style={({pressed}) => [{opacity: pressed ? 0.5 : 1}]}
-            onPress={rightOnPress}>
-            {rightIcon ? (
-              <SvgImage source={rightIcon} color={rightColor} />
-            ) : (
-              <Text style={styles.textRight}>{textRight}</Text>
-            )}
-          </Pressable>
+          <View style={styles.rightContainer}>
+            <Pressable
+              hitSlop={standardHitSlopSize}
+              style={({pressed}) => [{opacity: pressed ? 0.5 : 1}]}
+              onPress={rightOnPress}>
+              {rightIcon ? (
+                <SvgImage source={rightIcon} color={rightColor} />
+              ) : (
+                <Text style={styles.textRight}>{textRight}</Text>
+              )}
+            </Pressable>
+          </View>
         ) : (
-          <View />
+          <View style={styles.rightContainer} />
         )}
       </View>
       {largeTitle ? (
@@ -85,6 +86,11 @@ const styles = StyleSheet.create({
     paddingVertical: normalize('vertical', 12),
     ...CommonStyles.alignCenterJustifyBetweenRow,
   } as ViewStyle,
+  title: {
+    flex: 1,
+    textAlign: 'center',
+    ...TypographyStyles.title3,
+  } as TextStyle,
   largeText: {
     paddingTop: normalize('vertical', 16),
     paddingBottom: normalize('vertical', 8),
@@ -93,4 +99,12 @@ const styles = StyleSheet.create({
     ...TypographyStyles.LargeNoneSemibold,
     color: colors.primary.base,
   } as TextStyle,
+  leftContainer: {
+    width: '15%',
+  } as ViewStyle,
+  rightContainer: {
+    width: '15%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  } as ViewStyle,
 });
