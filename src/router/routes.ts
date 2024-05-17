@@ -5,6 +5,7 @@ export enum Routes {
   login = 'login',
   singUp = 'singUp',
   paymentMethod = 'paymentMethod',
+  paymentAddCard = 'paymentAddCard',
   verification = 'verification',
   home = 'home',
 }
