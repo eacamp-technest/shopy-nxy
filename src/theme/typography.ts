@@ -150,6 +150,11 @@ export const TypographyStyles = StyleSheet.create({
     fontSize: fontSize16,
     lineHeight: lineHeight24,
   } as TextStyle,
+  RegularNormalSemiBold: {
+    fontSize: fontSize16,
+    fontFamily: montserratFonts[600],
+    ...commonFontStyling,
+  },
   Inter: {
     fontFamily: InterFonts[500],
     fontSize: fontSize12,

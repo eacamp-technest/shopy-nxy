@@ -1,84 +1,186 @@
-import React from 'react';
-import {Modal, StyleSheet, View, ViewStyle} from 'react-native';
-import {Button} from './Button';
-import {TextLink} from './TextLink';
+import {
+  StyleSheet,
+  View,
+  Modal as NativeModal,
+  Text,
+  Image,
+  Pressable,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+  ImageStyle,
+  ImageSourcePropType,
+} from 'react-native';
+import React, {
+  useState,
+  forwardRef,
+  useCallback,
+  isValidElement,
+  useImperativeHandle,
+  ForwardRefRenderFunction,
+} from 'react';
 import {colors} from 'theme/colors';
-import {TypographyStyles} from 'theme/typography';
 import {normalize} from 'theme/metrics';
-import {modal} from 'constants/textLink';
+import {Button, IButton} from './Button';
+import {windowWidth} from 'theme/const.styles';
 import {CommonStyles} from 'theme/commonStyles';
-import {useNavigation} from '@react-navigation/native';
-import {Routes} from 'router/routes';
+import {TypographyStyles} from 'theme/typography';
+
+interface IModalButtons extends IButton {}
 
 interface IModal {
-  modalVisible?: boolean;
-  onPress?: () => void;
-  setModalVisible: (visible: boolean) => void;
+  title?: string;
+  subTitle?: string | React.ReactNode;
+  buttons?: IModalButtons[];
+  closeable?: boolean;
+  wrapperStyle?: StyleProp<ViewStyle>;
+  imageSize?: 'small' | 'medium' | 'large';
+  source?: ImageSourcePropType | undefined;
+  modalStyle?: StyleProp<ViewStyle>;
+  children?: React.ReactNode;
+  onClose?: () => void;
 }
 
-export const ModalWindow: React.FC<IModal> = ({
-  modalVisible,
-  setModalVisible,
-}) => {
-  const {navigate} = useNavigation();
+export interface IModalRefCallbacks {
+  open: () => void;
+  close: () => void;
+  state: boolean;
+}
 
-  const handleNavigate = () => {
-    setModalVisible(false);
-    navigate(Routes.paymentMethod as never);
+const Modal: ForwardRefRenderFunction<IModalRefCallbacks, IModal> = (
+  props,
+  ref,
+) => {
+  const {
+    children,
+    closeable,
+    modalStyle,
+    wrapperStyle,
+    onClose,
+    buttons,
+    subTitle,
+    imageSize = 'medium',
+    source,
+    title,
+  } = props;
+
+  const [visible, setVisible] = useState<boolean>(false);
+
+  const isElement = isValidElement(subTitle);
+
+  useImperativeHandle(ref, () => ({
+    open: () => setVisible(true),
+    close: () => setVisible(false),
+    state: visible,
+  }));
+
+  const closeModal = () => {
+    setVisible(false);
+    onClose?.();
+  };
+
+  const renderButtons = useCallback(
+    (buttonContext: IModalButtons, index: number) => {
+      return <Button key={index} {...buttonContext} />;
+    },
+    [],
+  );
+
+  const renderSubTitle = () => {
+    if (!subTitle) {
+      return null;
+    }
+
+    if (isElement) {
+      return subTitle;
+    }
+    return <Text style={[styles.subtitle]}>{subTitle}</Text>;
   };
 
   return (
-    <View style={styles.root}>
-      <Modal
-        animationType={'fade'}
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(!modalVisible)}>
-        <View style={styles.root}>
-          <View style={styles.modal}>
-            <TextLink
-              center
-              content={modal.content}
-              highlighted={modal.highlighted}
-              style={TypographyStyles.RegularNormalRegular}
-              fontColor={colors.primary.base}
+    <NativeModal
+      transparent
+      visible={visible}
+      animationType="fade"
+      statusBarTranslucent
+      onDismiss={closeModal}
+      onRequestClose={closeModal}>
+      <Pressable
+        disabled={!closeable}
+        onPress={() => (ref as {current: IModalRefCallbacks})?.current?.close()}
+        style={[styles.background, modalStyle]}>
+        <View
+          style={[
+            styles.view,
+            imageSize === 'large' && styles.main,
+            wrapperStyle,
+          ]}>
+          {source ? (
+            <Image
+              style={[
+                styles.image,
+                styles[
+                  `${imageSize}Image` as keyof typeof styles
+                ] as ImageStyle,
+              ]}
+              source={source}
             />
-            <View style={styles.buttons}>
-              <Button
-                type={'primary'}
-                position={'center'}
-                text={'Agree and continue'}
-                onPress={handleNavigate}
-              />
-              <Button
-                size={'block'}
-                position={'center'}
-                type={'transparent'}
-                text={'Disagree and close'}
-                onPress={() => setModalVisible(!modalVisible)}
-              />
-            </View>
-          </View>
+          ) : null}
+          {title ? (
+            <Text
+              style={[
+                TypographyStyles.title3,
+                TypographyStyles.textAlignCenter,
+              ]}>
+              {title}
+            </Text>
+          ) : null}
+          {renderSubTitle()}
+          {buttons?.map(renderButtons)}
+          {children}
         </View>
-      </Modal>
-    </View>
+      </Pressable>
+    </NativeModal>
   );
 };
+export default forwardRef(Modal);
 
 const styles = StyleSheet.create({
-  root: {
+  background: {
     backgroundColor: colors.modal,
-    ...CommonStyles.flexJustifyCenter,
+    ...CommonStyles.flexAlignJustifyCenter,
   } as ViewStyle,
-  modal: {
-    borderWidth: 1,
-    borderRadius: 16,
+  main: {
+    paddingTop: 0,
+  } as ViewStyle,
+  view: {
     padding: 24,
+    borderRadius: 16,
+    width: windowWidth - 48,
     backgroundColor: colors.white,
-    marginHorizontal: normalize('horizontal', 24),
   } as ViewStyle,
-  buttons: {
-    gap: normalize('vertical', 12),
-    paddingTop: normalize('vertical', 24),
-  } as ViewStyle,
+  subtitle: {
+    ...TypographyStyles.RegularNormalSemiBold,
+    textAlign: 'center',
+    color: colors.ink.lighter,
+  } as TextStyle,
+  image: {
+    borderRadius: 16,
+    alignSelf: 'center',
+  } as ImageStyle,
+  smallImage: {
+    width: normalize('width', 64),
+    height: normalize('height', 64),
+  } as ImageStyle,
+  mediumImage: {
+    width: normalize('width', 120),
+    height: normalize('height', 120),
+  } as ImageStyle,
+  largeImage: {
+    overflow: 'hidden',
+    width: windowWidth - 48,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    height: normalize('height', 186),
+  } as ImageStyle,
 });
