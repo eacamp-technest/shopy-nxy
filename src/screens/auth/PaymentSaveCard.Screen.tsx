@@ -13,11 +13,10 @@ export const PaymentSaveCardScreen: React.FC<
   return (
     <SafeMainProvider>
       <NavBar
+        title={'YOUR CARD'}
         leftColor={colors.ink.base}
         leftOnPress={navigation.goBack}
-        textRight={'Skip'}
         leftIcon={ImageResources.chevronLeft}
-        largeTitle={'PAYMENT METHODS'}
       />
     </SafeMainProvider>
   );
