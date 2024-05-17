@@ -19,9 +19,11 @@ export const PaymentAddCardScreen: React.FC<
       <NavBar
         leftColor={colors.ink.base}
         textRight={'Skip'}
+        title="YOUR CARD"
         largeTitle={'ADD NEW CARD'}
         leftOnPress={navigation.goBack}
         leftIcon={ImageResources.chevronLeft}
+        // rightIcon={ImageResources.bell}
       />
       <View style={styles.inputs}>
         <Input placeholder={'Enter your card number'} label={'Card Number'} />
@@ -31,7 +33,12 @@ export const PaymentAddCardScreen: React.FC<
         />
         <Input placeholder={'MM / YY / CVV'} />
       </View>
-      <Button type={'primary'} text={'Add card'} position={'center'} />
+      <Button
+        type={'primary'}
+        text={'Add card'}
+        position={'center'}
+        onPress={() => navigation.navigate(Routes.paymentSaveCard)}
+      />
     </SafeMainProvider>
   );
 };
