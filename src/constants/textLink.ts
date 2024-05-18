@@ -40,18 +40,6 @@ export const signUp = {
   content: 'By signing up you agree to our Terms and Conditions of Use',
 };
 
-// ! LOGIN
-
-export const login = {
-  highlighted: [
-    {
-      text: 'Log in',
-      callback: () => console.log('conditions'),
-    },
-  ],
-  content: 'Already have an account? Log in',
-};
-
 // ! Method Payment
 
 export const methodPayment = {
