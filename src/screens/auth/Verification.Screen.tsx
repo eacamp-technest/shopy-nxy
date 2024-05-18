@@ -12,6 +12,7 @@ import {Routes} from 'router/routes';
 import {normalize} from 'theme/metrics';
 import {Button} from 'components/Button';
 import {NavBar} from 'components/NavBar';
+import {IButton} from 'components/Button';
 import {TextLink} from 'components/TextLink';
 import {CommonStyles} from 'theme/commonStyles';
 import {OTPCodeField} from 'components/OTPInputField';
@@ -21,11 +22,10 @@ import {NavigationParamList} from 'types/navigation.types';
 import Modal, {IModalRefCallbacks} from 'components/Modal';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {IButton} from 'components/Button';
 
 export const VerificationScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.verification>
-> = ({navigation}) => {
+> = ({navigation, route}) => {
   const [code, setCode] = React.useState<string>('');
 
   const modalRef = useRef<IModalRefCallbacks>(null);
@@ -37,14 +37,24 @@ export const VerificationScreen: React.FC<
       position: 'center',
       onPress: () => {
         modalRef?.current?.close();
-        navigation.navigate(Routes.paymentMethod);
+        if (route.params.fullName) {
+          navigation.navigate(Routes.paymentMethod);
+          return;
+        }
+
+        // ! add HOME Screen
+        console.log('Welcome Home Screen');
+        // navigation.navigate(Routes.paymentMethod);
       },
     },
     {
       text: 'Disagree and close',
       type: 'transparent',
       position: 'center',
-      onPress: () => modalRef?.current?.close(),
+      onPress: () => {
+        modalRef?.current?.close();
+        navigation.goBack();
+      },
     },
   ];
 

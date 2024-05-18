@@ -43,7 +43,7 @@ export const PaymentMethodScreen: React.FC<
         type={'primary'}
         position={'center'}
         text={'Connect a bank account'}
-        onPress={() => navigation.navigate(Routes.addNewCard)}
+        onPress={() => navigation.navigate(Routes.yourCard)}
       />
     </SafeMainProvider>
   );

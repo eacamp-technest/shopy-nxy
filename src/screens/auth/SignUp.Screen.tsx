@@ -17,9 +17,9 @@ import {useForm} from 'react-hook-form';
 import {signUp} from 'constants/textLink';
 
 interface ISigUpForm {
-  email?: string;
-  password?: string;
-  fullName?: string;
+  email: string;
+  password: string;
+  fullName: string;
 }
 
 export const SignUpScreen: React.FC<
