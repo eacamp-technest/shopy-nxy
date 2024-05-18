@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Pressable} from 'react-native';
 import {colors} from 'theme/colors';
 import {SvgImage} from './SvgImage';
 import {normalize} from 'theme/metrics';
@@ -7,9 +7,17 @@ import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import {ImageResources} from 'assets/VectorResources.g';
 
-export const BankCard: React.FC = () => {
+interface IBankCard {
+  disabled?: boolean;
+  onPress?: () => void;
+}
+
+export const BankCard: React.FC<IBankCard> = ({onPress, disabled}) => {
   return (
-    <View style={styles.root}>
+    <Pressable
+      disabled={disabled}
+      onPress={onPress}
+      style={({pressed}) => [{opacity: pressed ? 0.5 : 1}, styles.root]}>
       <View style={CommonStyles.alignCenterJustifyBetweenRow}>
         <Text style={styles.mainText}>Universal Card</Text>
         <SvgImage source={ImageResources.masterCard} />
@@ -23,7 +31,7 @@ export const BankCard: React.FC = () => {
         <Text style={styles.textData}>Brooklyn Simmons</Text>
         <Text style={styles.textData}>12/24</Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

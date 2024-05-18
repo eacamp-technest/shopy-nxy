@@ -8,26 +8,27 @@ import {
   ScrollView,
   Linking,
 } from 'react-native';
-import {SafeMainProvider} from 'containers/SafeMainProvider';
-import {NavBar} from 'components/NavBar';
-import {ImageResources} from 'assets/VectorResources.g';
-import {normalize} from 'theme/metrics';
 import {colors} from 'theme/colors';
-import {SocialButton} from 'components/SocialButton';
-import {CommonStyles} from 'theme/commonStyles';
-import {Button} from 'components/Button';
-import {TypographyStyles} from 'theme/typography';
-import {TextLink} from 'components/TextLink';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {NavigationParamList} from 'types/navigation.types';
 import {Routes} from 'router/routes';
 import {useForm} from 'react-hook-form';
-import {InputControlled} from 'components/InputControlled';
+import {normalize} from 'theme/metrics';
+import {NavBar} from 'components/NavBar';
+import {TextLink} from 'components/TextLink';
+import {Button} from 'components/Button';
 import {FormRules} from 'constants/formRules';
+import {CommonStyles} from 'theme/commonStyles';
+import {TypographyStyles} from 'theme/typography';
+import {SocialButton} from 'components/SocialButton';
+import {ImageResources} from 'assets/VectorResources.g';
+import {NavigationParamList} from 'types/navigation.types';
+import {InputControlled} from 'components/InputControlled';
+import {SafeMainProvider} from 'containers/SafeMainProvider';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export interface ILoginForm {
   email: string;
   password: string;
+  fullName: string;
 }
 
 export const LoginScreen: React.FC<

@@ -35,7 +35,7 @@ export const AddNewCardScreen: React.FC<
         type={'primary'}
         text={'Add card'}
         position={'center'}
-        onPress={() => navigation.navigate(Routes.saveCard)}
+        onPress={() => navigation.navigate(Routes.paymentMethod)}
       />
     </SafeMainProvider>
   );

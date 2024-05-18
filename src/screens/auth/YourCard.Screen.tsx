@@ -23,9 +23,14 @@ export const YourCardScreen: React.FC<
         leftIcon={ImageResources.chevronLeft}
       />
       <View style={styles.card}>
-        <BankCard />
+        <BankCard onPress={() => navigation.navigate(Routes.saveCard)} />
       </View>
-      <Button text={'Add new card'} type={'outlined'} position={'center'} />
+      <Button
+        text={'Add new card'}
+        type={'outlined'}
+        position={'center'}
+        onPress={() => navigation.navigate(Routes.addNewCard)}
+      />
     </SafeMainProvider>
   );
 };

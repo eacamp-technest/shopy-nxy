@@ -24,7 +24,7 @@ export const SaveCardScreen: React.FC<
         leftIcon={ImageResources.chevronLeft}
       />
       <View style={styles.card}>
-        <BankCard />
+        <BankCard disabled={true} />
       </View>
       <View style={styles.inputs}>
         <Input placeholder={'4532 1245 8765 2156'} label={'Card Number'} />
@@ -32,10 +32,10 @@ export const SaveCardScreen: React.FC<
         <Input placeholder={'12 / 24  /  088'} />
       </View>
       <Button
-        onPress={() => navigation.navigate(Routes.yourCard)}
         text={'Save'}
         type={'primary'}
         position={'center'}
+        onPress={() => console.log('SAVE')}
       />
     </SafeMainProvider>
   );
