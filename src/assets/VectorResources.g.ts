@@ -43,4 +43,5 @@ export class ImageResources {
   static twitterButton = require('./vectors/twitterr.svg');
   static eye = require('./vectors/eye.svg');
   static eyeOff = require('./vectors/eye_off.svg');
+  static masterCard = require('./vectors/masterCard.svg');
 }
