@@ -24,7 +24,6 @@ import {Routes} from 'router/routes';
 import {useForm} from 'react-hook-form';
 import {InputControlled} from 'components/InputControlled';
 import {FormRules} from 'constants/formRules';
-import {login} from 'constants/textLink';
 
 export interface ILoginForm {
   email: string;
@@ -111,9 +110,14 @@ export const LoginScreen: React.FC<
         <View style={styles.footer}>
           <TextLink
             center
-            content={login.content}
-            highlighted={login.highlighted}
             fontColor={colors.primary.base}
+            content={'Already have an account? Sign up'}
+            highlighted={[
+              {
+                text: 'Sign up',
+                callback: () => navigation.navigate(Routes.singUp),
+              },
+            ]}
           />
         </View>
       </ScrollView>
@@ -140,8 +144,8 @@ const styles = StyleSheet.create({
     paddingVertical: normalize('vertical', 14),
   } as ViewStyle,
   inputs: {
+    gap: normalize('vertical', 24),
     paddingTop: normalize('vertical', 24),
     paddingBottom: normalize('vertical', 32),
-    gap: normalize('vertical', 24),
   } as ViewStyle,
 });
