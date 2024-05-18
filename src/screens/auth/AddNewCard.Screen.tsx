@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {colors} from 'theme/colors';
 import {Routes} from 'router/routes';
 import {Input} from 'components/Input';
 import {normalize} from 'theme/metrics';
 import {Button} from 'components/Button';
 import {NavBar} from 'components/NavBar';
+import {CommonStyles} from 'theme/commonStyles';
 import {ImageResources} from 'assets/VectorResources.g';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
@@ -16,27 +17,33 @@ export const AddNewCardScreen: React.FC<
 > = ({navigation}) => {
   return (
     <SafeMainProvider>
-      <NavBar
-        leftColor={colors.ink.base}
-        textRight={'Skip'}
-        largeTitle={'ADD NEW CARD'}
-        leftOnPress={navigation.goBack}
-        leftIcon={ImageResources.chevronLeft}
-      />
-      <View style={styles.inputs}>
-        <Input placeholder={'Enter your card number'} label={'Card Number'} />
-        <Input
-          label={'Cardholder Name'}
-          placeholder={'Enter your holder name'}
+      <ScrollView
+        scrollEnabled={false}
+        style={CommonStyles.flex}
+        keyboardShouldPersistTaps={'handled'}
+        contentContainerStyle={CommonStyles.flex}>
+        <NavBar
+          leftColor={colors.ink.base}
+          textRight={'Skip'}
+          largeTitle={'ADD NEW CARD'}
+          leftOnPress={navigation.goBack}
+          leftIcon={ImageResources.chevronLeft}
         />
-        <Input placeholder={'MM / YY / CVV'} />
-      </View>
-      <Button
-        type={'primary'}
-        text={'Add card'}
-        position={'center'}
-        onPress={() => navigation.navigate(Routes.paymentMethod)}
-      />
+        <View style={styles.inputs}>
+          <Input placeholder={'Enter your card number'} label={'Card Number'} />
+          <Input
+            label={'Cardholder Name'}
+            placeholder={'Enter your holder name'}
+          />
+          <Input placeholder={'MM / YY / CVV'} />
+        </View>
+        <Button
+          type={'primary'}
+          text={'Add card'}
+          position={'center'}
+          onPress={() => navigation.navigate(Routes.paymentMethod)}
+        />
+      </ScrollView>
     </SafeMainProvider>
   );
 };
