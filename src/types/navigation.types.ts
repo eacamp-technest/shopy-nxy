@@ -11,8 +11,9 @@ export type NavigationParamList = {
   [Routes.login]: undefined;
   [Routes.singUp]: undefined;
   [Routes.paymentMethod]: undefined;
-  [Routes.paymentAddCard]: undefined;
-  [Routes.paymentSaveCard]: undefined;
+  [Routes.addNewCard]: undefined;
+  [Routes.saveCard]: undefined;
+  [Routes.yourCard]: undefined;
   [Routes.verification]: ILoginForm;
   [Routes.home]: undefined;
 };

@@ -1,18 +1,18 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
+import {colors} from 'theme/colors';
+import {Routes} from 'router/routes';
 import {Input} from 'components/Input';
 import {normalize} from 'theme/metrics';
 import {Button} from 'components/Button';
-import {Routes} from 'router/routes';
-import {colors} from 'theme/colors';
 import {NavBar} from 'components/NavBar';
 import {ImageResources} from 'assets/VectorResources.g';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-export const PaymentAddCardScreen: React.FC<
-  NativeStackScreenProps<NavigationParamList, Routes.paymentAddCard>
+export const AddNewCardScreen: React.FC<
+  NativeStackScreenProps<NavigationParamList, Routes.addNewCard>
 > = ({navigation}) => {
   return (
     <SafeMainProvider>
@@ -35,7 +35,7 @@ export const PaymentAddCardScreen: React.FC<
         type={'primary'}
         text={'Add card'}
         position={'center'}
-        onPress={() => navigation.navigate(Routes.paymentSaveCard)}
+        onPress={() => navigation.navigate(Routes.saveCard)}
       />
     </SafeMainProvider>
   );
