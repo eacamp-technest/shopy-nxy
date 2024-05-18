@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
-import {normalize} from 'theme/metrics';
-import {TypographyStyles} from 'theme/typography';
 import {SvgImage} from './SvgImage';
-import {ImageResources} from 'assets/VectorResources.g';
+import {normalize} from 'theme/metrics';
 import {CommonStyles} from 'theme/commonStyles';
+import {TypographyStyles} from 'theme/typography';
+import {ImageResources} from 'assets/VectorResources.g';
 
 export const BankCard: React.FC = () => {
   return (
@@ -32,9 +32,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: colors.blue.base,
     height: normalize('height', 200),
-    marginTop: normalize('vertical', 24),
     paddingTop: normalize('vertical', 16),
-    marginBottom: normalize('vertical', 32),
     paddingBottom: normalize('vertical', 24),
     paddingHorizontal: normalize('horizontal', 24),
   },

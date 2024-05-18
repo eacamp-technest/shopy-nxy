@@ -1,17 +1,17 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextStyle, ViewStyle} from 'react-native';
-import {SafeMainProvider} from 'containers/SafeMainProvider';
-import {Routes} from 'router/routes';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {NavigationParamList} from 'types/navigation.types';
-import {NavBar} from 'components/NavBar';
-import {ImageResources} from 'assets/VectorResources.g';
 import {colors} from 'theme/colors';
+import {Routes} from 'router/routes';
+import {normalize} from 'theme/metrics';
+import {NavBar} from 'components/NavBar';
+import {Button} from 'components/Button';
 import {TextLink} from 'components/TextLink';
 import {methodPayment} from 'constants/textLink';
-import {normalize} from 'theme/metrics';
 import {TypographyStyles} from 'theme/typography';
-import {Button} from 'components/Button';
+import {ImageResources} from 'assets/VectorResources.g';
+import {NavigationParamList} from 'types/navigation.types';
+import {SafeMainProvider} from 'containers/SafeMainProvider';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export const PaymentMethodScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.paymentMethod>
@@ -43,7 +43,7 @@ export const PaymentMethodScreen: React.FC<
         type={'primary'}
         position={'center'}
         text={'Connect a bank account'}
-        onPress={() => navigation.navigate(Routes.paymentAddCard)}
+        onPress={() => navigation.navigate(Routes.addNewCard)}
       />
     </SafeMainProvider>
   );
