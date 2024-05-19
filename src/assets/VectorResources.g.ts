@@ -44,4 +44,7 @@ export class ImageResources {
   static eye = require('./vectors/eye.svg');
   static eyeOff = require('./vectors/eye_off.svg');
   static masterCard = require('./vectors/masterCard.svg');
+  static masterCardBlack = require('./vectors/masterCardBlack.svg');
+  static controlsButton = require('./vectors/controlsButton.svg');
+  static iconPlaceholder = require('./vectors/iconPlaceholder.svg');
 }
