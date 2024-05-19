@@ -8,6 +8,7 @@ import {Button} from 'components/Button';
 import {TextLink} from 'components/TextLink';
 import {methodPayment} from 'constants/textLink';
 import {TypographyStyles} from 'theme/typography';
+import {AnotherButton} from 'components/AnotherButton';
 import {ImageResources} from 'assets/VectorResources.g';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
@@ -25,36 +26,55 @@ export const PaymentMethodScreen: React.FC<
         leftIcon={ImageResources.chevronLeft}
         largeTitle={'PAYMENT METHODS'}
       />
-      <View style={styles.textLink}>
-        <Text style={styles.text}>STORED CARD</Text>
-        <TextLink
-          content={methodPayment.content}
-          fontColor={colors.primary.base}
-          highlighted={methodPayment.highlighted}
-        />
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>STORED CARD</Text>
-        <Text style={styles.textError}>
-          You don’t have a connected bank account.
-        </Text>
+      <View style={styles.main}>
+        <View style={styles.textLink}>
+          <Text style={styles.text}>STORED CARD</Text>
+          <TextLink
+            content={methodPayment.content}
+            fontColor={colors.primary.base}
+            highlighted={methodPayment.highlighted}
+          />
+        </View>
+        <View style={styles.buttons}>
+          <AnotherButton
+            type={'bank'}
+            text={'Mastercard * * * * 4 2 1 3'}
+            onPress={() => console.log('Pressed card')}
+          />
+          <AnotherButton
+            type={'add'}
+            text={'Add another card'}
+            onPress={() => navigation.navigate(Routes.yourCard)}
+          />
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>STORED CARD</Text>
+          <Text style={styles.textError}>
+            You don’t have a connected bank account.
+          </Text>
+        </View>
       </View>
       <Button
         type={'primary'}
         position={'center'}
         text={'Connect a bank account'}
-        onPress={() => navigation.navigate(Routes.yourCard)}
+        onPress={() => console.log('Connect a bank')}
       />
     </SafeMainProvider>
   );
 };
 
 const styles = StyleSheet.create({
+  main: {
+    gap: normalize('vertical', 32),
+  },
   textLink: {
     gap: normalize('vertical', 12),
     paddingTop: normalize('vertical', 24),
-    paddingBottom: normalize('vertical', 32),
   } as TextStyle,
+  buttons: {
+    gap: normalize('vertical', 16),
+  } as ViewStyle,
   text: {
     ...TypographyStyles.RegularNoneSemibold,
     color: colors.ink.darkest,
