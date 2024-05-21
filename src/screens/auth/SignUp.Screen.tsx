@@ -1,20 +1,21 @@
-import React from 'react';
-import {View, StyleSheet, ViewStyle, ScrollView} from 'react-native';
-import {CommonStyles} from 'theme/commonStyles';
-import {NavBar} from 'components/NavBar';
-import {SafeMainProvider} from 'containers/SafeMainProvider';
-import {ImageResources} from 'assets/VectorResources.g';
+import React, {useEffect, useRef} from 'react';
+import {View, StyleSheet, ViewStyle, ScrollView, Keyboard} from 'react-native';
 import {colors} from 'theme/colors';
-import {Button} from 'components/Button';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {NavigationParamList} from 'types/navigation.types';
 import {Routes} from 'router/routes';
-import {TextLink} from 'components/TextLink';
 import {normalize} from 'theme/metrics';
-import {InputControlled} from 'components/InputControlled';
-import {FormRules} from 'constants/formRules';
 import {useForm} from 'react-hook-form';
+import {NavBar} from 'components/NavBar';
+import {Button} from 'components/Button';
 import {signUp} from 'constants/textLink';
+import {TextLink} from 'components/TextLink';
+import {FormRules} from 'constants/formRules';
+import {CommonStyles} from 'theme/commonStyles';
+import {ImageResources} from 'assets/VectorResources.g';
+import {NavigationParamList} from 'types/navigation.types';
+import {InputControlled} from 'components/InputControlled';
+import {SafeMainProvider} from 'containers/SafeMainProvider';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {keyboardHideEvent, keyboardShowEvent} from 'constants/common.consts';
 
 interface ISigUpForm {
   email: string;
@@ -25,6 +26,8 @@ interface ISigUpForm {
 export const SignUpScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.singUp>
 > = ({navigation}) => {
+  const scrollRef = useRef<ScrollView>(null);
+
   const {
     control,
     handleSubmit,
@@ -39,6 +42,21 @@ export const SignUpScreen: React.FC<
   const onSubmit = (data: ISigUpForm) => {
     navigation.navigate(Routes.verification, data);
   };
+
+  useEffect(() => {
+    const showListener = Keyboard.addListener(keyboardShowEvent, () => {
+      scrollRef?.current?.scrollToEnd({animated: true});
+    });
+
+    const hideListener = Keyboard.addListener(keyboardHideEvent, () => {
+      scrollRef?.current?.scrollTo({y: 0, animated: true});
+    });
+
+    return () => {
+      hideListener.remove();
+      showListener.remove();
+    };
+  }, []);
   return (
     <SafeMainProvider>
       <ScrollView
@@ -52,44 +70,46 @@ export const SignUpScreen: React.FC<
           leftOnPress={navigation.goBack}
           leftIcon={ImageResources.chevronLeft}
         />
-        <View style={styles.inputs}>
-          <InputControlled
-            type={'text'}
-            name={'fullName'}
-            control={control}
-            label={'Full Name'}
-            keyboardType={'default'}
-            rules={FormRules.fullName}
-            placeholder={'Enter your full name'}
-            errorMessage={errors.fullName?.message}
+        <ScrollView scrollEnabled={false} ref={scrollRef}>
+          <View style={styles.inputs}>
+            <InputControlled
+              type={'text'}
+              name={'fullName'}
+              control={control}
+              label={'Full Name'}
+              keyboardType={'default'}
+              rules={FormRules.fullName}
+              placeholder={'Enter your full name'}
+              errorMessage={errors.fullName?.message}
+            />
+            <InputControlled
+              type={'text'}
+              name={'email'}
+              label={'Email'}
+              control={control}
+              rules={FormRules.email}
+              keyboardType={'email-address'}
+              placeholder={'Enter your email'}
+              errorMessage={errors.email?.message}
+            />
+            <InputControlled
+              control={control}
+              name={'password'}
+              label={'Password'}
+              type={'password'}
+              rules={FormRules.password}
+              placeholder={'Enter your password'}
+              errorMessage={errors.password?.message}
+            />
+          </View>
+          <Button
+            position={'center'}
+            loading={isSubmitting}
+            disabled={isSubmitting}
+            text={'Create an account'}
+            onPress={handleSubmit(onSubmit)}
           />
-          <InputControlled
-            type={'text'}
-            name={'email'}
-            label={'Email'}
-            control={control}
-            rules={FormRules.email}
-            keyboardType={'email-address'}
-            placeholder={'Enter your email'}
-            errorMessage={errors.email?.message}
-          />
-          <InputControlled
-            control={control}
-            name={'password'}
-            label={'Password'}
-            type={'password'}
-            rules={FormRules.password}
-            placeholder={'Enter your password'}
-            errorMessage={errors.password?.message}
-          />
-        </View>
-        <Button
-          position={'center'}
-          loading={isSubmitting}
-          disabled={isSubmitting}
-          text={'Create an account'}
-          onPress={handleSubmit(onSubmit)}
-        />
+        </ScrollView>
         <View style={styles.footer}>
           <TextLink
             center
