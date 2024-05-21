@@ -8,7 +8,7 @@ import {Button} from 'components/Button';
 import {TextLink} from 'components/TextLink';
 import {methodPayment} from 'constants/textLink';
 import {TypographyStyles} from 'theme/typography';
-import {AnotherButton} from 'components/AnotherButton';
+import {Table} from 'components/Table';
 import {ImageResources} from 'assets/VectorResources.g';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
@@ -36,13 +36,15 @@ export const PaymentMethodScreen: React.FC<
           />
         </View>
         <View style={styles.buttons}>
-          <AnotherButton
+          <Table
             type={'bank'}
+            isPressable={true}
             text={'Mastercard * * * * 4 2 1 3'}
             onPress={() => console.log('Pressed card')}
           />
-          <AnotherButton
+          <Table
             type={'add'}
+            isPressable={true}
             text={'Add another card'}
             onPress={() => navigation.navigate(Routes.yourCard)}
           />
