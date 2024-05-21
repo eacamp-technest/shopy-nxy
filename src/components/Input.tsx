@@ -191,6 +191,7 @@ export const Input: React.FC<IInput> = ({
 
 const styles = StyleSheet.create({
   root: {
+    borderRadius: 8,
     gap: normalize('vertical', 12),
   } as ViewStyle,
   focused: {

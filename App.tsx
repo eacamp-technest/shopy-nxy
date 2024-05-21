@@ -32,8 +32,6 @@ const App = () => {
 };
 export default gestureHandlerRootHOC(App);
 
-// ! Styles
-
 const styles = StyleSheet.create({
   root: {
     flex: 1,
