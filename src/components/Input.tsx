@@ -57,7 +57,7 @@ export const Input: React.FC<IInput> = ({
   ...props
 }) => {
   const [focused, setFocused] = useState<boolean>(false);
-  const [secureTextEntry, setSecureTextEntry] = useState<boolean>(true);
+  const [secureTextEntry, setSecureTextEntry] = useState<boolean>(false);
   const placeholderColor = disabled ? colors.skyBase : colors.ink.lighter;
   const isMoreIcon =
     ('position' in (icon ?? {}) && icon?.position === 'right') ||
@@ -73,15 +73,14 @@ export const Input: React.FC<IInput> = ({
   const renderIcon = () => {
     if (type === 'password') {
       return (
-        <Pressable hitSlop={standardHitSlopSize}>
+        <Pressable onPress={handleSecurityIcon} hitSlop={standardHitSlopSize}>
           <SvgImage
-            source={
-              secureTextEntry ? ImageResources.eyeOff : ImageResources.eye
-            }
-            color={disabled ? colors.skyBase : colors.inkBase}
             width={24}
             height={24}
-            onPress={handleSecurityIcon}
+            color={disabled ? colors.skyBase : colors.inkBase}
+            source={
+              !secureTextEntry ? ImageResources.eyeOff : ImageResources.eye
+            }
           />
         </Pressable>
       );
@@ -169,7 +168,9 @@ export const Input: React.FC<IInput> = ({
             onBlur={handleOnBlur}
             autoCapitalize="none"
             editable={!disabled}
-            secureTextEntry={secureTextEntry}
+            secureTextEntry={
+              type === 'password' ? !secureTextEntry : secureTextEntry
+            }
             onChangeText={setValue}
             placeholderTextColor={placeholderColor}
             style={styles.input}
