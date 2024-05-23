@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import {colors} from 'theme/colors';
-import {SvgImage} from './SvgImage';
+import {SvgImage} from 'components/SvgImage';
 import {normalize} from 'theme/metrics';
 import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';

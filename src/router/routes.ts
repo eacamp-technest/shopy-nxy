@@ -4,6 +4,7 @@ export enum Routes {
   onboarding = 'onboarding',
   login = 'login',
   singUp = 'singUp',
+  paymentScreensTab = 'paymentScreensTab',
   paymentMethod = 'paymentMethod',
   addNewCard = 'addNewCard',
   saveCard = 'saveCard',

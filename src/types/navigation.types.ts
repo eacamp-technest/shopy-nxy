@@ -10,6 +10,7 @@ export type NavigationParamList = {
   [Routes.onboarding]: undefined;
   [Routes.login]: undefined;
   [Routes.singUp]: undefined;
+  [Routes.paymentScreensTab]: undefined;
   [Routes.paymentMethod]: undefined;
   [Routes.addNewCard]: undefined;
   [Routes.saveCard]: undefined;

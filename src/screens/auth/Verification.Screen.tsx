@@ -38,7 +38,7 @@ export const VerificationScreen: React.FC<
       onPress: () => {
         modalRef?.current?.close();
         if (route.params.fullName) {
-          navigation.navigate(Routes.paymentMethod);
+          navigation.navigate(Routes.paymentScreensTab);
           return;
         }
 
