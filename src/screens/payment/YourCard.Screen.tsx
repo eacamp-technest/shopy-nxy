@@ -1,35 +1,32 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Routes} from 'router/routes';
 import {colors} from 'theme/colors';
+import {Routes} from 'router/routes';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {Button} from 'components/Button';
-import {BankCard} from 'components/BankCard';
+import {BankCard} from 'components/specific/BankCard';
 import {ImageResources} from 'assets/VectorResources.g';
-import {NavigationParamList} from 'types/navigation.types';
+import {SceneRendererProps} from 'react-native-tab-view';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-export const YourCardScreen: React.FC<
-  NativeStackScreenProps<NavigationParamList, Routes.yourCard>
-> = ({navigation}) => {
+export const YourCardScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
   return (
     <SafeMainProvider>
       <NavBar
         title={'YOUR CARD'}
         leftColor={colors.ink.base}
-        leftOnPress={navigation.goBack}
+        leftOnPress={() => jumpTo(Routes.paymentMethod)}
         leftIcon={ImageResources.chevronLeft}
       />
       <View style={styles.card}>
-        <BankCard onPress={() => navigation.navigate(Routes.saveCard)} />
+        <BankCard onPress={() => console.log('press')} />
       </View>
       <Button
         text={'Add new card'}
         type={'outlined'}
         position={'center'}
-        onPress={() => navigation.navigate(Routes.addNewCard)}
+        onPress={() => jumpTo(Routes.addNewCard)}
       />
     </SafeMainProvider>
   );

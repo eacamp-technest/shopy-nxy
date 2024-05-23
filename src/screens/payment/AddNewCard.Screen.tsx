@@ -1,20 +1,19 @@
 import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import {colors} from 'theme/colors';
-import {Routes} from 'router/routes';
 import {Input} from 'components/Input';
 import {normalize} from 'theme/metrics';
 import {Button} from 'components/Button';
 import {NavBar} from 'components/NavBar';
 import {CommonStyles} from 'theme/commonStyles';
+import {useNavigation} from '@react-navigation/native';
 import {ImageResources} from 'assets/VectorResources.g';
-import {NavigationParamList} from 'types/navigation.types';
+import {SceneRendererProps} from 'react-native-tab-view';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-export const AddNewCardScreen: React.FC<
-  NativeStackScreenProps<NavigationParamList, Routes.addNewCard>
-> = ({navigation}) => {
+export const AddNewCardScreen: React.FC<SceneRendererProps> = () => {
+  const {goBack} = useNavigation();
+
   return (
     <SafeMainProvider>
       <ScrollView
@@ -26,7 +25,7 @@ export const AddNewCardScreen: React.FC<
           leftColor={colors.ink.base}
           textRight={'Skip'}
           largeTitle={'ADD NEW CARD'}
-          leftOnPress={navigation.goBack}
+          leftOnPress={goBack}
           leftIcon={ImageResources.chevronLeft}
         />
         <View style={styles.inputs}>
@@ -41,7 +40,7 @@ export const AddNewCardScreen: React.FC<
           type={'primary'}
           text={'Add card'}
           position={'center'}
-          onPress={() => navigation.navigate(Routes.paymentMethod)}
+          onPress={() => console.log('Press')}
         />
       </ScrollView>
     </SafeMainProvider>

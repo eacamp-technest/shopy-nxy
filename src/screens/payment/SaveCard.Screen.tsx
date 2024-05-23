@@ -1,21 +1,20 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
-import {Routes} from 'router/routes';
 import {colors} from 'theme/colors';
 import {Input} from 'components/Input';
 import {normalize} from 'theme/metrics';
 import {Button} from 'components/Button';
 import {NavBar} from 'components/NavBar';
-import {BankCard} from 'components/BankCard';
 import {CommonStyles} from 'theme/commonStyles';
+import {BankCard} from 'components/specific/BankCard';
+import {useNavigation} from '@react-navigation/native';
 import {ImageResources} from 'assets/VectorResources.g';
-import {NavigationParamList} from 'types/navigation.types';
+import {SceneRendererProps} from 'react-native-tab-view';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-export const SaveCardScreen: React.FC<
-  NativeStackScreenProps<NavigationParamList, Routes.saveCard>
-> = ({navigation}) => {
+export const SaveCardScreen: React.FC<SceneRendererProps> = ({}) => {
+  const {goBack} = useNavigation();
+
   return (
     <SafeTopProvider>
       <ScrollView
@@ -26,7 +25,7 @@ export const SaveCardScreen: React.FC<
         <NavBar
           title={'YOUR CARD'}
           leftColor={colors.ink.base}
-          leftOnPress={navigation.goBack}
+          leftOnPress={goBack}
           leftIcon={ImageResources.chevronLeft}
         />
         <View style={styles.card}>

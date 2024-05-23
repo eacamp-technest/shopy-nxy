@@ -2,26 +2,26 @@ import React from 'react';
 import {View, Text, StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import {colors} from 'theme/colors';
 import {Routes} from 'router/routes';
+import {Table} from 'components/Table';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {Button} from 'components/Button';
 import {TextLink} from 'components/TextLink';
 import {methodPayment} from 'constants/textLink';
 import {TypographyStyles} from 'theme/typography';
-import {Table} from 'components/Table';
+import {useNavigation} from '@react-navigation/native';
 import {ImageResources} from 'assets/VectorResources.g';
-import {NavigationParamList} from 'types/navigation.types';
+import {SceneRendererProps} from 'react-native-tab-view';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-export const PaymentMethodScreen: React.FC<
-  NativeStackScreenProps<NavigationParamList, Routes.paymentMethod>
-> = ({navigation}) => {
+export const PaymentMethodScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
+  const {goBack} = useNavigation();
+
   return (
     <SafeMainProvider>
       <NavBar
         leftColor={colors.ink.base}
-        leftOnPress={navigation.goBack}
+        leftOnPress={goBack}
         textRight={'Skip'}
         leftIcon={ImageResources.chevronLeft}
         largeTitle={'PAYMENT METHODS'}
@@ -40,13 +40,13 @@ export const PaymentMethodScreen: React.FC<
             type={'bank'}
             isPressable={true}
             text={'Mastercard * * * * 4 2 1 3'}
-            onPress={() => console.log('Pressed card')}
+            onPress={() => jumpTo(Routes.saveCard)}
           />
           <Table
             type={'add'}
             isPressable={true}
             text={'Add another card'}
-            onPress={() => navigation.navigate(Routes.yourCard)}
+            onPress={() => jumpTo(Routes.addNewCard)}
           />
         </View>
         <View style={styles.textContainer}>
