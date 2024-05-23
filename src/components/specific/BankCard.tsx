@@ -1,8 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import {colors} from 'theme/colors';
-import {SvgImage} from 'components/SvgImage';
 import {normalize} from 'theme/metrics';
+import {SvgImage} from 'components/SvgImage';
 import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import {ImageResources} from 'assets/VectorResources.g';
@@ -10,9 +17,20 @@ import {ImageResources} from 'assets/VectorResources.g';
 interface IBankCard {
   disabled?: boolean;
   onPress?: () => void;
+  holder: string;
+  cardNumber: string;
+  expiration: string;
+  empty?: boolean;
+  style?: StyleProp<ViewStyle>;
 }
 
-export const BankCard: React.FC<IBankCard> = ({onPress, disabled}) => {
+export const BankCard: React.FC<IBankCard> = ({
+  holder,
+  onPress,
+  disabled,
+  cardNumber,
+  expiration,
+}) => {
   return (
     <Pressable
       disabled={disabled}
@@ -22,14 +40,14 @@ export const BankCard: React.FC<IBankCard> = ({onPress, disabled}) => {
         <Text style={styles.mainText}>Universal Card</Text>
         <SvgImage source={ImageResources.masterCard} />
       </View>
-      <Text style={styles.numberCard}>4532 1245 8765 2156</Text>
+      <Text style={styles.numberCard}>{cardNumber}</Text>
       <View style={styles.cardHolder}>
-        <Text style={styles.text}>card holder</Text>
-        <Text style={styles.text}>card save</Text>
+        <Text style={styles.text}>CARD HOLDER</Text>
+        <Text style={styles.text}>CARD SAVE</Text>
       </View>
       <View style={CommonStyles.alignCenterJustifyBetweenRow}>
-        <Text style={styles.textData}>Brooklyn Simmons</Text>
-        <Text style={styles.textData}>12/24</Text>
+        <Text style={styles.textData}>{holder}</Text>
+        <Text style={styles.textData}>{expiration}</Text>
       </View>
     </Pressable>
   );
@@ -61,6 +79,7 @@ const styles = StyleSheet.create({
   text: {
     ...TypographyStyles.Inter,
     color: colors.mellow.lightest,
+    opacity: 0.5,
   },
   textData: {
     ...TypographyStyles.TinyNoneSemibold,

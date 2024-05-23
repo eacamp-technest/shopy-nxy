@@ -29,7 +29,12 @@ export const SaveCardScreen: React.FC<SceneRendererProps> = ({}) => {
           leftIcon={ImageResources.chevronLeft}
         />
         <View style={styles.card}>
-          <BankCard disabled={true} />
+          <BankCard
+            disabled={true}
+            expiration={'12/24'}
+            holder={'Nadir Musayev'}
+            cardNumber={'4532 1245 8765 2156'}
+          />
         </View>
         <View style={styles.inputs}>
           <Input placeholder={'4532 1245 8765 2156'} label={'Card Number'} />
