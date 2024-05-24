@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {SafeMainProvider} from 'containers/SafeMainProvider';
+import {SafeTopProvider} from 'containers/SafeTopProvider';
 
 export const SearchScreen: React.FC = () => {
   return (
-    <SafeMainProvider>
+    <SafeTopProvider>
       <View>
         <Text>SearchScreen</Text>
       </View>
-    </SafeMainProvider>
+    </SafeTopProvider>
   );
 };

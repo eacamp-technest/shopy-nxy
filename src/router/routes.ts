@@ -19,4 +19,6 @@ export enum TabRoutes {
   home = 'home',
   search = 'search',
   favorite = 'favorite',
+  notification = 'notification',
+  settings = 'settings',
 }

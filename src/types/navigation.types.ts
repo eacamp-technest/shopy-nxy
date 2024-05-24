@@ -20,4 +20,6 @@ export type NavigationParamList = {
   [TabRoutes.home]: undefined;
   [TabRoutes.search]: undefined;
   [TabRoutes.favorite]: undefined;
+  [TabRoutes.notification]: undefined;
+  [TabRoutes.settings]: undefined;
 };
