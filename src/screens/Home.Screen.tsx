@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, StatusBar} from 'react-native';
 import {colors} from 'theme/colors';
 import {Input} from 'components/Input';
 import {normalize} from 'theme/metrics';
@@ -11,6 +11,11 @@ import {SafeTopProvider} from 'containers/SafeTopProvider';
 export const HomeScreen: React.FC = () => {
   return (
     <SafeTopProvider style={styles.provider}>
+      <StatusBar
+        backgroundColor={colors.bdazzledBlue.darkest}
+        translucent={true}
+        barStyle={'light-content'}
+      />
       <View style={styles.header}>
         <NavBar
           title={'SHOPPAY'}
