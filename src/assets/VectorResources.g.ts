@@ -47,4 +47,9 @@ export class ImageResources {
   static masterCardBlack = require('./vectors/masterCardBlack.svg');
   static controlsButton = require('./vectors/controlsButton.svg');
   static iconPlaceholder = require('./vectors/iconPlaceholder.svg');
+  static homeTab = require('./vectors/homeTab.svg');
+  static searchTab = require('./vectors/searchTab.svg');
+  static favoriteTab = require('./vectors/favoriteTab.svg');
+  static notificationTab = require('./vectors/notificationTab.svg');
+  static settingsTab = require('./vectors/settings.svg');
 }

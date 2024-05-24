@@ -1,6 +1,6 @@
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {Routes} from 'router/routes';
+import {Routes, TabRoutes} from 'router/routes';
 import {ILoginForm} from 'screens/auth/Login.Screen';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type AppNavigation = NativeStackNavigationProp<NavigationParamList>;
 
@@ -16,5 +16,10 @@ export type NavigationParamList = {
   [Routes.saveCard]: undefined;
   [Routes.yourCard]: undefined;
   [Routes.verification]: ILoginForm;
-  [Routes.home]: undefined;
+  [Routes.tabRouter]: undefined;
+  [TabRoutes.home]: undefined;
+  [TabRoutes.search]: undefined;
+  [TabRoutes.favorite]: undefined;
+  [TabRoutes.notification]: undefined;
+  [TabRoutes.settings]: undefined;
 };

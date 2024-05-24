@@ -10,5 +10,15 @@ export enum Routes {
   saveCard = 'saveCard',
   yourCard = 'yourCard',
   verification = 'verification',
+  tabRouter = 'tabRouter',
+}
+
+export enum StackRoutes {}
+
+export enum TabRoutes {
   home = 'home',
+  search = 'search',
+  favorite = 'favorite',
+  notification = 'notification',
+  settings = 'settings',
 }
