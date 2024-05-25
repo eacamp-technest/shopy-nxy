@@ -15,21 +15,21 @@ import {TypographyStyles} from 'theme/typography';
 import {ImageResources} from 'assets/VectorResources.g';
 
 interface IBankCard {
-  disabled?: boolean;
-  onPress?: () => void;
-  holder: string;
-  cardNumber: string;
-  expiration: string;
+  holder?: string;
   empty?: boolean;
+  disabled?: boolean;
+  cardNumber?: string;
+  expiration?: string;
   style?: StyleProp<ViewStyle>;
+  onPress?: () => void;
 }
 
 export const BankCard: React.FC<IBankCard> = ({
   holder,
   onPress,
   disabled,
-  cardNumber,
-  expiration,
+  cardNumber = '',
+  expiration = '',
 }) => {
   return (
     <Pressable

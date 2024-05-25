@@ -6339,6 +6339,11 @@ react-native-bootsplash@^5.5.3:
     ts-dedent "^2.2.0"
     xml-formatter "^3.6.0"
 
+react-native-date-picker@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-5.0.3.tgz#8fc5a3e2dc62ad689cb54f7a1a8083db269212ae"
+  integrity sha512-pA/HcnB7RBac/CigQcqvM95JiD4c7mN5DPie3c/LFBol55ntvpxyxxr5ixAonB5PYLTjop21EIajAHKAP7/JeQ==
+
 react-native-gesture-handler@^2.16.1:
   version "2.16.1"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.16.1.tgz#a2b6828134988632a87f5444a2cc2caa34f16748"
