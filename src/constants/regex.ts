@@ -7,4 +7,6 @@ export const Regex = {
   includeNumber: /\d/,
   fullName:
     /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/,
+  bankCard: /^\d{4} \d{4} \d{4} \d{4}$/,
+  cvv: /^\d{3}$/,
 };

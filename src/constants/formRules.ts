@@ -32,4 +32,24 @@ export const FormRules = {
       message: 'Full name is not valid',
     },
   } as RegisterOptions,
+  bankCard: {
+    required: {
+      message: 'Bank card is required',
+      value: true,
+    },
+    pattern: {
+      value: Regex.bankCard,
+      message: 'Bank card is not valid',
+    },
+  } as RegisterOptions,
+  cvv: {
+    required: {
+      message: 'CVV is required',
+      value: true,
+    },
+    pattern: {
+      value: Regex.cvv,
+      message: 'CVV is not valid',
+    },
+  } as RegisterOptions,
 };

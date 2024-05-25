@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useMemo, useCallback} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
-  KeyboardTypeOptions,
   StyleProp,
   ViewStyle,
   Pressable,
   TextStyle,
+  StyleSheet,
+  KeyboardTypeOptions,
 } from 'react-native';
-import {SvgImage, Resources} from './SvgImage';
-import {TypographyStyles} from 'theme/typography';
 import {colors} from 'theme/colors';
-import {standardHitSlopSize} from 'theme/const.styles';
-import {CommonStyles} from 'theme/commonStyles';
-import {ImageResources} from 'assets/VectorResources.g';
 import {normalize} from 'theme/metrics';
+import {SvgImage, Resources} from './SvgImage';
+import {CommonStyles} from 'theme/commonStyles';
+import {TypographyStyles} from 'theme/typography';
+import {standardHitSlopSize} from 'theme/const.styles';
+import {ImageResources} from 'assets/VectorResources.g';
 
 type TIcon = {
   source: Resources;
@@ -31,46 +31,53 @@ type TLabel = {
 };
 
 export interface IInput {
-  type?: 'text' | 'phone' | 'password' | 'select';
-  label?: string;
-  variant?: TLabel | string;
-  caption?: string;
-  value?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  keyboardType?: KeyboardTypeOptions;
   icon?: TIcon;
+  label?: string;
+  value?: string;
+  caption?: string;
+  disabled?: boolean;
+  maxLength?: number;
+  placeholder?: string;
   errorMessage?: string;
+  variant?: TLabel | string;
   style?: StyleProp<ViewStyle>;
-  setValue?: (value: string) => void;
-  onFocus?: () => void;
+  keyboardType?: KeyboardTypeOptions;
+  type?: 'text' | 'phone' | 'password' | 'select';
   onBlur?: () => void;
+  onFocus?: () => void;
+  onInputPress?: () => void;
+  setValue?: (value: string) => void;
 }
 
 export const Input: React.FC<IInput> = ({
-  value,
-  type = 'text',
-  setValue,
   icon,
-  variant = 'default',
+  value,
   disabled,
+  setValue,
+  type = 'text',
+  variant = 'default',
   ...props
 }) => {
   const [focused, setFocused] = useState<boolean>(false);
   const [secureTextEntry, setSecureTextEntry] = useState<boolean>(false);
   const placeholderColor = disabled ? colors.skyBase : colors.ink.lighter;
-  const isMoreIcon =
-    ('position' in (icon ?? {}) && icon?.position === 'right') ||
-    type === 'password';
+  const isMoreIcon = useMemo(
+    () =>
+      ('position' in (icon ?? {}) && (icon as TIcon)?.position === 'right') ||
+      type === 'password',
+    [icon, type],
+  );
 
-  const handleSecurityIcon = () => {
+  const isPressable = props.onInputPress instanceof Function;
+
+  const handleSecurityIcon = useCallback(() => {
     if (disabled) {
       return;
     }
     setSecureTextEntry(state => !state);
-  };
+  }, [disabled]);
 
-  const renderIcon = () => {
+  const renderIcon = useMemo(() => {
     if (type === 'password') {
       return (
         <Pressable onPress={handleSecurityIcon} hitSlop={standardHitSlopSize}>
@@ -107,7 +114,7 @@ export const Input: React.FC<IInput> = ({
         color={disabled ? colors.skyBase : colors.inkBase}
       />
     );
-  };
+  }, [icon, disabled, secureTextEntry, type, handleSecurityIcon]);
 
   const handleOnFocused = () => {
     setFocused(true);
@@ -129,15 +136,15 @@ export const Input: React.FC<IInput> = ({
           {props.label}
         </Text>
         <TextInput
-          placeholder={props.placeholder}
-          keyboardType={props.keyboardType}
           value={value}
-          onFocus={handleOnFocused}
+          editable={!disabled}
           onBlur={handleOnBlur}
           autoCapitalize="none"
-          editable={!disabled}
-          secureTextEntry={secureTextEntry}
           onChangeText={setValue}
+          onFocus={handleOnFocused}
+          placeholder={props.placeholder}
+          keyboardType={props.keyboardType}
+          secureTextEntry={secureTextEntry}
           placeholderTextColor={placeholderColor}
         />
       </View>
@@ -156,18 +163,19 @@ export const Input: React.FC<IInput> = ({
           disabled && styles.wrapperDisabled,
           isMoreIcon && CommonStyles.rowReverse,
         ]}>
-        {renderIcon()}
+        {renderIcon}
         {variant === 'floating' ? (
           renderFloatingLabel()
         ) : (
           <TextInput
+            value={value}
             placeholder={props.placeholder}
             keyboardType={props.keyboardType}
-            value={value}
+            maxLength={props.maxLength}
             onFocus={handleOnFocused}
             onBlur={handleOnBlur}
+            editable={!isPressable ?? !disabled}
             autoCapitalize="none"
-            editable={!disabled}
             secureTextEntry={
               type === 'password' ? !secureTextEntry : secureTextEntry
             }
