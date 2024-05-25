@@ -15,7 +15,7 @@ export const defaultScreenOptions: NativeStackNavigationOptions = {
   },
 };
 
-// AuthStackOption
+//  AuthOption
 
 export const authStackScreenOption: NativeStackNavigationOptions = {
   ...defaultScreenOptions,
@@ -24,6 +24,10 @@ export const authStackScreenOption: NativeStackNavigationOptions = {
     paddingHorizontal: normalize('horizontal', 24),
   },
 };
+
+// MainOption
+
+// ...........
 
 // TabBottomOption
 
@@ -43,13 +47,9 @@ export const tabBottomScreenOption: BottomTabNavigationOptions = {
   tabBarHideOnKeyboard: true,
   tabBarActiveTintColor: colors.primary.base,
   tabBarInactiveTintColor: colors.skyDark,
-  tabBarItemStyle: {
-    // borderColor: colors.red.base,
-    // borderWidth: 1,
-  },
   tabBarStyle: {
-    elevation: 0,
-    shadowOpacity: 0,
+    // elevation: 0,
+    // shadowOpacity: 0,
     borderTopWidth: 0,
     height: normalize('height', 90),
     paddingHorizontal: normalize('horizontal', 25),
