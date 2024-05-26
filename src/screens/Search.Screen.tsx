@@ -4,7 +4,7 @@ import {SafeTopProvider} from 'containers/SafeTopProvider';
 
 export const SearchScreen: React.FC = () => {
   return (
-    <SafeTopProvider>
+    <SafeTopProvider content={'dark-content'}>
       <View>
         <Text>SearchScreen</Text>
       </View>
