@@ -6,7 +6,9 @@ import {normalize} from 'theme/metrics';
 
 export const FavoriteScreen: React.FC = () => {
   return (
-    <SafeTopProvider style={styles.provider}>
+    <SafeTopProvider
+      statusBarColor={colors.bdazzledBlue.darkest}
+      style={styles.provider}>
       <View style={styles.header} />
       <View style={styles.main} />
     </SafeTopProvider>

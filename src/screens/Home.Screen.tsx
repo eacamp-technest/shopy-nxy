@@ -1,21 +1,23 @@
 import React from 'react';
-import {View, Text, StyleSheet, StatusBar} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {Input} from 'components/Input';
 import {normalize} from 'theme/metrics';
+import {TabRoutes} from 'router/routes';
 import {NavBar} from 'components/NavBar';
 import {TabBar} from 'components/TabBar';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
+import {NavigationParamList} from 'types/navigation.types';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-export const HomeScreen: React.FC = () => {
+export const HomeScreen: React.FC<
+  NativeStackScreenProps<NavigationParamList, TabRoutes.home>
+> = ({navigation}) => {
   return (
-    <SafeTopProvider style={styles.provider}>
-      <StatusBar
-        backgroundColor={colors.bdazzledBlue.darkest}
-        translucent={true}
-        barStyle={'light-content'}
-      />
+    <SafeTopProvider
+      style={styles.provider}
+      statusBarColor={colors.bdazzledBlue.darkest}>
       <View style={styles.header}>
         <NavBar
           title={'SHOPPAY'}
