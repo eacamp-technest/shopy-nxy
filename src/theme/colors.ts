@@ -43,14 +43,14 @@ export const colors = {
     darkest: '#3F609F',
   },
   skyBlue: {
-    main: '#5EC6EB',
+    base: '#5EC6EB',
     lightest: '#DFF4FB',
     lighter: '#A0DDF3',
     light: '#83D3F0',
     darkest: '#4087A0',
   },
   yellow: {
-    main: '#F1CA4A',
+    base: '#F1CA4A',
     lightest: '#FCF4DB',
     lighter: '#F7E094',
     light: '#F4D674',
