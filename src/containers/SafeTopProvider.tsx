@@ -13,7 +13,6 @@ export const SafeTopProvider: React.FC<ISafeContainer> = ({
 }) => {
   const paddingTop = useSafeAreaInsets().top;
   useSetStatusBar(content, statusBarColor);
-
   return (
     <View style={[CommonStyles.flex, {paddingTop}, style]}>{children}</View>
   );
