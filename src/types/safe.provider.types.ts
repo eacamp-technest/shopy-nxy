@@ -1,6 +1,7 @@
 import {useCallback} from 'react';
 import {StyleProp, ViewStyle, StatusBar} from 'react-native';
 import {colors} from 'theme/colors';
+import {isAndroid} from 'constants/common.consts';
 import {useFocusEffect} from '@react-navigation/native';
 
 type TStatusBar = 'default' | 'light-content' | 'dark-content';
@@ -18,10 +19,14 @@ export const useSetStatusBar = (
 ) => {
   const setStatusBar = useCallback(() => {
     StatusBar.setBarStyle(content);
-    StatusBar.setBackgroundColor(statusBarColor);
+    if (isAndroid) {
+      StatusBar.setBackgroundColor(statusBarColor);
+    }
     return () => {
       StatusBar.setBarStyle('default');
-      StatusBar.setBackgroundColor(colors.white);
+      if (isAndroid) {
+        StatusBar.setBackgroundColor(colors.white);
+      }
     };
   }, [content, statusBarColor]);
 
