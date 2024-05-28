@@ -22,6 +22,7 @@ import {useNavigation} from '@react-navigation/native';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
+import {useToast} from 'store/toast';
 
 export const PaymentMethodScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
   const {goBack} = useNavigation();
@@ -30,6 +31,8 @@ export const PaymentMethodScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
     cards,
     actions: {selectCard},
   } = useUserStore(state => state);
+
+  const showToast = useToast();
 
   const renderCards = (data: ICardInputFrom) => {
     const onPress = () => {
@@ -47,7 +50,15 @@ export const PaymentMethodScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
       />
     );
   };
+  const onAddNewMethod = () => {
+    if (cards.length >= 2) {
+      showToast('error', 'You can only store up to 3 cards. ');
 
+      return;
+    }
+
+    jumpTo(Routes.addNewCard);
+  };
   return (
     <SafeTopProvider>
       <NavBar
@@ -73,7 +84,7 @@ export const PaymentMethodScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
               type={'add'}
               isPressable={true}
               text={'Add another card'}
-              onPress={() => jumpTo(Routes.addNewCard)}
+              onPress={onAddNewMethod}
             />
           </View>
           <View style={styles.textContainer}>

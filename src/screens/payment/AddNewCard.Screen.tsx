@@ -16,6 +16,7 @@ import {ImageResources} from 'assets/VectorResources.g';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {InputControlled} from 'components/InputControlled';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
+import {useToast} from 'store/toast';
 
 interface IInputForm {
   cardNumber?: string;
@@ -30,10 +31,13 @@ export const AddNewCardScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
   const [picker, setPicker] = useState<boolean>(false);
   const {addCard} = useUserStoreActions();
 
+  const showToast = useToast();
+
   const onSubmit = (data: ICardInputFrom) => {
     data.id = String(Math.random() * 10000).slice(0, 4);
     addCard(data);
     jumpTo(Routes.paymentMethod);
+    showToast('success', 'Card added successfully');
     reset();
   };
 

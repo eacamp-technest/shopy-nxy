@@ -9,7 +9,7 @@ export interface Resources extends VectorResourcesType {
   default: any;
 }
 export interface SvgImageProps extends SvgProps {
-  source: Resources;
+  source: any;
   isPressable?: boolean;
   pressableStyle?: StyleProp<ViewStyle>;
   pressableHitSlop?: null | Insets | number | undefined;
