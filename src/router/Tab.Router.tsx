@@ -1,7 +1,7 @@
 import React from 'react';
 import {TabRoutes, Routes} from './routes';
 import {HomeScreen} from 'screens/Home.Screen';
-import {SearchScreen} from 'screens/Search.Screen';
+import {DiscoveryScreen} from 'screens/Discovery.Screen';
 import {FavoriteScreen} from 'screens/Favorite.Screen';
 import {SettingsScreen} from 'screens/Settings.Screen';
 import {renderTabIcon} from 'configs/navigation.configs';
@@ -25,7 +25,7 @@ export const TabRouter: React.FC<
       />
       <Tab.Screen
         name={TabRoutes.search}
-        component={SearchScreen}
+        component={DiscoveryScreen}
         options={{
           tabBarIcon: ({focused}) => renderTabIcon(focused, 'searchTab'),
         }}

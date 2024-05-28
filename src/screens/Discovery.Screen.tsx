@@ -4,7 +4,7 @@ import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 
-export const SearchScreen: React.FC = () => {
+export const DiscoveryScreen: React.FC = () => {
   return (
     <SafeTopProvider
       content={'default'}
