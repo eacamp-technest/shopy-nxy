@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {StatusBar, StyleSheet, View} from 'react-native';
-import BootSplash from 'react-native-bootsplash';
-import {colors} from 'theme/colors';
 import Router from 'router';
+import {colors} from 'theme/colors';
+import BootSplash from 'react-native-bootsplash';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 

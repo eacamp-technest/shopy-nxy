@@ -8,7 +8,7 @@ import {ISafeContainer, useSetStatusBar} from 'types/safe.provider.types';
 export const SafeMainProvider: React.FC<ISafeContainer> = ({
   style,
   children,
-  content = 'default',
+  content = 'dark-content',
   statusBarColor = colors.white,
 }) => {
   useSetStatusBar(content, statusBarColor);

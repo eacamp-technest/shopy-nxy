@@ -7,7 +7,7 @@ import {SafeTopProvider} from 'containers/SafeTopProvider';
 export const SearchScreen: React.FC = () => {
   return (
     <SafeTopProvider
-      content={'default'}
+      content={'light-content'}
       style={styles.provider}
       statusBarColor={colors.red.base}>
       <View style={styles.header} />

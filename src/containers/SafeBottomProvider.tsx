@@ -8,7 +8,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 export const SafeBottomProvider: React.FC<ISafeContainer> = ({
   style,
   children,
-  content = 'default',
+  content = 'dark-content',
   statusBarColor = colors.white,
 }) => {
   useSetStatusBar(content, statusBarColor);

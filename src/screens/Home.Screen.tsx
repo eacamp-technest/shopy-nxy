@@ -17,6 +17,7 @@ export const HomeScreen: React.FC<
   return (
     <SafeTopProvider
       style={styles.provider}
+      content={'light-content'}
       statusBarColor={colors.bdazzledBlue.darkest}>
       <View style={styles.header}>
         <NavBar

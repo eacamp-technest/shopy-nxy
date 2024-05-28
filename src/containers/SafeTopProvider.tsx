@@ -8,7 +8,7 @@ import {ISafeContainer, useSetStatusBar} from 'types/safe.provider.types';
 export const SafeTopProvider: React.FC<ISafeContainer> = ({
   style,
   children,
-  content = 'default',
+  content = 'dark-content',
   statusBarColor = colors.white,
 }) => {
   const paddingTop = useSafeAreaInsets().top;
