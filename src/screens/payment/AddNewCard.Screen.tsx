@@ -54,7 +54,16 @@ export const AddNewCardScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
     setValue,
     handleSubmit,
     formState: {errors},
-  } = useForm<IInputForm>();
+  } = useForm<IInputForm>({
+    defaultValues: __DEV__
+      ? {
+          cardNumber: '2322 1254 5675 6536',
+          holder: 'Nadir Musayev',
+          cvv: '354',
+          expiration: '12 / 21',
+        }
+      : {},
+  });
 
   return (
     <SafeMainProvider>
