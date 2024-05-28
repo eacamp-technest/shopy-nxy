@@ -174,7 +174,8 @@ export const Input: React.FC<IInput> = ({
             maxLength={props.maxLength}
             onFocus={handleOnFocused}
             onBlur={handleOnBlur}
-            editable={!isPressable ?? !disabled}
+            onPressIn={props.onInputPress}
+            editable={!isPressable || !disabled}
             autoCapitalize="none"
             secureTextEntry={
               type === 'password' ? !secureTextEntry : secureTextEntry
