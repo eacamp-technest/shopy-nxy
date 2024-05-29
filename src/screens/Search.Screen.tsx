@@ -1,34 +1,38 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text, ScrollView} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
+import {CartItem} from 'components/CartItem';
 
 export const SearchScreen: React.FC = () => {
   return (
-    <SafeTopProvider
-      content={'light-content'}
-      style={styles.provider}
-      statusBarColor={colors.red.base}>
-      <View style={styles.header} />
-      <View style={styles.main} />
+    <SafeTopProvider style={styles.provider}>
+      <ScrollView
+        style={styles.root}
+        contentContainerStyle={styles.contentContainer}>
+        <View style={styles.main}>
+          <CartItem />
+        </View>
+      </ScrollView>
     </SafeTopProvider>
   );
 };
 
-const mainPadding = normalize('horizontal', 24);
-
 const styles = StyleSheet.create({
   provider: {
-    backgroundColor: colors.red.base,
+    backgroundColor: colors.white,
   },
-  header: {
-    paddingHorizontal: mainPadding,
+  root: {
+    flex: 1,
     gap: normalize('vertical', 24),
-    height: 100,
+    paddingHorizontal: normalize('horizontal', 24),
+  },
+  contentContainer: {
+    paddingTop: 24,
+    paddingBottom: 24,
   },
   main: {
-    flex: 1,
-    backgroundColor: colors.white,
+    gap: normalize('vertical', 24),
   },
 });
