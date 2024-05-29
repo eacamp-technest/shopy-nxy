@@ -5,6 +5,7 @@ import {colors} from 'theme/colors';
 import BootSplash from 'react-native-bootsplash';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
+import {Toast} from 'components/Toast';
 
 const App = () => {
   useEffect(() => {
@@ -19,6 +20,7 @@ const App = () => {
   }, []);
   return (
     <SafeAreaProvider>
+      <Toast />
       <StatusBar
         backgroundColor={colors.white}
         translucent={true}
