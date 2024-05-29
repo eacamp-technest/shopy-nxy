@@ -12,29 +12,34 @@ import {normalize} from 'theme/metrics';
 import {TypographyStyles} from 'theme/typography';
 
 type ISize = 'small' | 'medium' | 'large';
-type ICategory = 'women' | 'men' | 'kids' | 'teens';
 
 interface ICartItem {
   size: ISize;
   title?: string;
   image?: string;
-  category: ICategory;
+  background: string;
   style?: StyleProp<ViewStyle>;
+  onPress?: () => void;
 }
 
 export const CartItem: React.FC<ICartItem> = ({
-  size,
+  size = 'medium',
   title,
   image,
-  category,
+  onPress,
+  background,
 }) => {
   return (
-    <Pressable style={styles.root}>
-      <Text style={styles.title}>WOMEN</Text>
-      <Image
-        style={styles.image}
-        source={require('../assets/images/imageWoman.png')}
-      />
+    <Pressable
+      size={size}
+      onPress={onPress}
+      style={({pressed}) => [
+        styles.root,
+        {opacity: pressed ? 0.8 : 1},
+        {backgroundColor: background},
+      ]}>
+      <Text style={styles.title}>{title}</Text>
+      <Image style={styles.image} source={image} />
     </Pressable>
   );
 };
@@ -48,10 +53,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   title: {
-    ...TypographyStyles.title3,
-    color: colors.white,
     paddingLeft: normalize('horizontal', 24),
     paddingBottom: normalize('vertical', 16),
+    ...TypographyStyles.title3,
+    color: colors.white,
   },
   image: {
     position: 'absolute',

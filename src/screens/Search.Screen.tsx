@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, StyleSheet, Text, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
-import {SafeTopProvider} from 'containers/SafeTopProvider';
+import {searchCategory} from 'mock/search';
 import {CartItem} from 'components/CartItem';
+import {SafeTopProvider} from 'containers/SafeTopProvider';
 
 export const SearchScreen: React.FC = () => {
   return (
@@ -12,7 +13,16 @@ export const SearchScreen: React.FC = () => {
         style={styles.root}
         contentContainerStyle={styles.contentContainer}>
         <View style={styles.main}>
-          <CartItem />
+          {searchCategory.map(item => (
+            <CartItem
+              key={item.id}
+              size={'medium'}
+              title={item.title}
+              image={item.image}
+              background={item.backgroundColor}
+              onPress={() => console.log('handle cart')}
+            />
+          ))}
         </View>
       </ScrollView>
     </SafeTopProvider>
