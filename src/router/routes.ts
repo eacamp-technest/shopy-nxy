@@ -17,7 +17,7 @@ export enum StackRoutes {}
 
 export enum TabRoutes {
   home = 'home',
-  search = 'search',
+  discovery = 'discovery',
   favorite = 'favorite',
   notification = 'notification',
   settings = 'settings',

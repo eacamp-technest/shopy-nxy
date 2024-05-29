@@ -24,7 +24,7 @@ export const TabRouter: React.FC<
         options={{tabBarIcon: ({focused}) => renderTabIcon(focused, 'homeTab')}}
       />
       <Tab.Screen
-        name={TabRoutes.search}
+        name={TabRoutes.discovery}
         component={DiscoveryScreen}
         options={{
           tabBarIcon: ({focused}) => renderTabIcon(focused, 'searchTab'),
