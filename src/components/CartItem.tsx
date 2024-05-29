@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {
   Text,
+  View,
   Image,
   StyleProp,
   ViewStyle,
@@ -14,7 +15,8 @@ import {TypographyStyles} from 'theme/typography';
 type ISize = 'small' | 'medium' | 'large';
 
 interface ICartItem {
-  size: ISize;
+  id?: number;
+  size?: ISize;
   title?: string;
   image?: string;
   background: string;
@@ -29,18 +31,30 @@ export const CartItem: React.FC<ICartItem> = ({
   onPress,
   background,
 }) => {
+  const renderLargeItem = () => {
+    return (
+      <View style={[styles.large, {backgroundColor: background}]}>
+        <Image style={styles.largeImage} source={image} />
+      </View>
+    );
+  };
+
   return (
-    <Pressable
-      size={size}
-      onPress={onPress}
-      style={({pressed}) => [
-        styles.root,
-        {opacity: pressed ? 0.8 : 1},
-        {backgroundColor: background},
-      ]}>
-      <Text style={styles.title}>{title}</Text>
-      <Image style={styles.image} source={image} />
-    </Pressable>
+    <Fragment>
+      {size === 'medium' ? (
+        <Pressable
+          onPress={onPress}
+          style={({pressed}) => [
+            styles.root,
+            {opacity: pressed ? 0.8 : 1},
+            {backgroundColor: background},
+          ]}>
+          <Text style={styles.title}>{title}</Text>
+          <Image style={styles.image} source={image} />
+        </Pressable>
+      ) : null}
+      {size === 'large' ? renderLargeItem() : null}
+    </Fragment>
   );
 };
 
@@ -51,6 +65,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.red.base,
     height: normalize('height', 184),
     justifyContent: 'flex-end',
+  },
+  large: {
+    borderRadius: 0,
+  },
+  largeImage: {
+    height: normalize('height', 193),
+    width: normalize('width', 350),
+    left: -60,
   },
   title: {
     paddingLeft: normalize('horizontal', 24),

@@ -1,4 +1,4 @@
-import {Routes, TabRoutes} from 'router/routes';
+import {Routes, StackRoutes, TabRoutes} from 'router/routes';
 import {ILoginForm} from 'screens/auth/Login.Screen';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
@@ -22,4 +22,8 @@ export type NavigationParamList = {
   [TabRoutes.favorite]: undefined;
   [TabRoutes.notification]: undefined;
   [TabRoutes.settings]: undefined;
+  [StackRoutes.listWoman]: undefined;
+  [StackRoutes.listMan]: undefined;
+  [StackRoutes.listKids]: undefined;
+  [StackRoutes.listTeens]: undefined;
 };

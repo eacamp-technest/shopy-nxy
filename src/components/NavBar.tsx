@@ -24,7 +24,7 @@ interface INavBar {
   leftColor?: string;
   rightColor?: string;
   textRight?: string;
-  styleTitle?: StyleProp<ViewStyle>;
+  styleTitle?: string;
   leftOnPress?: () => void;
   rightOnPress?: () => void;
 }
