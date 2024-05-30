@@ -1,40 +1,48 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {NavigationParamList} from 'types/navigation.types';
-import {StackRoutes} from 'router/routes';
-import {SafeTopProvider} from 'containers/SafeTopProvider';
-import {ImageResources} from 'assets/VectorResources.g';
-import {NavBar} from 'components/NavBar';
 import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
+import {NavBar} from 'components/NavBar';
+import {StackRoutes} from 'router/routes';
 import {CartItem} from 'components/CartItem';
+import {ImageResources} from 'assets/VectorResources.g';
+import {NavigationParamList} from 'types/navigation.types';
+import {SafeTopProvider} from 'containers/SafeTopProvider';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export const ListManScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.listMan>
 > = ({navigation}) => {
   return (
     <SafeTopProvider
-      style={styles.provider}
+      style={colors.blue.base}
       content={'light-content'}
       statusBarColor={colors.red.base}>
-      <NavBar
-        leftColor={colors.white}
-        title={'WOMAN'}
-        leftOnPress={navigation.goBack}
-        leftIcon={ImageResources.chevronLeft}
-      />
+      <View style={styles.navBar}>
+        <NavBar
+          title={'MAN'}
+          leftColor={colors.white}
+          styleTitle={colors.white}
+          leftOnPress={navigation.goBack}
+          leftIcon={ImageResources.chevronLeft}
+        />
+      </View>
       <CartItem
         size={'large'}
         image={require('../../assets/images/imageMan.png')}
       />
 
-      <View style={{flex: 1, backgroundColor: colors.white}}></View>
+      <View style={styles.main} />
     </SafeTopProvider>
   );
 };
 
 const styles = StyleSheet.create({
-  provider: {
-    backgroundColor: colors.blue.base,
+  main: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+  navBar: {
+    paddingHorizontal: normalize('horizontal', 24),
   },
 });

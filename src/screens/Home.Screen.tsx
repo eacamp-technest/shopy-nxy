@@ -13,10 +13,10 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export const HomeScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, TabRoutes.home>
-> = ({navigation}) => {
+> = ({}) => {
   return (
     <SafeTopProvider
-      style={styles.provider}
+      style={colors.bdazzledBlue.darkest}
       content={'light-content'}
       statusBarColor={colors.bdazzledBlue.darkest}>
       <View style={styles.header}>
@@ -24,7 +24,7 @@ export const HomeScreen: React.FC<
           title={'SHOPPAY'}
           leftColor={colors.white}
           rightColor={colors.white}
-          styleTitle={styles.titleColor}
+          styleTitle={colors.white}
           leftIcon={ImageResources.menu}
           rightIcon={ImageResources.shoppingBag}
         />
@@ -46,9 +46,6 @@ export const HomeScreen: React.FC<
 const mainPadding = normalize('horizontal', 24);
 
 const styles = StyleSheet.create({
-  provider: {
-    backgroundColor: colors.bdazzledBlue.darkest,
-  },
   header: {
     paddingHorizontal: mainPadding,
     gap: normalize('vertical', 24),
@@ -57,9 +54,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: mainPadding,
     backgroundColor: colors.white,
-  },
-  titleColor: {
-    color: colors.white,
   },
   input: {
     backgroundColor: colors.white,

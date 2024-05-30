@@ -19,7 +19,7 @@ interface ICartItem {
   size?: ISize;
   title?: string;
   image?: string;
-  background: string;
+  background?: string;
   style?: StyleProp<ViewStyle>;
   onPress?: () => void;
 }
