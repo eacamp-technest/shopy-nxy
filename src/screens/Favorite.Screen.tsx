@@ -7,7 +7,7 @@ import {SafeTopProvider} from 'containers/SafeTopProvider';
 export const FavoriteScreen: React.FC = () => {
   return (
     <SafeTopProvider
-      style={styles.provider}
+      style={colors.yellow.base}
       content={'dark-content'}
       statusBarColor={colors.yellow.base}>
       <View style={styles.header} />
@@ -19,9 +19,6 @@ export const FavoriteScreen: React.FC = () => {
 const mainPadding = normalize('horizontal', 24);
 
 const styles = StyleSheet.create({
-  provider: {
-    backgroundColor: colors.yellow.base,
-  },
   header: {
     paddingHorizontal: mainPadding,
     gap: normalize('vertical', 24),

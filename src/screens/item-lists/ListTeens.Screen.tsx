@@ -17,7 +17,7 @@ export const ListTeensScreen: React.FC<
     <SafeTopProvider
       style={colors.lavender.base}
       content={'light-content'}
-      statusBarColor={colors.red.base}>
+      statusBarColor={colors.lavender.base}>
       <View style={styles.navBar}>
         <NavBar
           title={'WOMAN'}

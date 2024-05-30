@@ -17,7 +17,7 @@ export const ListKidsScreen: React.FC<
     <SafeTopProvider
       style={colors.skyBlue.base}
       content={'light-content'}
-      statusBarColor={colors.red.base}>
+      statusBarColor={colors.skyBlue.base}>
       <View style={styles.navBar}>
         <NavBar
           title={'KIDS'}

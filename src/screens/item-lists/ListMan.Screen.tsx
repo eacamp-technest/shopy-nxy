@@ -17,7 +17,7 @@ export const ListManScreen: React.FC<
     <SafeTopProvider
       style={colors.blue.base}
       content={'light-content'}
-      statusBarColor={colors.red.base}>
+      statusBarColor={colors.blue.base}>
       <View style={styles.navBar}>
         <NavBar
           title={'MAN'}
@@ -31,7 +31,6 @@ export const ListManScreen: React.FC<
         size={'large'}
         image={require('../../assets/images/imageMan.png')}
       />
-
       <View style={styles.main} />
     </SafeTopProvider>
   );

@@ -27,7 +27,7 @@ export const SearchScreen: React.FC<
   };
 
   return (
-    <SafeTopProvider style={styles.provider}>
+    <SafeTopProvider style={colors.white}>
       <ScrollView
         style={styles.root}
         contentContainerStyle={styles.contentContainer}>
@@ -50,9 +50,6 @@ export const SearchScreen: React.FC<
 };
 
 const styles = StyleSheet.create({
-  provider: {
-    backgroundColor: colors.white,
-  },
   root: {
     flex: 1,
     gap: normalize('vertical', 24),

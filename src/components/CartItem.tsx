@@ -7,6 +7,7 @@ import {
   ViewStyle,
   Pressable,
   StyleSheet,
+  ImageSourcePropType,
 } from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
@@ -18,7 +19,7 @@ interface ICartItem {
   id?: number;
   size?: ISize;
   title?: string;
-  image?: string;
+  image?: ImageSourcePropType;
   background?: string;
   style?: StyleProp<ViewStyle>;
   onPress?: () => void;

@@ -16,6 +16,8 @@ export const useSetStatusBar = (
   content: TStatusBar,
   statusBarColor: string,
 ) => {
+  console.log('render');
+
   const setStatusBar = useCallback(() => {
     StatusBar.setBarStyle(content);
     if (isAndroid) {
