@@ -9,7 +9,7 @@ export const FavoriteScreen: React.FC = () => {
   return (
     <SafeTopProvider
       style={colors.bdazzledBlue.darkest}
-      content={'dark-content'}
+      content={'light-content'}
       statusBarColor={colors.bdazzledBlue.darkest}>
       <View style={styles.header} />
       <View style={styles.main}>
@@ -17,13 +17,25 @@ export const FavoriteScreen: React.FC = () => {
           title={'Man'}
           size={'small'}
           background={colors.blue.base}
-          image={require('../assets/images/imageWoman.png')}
+          image={require('../assets/images/manSmall.png')}
         />
         <CartItem
           size={'small'}
           title={'Woman'}
           background={colors.red.base}
-          image={require('../assets/images/imageWoman.png')}
+          image={require('../assets/images/womanSmall.png')}
+        />
+        <CartItem
+          size={'small'}
+          title={'Kids'}
+          background={colors.skyBlue.base}
+          image={require('../assets/images/kidsSmall.png')}
+        />
+        <CartItem
+          size={'small'}
+          title={'Teens'}
+          background={colors.lavender.base}
+          image={require('../assets/images/teensSmall.png')}
         />
       </View>
     </SafeTopProvider>
@@ -40,6 +52,7 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
+    gap: 20,
     backgroundColor: colors.white,
   },
 });

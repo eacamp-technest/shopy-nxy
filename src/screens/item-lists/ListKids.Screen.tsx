@@ -30,7 +30,7 @@ export const ListKidsScreen: React.FC<
 
       <CartItem
         size={'large'}
-        image={require('../../assets/images/imageKids.png')}
+        image={require('../../assets/images/kidsLarge.png')}
       />
       <View style={styles.main} />
     </SafeTopProvider>

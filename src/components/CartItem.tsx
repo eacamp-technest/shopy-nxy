@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 
 type ISize = 'small' | 'medium' | 'large';
@@ -45,7 +46,7 @@ export const CartItem: React.FC<ICartItem> = ({
 
   const renderLargeItem = () => {
     return (
-      <View style={[styles.large, {backgroundColor: background}]}>
+      <View style={[styles.largeContainer, {backgroundColor: background}]}>
         <Image style={styles.largeImage} source={image} />
       </View>
     );
@@ -73,33 +74,39 @@ export const CartItem: React.FC<ICartItem> = ({
 
 const styles = StyleSheet.create({
   root: {
-    borderRadius: 16,
     borderWidth: 0,
+    borderRadius: 16,
+    justifyContent: 'flex-end',
     backgroundColor: colors.red.base,
     height: normalize('height', 184),
-    justifyContent: 'flex-end',
   },
-  large: {
+  image: {
+    position: 'absolute',
+    left: -10,
+    width: 350,
+    height: 193,
+  },
+  largeContainer: {
     borderRadius: 0,
+    alignItems: 'center',
+    height: normalize('height', 179),
   },
   largeImage: {
-    height: normalize('height', 193),
     width: normalize('width', 350),
-    left: -60,
+    height: normalize('height', 282),
   },
   smallContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
+    gap: normalize('horizontal', 16),
+    ...CommonStyles.alignCenterRow,
   },
   small: {
-    borderRadius: 16,
     borderWidth: 0,
-    height: 56,
-    width: 56,
-    backgroundColor: 'green',
+    borderRadius: 8,
   },
-  smallImage: {},
+  smallImage: {
+    width: normalize('width', 56),
+    height: normalize('height', 56),
+  },
   text: {
     ...TypographyStyles.SmallNoneSemibold,
     color: colors.ink.base,
@@ -109,11 +116,5 @@ const styles = StyleSheet.create({
     paddingBottom: normalize('vertical', 16),
     ...TypographyStyles.title3,
     color: colors.white,
-  },
-  image: {
-    position: 'absolute',
-    height: 193,
-    width: 350,
-    left: -10,
   },
 });

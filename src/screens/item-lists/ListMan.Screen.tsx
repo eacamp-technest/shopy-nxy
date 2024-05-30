@@ -29,7 +29,7 @@ export const ListManScreen: React.FC<
       </View>
       <CartItem
         size={'large'}
-        image={require('../../assets/images/imageMan.png')}
+        image={require('../../assets/images/manLarge.png')}
       />
       <View style={styles.main} />
     </SafeTopProvider>

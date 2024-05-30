@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
 import {CartItem} from 'components/CartItem';
@@ -8,7 +9,6 @@ import {ImageResources} from 'assets/VectorResources.g';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {normalize} from 'theme/metrics';
 
 export const ListWomanScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.listWoman>
@@ -29,9 +29,8 @@ export const ListWomanScreen: React.FC<
       </View>
       <CartItem
         size={'large'}
-        image={require('../../assets/images/imageWoman.png')}
+        image={require('../../assets/images/womanLarge.png')}
       />
-
       <View style={styles.main} />
     </SafeTopProvider>
   );

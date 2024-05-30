@@ -20,7 +20,7 @@ export const ListTeensScreen: React.FC<
       statusBarColor={colors.lavender.base}>
       <View style={styles.navBar}>
         <NavBar
-          title={'WOMAN'}
+          title={'TEENS'}
           leftColor={colors.white}
           styleTitle={colors.white}
           leftOnPress={navigation.goBack}
@@ -29,7 +29,7 @@ export const ListTeensScreen: React.FC<
       </View>
       <CartItem
         size={'large'}
-        image={require('../../assets/images/imageTeens.png')}
+        image={require('../../assets/images/teensLarge.png')}
       />
       <View style={styles.main} />
     </SafeTopProvider>

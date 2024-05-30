@@ -23,6 +23,6 @@ export const searchCategory = [
     id: 3,
     title: 'TEENS',
     backgroundColor: colors.lavender.base,
-    image: require('../assets/images/imageTeens.png'),
+    image: require('../assets/images/imageWoman.png'),
   },
 ];
