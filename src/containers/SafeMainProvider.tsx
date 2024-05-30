@@ -15,7 +15,12 @@ export const SafeMainProvider: React.FC<ISafeContainer> = ({
   const paddingTop = useSafeAreaInsets().top;
   const paddingBottom = useSafeAreaInsets().bottom;
   return (
-    <View style={[CommonStyles.flex, {paddingTop, paddingBottom}, style]}>
+    <View
+      style={[
+        CommonStyles.flex,
+        {paddingTop, paddingBottom},
+        {backgroundColor: style},
+      ]}>
       {children}
     </View>
   );

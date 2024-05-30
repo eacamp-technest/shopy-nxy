@@ -7,8 +7,8 @@ import {SafeTopProvider} from 'containers/SafeTopProvider';
 export const NotificationScreen: React.FC = () => {
   return (
     <SafeTopProvider
-      content={'default'}
-      style={styles.provider}
+      content={'light-content'}
+      style={colors.blue.base}
       statusBarColor={colors.blue.base}>
       <View style={styles.header} />
       <View style={styles.main} />
@@ -19,9 +19,6 @@ export const NotificationScreen: React.FC = () => {
 const mainPadding = normalize('horizontal', 24);
 
 const styles = StyleSheet.create({
-  provider: {
-    backgroundColor: colors.blue.base,
-  },
   header: {
     paddingHorizontal: mainPadding,
     gap: normalize('vertical', 24),

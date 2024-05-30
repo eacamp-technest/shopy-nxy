@@ -14,6 +14,9 @@ export const SafeBottomProvider: React.FC<ISafeContainer> = ({
   useSetStatusBar(content, statusBarColor);
   const paddingBottom = useSafeAreaInsets().bottom;
   return (
-    <View style={[CommonStyles.flex, {paddingBottom}, style]}>{children}</View>
+    <View
+      style={[CommonStyles.flex, {paddingBottom}, {backgroundColor: style}]}>
+      {children}
+    </View>
   );
 };

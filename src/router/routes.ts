@@ -13,7 +13,12 @@ export enum Routes {
   tabRouter = 'tabRouter',
 }
 
-export enum StackRoutes {}
+export enum StackRoutes {
+  listWoman = 'listWoman',
+  listMan = 'listMan',
+  listKids = 'listKids',
+  listTeens = 'listTeens',
+}
 
 export enum TabRoutes {
   home = 'home',

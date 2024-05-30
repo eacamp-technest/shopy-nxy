@@ -7,7 +7,7 @@ import {normalize} from 'theme/metrics';
 export const SettingsScreen: React.FC = () => {
   return (
     <SafeTopProvider
-      style={styles.provider}
+      style={colors.skyBlue.base}
       content={'dark-content'}
       statusBarColor={colors.skyBlue.base}>
       <View style={styles.header} />
@@ -19,9 +19,6 @@ export const SettingsScreen: React.FC = () => {
 const mainPadding = normalize('horizontal', 24);
 
 const styles = StyleSheet.create({
-  provider: {
-    backgroundColor: colors.skyBlue.base,
-  },
   header: {
     paddingHorizontal: mainPadding,
     gap: normalize('vertical', 24),

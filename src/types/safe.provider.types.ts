@@ -1,5 +1,5 @@
 import {useCallback} from 'react';
-import {StyleProp, ViewStyle, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
 import {isAndroid} from 'constants/common.consts';
 import {useFocusEffect} from '@react-navigation/native';
 
@@ -8,7 +8,7 @@ type TStatusBar = 'light-content' | 'dark-content';
 export interface ISafeContainer {
   content?: TStatusBar;
   statusBarColor?: string;
-  style?: StyleProp<ViewStyle>;
+  style?: string;
   children: JSX.Element | JSX.Element[];
 }
 

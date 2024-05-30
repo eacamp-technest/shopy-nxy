@@ -48,9 +48,8 @@ export const tabBottomScreenOption: BottomTabNavigationOptions = {
   tabBarActiveTintColor: colors.primary.base,
   tabBarInactiveTintColor: colors.skyDark,
   tabBarStyle: {
-    // elevation: 0,
-    // shadowOpacity: 0,
-    borderTopWidth: 0,
+    shadowOpacity: 0.05,
+    borderTopWidth: 0.05,
     height: normalize('height', 90),
     paddingHorizontal: normalize('horizontal', 25),
   },

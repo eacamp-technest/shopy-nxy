@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TextStyle,
   ViewStyle,
-  StyleProp,
 } from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
@@ -24,7 +23,7 @@ interface INavBar {
   leftColor?: string;
   rightColor?: string;
   textRight?: string;
-  styleTitle?: StyleProp<ViewStyle>;
+  styleTitle?: string;
   leftOnPress?: () => void;
   rightOnPress?: () => void;
 }
@@ -58,7 +57,7 @@ export const NavBar: React.FC<INavBar> = ({
           <View />
         )}
         {title ? (
-          <Text style={[styles.title, styleTitle]}>{title}</Text>
+          <Text style={[styles.title, {color: styleTitle}]}>{title}</Text>
         ) : (
           <View />
         )}
