@@ -32,6 +32,17 @@ export const CartItem: React.FC<ICartItem> = ({
   onPress,
   background,
 }) => {
+  const renderSmallItem = () => {
+    return (
+      <View style={styles.smallContainer}>
+        <View style={[styles.small, {backgroundColor: background}]}>
+          <Image style={styles.smallImage} source={image} />
+        </View>
+        <Text style={styles.text}>{title}</Text>
+      </View>
+    );
+  };
+
   const renderLargeItem = () => {
     return (
       <View style={[styles.large, {backgroundColor: background}]}>
@@ -55,6 +66,7 @@ export const CartItem: React.FC<ICartItem> = ({
         </Pressable>
       ) : null}
       {size === 'large' ? renderLargeItem() : null}
+      {size === 'small' ? renderSmallItem() : null}
     </Fragment>
   );
 };
@@ -74,6 +86,23 @@ const styles = StyleSheet.create({
     height: normalize('height', 193),
     width: normalize('width', 350),
     left: -60,
+  },
+  smallContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
+  },
+  small: {
+    borderRadius: 16,
+    borderWidth: 0,
+    height: 56,
+    width: 56,
+    backgroundColor: 'green',
+  },
+  smallImage: {},
+  text: {
+    ...TypographyStyles.SmallNoneSemibold,
+    color: colors.ink.base,
   },
   title: {
     paddingLeft: normalize('horizontal', 24),

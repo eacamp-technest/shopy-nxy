@@ -27,11 +27,11 @@ export const ListWomanScreen: React.FC<
           leftIcon={ImageResources.chevronLeft}
         />
       </View>
-
       <CartItem
         size={'large'}
         image={require('../../assets/images/imageWoman.png')}
       />
+
       <View style={styles.main} />
     </SafeTopProvider>
   );
