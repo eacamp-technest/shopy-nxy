@@ -54,7 +54,7 @@ export const NavBar: React.FC<INavBar> = ({
             <SvgImage source={leftIcon} color={leftColor} />
           </Pressable>
         ) : (
-          <View />
+          <View style={styles.leftContainer} />
         )}
         {title ? (
           <Text style={[styles.title, {color: styleTitle}]}>{title}</Text>
