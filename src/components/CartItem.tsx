@@ -74,11 +74,12 @@ export const CartItem: React.FC<ICartItem> = ({
 
 const styles = StyleSheet.create({
   root: {
+    height: 184,
     borderWidth: 0,
     borderRadius: 16,
+
     justifyContent: 'flex-end',
     backgroundColor: colors.red.base,
-    height: normalize('height', 184),
   },
   image: {
     position: 'absolute',
@@ -87,13 +88,13 @@ const styles = StyleSheet.create({
     height: 193,
   },
   largeContainer: {
+    height: 179,
     borderRadius: 0,
     alignItems: 'center',
-    height: normalize('height', 179),
   },
   largeImage: {
+    height: 282,
     width: normalize('width', 350),
-    height: normalize('height', 282),
   },
   smallContainer: {
     gap: normalize('horizontal', 16),
