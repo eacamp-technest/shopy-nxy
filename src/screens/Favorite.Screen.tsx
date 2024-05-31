@@ -1,6 +1,7 @@
 import React from 'react';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {NavBar} from 'components/NavBar';
 import {CartItem} from 'components/CartItem';
 import {View, StyleSheet} from 'react-native';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
@@ -11,7 +12,9 @@ export const FavoriteScreen: React.FC = () => {
       style={colors.bdazzledBlue.darkest}
       content={'light-content'}
       statusBarColor={colors.bdazzledBlue.darkest}>
-      <View style={styles.header} />
+      <View style={styles.header}>
+        <NavBar styleTitle={colors.white} title={'SAVED ITEMS'} />
+      </View>
       <View style={styles.main}>
         <CartItem
           title={'Man'}
