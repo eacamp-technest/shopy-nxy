@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {colors} from 'theme/colors';
 import {Routes} from 'router/routes';
+import {useToast} from 'store/toast';
 import {Table} from 'components/Table';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
@@ -22,7 +23,6 @@ import {useNavigation} from '@react-navigation/native';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
-import {useToast} from 'store/toast';
 
 export const PaymentMethodScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
   const {goBack} = useNavigation();
@@ -68,7 +68,9 @@ export const PaymentMethodScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
         leftIcon={ImageResources.chevronLeft}
         largeTitle={'PAYMENT METHODS'}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.contentContainerStyle}>
         <View style={styles.main}>
           <View style={styles.textLink}>
             <Text style={styles.text}>STORED CARD</Text>
@@ -108,6 +110,9 @@ export const PaymentMethodScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
 const styles = StyleSheet.create({
   main: {
     gap: normalize('vertical', 32),
+  } as ViewStyle,
+  contentContainerStyle: {
+    paddingBottom: normalize('vertical', 60),
   },
   textLink: {
     gap: normalize('vertical', 12),
