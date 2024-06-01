@@ -13,6 +13,7 @@ import {SafeMainProvider} from 'containers/SafeMainProvider';
 
 export const YourCardScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
   const {
+    cards,
     selectedCard,
     actions: {selectCard},
   } = useUserStore(state => state);
@@ -41,6 +42,7 @@ export const YourCardScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
         text={'Add new card'}
         type={'outlined'}
         position={'center'}
+        disabled={cards.length >= 2}
         onPress={() => jumpTo(Routes.addNewCard)}
       />
     </SafeMainProvider>

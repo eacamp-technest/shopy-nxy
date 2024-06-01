@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import {StatusBar, StyleSheet, View} from 'react-native';
 import Router from 'router';
 import {colors} from 'theme/colors';
+import {Toast} from 'components/Toast';
 import BootSplash from 'react-native-bootsplash';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
-import {Toast} from 'components/Toast';
 
 const App = () => {
   useEffect(() => {
@@ -22,9 +22,9 @@ const App = () => {
     <SafeAreaProvider>
       <Toast />
       <StatusBar
-        backgroundColor={colors.white}
         translucent={true}
         barStyle={'dark-content'}
+        backgroundColor={colors.white}
       />
       <View style={styles.root}>
         <Router />

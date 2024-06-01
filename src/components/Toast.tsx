@@ -1,7 +1,11 @@
 import React, {memo, useCallback, useEffect} from 'react';
 import {StyleSheet, Text, TextStyle, ViewStyle} from 'react-native';
-
-import {PanGestureHandler} from 'react-native-gesture-handler';
+import {colors} from 'theme/colors';
+import {SvgImage} from './SvgImage';
+import {normalize} from 'theme/metrics';
+import {CommonStyles} from 'theme/commonStyles';
+import {TypographyStyles} from 'theme/typography';
+import {useToastStore} from 'store/toast/toast.store';
 import Animated, {
   runOnJS,
   useAnimatedStyle,
@@ -9,15 +13,8 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import {PanGestureHandler} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-
-import {useToastStore} from 'store/toast/toast.store';
-import {colors} from 'theme/colors';
-import {CommonStyles} from 'theme/commonStyles';
-
-import {SvgImage} from './SvgImage';
-import {normalize} from 'theme/metrics';
-import {TypographyStyles} from 'theme/typography';
 
 export const Toast: React.FC = memo(() => {
   const top = useSafeAreaInsets().top;
@@ -59,23 +56,23 @@ export const Toast: React.FC = memo(() => {
         {icon ? <SvgImage source={icon} /> : null}
         <Text style={[styles.text]}>{message}</Text>
         <SvgImage
+          width={18}
+          height={18}
           isPressable
+          source={vector}
           pressableHitSlop={8}
           style={styles.pressable}
           onPress={actions.hideToast}
-          source={vector}
           color={colors.primary.base}
-          width={18}
-          height={18}
         />
       </Animated.View>
     </PanGestureHandler>
   );
 });
 
-const vector = require('../assets/vectors/x-square.svg');
-const horizontal = normalize('horizontal', 8);
 const vertical = normalize('vertical', 4);
+const horizontal = normalize('horizontal', 8);
+const vector = require('../assets/vectors/x-square.svg');
 
 const styles = StyleSheet.create({
   root: {

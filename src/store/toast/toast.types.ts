@@ -7,9 +7,9 @@ interface IToastStoreActions {
 
 export interface IToastStore {
   message: string;
-  severity: ToastSeverity;
   show: boolean;
-  timeoutId: NodeJS.Timeout | null;
   icon: null | string;
+  severity: ToastSeverity;
+  timeoutId: NodeJS.Timeout | null;
   actions: IToastStoreActions;
 }

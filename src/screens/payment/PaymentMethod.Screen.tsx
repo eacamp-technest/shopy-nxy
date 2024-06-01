@@ -52,7 +52,7 @@ export const PaymentMethodScreen: React.FC<SceneRendererProps> = ({jumpTo}) => {
   };
   const onAddNewMethod = () => {
     if (cards.length >= 2) {
-      showToast('error', 'You can only store up to 3 cards. ');
+      showToast('error', 'You can only store up to 2 cards. ');
 
       return;
     }
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   contentContainerStyle: {
     paddingBottom: normalize('vertical', 60),
-  },
+  } as ViewStyle,
   textLink: {
     gap: normalize('vertical', 12),
     paddingTop: normalize('vertical', 24),

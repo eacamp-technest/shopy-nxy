@@ -5,9 +5,9 @@ const DURATION = 5000;
 const vectors = {
   default: null,
   info: require('../../assets/vectors/toast_info.svg'),
+  error: require('../../assets/vectors/toast_error.svg'),
   success: require('../../assets/vectors/toast_success.svg'),
   warning: require('../../assets/vectors/toast_warning.svg'),
-  error: require('../../assets/vectors/toast_error.svg'),
 };
 
 export const showToastAction =
@@ -19,17 +19,17 @@ export const showToastAction =
 
       const newTimeoutId = setTimeout(() => {
         set({
-          show: false,
-          severity: 'default',
-          message: '',
           icon: null,
+          show: false,
+          message: '',
+          severity: 'default',
         });
       }, DURATION);
 
       return {
-        show: true,
-        severity,
         message,
+        severity,
+        show: true,
         icon: vectors[severity],
         timeoutId: newTimeoutId,
       };
