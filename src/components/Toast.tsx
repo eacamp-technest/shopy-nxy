@@ -87,6 +87,8 @@ const styles = StyleSheet.create({
     paddingRight: horizontal,
     backgroundColor: colors.white,
     shadowColor: colors.ink.dark,
+    borderWidth: 0.3,
+    borderColor: colors.primary.base,
     shadowOffset: {
       width: 0,
       height: 4,
