@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
+import {Order} from 'components/Order';
 import {normalize} from 'theme/metrics';
 import {Avatar} from 'components/Avatar';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
-import {Order} from 'components/Order';
 
 export const NotificationScreen: React.FC = () => {
   return (
