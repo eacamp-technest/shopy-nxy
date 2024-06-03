@@ -4,6 +4,7 @@ import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {Avatar} from 'components/Avatar';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
+import {Order} from 'components/Order';
 
 export const NotificationScreen: React.FC = () => {
   return (
@@ -16,6 +17,14 @@ export const NotificationScreen: React.FC = () => {
         <Avatar
           image={require('../assets/images/Ellipse7.png')}
           size={'large'}
+        />
+        <Order
+          quantiy={4}
+          totalAmount={231}
+          date={'12-01-2022'}
+          status={'Delivered'}
+          orderNumber={19342567}
+          trackingNumber={'IWCDFGWETE3456'}
         />
       </View>
     </SafeTopProvider>
