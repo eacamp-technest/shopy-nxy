@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {CommonStyles} from 'theme/commonStyles';
+import {Button} from './Button';
+import {Divider} from './Divider';
 
 interface IOrder {
   orderNumber?: number;
@@ -21,34 +23,39 @@ export const Order: React.FC<IOrder> = ({
 }) => {
   return (
     <View style={styles.root}>
-      <View style={CommonStyles.justifyBetweenRow}>
-        <Text>{`Order No ${orderNumber}`}</Text>
-        <Text>{date}</Text>
+      <View style={styles.main}>
+        <View style={CommonStyles.justifyBetweenRow}>
+          <Text>{`Order No ${orderNumber}`}</Text>
+          <Text>{date}</Text>
+        </View>
+        <View style={CommonStyles.justifyBetweenRow}>
+          <Text>Tracking Number</Text>
+          <Text>{trackingNumber}</Text>
+        </View>
+        <View style={CommonStyles.justifyBetweenRow}>
+          <Text>Quantiy</Text>
+          <Text>{quantiy}</Text>
+        </View>
+        <View style={CommonStyles.justifyBetweenRow}>
+          <Text>Total Amount</Text>
+          <Text>{`$${totalAmount}`}</Text>
+        </View>
+        <View style={CommonStyles.justifyBetweenRow}>
+          <Text>Status</Text>
+          <Text>{status}</Text>
+        </View>
       </View>
-      <View style={CommonStyles.justifyBetweenRow}>
-        <Text>Tracking Number</Text>
-        <Text>{trackingNumber}</Text>
-      </View>
-      <View style={CommonStyles.justifyBetweenRow}>
-        <Text>Quantiy</Text>
-        <Text>{quantiy}</Text>
-      </View>
-      <View style={CommonStyles.justifyBetweenRow}>
-        <Text>Total Amount</Text>
-        <Text>{`$${totalAmount}`}</Text>
-      </View>
-      <View style={CommonStyles.justifyBetweenRow}>
-        <Text>Status</Text>
-        <Text>{status}</Text>
-      </View>
+      <Button type={'outlined'} text={'Details'} position={'center'} />
+      <Divider height={'medium'} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    borderWidth: 1,
-    borderColor: 'black',
+    gap: 24,
+  },
+  main: {
     gap: 12,
   },
 });
