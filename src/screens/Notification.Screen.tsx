@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {Avatar} from 'components/Avatar';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 
 export const NotificationScreen: React.FC = () => {
@@ -11,7 +12,12 @@ export const NotificationScreen: React.FC = () => {
       style={colors.blue.base}
       statusBarColor={colors.blue.base}>
       <View style={styles.header} />
-      <View style={styles.main} />
+      <View style={styles.main}>
+        <Avatar
+          image={require('../assets/images/Ellipse7.png')}
+          size={'large'}
+        />
+      </View>
     </SafeTopProvider>
   );
 };
