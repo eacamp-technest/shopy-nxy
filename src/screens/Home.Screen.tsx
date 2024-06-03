@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {Input} from 'components/Input';
 import {normalize} from 'theme/metrics';
 import {TabRoutes} from 'router/routes';
 import {NavBar} from 'components/NavBar';
 import {TabBar} from 'components/TabBar';
+import {Steppers} from 'components/Steppers';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
@@ -37,7 +38,7 @@ export const HomeScreen: React.FC<
         <TabBar />
       </View>
       <View style={styles.main}>
-        <Text>HELLO</Text>
+        <Steppers count={0} size={'normal'} type={'normal'} />
       </View>
     </SafeTopProvider>
   );
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: mainPadding,
     backgroundColor: colors.white,
+    paddingTop: 50,
   },
   input: {
     backgroundColor: colors.white,
