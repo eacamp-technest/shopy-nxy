@@ -2,10 +2,8 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {colors} from 'theme/colors';
 
-type THeight = 'small' | 'medium' | 'large';
-
 interface IDivider {
-  height: THeight;
+  height: 'small' | 'medium' | 'large';
 }
 
 export const Divider: React.FC<IDivider> = ({height}) => (
