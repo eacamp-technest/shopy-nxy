@@ -16,7 +16,7 @@ import {TypographyStyles} from 'theme/typography';
 
 type ISize = 'small' | 'medium' | 'large';
 
-interface ICartItem {
+interface ICardCategory {
   id?: number;
   size?: ISize;
   title?: string;
@@ -26,7 +26,7 @@ interface ICartItem {
   onPress?: () => void;
 }
 
-export const CartItem: React.FC<ICartItem> = ({
+export const CardCategory: React.FC<ICardCategory> = ({
   size = 'medium',
   title,
   image,

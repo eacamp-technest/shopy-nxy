@@ -2,8 +2,8 @@ import React from 'react';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
-import {CartItem} from 'components/CartItem';
 import {View, StyleSheet} from 'react-native';
+import {CardCategory} from 'components/CardCategory';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 
 export const FavoriteScreen: React.FC = () => {
@@ -16,25 +16,25 @@ export const FavoriteScreen: React.FC = () => {
         <NavBar styleTitle={colors.white} title={'SAVED ITEMS'} />
       </View>
       <View style={styles.main}>
-        <CartItem
+        <CardCategory
           title={'Man'}
           size={'small'}
           background={colors.blue.base}
           image={require('../assets/images/manSmall.png')}
         />
-        <CartItem
+        <CardCategory
           size={'small'}
           title={'Woman'}
           background={colors.red.base}
           image={require('../assets/images/womanSmall.png')}
         />
-        <CartItem
+        <CardCategory
           size={'small'}
           title={'Kids'}
           background={colors.skyBlue.base}
           image={require('../assets/images/kidsSmall.png')}
         />
-        <CartItem
+        <CardCategory
           size={'small'}
           title={'Teens'}
           background={colors.lavender.base}

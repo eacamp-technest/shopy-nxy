@@ -4,7 +4,7 @@ import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
-import {CartItem} from 'components/CartItem';
+import {CardCategory} from 'components/CardCategory';
 import {ImageResources} from 'assets/VectorResources.g';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
@@ -27,7 +27,7 @@ export const ListWomanScreen: React.FC<
           leftIcon={ImageResources.chevronLeft}
         />
       </View>
-      <CartItem
+      <CardCategory
         size={'large'}
         image={require('../../assets/images/womanLarge.png')}
       />

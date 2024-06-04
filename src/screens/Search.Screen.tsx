@@ -4,7 +4,7 @@ import {colors} from 'theme/colors';
 import {StackRoutes, TabRoutes} from 'router/routes';
 import {normalize} from 'theme/metrics';
 import {searchCategory} from 'mock/search';
-import {CartItem} from 'components/CartItem';
+import {CardCategory} from 'components/CardCategory';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -33,7 +33,7 @@ export const SearchScreen: React.FC<
         contentContainerStyle={styles.contentContainer}>
         <View style={styles.main}>
           {searchCategory.map(item => (
-            <CartItem
+            <CardCategory
               key={item.id}
               id={item.id}
               size={'medium'}
