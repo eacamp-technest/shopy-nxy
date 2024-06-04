@@ -11,6 +11,7 @@ export interface Resources extends VectorResourcesType {
 export interface SvgImageProps extends SvgProps {
   source: any;
   isPressable?: boolean;
+  disabled?: boolean;
   pressableStyle?: StyleProp<ViewStyle>;
   pressableHitSlop?: null | Insets | number | undefined;
   onPress?: () => void;
@@ -21,6 +22,7 @@ export const SvgImage: React.FC<SvgImageProps> = memo(
     source,
     children,
     onPress,
+    disabled,
     isPressable,
     pressableStyle,
     pressableHitSlop,
@@ -41,6 +43,7 @@ export const SvgImage: React.FC<SvgImageProps> = memo(
     if (isPressable) {
       return (
         <Pressable
+          disabled={disabled}
           onPress={onPress}
           hitSlop={pressableHitSlop}
           style={({pressed}) => [{opacity: pressed ? 0.5 : 1}, pressableStyle]}>
