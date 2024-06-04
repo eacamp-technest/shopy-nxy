@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {Input} from 'components/Input';
@@ -15,6 +15,23 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 export const HomeScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, TabRoutes.home>
 > = ({}) => {
+  const [count, setCount] = useState<number>(0);
+  const [disabled, setDisabled] = useState<boolean>(true);
+
+  const increment = () => {
+    setDisabled(false);
+    setCount(state => state + 1);
+  };
+
+  const decrement = () => {
+    if (count === 0) {
+      setDisabled(true);
+      return;
+    }
+
+    setCount(state => state - 1);
+  };
+
   return (
     <SafeTopProvider
       style={colors.bdazzledBlue.darkest}
@@ -38,7 +55,14 @@ export const HomeScreen: React.FC<
         <TabBar />
       </View>
       <View style={styles.main}>
-        <Steppers count={0} size={'normal'} type={'normal'} />
+        <Steppers
+          count={count}
+          size={'normal'}
+          type={'normal'}
+          disabled={disabled}
+          increment={increment}
+          decrement={decrement}
+        />
       </View>
     </SafeTopProvider>
   );

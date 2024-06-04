@@ -10,21 +10,42 @@ type TType = 'normal' | 'noCounter' | 'transparent';
 interface ISteppers {
   size: TSize;
   type: TType;
-  count?: number;
-  onPress?: () => void;
+  count: number;
+  disabled?: boolean;
+  increment?: () => void;
+  decrement?: () => void;
 }
-export const Steppers: React.FC<ISteppers> = ({type, count, size}) => {
+export const Steppers: React.FC<ISteppers> = ({
+  type,
+  count,
+  size,
+  disabled,
+  increment,
+  decrement,
+}) => {
   const styles = getStyles(size, type);
 
   return (
     <View style={styles.container}>
-      <SvgImage isPressable={true} color={colors.skyBase} source={minus} />
+      <SvgImage
+        source={minus}
+        isPressable={true}
+        disabled={disabled}
+        onPress={decrement}
+        color={colors.skyBase}
+      />
       {type === 'noCounter' ? (
         <View style={styles.line} />
       ) : (
         <Text style={styles.count}>{count}</Text>
       )}
-      <SvgImage isPressable={true} color={colors.primary.base} source={plus} />
+      <SvgImage
+        source={plus}
+        isPressable={true}
+        disabled={false}
+        onPress={increment}
+        color={colors.primary.base}
+      />
     </View>
   );
 };
