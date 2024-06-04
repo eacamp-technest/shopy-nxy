@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
+import {CardProduct} from 'components/CardProduct';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 
@@ -16,7 +17,12 @@ export const SettingsScreen: React.FC = () => {
           title={'SETTINGS'}
           styleTitle={colors.ink.base}
         />
-        <Text>SETTINGS</Text>
+        <CardProduct
+          type={'list'}
+          price={95}
+          title={'Nike Air Max 90'}
+          image={require('../assets/images/nike.png')}
+        />
       </View>
     </SafeTopProvider>
   );
