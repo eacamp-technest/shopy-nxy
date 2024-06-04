@@ -1,14 +1,17 @@
-import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import React, {Fragment} from 'react';
+import {View, Text, StyleSheet, Image, ImageSourcePropType} from 'react-native';
 import {normalize} from 'theme/metrics';
+import {Steppers} from './Steppers';
+import {SvgImage} from './SvgImage';
+import {ImageResources} from 'assets/VectorResources.g';
 
-type TTypeCard = 'list' | 'add' | 'save';
+type TTypeCard = 'product' | 'list' | 'add' | 'save';
 
 interface ICardProduct {
-  type: TTypeCard;
-  image?: string;
   title?: string;
   price?: number;
+  type: TTypeCard;
+  image?: ImageSourcePropType;
 }
 
 export const CardProduct: React.FC<ICardProduct> = ({
@@ -28,10 +31,22 @@ export const CardProduct: React.FC<ICardProduct> = ({
         {type === 'list' ? (
           <Text>{`$${price}`}</Text>
         ) : (
-          <View style={styles.main}>
-            <Text>ICON</Text>
-            <Text>{`$${price}`}</Text>
-          </View>
+          <Fragment>
+            {type === 'add' ? (
+              <View style={[styles.main]}>
+                <Steppers type="transparent" size={'small'} count={0} />
+                <Text>{`$${price}`}</Text>
+              </View>
+            ) : (
+              <Fragment>
+                <Text>{`$${price}`}</Text>
+                <View style={[styles.main]}>
+                  <Text style={{paddingHorizontal: 16}}>Move to Bag</Text>
+                  <SvgImage isPressable={true} source={ImageResources.bell} />
+                </View>
+              </Fragment>
+            )}
+          </Fragment>
         )}
       </View>
     </View>
@@ -40,9 +55,6 @@ export const CardProduct: React.FC<ICardProduct> = ({
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: 'green',
-    borderWidth: 1,
-    borderColor: 'red',
     flexDirection: 'row',
     gap: normalize('horizontal', 20),
   },
@@ -61,7 +73,7 @@ const styles = StyleSheet.create({
     paddingVertical: normalize('vertical', 7),
   },
   main: {
-    backgroundColor: 'red',
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

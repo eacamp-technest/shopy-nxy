@@ -18,7 +18,7 @@ export const SettingsScreen: React.FC = () => {
           styleTitle={colors.ink.base}
         />
         <CardProduct
-          type={'list'}
+          type={'save'}
           price={95}
           title={'Nike Air Max 90'}
           image={require('../assets/images/nike.png')}
