@@ -20,7 +20,7 @@ export const Steppers: React.FC<ISteppers> = ({type, count, size}) => {
     <View style={styles.container}>
       <SvgImage isPressable={true} color={colors.skyBase} source={minus} />
       {type === 'noCounter' ? (
-        <SvgImage color={colors.skyLight} source={line} />
+        <View style={styles.line} />
       ) : (
         <Text style={styles.count}>{count}</Text>
       )}
@@ -31,7 +31,6 @@ export const Steppers: React.FC<ISteppers> = ({type, count, size}) => {
 
 const plus = require('../assets/vectors/plus.svg');
 const minus = require('../assets/vectors/minus.svg');
-const line = require('../assets/vectors/line.svg');
 
 const getStyles = (size: TSize, type: TType) =>
   StyleSheet.create({
@@ -39,7 +38,7 @@ const getStyles = (size: TSize, type: TType) =>
       gap: 16,
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-evenly',
+      justifyContent: 'center',
       borderColor: colors.skyLight,
       height: size === 'small' ? 32 : 48,
       width: type === 'noCounter' ? 104 : 124,
@@ -50,5 +49,10 @@ const getStyles = (size: TSize, type: TType) =>
       ...TypographyStyles.RegularNoneBold,
       color: colors.ink.darkest,
       lineHeight: 0,
+    },
+    line: {
+      width: 1,
+      height: size === 'small' ? 32 : 48,
+      backgroundColor: colors.skyLight,
     },
   });
