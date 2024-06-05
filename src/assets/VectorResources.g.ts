@@ -6,6 +6,7 @@ export class ImageResources {
   static shoppingBag = require('./vectors/shoppingBag.svg');
   static home = require('./vectors/home.svg');
   static heart = require('./vectors/heart.svg');
+  static heartWhite = require('./vectors/heartWhite.svg');
   static bell = require('./vectors/bell.svg');
   static sliders = require('./vectors/sliders.svg');
   static square = require('./vectors/square.svg');

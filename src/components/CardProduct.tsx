@@ -1,9 +1,11 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import {View, Text, StyleSheet, Image, ImageSourcePropType} from 'react-native';
-import {normalize} from 'theme/metrics';
 import {Steppers} from './Steppers';
 import {SvgImage} from './SvgImage';
-import {ImageResources} from 'assets/VectorResources.g';
+import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
+import {TypographyStyles} from 'theme/typography';
+import {CommonStyles} from 'theme/commonStyles';
 
 type TTypeCard = 'product' | 'list' | 'add' | 'save';
 
@@ -20,55 +22,81 @@ export const CardProduct: React.FC<ICardProduct> = ({
   title,
   price,
 }) => {
+  const [heartSvg, setHeartSvg] = useState<boolean>(false);
+
+  const heartColor = () => {
+    setHeartSvg(!heartSvg);
+  };
+
+  const isAdd = type === 'add';
+  const isSave = type === 'save';
+  const isList = type === 'list';
+  const isProduct = type === 'product';
+
+  const renderImage = () => (
+    <Image
+      source={image}
+      style={[
+        styles.imageNormal,
+        isSave && styles.imageMedium,
+        isProduct && styles.imageLarge,
+      ]}
+    />
+  );
+
+  const renderTitle = () => (
+    <Text style={styles.title} numberOfLines={2}>
+      {title}
+    </Text>
+  );
+
+  const renderPrice = () => <Text style={styles.title}>{`$${price}`}</Text>;
+
+  const renderProductInfo = () => (
+    <View style={styles.main}>
+      {renderTitle()}
+      {renderPrice()}
+      <Text style={styles.link}>nike.com</Text>
+    </View>
+  );
+
+  const renderListInfo = () => (
+    <View style={styles.list}>
+      {renderTitle()}
+      {isList ? (
+        renderPrice()
+      ) : isAdd ? (
+        <View style={CommonStyles.alignCenterJustifyBetweenRow}>
+          <Steppers type="transparent" size="small" count={0} />
+          {renderPrice()}
+        </View>
+      ) : (
+        <Fragment>
+          {renderPrice()}
+          <View style={CommonStyles.alignCenterJustifyBetweenRow}>
+            <Text style={styles.textSave}>Move to Bag</Text>
+            <SvgImage
+              isPressable={true}
+              onPress={heartColor}
+              color={colors.primary.base}
+              source={heartSvg ? heart : heartWhite}
+            />
+          </View>
+        </Fragment>
+      )}
+    </View>
+  );
+
   return (
-    <View style={[styles.root, type === 'product' ? styles.product : null]}>
-      <Image
-        source={image}
-        style={[
-          styles.imageNormal,
-          type === 'save' ? styles.imageMedium : null,
-          type === 'product' ? styles.imageLarge : null,
-        ]}
-      />
-      <Fragment>
-        {type === 'product' ? (
-          <View>
-            <Text>{title}</Text>
-            <Text>{`$${price}`}</Text>
-            <Text>nike.com</Text>
-          </View>
-        ) : (
-          <View style={styles.list}>
-            <Text numberOfLines={2}>{title}</Text>
-            {type === 'list' ? (
-              <Text>{`$${price}`}</Text>
-            ) : (
-              <Fragment>
-                {type === 'add' ? (
-                  <View style={[styles.main]}>
-                    <Steppers type="transparent" size={'small'} count={0} />
-                    <Text>{`$${price}`}</Text>
-                  </View>
-                ) : (
-                  <Fragment>
-                    <Text>{`$${price}`}</Text>
-                    <View style={[styles.main]}>
-                      <Text style={{paddingHorizontal: 16}}>Move to Bag</Text>
-                      <SvgImage
-                        isPressable={true}
-                        source={ImageResources.bell}
-                      />
-                    </View>
-                  </Fragment>
-                )}
-              </Fragment>
-            )}
-          </View>
-        )}
-      </Fragment>
+    <View style={[styles.root, isProduct ? styles.product : null]}>
+      {renderImage()}
+      <Fragment>{isProduct ? renderProductInfo() : renderListInfo()}</Fragment>
     </View>
   );
 };
+
+const heart = require('../assets/vectors/heart.svg');
+const heartWhite = require('../assets/vectors/heartWhite.svg');
 
 const styles = StyleSheet.create({
   root: {
@@ -94,13 +122,24 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    gap: 8,
+    gap: normalize('vertical', 8),
     justifyContent: 'space-between',
     paddingVertical: normalize('vertical', 7),
   },
   main: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    gap: normalize('vertical', 8),
+  },
+  title: {
+    ...TypographyStyles.RegularNoneSemibold,
+    color: colors.ink.base,
+  },
+  textSave: {
+    paddingHorizontal: normalize('horizontal', 16),
+    ...TypographyStyles.RegularNoneRegular,
+    color: colors.ink.base,
+  },
+  link: {
+    ...TypographyStyles.TinyNormalRegular,
+    color: colors.ink.lighter,
   },
 });
