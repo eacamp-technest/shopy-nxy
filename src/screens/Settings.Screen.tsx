@@ -25,7 +25,12 @@ export const SettingsScreen: React.FC = () => {
           image={require('../assets/images/nike.png')}
         />
 
-        <AddPhoto icon={ImageResources.camera} title={'Add photo'} />
+        <AddPhoto
+          image={require('../assets/images/nike.png')}
+          icon={ImageResources.camera}
+          title={'Add photo'}
+        />
+        <AddPhoto image={require('../assets/images/nike.png')} />
       </View>
     </SafeTopProvider>
   );
