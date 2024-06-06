@@ -13,7 +13,7 @@ export interface ICardProduct {
   id?: number;
   title?: string;
   price?: number;
-  type: TTypeCard;
+  type?: TTypeCard;
   image?: ImageSourcePropType;
 }
 
