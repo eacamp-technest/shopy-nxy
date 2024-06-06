@@ -1,4 +1,6 @@
-export const product = [
+import {ICardProduct} from 'components/CardProduct';
+
+export const product: ICardProduct[] = [
   {
     id: 0,
     title: 'Nike Air Max 90',
@@ -14,6 +16,7 @@ export const product = [
   {
     id: 2,
     title: 'Nike Air Force 1 Shoe',
+    price: 100,
     image: require('../assets/images/product3.png'),
   },
   {

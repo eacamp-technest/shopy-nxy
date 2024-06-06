@@ -7,9 +7,10 @@ import {normalize} from 'theme/metrics';
 import {TypographyStyles} from 'theme/typography';
 import {CommonStyles} from 'theme/commonStyles';
 
-type TTypeCard = 'product' | 'list' | 'add' | 'save';
+export type TTypeCard = 'product' | 'list' | 'add' | 'save';
 
-interface ICardProduct {
+export interface ICardProduct {
+  id?: number;
   title?: string;
   price?: number;
   type: TTypeCard;
