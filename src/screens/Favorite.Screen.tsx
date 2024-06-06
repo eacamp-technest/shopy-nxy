@@ -1,9 +1,9 @@
 import React from 'react';
+import {View, StyleSheet, ScrollView, Text} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
-import {View, StyleSheet} from 'react-native';
-import {CardCategory} from 'components/CardCategory';
+
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 
 export const FavoriteScreen: React.FC = () => {
@@ -15,32 +15,11 @@ export const FavoriteScreen: React.FC = () => {
       <View style={styles.header}>
         <NavBar styleTitle={colors.white} title={'SAVED ITEMS'} />
       </View>
-      <View style={styles.main}>
-        <CardCategory
-          title={'Man'}
-          size={'small'}
-          background={colors.blue.base}
-          image={require('../assets/images/manSmall.png')}
-        />
-        <CardCategory
-          size={'small'}
-          title={'Woman'}
-          background={colors.red.base}
-          image={require('../assets/images/womanSmall.png')}
-        />
-        <CardCategory
-          size={'small'}
-          title={'Kids'}
-          background={colors.skyBlue.base}
-          image={require('../assets/images/kidsSmall.png')}
-        />
-        <CardCategory
-          size={'small'}
-          title={'Teens'}
-          background={colors.lavender.base}
-          image={require('../assets/images/teensSmall.png')}
-        />
-      </View>
+      <ScrollView
+        style={styles.main}
+        contentContainerStyle={styles.contentContainerStyle}>
+        <Text>AAA</Text>
+      </ScrollView>
     </SafeTopProvider>
   );
 };
@@ -55,7 +34,10 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
-    gap: 20,
     backgroundColor: colors.white,
+    paddingHorizontal: normalize('horizontal', 24),
+  },
+  contentContainerStyle: {
+    paddingVertical: normalize('vertical', 32),
   },
 });
