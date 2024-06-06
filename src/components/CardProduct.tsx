@@ -109,10 +109,12 @@ const styles = StyleSheet.create({
     gap: normalize('vertical', 12),
   },
   imageNormal: {
+    borderRadius: 8,
     height: normalize('height', 78),
     width: normalize('width', 78),
   },
   imageMedium: {
+    borderRadius: 8,
     height: normalize('height', 100),
     width: normalize('width', 100),
   },
