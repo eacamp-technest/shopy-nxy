@@ -1,11 +1,18 @@
 import React, {Fragment, useState} from 'react';
-import {View, Text, StyleSheet, Image, ImageSourcePropType} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ImageSourcePropType,
+  TouchableOpacity,
+} from 'react-native';
 import {Steppers} from './Steppers';
 import {SvgImage} from './SvgImage';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
-import {TypographyStyles} from 'theme/typography';
 import {CommonStyles} from 'theme/commonStyles';
+import {TypographyStyles} from 'theme/typography';
 
 export type TTypeCard = 'product' | 'list' | 'add' | 'save';
 
@@ -15,6 +22,7 @@ export interface ICardProduct {
   price?: number;
   type?: TTypeCard;
   image?: ImageSourcePropType;
+  onPress?: () => void;
 }
 
 export const CardProduct: React.FC<ICardProduct> = ({
@@ -22,6 +30,7 @@ export const CardProduct: React.FC<ICardProduct> = ({
   image,
   title,
   price,
+  onPress,
 }) => {
   const [heartSvg, setHeartSvg] = useState<boolean>(false);
 
@@ -35,14 +44,16 @@ export const CardProduct: React.FC<ICardProduct> = ({
   const isProduct = type === 'product';
 
   const renderImage = () => (
-    <Image
-      source={image}
-      style={[
-        styles.imageNormal,
-        isSave && styles.imageMedium,
-        isProduct && styles.imageLarge,
-      ]}
-    />
+    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+      <Image
+        source={image}
+        style={[
+          styles.imageNormal,
+          isSave && styles.imageMedium,
+          isProduct && styles.imageLarge,
+        ]}
+      />
+    </TouchableOpacity>
   );
 
   const renderTitle = () => (
@@ -109,10 +120,12 @@ const styles = StyleSheet.create({
     gap: normalize('vertical', 12),
   },
   imageNormal: {
+    borderRadius: 8,
     height: normalize('height', 78),
     width: normalize('width', 78),
   },
   imageMedium: {
+    borderRadius: 8,
     height: normalize('height', 100),
     width: normalize('width', 100),
   },
