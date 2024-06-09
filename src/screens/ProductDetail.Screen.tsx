@@ -7,6 +7,7 @@ import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {Button} from 'components/Button';
 
 export const ProductDetailScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.productDetail>
@@ -30,6 +31,7 @@ export const ProductDetailScreen: React.FC<
       </ImageBackground>
       <View style={styles.main}>
         <Text>HELLO</Text>
+        <Button position={'center'} text={'Add to cart'} />
       </View>
     </Fragment>
   );
