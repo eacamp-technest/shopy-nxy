@@ -5,14 +5,19 @@ import {product} from 'mock/product';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {FlashList} from '@shopify/flash-list';
+import {StackRoutes, TabRoutes} from 'router/routes';
+import {NavigationParamList} from 'types/navigation.types';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 const ItemSeparatorComponent = () => {
   return <View style={styles.flashVertical} />;
 };
 
-export const FavoriteScreen: React.FC = () => {
+export const FavoriteScreen: React.FC<
+  NativeStackScreenProps<NavigationParamList, TabRoutes.favorite>
+> = ({navigation}) => {
   const renderProduct = ({
     item,
     index,
@@ -27,6 +32,7 @@ export const FavoriteScreen: React.FC = () => {
         title={item.title}
         price={item.price}
         image={item.image}
+        onPress={() => navigation.navigate(StackRoutes.productDetail)}
       />
     );
   };

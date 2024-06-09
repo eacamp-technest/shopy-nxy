@@ -18,6 +18,7 @@ export enum StackRoutes {
   listMan = 'listMan',
   listKids = 'listKids',
   listTeens = 'listTeens',
+  productDetail = 'productDetail',
 }
 
 export enum TabRoutes {

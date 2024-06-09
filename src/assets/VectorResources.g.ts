@@ -53,4 +53,5 @@ export class ImageResources {
   static favoriteTab = require('./vectors/favoriteTab.svg');
   static notificationTab = require('./vectors/notificationTab.svg');
   static settingsTab = require('./vectors/settings.svg');
+  static rightActionable = require('./vectors/rightActionable.svg');
 }
