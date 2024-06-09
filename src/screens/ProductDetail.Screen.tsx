@@ -1,13 +1,14 @@
 import React, {Fragment} from 'react';
 import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
+import {Button} from 'components/Button';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {Button} from 'components/Button';
 
 export const ProductDetailScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.productDetail>
@@ -37,14 +38,16 @@ export const ProductDetailScreen: React.FC<
   );
 };
 
+const mainPadding = normalize('horizontal', 24);
+
 const styles = StyleSheet.create({
   root: {
-    height: 375,
+    height: normalize('height', 375),
   },
   navbar: {
-    paddingHorizontal: 24,
+    paddingHorizontal: mainPadding,
   },
   main: {
-    paddingHorizontal: 24,
+    paddingHorizontal: mainPadding,
   },
 });
