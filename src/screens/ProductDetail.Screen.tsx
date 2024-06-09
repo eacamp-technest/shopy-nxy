@@ -26,6 +26,7 @@ export const ProductDetailScreen: React.FC<
               leftIcon={ImageResources.chevronLeft}
               leftOnPress={() => navigation.goBack()}
               rightIcon={ImageResources.rightActionable}
+              rightOnPress={() => navigation.navigate(StackRoutes.reviewRating)}
             />
           </View>
         </SafeTopProvider>
