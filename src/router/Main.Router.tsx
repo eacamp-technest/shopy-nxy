@@ -1,13 +1,14 @@
 import React from 'react';
-import {Routes, StackRoutes} from './routes';
 import {TabRouter} from './Tab.Router';
+import {Routes, StackRoutes} from './routes';
 import {NavigationParamList} from 'types/navigation.types';
+import {ReviewRatingScreen} from 'screens/ReviewRating.Screen';
 import {ListManScreen} from 'screens/item-lists/ListMan.Screen';
+import {ProductDetailScreen} from 'screens/ProductDetail.Screen';
 import {ListKidsScreen} from 'screens/item-lists/ListKids.Screen';
 import {ListWomanScreen} from 'screens/item-lists/ListWoman.Screen';
 import {ListTeensScreen} from 'screens/item-lists/ListTeens.Screen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ProductDetailScreen} from 'screens/ProductDetail.Screen';
 
 const MainStack = createNativeStackNavigator<NavigationParamList>();
 
@@ -33,6 +34,10 @@ export const MainRouter = () => {
       <MainStack.Screen
         name={StackRoutes.productDetail}
         component={ProductDetailScreen}
+      />
+      <MainStack.Screen
+        name={StackRoutes.reviewRating}
+        component={ReviewRatingScreen}
       />
     </MainStack.Navigator>
   );
