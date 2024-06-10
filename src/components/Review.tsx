@@ -2,11 +2,12 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
 interface IReview {
-  day: string;
-  star: string;
-  image: string;
-  userName: string;
-  description: string;
+  day?: string;
+  star?: string;
+  image?: string;
+  name?: string;
+  surname?: string;
+  description?: string;
 }
 
 export const Review: React.FC<IReview> = () => {
