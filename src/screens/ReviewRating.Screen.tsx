@@ -4,6 +4,7 @@ import {review} from 'mock/review';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
+import {Button} from 'components/Button';
 import {StackRoutes} from 'router/routes';
 import {FlashList} from '@shopify/flash-list';
 import {IReview, Review} from 'components/Review';
@@ -54,6 +55,13 @@ export const ReviewRatingScreen: React.FC<
             ItemSeparatorComponent={ItemSeparatorComponent}
           />
         </ScrollView>
+        <View style={styles.buttonContainer}>
+          <Button
+            style={styles.button}
+            icon={ImageResources.edit2}
+            text={'Write a review'}
+          />
+        </View>
       </View>
     </SafeTopProvider>
   );
@@ -70,5 +78,16 @@ const styles = StyleSheet.create({
   },
   flashVertical: {
     height: normalize('height', 24),
+  },
+  buttonContainer: {
+    left: 0,
+    right: 0,
+    bottom: 37,
+    zIndex: 999,
+    position: 'absolute',
+    alignItems: 'center',
+  },
+  button: {
+    gap: normalize('horizontal', 24),
   },
 });
