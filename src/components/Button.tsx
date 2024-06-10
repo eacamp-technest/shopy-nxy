@@ -8,11 +8,11 @@ import {
   PressableProps,
   ActivityIndicator,
 } from 'react-native';
-import {SvgImage, Resources} from 'components/SvgImage';
-import {TypographyStyles} from 'theme/typography';
-import {normalize} from 'theme/metrics';
 import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
 import {CommonStyles} from 'theme/commonStyles';
+import {TypographyStyles} from 'theme/typography';
+import {SvgImage, Resources} from 'components/SvgImage';
 import {TTypesButton, getButtonTheme} from 'helpers/buttonTheme';
 
 type TSize = 'small' | 'block' | 'large';
@@ -33,15 +33,15 @@ export interface IButton {
 
 export const Button: React.FC<IButton> = ({
   text,
-  disabled,
-  loading,
-  size = 'block',
-  type = 'primary',
   icon,
-  position = 'left',
   style,
   onPress,
+  loading,
   hitSlop,
+  disabled,
+  size = 'block',
+  type = 'primary',
+  position = 'left',
 }) => {
   const [press, setPress] = useState<boolean>(false);
 
