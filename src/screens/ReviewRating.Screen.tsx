@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     paddingTop: normalize('vertical', 24),
-    paddingBottom: normalize('vertical', 50),
+    paddingBottom: normalize('vertical', 120),
   },
   flashVertical: {
     height: normalize('height', 24),

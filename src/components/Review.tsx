@@ -10,8 +10,8 @@ import {CommonStyles} from 'theme/commonStyles';
 export interface IReview {
   date?: string;
   star?: string;
-  image?: string;
   name?: string;
+  image?: string;
   surname?: string;
   description?: string;
 }
