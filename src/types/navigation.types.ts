@@ -28,4 +28,6 @@ export type NavigationParamList = {
   [StackRoutes.listTeens]: undefined;
   [StackRoutes.productDetail]: undefined;
   [StackRoutes.reviewRating]: undefined;
+  [StackRoutes.allItems]: undefined;
+  [StackRoutes.boards]: undefined;
 };

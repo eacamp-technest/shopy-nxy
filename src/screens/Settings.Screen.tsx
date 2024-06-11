@@ -24,7 +24,6 @@ export const SettingsScreen: React.FC = () => {
           title={'Nike Air Max 90'}
           image={require('../assets/images/nike.png')}
         />
-
         <AddPhoto
           image={require('../assets/images/nike.png')}
           icon={ImageResources.camera}

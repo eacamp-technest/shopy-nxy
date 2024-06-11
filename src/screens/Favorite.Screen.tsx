@@ -1,41 +1,49 @@
-import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, Text} from 'react-native';
 import {colors} from 'theme/colors';
-import {product} from 'mock/product';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
-import {FlashList} from '@shopify/flash-list';
+import {windowWidth} from 'theme/const.styles';
+import {TypographyStyles} from 'theme/typography';
 import {StackRoutes, TabRoutes} from 'router/routes';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
-import {CardProduct, ICardProduct} from 'components/CardProduct';
+import {BoardsScreen} from './favoriteTabView/Boards.Screen';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import {ALLItemsScreen} from './favoriteTabView/ALLItems.Screen';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-const ItemSeparatorComponent = () => {
-  return <View style={styles.flashVertical} />;
-};
+const renderScene = SceneMap({
+  [StackRoutes.allItems]: ALLItemsScreen,
+  [StackRoutes.boards]: BoardsScreen,
+});
+
+const routes = [
+  {key: StackRoutes.allItems, title: 'All Items'},
+  {key: StackRoutes.boards, title: 'Boards'},
+];
 
 export const FavoriteScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, TabRoutes.favorite>
-> = ({navigation}) => {
-  const renderProduct = ({
-    item,
-    index,
-  }: {
-    index: number;
-    item: ICardProduct;
-  }) => {
-    return (
-      <CardProduct
-        key={index}
-        type={'save'}
-        title={item.title}
-        price={item.price}
-        image={item.image}
-        onPress={() => navigation.navigate(StackRoutes.productDetail)}
-      />
-    );
-  };
+> = () => {
+  const [index, setIndex] = useState<number>(0);
+
+  const renderTabBar = (props: any) => (
+    <TabBar
+      {...props}
+      indicatorStyle={styles.indicatorStyle}
+      style={styles.tabBar}
+      renderLabel={({route, focused}) => (
+        <Text
+          style={[
+            styles.title,
+            focused ? styles.titleFocused : styles.titleNoFocused,
+          ]}>
+          {route.title}
+        </Text>
+      )}
+    />
+  );
 
   return (
     <SafeTopProvider
@@ -45,37 +53,39 @@ export const FavoriteScreen: React.FC<
       <View style={styles.header}>
         <NavBar styleTitle={colors.white} title={'SAVED ITEMS'} />
       </View>
-      <ScrollView
-        style={styles.main}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.contentContainer}>
-        <FlashList
-          data={product}
-          scrollEnabled={false}
-          estimatedItemSize={200}
-          renderItem={renderProduct}
-          ItemSeparatorComponent={ItemSeparatorComponent}
-        />
-      </ScrollView>
+      <TabView
+        swipeEnabled={true}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+        renderTabBar={renderTabBar}
+        navigationState={{index, routes}}
+        initialLayout={{width: windowWidth}}
+      />
     </SafeTopProvider>
   );
 };
 
 const styles = StyleSheet.create({
   header: {
-    height: 100,
-    gap: normalize('vertical', 24),
-    paddingHorizontal: normalize('horizontal', 24),
+    paddingBottom: normalize('vertical', 16),
   },
-  main: {
-    flex: 1,
-    backgroundColor: colors.white,
-    paddingHorizontal: normalize('horizontal', 24),
+  tabBar: {
+    backgroundColor: colors.bdazzledBlue.darkest,
   },
-  contentContainer: {
-    paddingVertical: normalize('vertical', 32),
+  indicatorStyle: {
+    backgroundColor: colors.skyBlue.base,
   },
-  flashVertical: {
-    height: 24,
+  title: {
+    paddingVertical: normalize('vertical', 16),
+    paddingHorizontal: normalize('horizontal', 20),
+    ...TypographyStyles.RegularNoneSemibold,
+    color: colors.white,
+  },
+  titleFocused: {
+    color: colors.skyBlue.base,
+  },
+  titleNoFocused: {
+    ...TypographyStyles.RegularNoneRegular,
+    color: colors.white,
   },
 });
