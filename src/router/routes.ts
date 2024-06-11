@@ -20,6 +20,8 @@ export enum StackRoutes {
   listTeens = 'listTeens',
   productDetail = 'productDetail',
   reviewRating = 'reviewRating',
+  allItems = 'allItems',
+  boards = 'boards',
 }
 
 export enum TabRoutes {
