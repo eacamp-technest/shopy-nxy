@@ -3,19 +3,15 @@ import {View, ScrollView, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {product} from 'mock/product';
 import {normalize} from 'theme/metrics';
-import {StackRoutes} from 'router/routes';
 import {FlashList} from '@shopify/flash-list';
-import {NavigationParamList} from 'types/navigation.types';
+import {SceneRendererProps} from 'react-native-tab-view';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 const ItemSeparatorComponent = () => {
   return <View style={styles.flashVertical} />;
 };
 
-export const ALLItemsScreen: React.FC<
-  NativeStackScreenProps<NavigationParamList, StackRoutes.allItems>
-> = ({navigation}) => {
+export const ALLItemsScreen: React.FC<SceneRendererProps> = ({}) => {
   const renderProduct = ({
     item,
     index,
@@ -30,7 +26,7 @@ export const ALLItemsScreen: React.FC<
         title={item.title}
         price={item.price}
         image={item.image}
-        onPress={() => navigation.navigate(StackRoutes.productDetail)}
+        onPress={() => console.log('Pressed Product')}
       />
     );
   };

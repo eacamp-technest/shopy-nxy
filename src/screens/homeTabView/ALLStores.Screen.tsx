@@ -1,12 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {StackRoutes} from 'router/routes';
-import {NavigationParamList} from 'types/navigation.types';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {colors} from 'theme/colors';
+import {SceneRendererProps} from 'react-native-tab-view';
 
-export const ALLStoresScreenTab: React.FC<
-  NativeStackScreenProps<NavigationParamList, StackRoutes.allStores>
-> = () => {
+export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
   return (
     <View style={styles.root}>
       <Text style={styles.text}>ALLStores</Text>
@@ -23,6 +20,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 40,
-    color: 'white',
+    color: colors.bdazzledBlue.darkest,
   },
 });
