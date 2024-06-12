@@ -4,12 +4,12 @@ import {StackRoutes} from 'router/routes';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-export const BoardsScreen: React.FC<
-  NativeStackScreenProps<NavigationParamList, StackRoutes.boards>
+export const ALLStoresScreenTab: React.FC<
+  NativeStackScreenProps<NavigationParamList, StackRoutes.allStores>
 > = () => {
   return (
     <View style={styles.root}>
-      <Text style={styles.text}>BoardsScreen</Text>
+      <Text style={styles.text}>ALLStores</Text>
     </View>
   );
 };

@@ -22,6 +22,8 @@ export enum StackRoutes {
   reviewRating = 'reviewRating',
   allItems = 'allItems',
   boards = 'boards',
+  allStores = 'allStores',
+  inStores = 'inStores',
 }
 
 export enum TabRoutes {
