@@ -30,4 +30,6 @@ export type NavigationParamList = {
   [StackRoutes.reviewRating]: undefined;
   [StackRoutes.allItems]: undefined;
   [StackRoutes.boards]: undefined;
+  [StackRoutes.allStores]: undefined;
+  [StackRoutes.inStores]: undefined;
 };

@@ -1,36 +1,50 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import {colors} from 'theme/colors';
 import {Input} from 'components/Input';
 import {normalize} from 'theme/metrics';
-import {TabRoutes} from 'router/routes';
 import {NavBar} from 'components/NavBar';
-import {TabBar} from 'components/TabBar';
-import {Steppers} from 'components/Steppers';
+import {windowWidth} from 'theme/const.styles';
+import {TypographyStyles} from 'theme/typography';
+import {StackRoutes, TabRoutes} from 'router/routes';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
+import {InStoresScreenTab} from './homeTabView/InStores.Screen';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import {ALLStoresScreenTab} from './homeTabView/ALLStores.Screen';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+
+const renderScene = SceneMap({
+  [StackRoutes.allStores]: ALLStoresScreenTab,
+  [StackRoutes.inStores]: InStoresScreenTab,
+});
+const routes = [
+  {key: StackRoutes.allStores, title: 'All Stores'},
+  {key: StackRoutes.inStores, title: 'In-Store'},
+];
 
 export const HomeScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, TabRoutes.home>
 > = ({}) => {
-  const [count, setCount] = useState<number>(0);
-  const [disabled, setDisabled] = useState<boolean>(true);
+  const [index, setIndex] = useState<number>(0);
 
-  const increment = () => {
-    setDisabled(false);
-    setCount(state => state + 1);
-  };
-
-  const decrement = () => {
-    if (count === 0) {
-      setDisabled(true);
-      return;
-    }
-
-    setCount(state => state - 1);
-  };
+  const renderTabBar = (props: any) => (
+    <TabBar
+      {...props}
+      indicatorStyle={styles.indicatorStyle}
+      style={styles.tabBar}
+      renderLabel={({route, focused}) => (
+        <Text
+          style={[
+            styles.title,
+            focused ? styles.titleFocused : styles.titleNoFocused,
+          ]}>
+          {route.title}
+        </Text>
+      )}
+    />
+  );
 
   return (
     <SafeTopProvider
@@ -52,18 +66,15 @@ export const HomeScreen: React.FC<
           style={styles.input}
           placeholder={'Search brand, products...'}
         />
-        <TabBar />
       </View>
-      <View style={styles.main}>
-        <Steppers
-          count={count}
-          size={'normal'}
-          type={'normal'}
-          disabled={disabled}
-          increment={increment}
-          decrement={decrement}
-        />
-      </View>
+      <TabView
+        swipeEnabled={true}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+        renderTabBar={renderTabBar}
+        navigationState={{index, routes}}
+        initialLayout={{width: windowWidth}}
+      />
     </SafeTopProvider>
   );
 };
@@ -74,14 +85,27 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: mainPadding,
     gap: normalize('vertical', 24),
-  },
-  main: {
-    flex: 1,
-    paddingHorizontal: mainPadding,
-    backgroundColor: colors.white,
-    paddingTop: 50,
+    paddingBottom: normalize('vertical', 24),
   },
   input: {
     backgroundColor: colors.white,
+  },
+  tabBar: {
+    backgroundColor: colors.bdazzledBlue.darkest,
+  },
+  indicatorStyle: {
+    backgroundColor: colors.skyBlue.base,
+  },
+  title: {
+    paddingHorizontal: normalize('horizontal', 20),
+    ...TypographyStyles.RegularNoneSemibold,
+    color: colors.white,
+  },
+  titleFocused: {
+    color: colors.skyBlue.base,
+  },
+  titleNoFocused: {
+    ...TypographyStyles.RegularNoneRegular,
+    color: colors.white,
   },
 });

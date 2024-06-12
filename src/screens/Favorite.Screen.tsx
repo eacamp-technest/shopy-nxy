@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.skyBlue.base,
   },
   title: {
-    paddingVertical: normalize('vertical', 16),
     paddingHorizontal: normalize('horizontal', 20),
     ...TypographyStyles.RegularNoneSemibold,
     color: colors.white,

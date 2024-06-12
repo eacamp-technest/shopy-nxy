@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {SceneRendererProps} from 'react-native-tab-view';
 import {colors} from 'theme/colors';
+import {SceneRendererProps} from 'react-native-tab-view';
 
-export const BoardsScreen: React.FC<SceneRendererProps> = ({}) => {
+export const InStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
   return (
     <View style={styles.root}>
-      <Text style={styles.text}>BoardsScreen</Text>
+      <Text style={styles.text}>InStore</Text>
     </View>
   );
 };
