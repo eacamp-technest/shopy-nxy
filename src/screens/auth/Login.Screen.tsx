@@ -8,14 +8,18 @@ import {
   ScrollView,
   Linking,
 } from 'react-native';
+import axios from 'axios';
 import {colors} from 'theme/colors';
 import {Routes} from 'router/routes';
+import {useToast} from 'store/toast';
 import {useForm} from 'react-hook-form';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
-import {TextLink} from 'components/TextLink';
 import {Button} from 'components/Button';
+import {TextLink} from 'components/TextLink';
+import {ENDPOINTS} from 'services/Endpoints';
 import {FormRules} from 'constants/formRules';
+import {useUserStoreActions} from 'store/user';
 import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import {SocialButton} from 'components/SocialButton';
@@ -34,18 +38,36 @@ export interface ILoginForm {
 export const LoginScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, Routes.login>
 > = ({navigation}) => {
+  const {initUser} = useUserStoreActions();
+  const showToast = useToast();
+
   const {
     control,
     handleSubmit,
     formState: {errors, isSubmitting},
   } = useForm<ILoginForm>({
     defaultValues: {
-      email: __DEV__ ? 'nadir.musayevv@gmail.com' : '',
-      password: __DEV__ ? '123456XX!' : '',
+      email: __DEV__ ? 'emilys@gmail.com' : '',
+      password: __DEV__ ? 'emilyspass' : '',
     },
   });
-  const onSubmit = (data: ILoginForm) => {
-    navigation.navigate(Routes.verification, data);
+  const onSubmit = async (data: ILoginForm) => {
+    const res = await axios({
+      url: ENDPOINTS.auth.login,
+      method: 'POST',
+      data: {
+        username: data.email.replace('@gmail.com', ''),
+        password: data.password,
+      },
+    });
+
+    if (res.status === 200) {
+      initUser(res.data);
+      showToast('success', 'Login successful');
+      // navigation.navigate(Routes.verification, data);
+    } else {
+      showToast('error', 'Login failed');
+    }
   };
 
   return (
@@ -77,7 +99,7 @@ export const LoginScreen: React.FC<
             name={'password'}
             type={'password'}
             label={'Password'}
-            rules={FormRules.password}
+            // rules={FormRules.password}
             placeholder={'Enter your password'}
             errorMessage={errors.password?.message}
           />

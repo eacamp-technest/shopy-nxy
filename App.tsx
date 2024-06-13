@@ -1,23 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StatusBar, StyleSheet, View} from 'react-native';
 import Router from 'router';
 import {colors} from 'theme/colors';
 import {Toast} from 'components/Toast';
-import BootSplash from 'react-native-bootsplash';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 
 const App = () => {
-  useEffect(() => {
-    const init = async () => {
-      // …do multiple sync or async tasks
-    };
-
-    init().finally(async () => {
-      await BootSplash.hide({fade: true});
-      // console.log('BootSplash has been hidden successfully');
-    });
-  }, []);
   return (
     <SafeAreaProvider>
       <Toast />

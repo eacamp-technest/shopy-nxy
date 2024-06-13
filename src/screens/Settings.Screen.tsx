@@ -2,35 +2,26 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {Button} from 'components/Button';
 import {NavBar} from 'components/NavBar';
-import {AddPhoto} from 'components/AddPhoto';
-import {CardProduct} from 'components/CardProduct';
+import {useUserStoreActions} from 'store/user';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 
 export const SettingsScreen: React.FC = () => {
+  const {logout} = useUserStoreActions();
+
   return (
     <SafeTopProvider style={colors.white}>
       <View style={styles.root}>
         <NavBar
-          leftIcon={ImageResources.chevronLeft}
-          leftColor={colors.ink.base}
           title={'SETTINGS'}
+          leftColor={colors.ink.base}
           styleTitle={colors.ink.base}
+          leftIcon={ImageResources.chevronLeft}
         />
-        <CardProduct
-          type={'save'}
-          price={95}
-          title={'Nike Air Max 90'}
-          image={require('../assets/images/nike.png')}
-        />
-        <AddPhoto
-          image={require('../assets/images/nike.png')}
-          icon={ImageResources.camera}
-          title={'Add photo'}
-        />
-        <AddPhoto image={require('../assets/images/nike.png')} />
       </View>
+      <Button onPress={logout} text={'Logout'} position={'center'} />
     </SafeTopProvider>
   );
 };
