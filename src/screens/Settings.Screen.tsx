@@ -7,6 +7,7 @@ import {NavBar} from 'components/NavBar';
 import {useUserStoreActions} from 'store/user';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
+import {BottomSheetAction} from 'components/BottomSheet';
 
 export const SettingsScreen: React.FC = () => {
   const {logout} = useUserStoreActions();
@@ -21,6 +22,7 @@ export const SettingsScreen: React.FC = () => {
           leftIcon={ImageResources.chevronLeft}
         />
       </View>
+      <BottomSheetAction />
       <Button onPress={logout} text={'Logout'} position={'center'} />
     </SafeTopProvider>
   );
