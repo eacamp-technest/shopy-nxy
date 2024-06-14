@@ -3,7 +3,9 @@ import {View, ScrollView, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {product} from 'mock/product';
 import {normalize} from 'theme/metrics';
+import {StackRoutes} from 'router/routes';
 import {FlashList} from '@shopify/flash-list';
+import {useNavigation} from '@react-navigation/native';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
 
@@ -12,6 +14,8 @@ const ItemSeparatorComponent = () => {
 };
 
 export const ALLItemsScreen: React.FC<SceneRendererProps> = ({}) => {
+  const {navigate} = useNavigation();
+
   const renderProduct = ({
     item,
     index,
@@ -26,10 +30,11 @@ export const ALLItemsScreen: React.FC<SceneRendererProps> = ({}) => {
         title={item.title}
         price={item.price}
         image={item.image}
-        onPress={() => console.log('Pressed Product')}
+        onPress={() => navigate(StackRoutes.productDetail as never)}
       />
     );
   };
+
   return (
     <ScrollView
       style={styles.main}
