@@ -1,23 +1,23 @@
 import React, {useCallback, useRef, useMemo} from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {Button} from './Button';
 import {colors} from 'theme/colors';
 import {AddPhoto} from './AddPhoto';
 import {normalize} from 'theme/metrics';
+import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import {ImageResources} from 'assets/VectorResources.g';
-import BottomSheet, {
-  BottomSheetScrollView,
-  BottomSheetView,
-} from '@gorhom/bottom-sheet';
+import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 
 interface IActionSheet {
+  buttonText?: string;
+  description?: string;
   openPress?: () => void;
   closePress?: () => void;
 }
 
 export const BottomSheetAction: React.FC<IActionSheet> = ({}) => {
-  const snapPointsValue = normalize('height', 600);
+  const snapPointsValue = normalize('height', 800);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => [snapPointsValue], [snapPointsValue]);
@@ -26,17 +26,15 @@ export const BottomSheetAction: React.FC<IActionSheet> = ({}) => {
     console.log('handleSheetChanges', index);
   }, []);
 
-  const openPress = () => bottomSheetRef.current?.expand();
+  // const openPress = () => bottomSheetRef.current?.expand();
 
   const closePress = () => bottomSheetRef.current?.close();
 
   return (
-    <View style={styles.container}>
-      <Button onPress={openPress} text={'Open'} position={'center'} />
+    <View style={CommonStyles.flex}>
       <BottomSheet
-        index={-1}
-        snapPoints={snapPoints}
         ref={bottomSheetRef}
+        snapPoints={snapPoints}
         enablePanDownToClose={true}
         onChange={handleSheetChanges}
         handleIndicatorStyle={styles.handleIndicatorStyle}>
@@ -49,11 +47,11 @@ export const BottomSheetAction: React.FC<IActionSheet> = ({}) => {
             </Text>
             <View style={styles.descriptionContainer}>
               <Text style={styles.description} numberOfLines={3}>
-                The Nike Air Zoom Structure 24 is asupportive neutral trainer
+                The Nike Air Zoom Structure 24 is supportive neutral trainer
                 which can handle most types of runs
               </Text>
             </View>
-            <View style={{flexDirection: 'row', gap: 16}}>
+            <View style={styles.photoContainer}>
               <AddPhoto icon={ImageResources.camera} title="Add photo" />
               <AddPhoto image={require('../assets/images/product2.png')} />
               <AddPhoto image={require('../assets/images/product1.png')} />
@@ -72,7 +70,7 @@ export const BottomSheetAction: React.FC<IActionSheet> = ({}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // padding: 24,
     // backgroundColor: 'grey',
     // backgroundColor: 'red',
@@ -80,7 +78,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: normalize('horizontal', 24),
   },
   main: {
     gap: normalize('vertical', 32),
@@ -101,6 +99,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     ...TypographyStyles.RegularNormalSemiBold,
     color: colors.ink.dark,
+  },
+  photoContainer: {
+    flexDirection: 'row',
+    gap: normalize('horizontal', 16),
   },
   descriptionContainer: {
     alignItems: 'center',
