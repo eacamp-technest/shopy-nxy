@@ -15,9 +15,9 @@ export const ListManScreen: React.FC<
 > = ({navigation}) => {
   return (
     <SafeTopProvider
-      style={colors.blue.base}
       content={'light-content'}
-      statusBarColor={colors.blue.base}>
+      backColorSafeProvider={colors.blue.base}
+      statusBarColorAndroid={colors.blue.base}>
       <View style={styles.navBar}>
         <NavBar
           title={'MAN'}

@@ -6,12 +6,13 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ISafeContainer, useSetStatusBar} from 'types/safe.provider.types';
 
 export const SafeMainProvider: React.FC<ISafeContainer> = ({
-  style,
+  backColorSafeProvider,
   children,
+  customStyles,
   content = 'dark-content',
-  statusBarColor = colors.white,
+  statusBarColorAndroid = colors.white,
 }) => {
-  useSetStatusBar(content, statusBarColor);
+  useSetStatusBar(content, statusBarColorAndroid);
   const paddingTop = useSafeAreaInsets().top;
   const paddingBottom = useSafeAreaInsets().bottom;
   return (
@@ -19,7 +20,8 @@ export const SafeMainProvider: React.FC<ISafeContainer> = ({
       style={[
         CommonStyles.flex,
         {paddingTop, paddingBottom},
-        {backgroundColor: style},
+        {backgroundColor: backColorSafeProvider},
+        customStyles,
       ]}>
       {children}
     </View>

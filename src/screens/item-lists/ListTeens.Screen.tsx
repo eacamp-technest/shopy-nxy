@@ -15,9 +15,9 @@ export const ListTeensScreen: React.FC<
 > = ({navigation}) => {
   return (
     <SafeTopProvider
-      style={colors.lavender.base}
       content={'light-content'}
-      statusBarColor={colors.lavender.base}>
+      backColorSafeProvider={colors.lavender.base}
+      statusBarColorAndroid={colors.lavender.base}>
       <View style={styles.navBar}>
         <NavBar
           title={'TEENS'}

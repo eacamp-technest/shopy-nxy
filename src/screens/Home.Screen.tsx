@@ -48,9 +48,9 @@ export const HomeScreen: React.FC<
 
   return (
     <SafeTopProvider
-      style={colors.bdazzledBlue.darkest}
       content={'light-content'}
-      statusBarColor={colors.bdazzledBlue.darkest}>
+      backColorSafeProvider={colors.bdazzledBlue.darkest}
+      statusBarColorAndroid={colors.bdazzledBlue.darkest}>
       <View style={styles.header}>
         <NavBar
           title={'SHOPPAY'}
