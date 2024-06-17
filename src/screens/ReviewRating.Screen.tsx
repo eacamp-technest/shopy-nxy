@@ -53,8 +53,8 @@ export const ReviewRatingScreen: React.FC<
   };
 
   return (
-    <SafeTopProvider>
-      <View style={[styles.root]}>
+    <SafeTopProvider style={colors.white}>
+      <View style={styles.root}>
         <NavBar
           title={'PRODUCT REVIEW'}
           leftColor={colors.ink.base}
