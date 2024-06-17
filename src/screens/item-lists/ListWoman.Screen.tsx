@@ -15,9 +15,9 @@ export const ListWomanScreen: React.FC<
 > = ({navigation}) => {
   return (
     <SafeTopProvider
-      style={colors.red.base}
       content={'light-content'}
-      statusBarColor={colors.red.base}>
+      backColorSafeProvider={colors.red.base}
+      statusBarColorAndroid={colors.red.base}>
       <View style={styles.navBar}>
         <NavBar
           title={'WOMAN'}

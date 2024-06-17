@@ -10,8 +10,8 @@ export const NotificationScreen: React.FC = () => {
   return (
     <SafeTopProvider
       content={'light-content'}
-      style={colors.blue.base}
-      statusBarColor={colors.blue.base}>
+      backColorSafeProvider={colors.blue.base}
+      statusBarColorAndroid={colors.blue.base}>
       <View style={styles.header} />
       <View style={styles.main}>
         <Avatar

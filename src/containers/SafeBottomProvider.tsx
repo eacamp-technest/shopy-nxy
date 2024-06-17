@@ -6,16 +6,22 @@ import {ISafeContainer, useSetStatusBar} from 'types/safe.provider.types';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export const SafeBottomProvider: React.FC<ISafeContainer> = ({
-  style,
+  backColorSafeProvider,
   children,
+  customStyles,
   content = 'dark-content',
-  statusBarColor = colors.white,
+  statusBarColorAndroid = colors.white,
 }) => {
-  useSetStatusBar(content, statusBarColor);
+  useSetStatusBar(content, statusBarColorAndroid);
   const paddingBottom = useSafeAreaInsets().bottom;
   return (
     <View
-      style={[CommonStyles.flex, {paddingBottom}, {backgroundColor: style}]}>
+      style={[
+        CommonStyles.flex,
+        {paddingBottom},
+        {backgroundColor: backColorSafeProvider},
+        customStyles,
+      ]}>
       {children}
     </View>
   );
