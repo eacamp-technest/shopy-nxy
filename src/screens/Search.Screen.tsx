@@ -27,7 +27,7 @@ export const SearchScreen: React.FC<
   };
 
   return (
-    <SafeTopProvider style={colors.white}>
+    <SafeTopProvider backColorSafeProvider={colors.white}>
       <ScrollView
         style={styles.root}
         contentContainerStyle={styles.contentContainer}>

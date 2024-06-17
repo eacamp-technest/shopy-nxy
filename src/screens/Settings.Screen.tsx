@@ -12,7 +12,7 @@ export const SettingsScreen: React.FC = () => {
   const {logout} = useUserStoreActions();
 
   return (
-    <SafeTopProvider style={colors.white}>
+    <SafeTopProvider backColorSafeProvider={colors.white}>
       <View style={styles.root}>
         <NavBar
           title={'SETTINGS'}
