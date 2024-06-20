@@ -21,7 +21,7 @@ export const ImageResources = {
   camera: require('./vectors/camera.svg'),
   user: require('./vectors/user.svg'),
   mapPin: require('./vectors/mapPin.svg'),
-  shoppingCat: require('./vectors/shoppingCart.svg'),
+  shoppingCart: require('./vectors/shoppingCart.svg'),
   creditCard: require('./vectors/creditCard.svg'),
   info: require('./vectors/info.svg'),
   logOut: require('./vectors/logOut.svg'),
