@@ -4,7 +4,7 @@ import {HomeScreen} from 'screens/Home.Screen';
 import {SearchScreen} from 'screens/Search.Screen';
 import {FavoriteScreen} from 'screens/Favorite.Screen';
 import {SettingsScreen} from 'screens/Settings.Screen';
-import {renderTabIcon} from 'configs/navigation.configs';
+import {tabBarOption} from 'configs/navigation.configs';
 import {NavigationParamList} from 'types/navigation.types';
 import {NotificationScreen} from 'screens/Notification.Screen';
 import {tabBottomScreenOption} from 'configs/navigation.configs';
@@ -21,35 +21,27 @@ export const TabRouter: React.FC<
       <Tab.Screen
         name={TabRoutes.home}
         component={HomeScreen}
-        options={{tabBarIcon: ({focused}) => renderTabIcon(focused, 'homeTab')}}
+        options={tabBarOption[TabRoutes.home]}
       />
       <Tab.Screen
         name={TabRoutes.search}
         component={SearchScreen}
-        options={{
-          tabBarIcon: ({focused}) => renderTabIcon(focused, 'searchTab'),
-        }}
+        options={tabBarOption[TabRoutes.search]}
       />
       <Tab.Screen
         name={TabRoutes.favorite}
         component={FavoriteScreen}
-        options={{
-          tabBarIcon: ({focused}) => renderTabIcon(focused, 'favoriteTab'),
-        }}
+        options={tabBarOption[TabRoutes.favorite]}
       />
       <Tab.Screen
         name={TabRoutes.notification}
         component={NotificationScreen}
-        options={{
-          tabBarIcon: ({focused}) => renderTabIcon(focused, 'notificationTab'),
-        }}
+        options={tabBarOption[TabRoutes.notification]}
       />
       <Tab.Screen
         name={TabRoutes.settings}
         component={SettingsScreen}
-        options={{
-          tabBarIcon: ({focused}) => renderTabIcon(focused, 'settingsTab'),
-        }}
+        options={tabBarOption[TabRoutes.settings]}
       />
     </Tab.Navigator>
   );
