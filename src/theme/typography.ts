@@ -155,6 +155,12 @@ export const TypographyStyles = StyleSheet.create({
     fontFamily: montserratFonts[600],
     ...commonFontStyling,
   },
+  SmallTightRegular: {
+    fontSize: fontSize14,
+    fontFamily: montserratFonts[400],
+    lineHeight: lineHeight16,
+    ...commonFontStyling,
+  } as TextStyle,
   Inter: {
     fontFamily: InterFonts[500],
     fontSize: fontSize12,
