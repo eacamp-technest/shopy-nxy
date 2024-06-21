@@ -7,7 +7,6 @@ import {NavBar} from 'components/NavBar';
 import {MainTab} from 'components/MainTab';
 import {Divider} from 'components/Divider';
 import {useUserStoreActions} from 'store/user';
-import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 
 export const SettingsScreen: React.FC = () => {
@@ -18,12 +17,7 @@ export const SettingsScreen: React.FC = () => {
   return (
     <SafeTopProvider backColorSafeProvider={colors.white}>
       <View>
-        <NavBar
-          title={'SETTINGS'}
-          leftColor={colors.ink.base}
-          styleTitle={colors.ink.base}
-          leftIcon={ImageResources.chevronLeft}
-        />
+        <NavBar title={'SETTINGS'} styleTitle={colors.ink.base} />
         {settings.map(item => (
           <Fragment key={item.id}>
             {item.id === 4 ? <Divider height={'medium'} /> : null}
