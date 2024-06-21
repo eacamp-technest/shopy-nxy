@@ -1,15 +1,24 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  ViewStyle,
+  StyleSheet,
+  StyleProp,
+  TouchableOpacity,
+} from 'react-native';
 import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
 import {Resources, SvgImage} from './SvgImage';
 import {TypographyStyles} from 'theme/typography';
-import {normalize} from 'theme/metrics';
 
 interface IMainTab {
   title?: string;
   caption?: string;
   leftIcon?: Resources;
   rightIcon?: Resources;
+  style?: StyleProp<ViewStyle>;
+  onPress?: () => void;
 }
 
 export const MainTab: React.FC<IMainTab> = ({
@@ -17,30 +26,37 @@ export const MainTab: React.FC<IMainTab> = ({
   caption,
   leftIcon,
   rightIcon,
+  onPress,
+  style,
 }) => {
   return (
-    <View style={styles.root}>
+    <TouchableOpacity onPress={onPress} style={[styles.root, style]}>
       <View style={styles.main}>
         <SvgImage color={colors.primary.base} source={leftIcon} />
-        <View>
+        <View style={styles.titleContainer}>
           <Text style={styles.title}>{title}</Text>
           {caption ? <Text style={styles.caption}>{caption}</Text> : null}
         </View>
       </View>
       <SvgImage color={colors.skyDark} source={rightIcon} />
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
+    paddingVertical: 20,
   },
   main: {
     flexDirection: 'row',
     gap: normalize('horizontal', 12),
     alignItems: 'center',
+  },
+  titleContainer: {
+    gap: 4,
   },
   title: {
     ...TypographyStyles.RegularTightSemibold,
