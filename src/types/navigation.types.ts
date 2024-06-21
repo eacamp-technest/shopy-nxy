@@ -32,4 +32,5 @@ export type NavigationParamList = {
   [StackRoutes.boards]: undefined;
   [StackRoutes.allStores]: undefined;
   [StackRoutes.inStores]: undefined;
+  [StackRoutes.profile]: undefined;
 };

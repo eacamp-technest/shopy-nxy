@@ -1,6 +1,7 @@
 import React from 'react';
 import {TabRouter} from './Tab.Router';
 import {Routes, StackRoutes} from './routes';
+import {ProfileScreen} from 'screens/Profile.Screen';
 import {NavigationParamList} from 'types/navigation.types';
 import {ReviewRatingScreen} from 'screens/ReviewRating.Screen';
 import {ListManScreen} from 'screens/item-lists/ListMan.Screen';
@@ -39,6 +40,7 @@ export const MainRouter = () => {
         name={StackRoutes.reviewRating}
         component={ReviewRatingScreen}
       />
+      <MainStack.Screen name={StackRoutes.profile} component={ProfileScreen} />
     </MainStack.Navigator>
   );
 };
