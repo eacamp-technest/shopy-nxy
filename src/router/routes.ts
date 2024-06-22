@@ -26,6 +26,9 @@ export enum StackRoutes {
   inStores = 'inStores',
   profile = 'profile',
   order = 'order',
+  processing = 'processing',
+  delivered = 'delivered',
+  cancelled = 'cancelled',
 }
 
 export enum TabRoutes {

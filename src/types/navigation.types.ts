@@ -34,4 +34,7 @@ export type NavigationParamList = {
   [StackRoutes.inStores]: undefined;
   [StackRoutes.profile]: undefined;
   [StackRoutes.order]: undefined;
+  [StackRoutes.processing]: undefined;
+  [StackRoutes.delivered]: undefined;
+  [StackRoutes.cancelled]: undefined;
 };
