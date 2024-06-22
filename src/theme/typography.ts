@@ -121,6 +121,12 @@ export const TypographyStyles = StyleSheet.create({
     lineHeight: lineHeight12,
     ...commonFontStyling,
   } as TextStyle,
+  LargeTightBold: {
+    fontFamily: montserratFonts[700],
+    fontSize: fontSize18,
+    lineHeight: lineHeight20,
+    ...commonFontStyling,
+  } as TextStyle,
   SmallNoneSemibold: {
     fontFamily: montserratFonts[600],
     fontSize: fontSize14,

@@ -73,6 +73,7 @@ export const colors = {
   },
   bdazzledBlue: {
     darkest: '#1E385A',
+    blueBase: '#2C5385',
   },
   mellowApricot: '#FCF0E2',
   white: '#ffff',

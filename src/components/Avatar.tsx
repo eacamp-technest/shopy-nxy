@@ -1,15 +1,28 @@
-import React from 'react';
-import {StyleSheet, Image} from 'react-native';
+import React, {Fragment} from 'react';
+import {StyleSheet, Image, Text, View} from 'react-native';
+import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
+import {TypographyStyles} from 'theme/typography';
 
-type TSize = 'tiny' | 'small' | 'medium' | 'large';
+type TSize = 'tiny' | 'small' | 'medium' | 'large' | 'extraLarge';
 
 interface IAvatar {
   size: TSize;
   image: any;
+  name?: string;
+  email?: string;
 }
 
-export const Avatar: React.FC<IAvatar> = ({size, image}) => (
-  <Image source={image} style={[styles.view, styles[size]]} />
+export const Avatar: React.FC<IAvatar> = ({size, image, name, email}) => (
+  <Fragment>
+    <Image source={image} style={[styles.view, styles[size]]} />
+    {name ? (
+      <View style={styles.user}>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.email}>{email}</Text>
+      </View>
+    ) : null}
+  </Fragment>
 );
 
 const styles = StyleSheet.create({
@@ -31,5 +44,22 @@ const styles = StyleSheet.create({
   large: {
     width: 64,
     height: 64,
+  },
+  extraLarge: {
+    width: 120,
+    height: 120,
+  },
+  user: {
+    textAlign: 'center',
+    alignItems: 'center',
+    gap: normalize('vertical', 8),
+  },
+  name: {
+    ...TypographyStyles.LargeTightBold,
+    color: colors.bdazzledBlue.blueBase,
+  },
+  email: {
+    ...TypographyStyles.RegularNoneRegular,
+    color: colors.bdazzledBlue.blueBase,
   },
 });
