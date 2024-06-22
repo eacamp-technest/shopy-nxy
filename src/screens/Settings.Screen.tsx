@@ -17,7 +17,7 @@ export const SettingsScreen: React.FC<
 > = ({navigation}) => {
   const {logout} = useUserStoreActions();
 
-  const screensArray = [StackRoutes.profile];
+  const screensArray = [StackRoutes.profile, StackRoutes.order];
 
   const handleNextScreen = (id: number) => {
     navigation.navigate(screensArray[id]);
