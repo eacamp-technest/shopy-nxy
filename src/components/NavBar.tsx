@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TextStyle,
   ViewStyle,
+  StyleProp,
 } from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
@@ -24,6 +25,7 @@ interface INavBar {
   rightColor?: string;
   textRight?: string;
   styleTitle?: string;
+  style?: StyleProp<ViewStyle>;
   leftOnPress?: () => void;
   rightOnPress?: () => void;
 }
@@ -39,10 +41,11 @@ export const NavBar: React.FC<INavBar> = ({
   leftColor,
   textRight,
   styleTitle,
+  style,
 }) => {
   return (
     <Fragment>
-      <View style={styles.root}>
+      <View style={[styles.root, style]}>
         {leftIcon ? (
           <Pressable
             hitSlop={standardHitSlopSize}

@@ -56,11 +56,10 @@ export const Order: React.FC<IOrder> = ({
 
 const styles = StyleSheet.create({
   root: {
-    paddingHorizontal: 24,
-    gap: 24,
+    gap: normalize('vertical', 24),
   },
   main: {
-    gap: 12,
+    gap: normalize('vertical', 12),
   },
   orderText: {
     ...TypographyStyles.RegularTightSemibold,

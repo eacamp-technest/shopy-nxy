@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
+import {windowWidth} from 'theme/const.styles';
 import {TypographyStyles} from 'theme/typography';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {ProcessingScreen} from './orderTabView/Processing.Screen';
 import {DeliveredScreen} from './orderTabView/Delivered.Screen';
 import {CancelledScreen} from './orderTabView/Cancelled.Screen';
-import {windowWidth} from 'theme/const.styles';
-import {normalize} from 'theme/metrics';
+import {ProcessingScreen} from './orderTabView/Processing.Screen';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 const renderScene = SceneMap({
   [StackRoutes.processing]: ProcessingScreen,
@@ -55,28 +55,31 @@ export const OrderScreen: React.FC<
       <View style={styles.header}>
         <NavBar
           title={'MY ORDERS'}
+          style={styles.navBar}
           leftColor={colors.white}
           styleTitle={colors.white}
           leftOnPress={navigation.goBack}
           leftIcon={ImageResources.chevronLeft}
         />
-        <TabView
-          swipeEnabled={true}
-          onIndexChange={setIndex}
-          renderScene={renderScene}
-          renderTabBar={renderTabBar}
-          navigationState={{index, routes}}
-          initialLayout={{width: windowWidth}}
-        />
       </View>
+      <TabView
+        swipeEnabled={true}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+        renderTabBar={renderTabBar}
+        navigationState={{index, routes}}
+        initialLayout={{width: windowWidth}}
+      />
     </SafeTopProvider>
   );
 };
 
 const styles = StyleSheet.create({
   header: {
-    flex: 1,
-    gap: normalize('vertical', 16),
+    paddingBottom: normalize('vertical', 24),
+  },
+  navBar: {
+    paddingHorizontal: normalize('horizontal', 24),
   },
   title: {
     ...TypographyStyles.RegularNoneRegular,
@@ -89,6 +92,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.skyBlue.base,
   },
   titleFocused: {
+    ...TypographyStyles.RegularNoneSemibold,
     color: colors.skyBlue.base,
   },
   titleNoFocused: {

@@ -79,11 +79,9 @@ export const HomeScreen: React.FC<
   );
 };
 
-const mainPadding = normalize('horizontal', 24);
-
 const styles = StyleSheet.create({
   header: {
-    paddingHorizontal: mainPadding,
+    paddingHorizontal: normalize('horizontal', 24),
     gap: normalize('vertical', 24),
     paddingBottom: normalize('vertical', 24),
   },

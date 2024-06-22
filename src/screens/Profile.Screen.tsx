@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {Avatar} from 'components/Avatar';
 import {StackRoutes} from 'router/routes';
@@ -9,13 +10,14 @@ import {ImageResources} from 'assets/VectorResources.g';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {normalize} from 'theme/metrics';
 
 export const ProfileScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.profile>
 > = ({navigation}) => {
   return (
-    <SafeTopProvider backColorSafeProvider={colors.mellow.base}>
+    <SafeTopProvider
+      statusBarColorAndroid={colors.mellow.base}
+      backColorSafeProvider={colors.mellow.base}>
       <View style={styles.root}>
         <NavBar
           title={'PROFILE'}
