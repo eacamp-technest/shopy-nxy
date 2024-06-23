@@ -1,3 +1,4 @@
+import React, {isValidElement} from 'react';
 import {
   Pressable,
   StyleProp,
@@ -8,9 +9,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import {colors} from 'theme/colors';
-import React, {isValidElement} from 'react';
-import {TypographyStyles} from 'theme/typography';
 import {normalize} from 'theme/metrics';
+import {TypographyStyles} from 'theme/typography';
 
 interface ITables {
   content?: string;
@@ -51,6 +51,7 @@ export const Tables: React.FC<ITables> = ({
 const styles = StyleSheet.create({
   root: {
     flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: normalize('vertical', 12),
     paddingHorizontal: normalize('horizontal', 24),
     gap: normalize('horizontal', 12),
