@@ -1,32 +1,34 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
-import {Input} from 'components/Input';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
+import {StackRoutes} from 'router/routes';
 import {windowWidth} from 'theme/const.styles';
 import {TypographyStyles} from 'theme/typography';
-import {StackRoutes, TabRoutes} from 'router/routes';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
-import {InStoresScreenTab} from './homeTabView/InStores.Screen';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import {ALLStoresScreenTab} from './homeTabView/ALLStores.Screen';
+import {DeliveredScreen} from './orderTabView/Delivered.Screen';
+import {CancelledScreen} from './orderTabView/Cancelled.Screen';
+import {ProcessingScreen} from './orderTabView/Processing.Screen';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 const renderScene = SceneMap({
-  [StackRoutes.allStores]: ALLStoresScreenTab,
-  [StackRoutes.inStores]: InStoresScreenTab,
+  [StackRoutes.processing]: ProcessingScreen,
+  [StackRoutes.delivered]: DeliveredScreen,
+  [StackRoutes.cancelled]: CancelledScreen,
 });
 const routes = [
-  {key: StackRoutes.allStores, title: 'All Stores'},
-  {key: StackRoutes.inStores, title: 'In-Store'},
+  {key: StackRoutes.processing, title: 'Processing'},
+  {key: StackRoutes.delivered, title: 'Delivered'},
+  {key: StackRoutes.cancelled, title: 'Cancelled'},
 ];
 
-export const HomeScreen: React.FC<
-  NativeStackScreenProps<NavigationParamList, TabRoutes.home>
-> = ({}) => {
+export const OrderScreen: React.FC<
+  NativeStackScreenProps<NavigationParamList, StackRoutes.order>
+> = ({navigation}) => {
   const [index, setIndex] = useState<number>(0);
 
   const renderTabBar = (props: any) => (
@@ -45,7 +47,6 @@ export const HomeScreen: React.FC<
       )}
     />
   );
-
   return (
     <SafeTopProvider
       content={'light-content'}
@@ -53,18 +54,12 @@ export const HomeScreen: React.FC<
       statusBarColorAndroid={colors.bdazzledBlue.darkest}>
       <View style={styles.header}>
         <NavBar
-          title={'SHOPPAY'}
+          title={'MY ORDERS'}
+          style={styles.navBar}
           leftColor={colors.white}
-          rightColor={colors.white}
           styleTitle={colors.white}
-          leftIcon={ImageResources.menu}
-          rightIcon={ImageResources.shoppingBag}
-        />
-        <Input
-          type={'text'}
-          icon={ImageResources.search}
-          style={styles.input}
-          placeholder={'Search brand, products...'}
+          leftOnPress={navigation.goBack}
+          leftIcon={ImageResources.chevronLeft}
         />
       </View>
       <TabView
@@ -81,12 +76,14 @@ export const HomeScreen: React.FC<
 
 const styles = StyleSheet.create({
   header: {
-    paddingHorizontal: normalize('horizontal', 24),
-    gap: normalize('vertical', 24),
     paddingBottom: normalize('vertical', 24),
   },
-  input: {
-    backgroundColor: colors.white,
+  navBar: {
+    paddingHorizontal: normalize('horizontal', 24),
+  },
+  title: {
+    ...TypographyStyles.RegularNoneRegular,
+    color: colors.white,
   },
   tabBar: {
     backgroundColor: colors.bdazzledBlue.darkest,
@@ -94,12 +91,8 @@ const styles = StyleSheet.create({
   indicatorStyle: {
     backgroundColor: colors.skyBlue.base,
   },
-  title: {
-    paddingHorizontal: normalize('horizontal', 20),
-    ...TypographyStyles.RegularNoneSemibold,
-    color: colors.white,
-  },
   titleFocused: {
+    ...TypographyStyles.RegularNoneSemibold,
     color: colors.skyBlue.base,
   },
   titleNoFocused: {
