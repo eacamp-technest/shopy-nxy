@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     height: 184,
     borderWidth: 0,
     borderRadius: 16,
-
     justifyContent: 'flex-end',
     backgroundColor: colors.red.base,
   },
