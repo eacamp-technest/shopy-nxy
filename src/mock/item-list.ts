@@ -89,3 +89,48 @@ export const man: IMainTab[] = [
     leftIcon: require('../assets/vectors/chevronRight.svg'),
   },
 ];
+
+// KIDS
+
+export const kids: IMainTab[] = [
+  {
+    id: 0,
+    title: 'Dresses',
+    leftIcon: require('../assets/vectors/chevronRight.svg'),
+  },
+  {
+    id: 1,
+    title: 'Shirts & Blouses',
+    leftIcon: require('../assets/vectors/chevronRight.svg'),
+  },
+  {
+    id: 2,
+    title: 'Tops',
+    leftIcon: require('../assets/vectors/chevronRight.svg'),
+  },
+  {
+    id: 3,
+    title: 'Skirts',
+    leftIcon: require('../assets/vectors/chevronRight.svg'),
+  },
+  {
+    id: 4,
+    title: 'Basics',
+    leftIcon: require('../assets/vectors/chevronRight.svg'),
+  },
+  {
+    id: 5,
+    title: 'Shoes',
+    leftIcon: require('../assets/vectors/chevronRight.svg'),
+  },
+  {
+    id: 6,
+    title: 'Accessories',
+    leftIcon: require('../assets/vectors/chevronRight.svg'),
+  },
+  {
+    id: 7,
+    title: 'Premium Quality',
+    leftIcon: require('../assets/vectors/chevronRight.svg'),
+  },
+];
