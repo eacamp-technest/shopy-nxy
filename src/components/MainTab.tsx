@@ -12,7 +12,8 @@ import {normalize} from 'theme/metrics';
 import {Resources, SvgImage} from './SvgImage';
 import {TypographyStyles} from 'theme/typography';
 
-interface IMainTab {
+export interface IMainTab {
+  id?: number;
   title?: string;
   caption?: string;
   leftIcon?: Resources;

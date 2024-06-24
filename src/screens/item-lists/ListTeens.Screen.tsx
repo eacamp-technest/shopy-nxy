@@ -1,9 +1,12 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {colors} from 'theme/colors';
+import {teens} from 'mock/item-list';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
+import {FlashList} from '@shopify/flash-list';
+import {IMainTab, MainTab} from 'components/MainTab';
 import {CardCategory} from 'components/CardCategory';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
@@ -13,6 +16,15 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 export const ListTeensScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.listTeens>
 > = ({navigation}) => {
+  const renderTabList = ({
+    index,
+    item: {title, leftIcon},
+  }: {
+    index: number;
+    item: IMainTab;
+  }) => {
+    return <MainTab key={index} title={title} rightIcon={leftIcon} />;
+  };
   return (
     <SafeTopProvider
       content={'light-content'}
@@ -31,7 +43,16 @@ export const ListTeensScreen: React.FC<
         size={'large'}
         image={require('../../assets/images/teensLarge.png')}
       />
-      <View style={styles.main} />
+      <ScrollView
+        style={styles.main}
+        contentContainerStyle={styles.contentContainerStyle}>
+        <FlashList
+          data={teens}
+          scrollEnabled={false}
+          estimatedItemSize={200}
+          renderItem={renderTabList}
+        />
+      </ScrollView>
     </SafeTopProvider>
   );
 };
@@ -39,9 +60,14 @@ export const ListTeensScreen: React.FC<
 const styles = StyleSheet.create({
   main: {
     flex: 1,
+    paddingTop: normalize('vertical', 16),
+    paddingHorizontal: normalize('horizontal', 24),
     backgroundColor: colors.white,
   },
   navBar: {
     paddingHorizontal: normalize('horizontal', 24),
+  },
+  contentContainerStyle: {
+    paddingBottom: normalize('vertical', 50),
   },
 });
