@@ -18,10 +18,11 @@ export type NavigationParamList = {
   [Routes.verification]: ILoginForm;
   [Routes.tabRouter]: undefined;
   [TabRoutes.home]: undefined;
-  [TabRoutes.search]: undefined;
+  [StackRoutes.search]: undefined;
   [TabRoutes.favorite]: undefined;
   [TabRoutes.notification]: undefined;
   [TabRoutes.settings]: undefined;
+  [TabRoutes.discover]: undefined;
   [StackRoutes.listWoman]: undefined;
   [StackRoutes.listMan]: undefined;
   [StackRoutes.listKids]: undefined;

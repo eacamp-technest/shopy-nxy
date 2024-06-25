@@ -43,7 +43,7 @@ export const tabBottomScreenOption: BottomTabNavigationOptions = {
 
 const tabIconConfig: {[key: string]: NodeRequire} = {
   [TabRoutes.home]: require('../assets/vectors/home.svg'),
-  [TabRoutes.search]: require('../assets/vectors/search.svg'),
+  [TabRoutes.discover]: require('../assets/vectors/search.svg'),
   [TabRoutes.favorite]: require('../assets/vectors/heartWhite.svg'),
   [TabRoutes.notification]: require('../assets/vectors/bell.svg'),
   [TabRoutes.settings]: require('../assets/vectors/settings.svg'),
@@ -71,8 +71,8 @@ export const tabBarOption = {
   [TabRoutes.home]: {
     tabBarIcon: renderTabIcon(TabRoutes.home),
   },
-  [TabRoutes.search]: {
-    tabBarIcon: renderTabIcon(TabRoutes.search),
+  [TabRoutes.discover]: {
+    tabBarIcon: renderTabIcon(TabRoutes.discover),
   },
   [TabRoutes.favorite]: {
     tabBarIcon: renderTabIcon(TabRoutes.favorite),

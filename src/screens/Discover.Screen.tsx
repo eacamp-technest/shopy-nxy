@@ -9,8 +9,8 @@ import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-export const SearchScreen: React.FC<
-  NativeStackScreenProps<NavigationParamList, TabRoutes.search>
+export const DiscoverScreen: React.FC<
+  NativeStackScreenProps<NavigationParamList, TabRoutes.discover>
 > = ({navigation}) => {
   const screensArray = [
     StackRoutes.listWoman,
