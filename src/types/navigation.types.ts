@@ -1,8 +1,15 @@
 import {Routes, StackRoutes, TabRoutes} from 'router/routes';
 import {ILoginForm} from 'screens/auth/Login.Screen';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-
+import {
+  NativeStackNavigationOptions,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 export type AppNavigation = NativeStackNavigationProp<NavigationParamList>;
+
+interface ISearchInterface extends NativeStackNavigationOptions {
+  items?: string[];
+  onItemPress?: (item: string) => void;
+}
 
 export type NavigationParamList = {
   [Routes.authRouter]: undefined;
@@ -18,7 +25,7 @@ export type NavigationParamList = {
   [Routes.verification]: ILoginForm;
   [Routes.tabRouter]: undefined;
   [TabRoutes.home]: undefined;
-  [StackRoutes.search]: undefined;
+  [StackRoutes.search]: ISearchInterface;
   [TabRoutes.favorite]: undefined;
   [TabRoutes.notification]: undefined;
   [TabRoutes.settings]: undefined;
@@ -39,3 +46,5 @@ export type NavigationParamList = {
   [StackRoutes.delivered]: undefined;
   [StackRoutes.cancelled]: undefined;
 };
+
+export type BottomTabNavigationOptions = {};

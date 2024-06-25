@@ -15,7 +15,7 @@ export const defaultScreenOptions: NativeStackNavigationOptions = {
   },
 };
 
-//  AuthOption
+// ! AUTH Options
 
 export const authStackScreenOption: NativeStackNavigationOptions = {
   ...defaultScreenOptions,
@@ -25,7 +25,31 @@ export const authStackScreenOption: NativeStackNavigationOptions = {
   },
 };
 
-// TabBottomOption
+// ! MainStack Options
+
+interface ISearchScreenOption extends NativeStackNavigationOptions {
+  items?: string[] | null;
+}
+
+export const searchScreenOptions: ISearchScreenOption = {
+  ...defaultScreenOptions,
+  headerTitle: 'Search products',
+  headerLargeTitle: true,
+  presentation: 'formSheet',
+  headerShown: true,
+  headerSearchBarOptions: {
+    autoFocus: true,
+    inputType: 'text',
+    textColor: 'gray',
+    hideWhenScrolling: false,
+    onChangeText(e) {
+      const text = e.nativeEvent.text;
+      console.log(text);
+    },
+  },
+};
+
+// ! Tab Options
 
 export const tabBottomScreenOption: BottomTabNavigationOptions = {
   headerShown: false,

@@ -2,8 +2,10 @@ import React from 'react';
 import {TabRouter} from './Tab.Router';
 import {Routes, StackRoutes} from './routes';
 import {OrderScreen} from 'screens/Order.Screen';
+import {SearchScreen} from 'screens/Search.Screen';
 import {ProfileScreen} from 'screens/Profile.Screen';
 import {NavigationParamList} from 'types/navigation.types';
+import {searchScreenOptions} from 'configs/navigation.configs';
 import {ReviewRatingScreen} from 'screens/ReviewRating.Screen';
 import {ListManScreen} from 'screens/item-lists/ListMan.Screen';
 import {ProductDetailScreen} from 'screens/ProductDetail.Screen';
@@ -43,6 +45,11 @@ export const MainRouter = () => {
       />
       <MainStack.Screen name={StackRoutes.profile} component={ProfileScreen} />
       <MainStack.Screen name={StackRoutes.order} component={OrderScreen} />
+      <MainStack.Screen
+        name={StackRoutes.search}
+        component={SearchScreen}
+        options={searchScreenOptions}
+      />
     </MainStack.Navigator>
   );
 };
