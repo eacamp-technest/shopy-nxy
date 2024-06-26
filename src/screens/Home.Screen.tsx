@@ -29,6 +29,8 @@ export const HomeScreen: React.FC<
 > = ({navigation}) => {
   const [index, setIndex] = useState<number>(0);
 
+  const Array = ['Nike,Adidas,AirMax,Puma,Abibas'];
+
   const renderTabBar = (props: any) => (
     <TabBar
       {...props}
@@ -68,8 +70,8 @@ export const HomeScreen: React.FC<
           onInputPress={() =>
             navigation.navigate(StackRoutes.search, {
               headerTitle: 'Search products',
-              items: ['items1,items2,items3,item4,item5'],
-              onItemPress: item => console.log('item pressed ', item),
+              items: Array,
+              // onItemPress: item => console.log('item pressed ', item),
             })
           }
         />

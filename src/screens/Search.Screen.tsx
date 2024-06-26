@@ -1,12 +1,12 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   Text,
   TouchableOpacity,
   NativeSyntheticEvent,
   TextInputFocusEventData,
+  FlatList,
 } from 'react-native';
 import {StackRoutes} from 'router/routes';
-import {FlashList} from '@shopify/flash-list';
 import {NavigationParamList} from 'types/navigation.types';
 import {searchScreenOptions} from 'configs/navigation.configs';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -16,11 +16,18 @@ export const SearchScreen: React.FC<
 > = ({navigation, route}) => {
   const {onItemPress, items, ...rest} = route.params;
 
+  const [data, setData] = useState<string[]>(items ?? []);
+
   const onChangeText = useCallback(
     (event: NativeSyntheticEvent<TextInputFocusEventData>) => {
-      console.log(event.nativeEvent.text);
+      const text = event.nativeEvent.text;
+      const filtered = items?.filter(item => {
+        return item.toLowerCase().includes(text.toLocaleLowerCase());
+      });
+
+      setData(filtered ?? []);
     },
-    [],
+    [items],
   );
 
   const renderItem = useCallback(
@@ -50,9 +57,8 @@ export const SearchScreen: React.FC<
   }, [navigation, rest, onChangeText]);
 
   return (
-    <FlashList
-      data={items || []}
-      estimatedItemSize={200}
+    <FlatList
+      data={data}
       renderItem={renderItem}
       contentInsetAdjustmentBehavior={'automatic'}
     />
