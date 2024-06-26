@@ -1,65 +1,66 @@
-import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
-import {colors} from 'theme/colors';
-import {StackRoutes, TabRoutes} from 'router/routes';
-import {normalize} from 'theme/metrics';
-import {searchCategory} from 'mock/search';
-import {CardCategory} from 'components/CardCategory';
-import {SafeTopProvider} from 'containers/SafeTopProvider';
+import React, {useCallback, useEffect, useState} from 'react';
+import {
+  Text,
+  TouchableOpacity,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+  FlatList,
+} from 'react-native';
+import {StackRoutes} from 'router/routes';
 import {NavigationParamList} from 'types/navigation.types';
+import {searchScreenOptions} from 'configs/navigation.configs';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export const SearchScreen: React.FC<
-  NativeStackScreenProps<NavigationParamList, TabRoutes.search>
-> = ({navigation}) => {
-  const screensArray = [
-    StackRoutes.listWoman,
-    StackRoutes.listMan,
-    StackRoutes.listKids,
-    StackRoutes.listTeens,
-  ];
+  NativeStackScreenProps<NavigationParamList, StackRoutes.search>
+> = ({navigation, route}) => {
+  const {onItemPress, items, ...rest} = route.params;
 
-  const navigateToScreen = (id: number) => {
-    const screenName = screensArray[id];
-    if (screenName) {
-      navigation.navigate(screenName);
-    }
-  };
+  const [data, setData] = useState<string[]>(items ?? []);
+
+  const onChangeText = useCallback(
+    (event: NativeSyntheticEvent<TextInputFocusEventData>) => {
+      const text = event.nativeEvent.text;
+      const filtered = items?.filter(item => {
+        return item.toLowerCase().includes(text.toLocaleLowerCase());
+      });
+
+      setData(filtered ?? []);
+    },
+    [items],
+  );
+
+  const renderItem = useCallback(
+    ({item}: {item: any}) => {
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            onItemPress?.(item);
+            navigation.pop();
+          }}>
+          <Text>{item}</Text>
+        </TouchableOpacity>
+      );
+    },
+    [onItemPress, navigation],
+  );
+
+  useEffect(() => {
+    navigation.setOptions({
+      ...rest,
+      ...searchScreenOptions,
+      headerSearchBarOptions: {
+        ...searchScreenOptions.headerSearchBarOptions,
+        onChangeText,
+      },
+    });
+  }, [navigation, rest, onChangeText]);
 
   return (
-    <SafeTopProvider backColorSafeProvider={colors.white}>
-      <ScrollView
-        style={styles.root}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.main}>
-          {searchCategory.map(item => (
-            <CardCategory
-              key={item.id}
-              id={item.id}
-              size={'medium'}
-              title={item.title}
-              image={item.image}
-              background={item.backgroundColor}
-              onPress={() => navigateToScreen(item.id)}
-            />
-          ))}
-        </View>
-      </ScrollView>
-    </SafeTopProvider>
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      contentInsetAdjustmentBehavior={'automatic'}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    gap: normalize('vertical', 24),
-    paddingHorizontal: normalize('horizontal', 24),
-  },
-  contentContainer: {
-    paddingTop: 24,
-    paddingBottom: 24,
-  },
-  main: {
-    gap: normalize('vertical', 24),
-  },
-});

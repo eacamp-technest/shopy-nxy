@@ -4,16 +4,16 @@ import {colors} from 'theme/colors';
 import {settings} from 'mock/settings';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
-import {StackRoutes} from 'router/routes';
 import {MainTab} from 'components/MainTab';
 import {Divider} from 'components/Divider';
 import {useUserStoreActions} from 'store/user';
+import {StackRoutes, TabRoutes} from 'router/routes';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export const SettingsScreen: React.FC<
-  NativeStackScreenProps<NavigationParamList, StackRoutes.profile>
+  NativeStackScreenProps<NavigationParamList, TabRoutes.settings>
 > = ({navigation}) => {
   const {logout} = useUserStoreActions();
 

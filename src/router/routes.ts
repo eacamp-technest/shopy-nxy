@@ -29,11 +29,12 @@ export enum StackRoutes {
   processing = 'processing',
   delivered = 'delivered',
   cancelled = 'cancelled',
+  search = 'search',
 }
 
 export enum TabRoutes {
   home = 'home',
-  search = 'search',
+  discover = 'discover',
   favorite = 'favorite',
   notification = 'notification',
   settings = 'settings',

@@ -26,8 +26,10 @@ const routes = [
 
 export const HomeScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, TabRoutes.home>
-> = ({}) => {
+> = ({navigation}) => {
   const [index, setIndex] = useState<number>(0);
+
+  const Array = ['Nike,Adidas,AirMax,Puma,Abibas'];
 
   const renderTabBar = (props: any) => (
     <TabBar
@@ -65,6 +67,13 @@ export const HomeScreen: React.FC<
           icon={ImageResources.search}
           style={styles.input}
           placeholder={'Search brand, products...'}
+          onInputPress={() =>
+            navigation.navigate(StackRoutes.search, {
+              headerTitle: 'Search products',
+              items: Array,
+              // onItemPress: item => console.log('item pressed ', item),
+            })
+          }
         />
       </View>
       <TabView

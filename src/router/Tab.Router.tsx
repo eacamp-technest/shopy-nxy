@@ -1,7 +1,7 @@
 import React from 'react';
 import {TabRoutes, Routes} from './routes';
 import {HomeScreen} from 'screens/Home.Screen';
-import {SearchScreen} from 'screens/Search.Screen';
+import {DiscoverScreen} from 'screens/Discover.Screen';
 import {FavoriteScreen} from 'screens/Favorite.Screen';
 import {SettingsScreen} from 'screens/Settings.Screen';
 import {tabBarOption} from 'configs/navigation.configs';
@@ -24,9 +24,9 @@ export const TabRouter: React.FC<
         options={tabBarOption[TabRoutes.home]}
       />
       <Tab.Screen
-        name={TabRoutes.search}
-        component={SearchScreen}
-        options={tabBarOption[TabRoutes.search]}
+        name={TabRoutes.discover}
+        component={DiscoverScreen}
+        options={tabBarOption[TabRoutes.discover]}
       />
       <Tab.Screen
         name={TabRoutes.favorite}

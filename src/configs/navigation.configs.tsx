@@ -15,7 +15,7 @@ export const defaultScreenOptions: NativeStackNavigationOptions = {
   },
 };
 
-//  AuthOption
+// ! AUTH Options
 
 export const authStackScreenOption: NativeStackNavigationOptions = {
   ...defaultScreenOptions,
@@ -25,7 +25,31 @@ export const authStackScreenOption: NativeStackNavigationOptions = {
   },
 };
 
-// TabBottomOption
+// ! MainStack Options
+
+interface ISearchScreenOption extends NativeStackNavigationOptions {
+  items?: string[] | null;
+}
+
+export const searchScreenOptions: ISearchScreenOption = {
+  ...defaultScreenOptions,
+  headerTitle: 'Search products',
+  headerLargeTitle: true,
+  presentation: 'formSheet',
+  headerShown: true,
+  headerSearchBarOptions: {
+    autoFocus: true,
+    inputType: 'text',
+    textColor: 'gray',
+    hideWhenScrolling: false,
+    onChangeText(e) {
+      const text = e.nativeEvent.text;
+      console.log(text);
+    },
+  },
+};
+
+// ! Tab Options
 
 export const tabBottomScreenOption: BottomTabNavigationOptions = {
   headerShown: false,
@@ -43,7 +67,7 @@ export const tabBottomScreenOption: BottomTabNavigationOptions = {
 
 const tabIconConfig: {[key: string]: NodeRequire} = {
   [TabRoutes.home]: require('../assets/vectors/home.svg'),
-  [TabRoutes.search]: require('../assets/vectors/search.svg'),
+  [TabRoutes.discover]: require('../assets/vectors/search.svg'),
   [TabRoutes.favorite]: require('../assets/vectors/heartWhite.svg'),
   [TabRoutes.notification]: require('../assets/vectors/bell.svg'),
   [TabRoutes.settings]: require('../assets/vectors/settings.svg'),
@@ -71,8 +95,8 @@ export const tabBarOption = {
   [TabRoutes.home]: {
     tabBarIcon: renderTabIcon(TabRoutes.home),
   },
-  [TabRoutes.search]: {
-    tabBarIcon: renderTabIcon(TabRoutes.search),
+  [TabRoutes.discover]: {
+    tabBarIcon: renderTabIcon(TabRoutes.discover),
   },
   [TabRoutes.favorite]: {
     tabBarIcon: renderTabIcon(TabRoutes.favorite),
