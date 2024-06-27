@@ -1135,6 +1135,8 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
+  - RNPermissions (4.1.5):
+    - React-Core
   - RNReanimated (3.12.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1148,6 +1150,12 @@ PODS:
   - RNSVG (15.3.0):
     - React-Core
   - SocketRocket (0.6.1)
+  - VisionCamera (4.3.2):
+    - VisionCamera/Core (= 4.3.2)
+    - VisionCamera/React (= 4.3.2)
+  - VisionCamera/Core (4.3.2)
+  - VisionCamera/React (4.3.2):
+    - React-Core
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -1230,9 +1238,11 @@ DEPENDENCIES:
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
   - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - VisionCamera (from `../node_modules/react-native-vision-camera`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1363,12 +1373,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@shopify/flash-list"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  VisionCamera:
+    :path: "../node_modules/react-native-vision-camera"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -1441,12 +1455,14 @@ SPEC CHECKSUMS:
   RNBootSplash: e025d4ee98d942ee6c8b495a6fe66339a6b5f6dd
   RNFlashList: b521ebdd7f9352673817f1d98e8bdc0c8cf8545b
   RNGestureHandler: 7386b219dadbb34d03c866509d1aa865ef3e3a78
+  RNPermissions: 4da8c626e4ac9d71c1a199d500d52dd54da62e38
   RNReanimated: 5307ba390921b76ddf9c0aa69876916ad427a61f
   RNScreens: e842cdccb23c0a084bd6307f6fa83fd1c1738029
   RNSVG: a48668fd382115bc89761ce291a81c4ca5f2fd2e
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
+  VisionCamera: 2c4cb89c573c5d54d1191e433bd224998d3b14b7
   Yoga: e5b887426cee15d2a326bdd34afc0282fc0486ad
 
-PODFILE CHECKSUM: 02aff955c0c212fa26a24f64eebe8d589b2d9386
+PODFILE CHECKSUM: 4e0fe32e1787364c16fd64c98d6141edca188276
 
 COCOAPODS: 1.14.2
