@@ -14,11 +14,12 @@ import {InStoresScreenTab} from './homeTabView/InStores.Screen';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {ALLStoresScreenTab} from './homeTabView/ALLStores.Screen';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {TabViewExample} from 'components/TabBarViewCustom';
 
-const renderScene = SceneMap({
+const renderScene = {
   [StackRoutes.allStores]: ALLStoresScreenTab,
   [StackRoutes.inStores]: InStoresScreenTab,
-});
+};
 const routes = [
   {key: StackRoutes.allStores, title: 'All Stores'},
   {key: StackRoutes.inStores, title: 'In-Store'},
@@ -27,26 +28,26 @@ const routes = [
 export const HomeScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, TabRoutes.home>
 > = ({navigation}) => {
-  const [index, setIndex] = useState<number>(0);
+  // const [index, setIndex] = useState<number>(0);
 
   const Array = ['Nike,Adidas,AirMax,Puma,Abibas'];
 
-  const renderTabBar = (props: any) => (
-    <TabBar
-      {...props}
-      indicatorStyle={styles.indicatorStyle}
-      style={styles.tabBar}
-      renderLabel={({route, focused}) => (
-        <Text
-          style={[
-            styles.title,
-            focused ? styles.titleFocused : styles.titleNoFocused,
-          ]}>
-          {route.title}
-        </Text>
-      )}
-    />
-  );
+  // const renderTabBar = (props: any) => (
+  //   <TabBar
+  //     {...props}
+  //     indicatorStyle={styles.indicatorStyle}
+  //     style={styles.tabBar}
+  //     renderLabel={({route, focused}) => (
+  //       <Text
+  //         style={[
+  //           styles.title,
+  //           focused ? styles.titleFocused : styles.titleNoFocused,
+  //         ]}>
+  //         {route.title}
+  //       </Text>
+  //     )}
+  //   />
+  // );
 
   return (
     <SafeTopProvider
@@ -76,13 +77,20 @@ export const HomeScreen: React.FC<
           }
         />
       </View>
-      <TabView
+      {/* <TabView
         swipeEnabled={true}
         onIndexChange={setIndex}
         renderScene={renderScene}
         renderTabBar={renderTabBar}
         navigationState={{index, routes}}
         initialLayout={{width: windowWidth}}
+      /> */}
+      <TabViewExample
+        focusTitle={colors.bdazzledBlue.blueBase}
+        screens={routes}
+        style={styles.tabStyles}
+        titleStyle={styles.tabTitle}
+        renderSceneProps={renderScene}
       />
     </SafeTopProvider>
   );
@@ -114,5 +122,15 @@ const styles = StyleSheet.create({
   titleNoFocused: {
     ...TypographyStyles.RegularNoneRegular,
     color: colors.white,
+  },
+
+  tabStyles: {
+    // backgroundColor: 'green',
+  },
+
+  tabTitle: {
+    paddingHorizontal: normalize('horizontal', 20),
+    ...TypographyStyles.RegularNoneSemibold,
+    color: colors.skyBlue.base,
   },
 });

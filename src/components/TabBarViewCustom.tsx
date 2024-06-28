@@ -1,36 +1,55 @@
-import * as React from 'react';
-import {Animated, View, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {Fragment, useState} from 'react';
+import {
+  View,
+  Animated,
+  StyleSheet,
+  ViewStyle,
+  StyleProp,
+  TouchableOpacity,
+} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {TypographyStyles} from 'theme/typography';
 import {TabView, SceneMap} from 'react-native-tab-view';
-import {ALLStoresScreenTab} from 'screens/homeTabView/ALLStores.Screen';
-import {InStoresScreenTab} from 'screens/homeTabView/InStores.Screen';
 
-export default class TabViewExample extends React.Component {
-  state = {
-    index: 0,
-    routes: [
-      {key: 'first', title: 'All Stores'},
-      {key: 'second', title: 'In-Store'},
-    ],
-  };
+type Route = {
+  key: string;
+  title: string;
+};
+interface ITabView {
+  screens: Route[];
+  style?: StyleProp<ViewStyle>;
+  titleStyle?: StyleProp<ViewStyle>;
+  focusTitle?: StyleProp<ViewStyle>;
+  disabledFocusTitle?: StyleProp<ViewStyle>;
+  renderSceneProps: {[key: string]: React.ComponentType<any>};
+}
 
-  _handleIndexChange = (index: any) => this.setState({index});
+export const TabViewExample: React.FC<ITabView> = ({
+  style,
+  screens,
+  titleStyle,
+  renderSceneProps,
+}) => {
+  const [index, setIndex] = useState(0);
+  const [routes] = useState(screens);
 
-  _renderTabBar = (props: {
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  const handleIndexChange = (index: number) => setIndex(index);
+
+  const renderTabBar = (props: {
     navigationState: {routes: any[]};
     position: {interpolate: (arg0: {inputRange: any; outputRange: any}) => any};
   }) => {
     const inputRange = props.navigationState.routes.map((_, i) => i);
 
     return (
-      <View style={styles.tabBar}>
+      <View style={[styles.tabBar, style]}>
         {props.navigationState.routes.map((route, i) => {
-          const opacity = props.position.interpolate({
+          const color = props.position.interpolate({
             inputRange,
             outputRange: inputRange.map(inputIndex =>
-              inputIndex === i ? 1 : 0.5,
+              inputIndex === i ? colors.white : colors.skyBlue.base,
             ),
           });
 
@@ -38,8 +57,8 @@ export default class TabViewExample extends React.Component {
             <TouchableOpacity
               key={route.key}
               style={styles.tabItem}
-              onPress={() => this.setState({index: i})}>
-              <Animated.Text style={[{opacity}, styles.title]}>
+              onPress={() => setIndex(i)}>
+              <Animated.Text style={[titleStyle, {color}]}>
                 {route.title}
               </Animated.Text>
             </TouchableOpacity>
@@ -49,22 +68,17 @@ export default class TabViewExample extends React.Component {
     );
   };
 
-  _renderScene = SceneMap({
-    first: ALLStoresScreenTab,
-    second: InStoresScreenTab,
-  });
+  const renderScene = SceneMap(renderSceneProps);
 
-  render() {
-    return (
-      <TabView
-        navigationState={this.state}
-        renderScene={this._renderScene}
-        renderTabBar={this._renderTabBar}
-        onIndexChange={this._handleIndexChange}
-      />
-    );
-  }
-}
+  return (
+    <TabView
+      navigationState={{index, routes}}
+      renderScene={renderScene}
+      renderTabBar={renderTabBar}
+      onIndexChange={handleIndexChange}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -79,9 +93,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
   },
-  title: {
-    paddingHorizontal: normalize('horizontal', 20),
-    ...TypographyStyles.RegularNoneSemibold,
-    color: colors.white,
+
+  opacity: {
+    color: 'red', // Вы можете установить и другие свойства здесь, если нужно
   },
 });
