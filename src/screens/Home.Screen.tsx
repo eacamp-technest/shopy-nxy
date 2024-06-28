@@ -85,6 +85,7 @@ export const HomeScreen: React.FC<
         navigationState={{index, routes}}
         initialLayout={{width: windowWidth}}
       /> */}
+
       <TabViewExample
         focusTitle={colors.bdazzledBlue.blueBase}
         screens={routes}
