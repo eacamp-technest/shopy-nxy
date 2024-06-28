@@ -1,20 +1,18 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {Input} from 'components/Input';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
-import {windowWidth} from 'theme/const.styles';
 import {TypographyStyles} from 'theme/typography';
 import {StackRoutes, TabRoutes} from 'router/routes';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
+import {TabViewExample} from 'components/TabBarViewCustom';
 import {InStoresScreenTab} from './homeTabView/InStores.Screen';
-import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {ALLStoresScreenTab} from './homeTabView/ALLStores.Screen';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {TabViewExample} from 'components/TabBarViewCustom';
 
 const renderScene = {
   [StackRoutes.allStores]: ALLStoresScreenTab,
@@ -28,26 +26,7 @@ const routes = [
 export const HomeScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, TabRoutes.home>
 > = ({navigation}) => {
-  // const [index, setIndex] = useState<number>(0);
-
   const Array = ['Nike,Adidas,AirMax,Puma,Abibas'];
-
-  // const renderTabBar = (props: any) => (
-  //   <TabBar
-  //     {...props}
-  //     indicatorStyle={styles.indicatorStyle}
-  //     style={styles.tabBar}
-  //     renderLabel={({route, focused}) => (
-  //       <Text
-  //         style={[
-  //           styles.title,
-  //           focused ? styles.titleFocused : styles.titleNoFocused,
-  //         ]}>
-  //         {route.title}
-  //       </Text>
-  //     )}
-  //   />
-  // );
 
   return (
     <SafeTopProvider
@@ -72,25 +51,16 @@ export const HomeScreen: React.FC<
             navigation.navigate(StackRoutes.search, {
               headerTitle: 'Search products',
               items: Array,
-              // onItemPress: item => console.log('item pressed ', item),
             })
           }
         />
       </View>
-      {/* <TabView
-        swipeEnabled={true}
-        onIndexChange={setIndex}
-        renderScene={renderScene}
-        renderTabBar={renderTabBar}
-        navigationState={{index, routes}}
-        initialLayout={{width: windowWidth}}
-      /> */}
-
       <TabViewExample
-        focusTitle={colors.bdazzledBlue.blueBase}
         screens={routes}
         style={styles.tabStyles}
+        focusTitle={styles.title}
         titleStyle={styles.tabTitle}
+        disabledFocusTitle={styles.title}
         renderSceneProps={renderScene}
       />
     </SafeTopProvider>
@@ -119,10 +89,6 @@ const styles = StyleSheet.create({
   },
   titleFocused: {
     color: colors.skyBlue.base,
-  },
-  titleNoFocused: {
-    ...TypographyStyles.RegularNoneRegular,
-    color: colors.white,
   },
 
   tabStyles: {
