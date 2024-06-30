@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  Alert,
+  Linking,
+} from 'react-native';
 import {StackRoutes} from 'router/routes';
 import {NavigationParamList} from 'types/navigation.types';
 import {
@@ -8,15 +15,15 @@ import {
   useCameraDevice,
 } from 'react-native-vision-camera';
 import {colors} from 'theme/colors';
-import {SvgImage} from 'components/SvgImage';
 import {TypographyStyles} from 'theme/typography';
-import {ImageResources} from 'assets/VectorResources.g';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export const ScannerScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.scanner>
 > = () => {
+  const [isScanning, setIsScanning] = useState(true);
   const [hasPermission, setHasPermission] = useState(false);
+
   const device = useCameraDevice('back');
 
   useEffect(() => {
@@ -29,7 +36,20 @@ export const ScannerScreen: React.FC<
   const codeScanner = useCodeScanner({
     codeTypes: ['qr', 'ean-13'],
     onCodeScanned: codes => {
-      console.log(`Scanned ${codes.length} codes!`);
+      if (isScanning && codes.length > 0) {
+        Alert.alert('Scanned Codes', codes.map(code => code.value).join(', '), [
+          {
+            text: 'Open Link',
+            onPress: () => Linking.openURL(codes[0].value),
+          },
+          {
+            text: 'Cancel',
+            style: 'cancel',
+            onPress: () => setIsScanning(true),
+          },
+        ]);
+        setIsScanning(false);
+      }
     },
   });
 
@@ -60,13 +80,6 @@ export const ScannerScreen: React.FC<
       />
       <View style={styles.overlay}>
         <View style={styles.mask} />
-        <View style={styles.iconContainer}>
-          <SvgImage
-            onPress={() => console.log('Press camera')}
-            color={colors.white}
-            source={ImageResources.camera}
-          />
-        </View>
         <Text style={styles.text}>Hold the QR code up to the camera</Text>
       </View>
     </View>
@@ -99,19 +112,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-  iconContainer: {
-    position: 'absolute',
-    top: 20,
-    right: 20,
-    padding: 10,
-    borderRadius: 25,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-  },
   text: {
-    color: colors.white,
     fontSize: 18,
-    marginTop: 20,
+    marginTop: 100,
     textAlign: 'center',
+    ...TypographyStyles.title3,
+    color: colors.white,
   },
   center: {
     flex: 1,
