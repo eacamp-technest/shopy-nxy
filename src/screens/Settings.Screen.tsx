@@ -74,7 +74,7 @@ export const SettingsScreen: React.FC<
               <>
                 <MainTab
                   style={styles.mainTab}
-                  title={'Permission camera'}
+                  title={'Scan QR Code'}
                   rightIcon={item.rightIcon}
                   leftIcon={ImageResources.camera}
                   onPress={checkCameraPermission}

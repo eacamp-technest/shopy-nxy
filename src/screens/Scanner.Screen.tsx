@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {StackRoutes} from 'router/routes';
 import {NavigationParamList} from 'types/navigation.types';
 import {
@@ -7,10 +7,11 @@ import {
   useCodeScanner,
   useCameraDevice,
 } from 'react-native-vision-camera';
+import {colors} from 'theme/colors';
 import {SvgImage} from 'components/SvgImage';
+import {TypographyStyles} from 'theme/typography';
 import {ImageResources} from 'assets/VectorResources.g';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {SafeMainProvider} from 'containers/SafeMainProvider';
 
 export const ScannerScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.scanner>
@@ -34,43 +35,98 @@ export const ScannerScreen: React.FC<
 
   if (!device) {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Loading camera...</Text>
+      <View style={styles.deviceContainer}>
+        <ActivityIndicator size={'large'} color={colors.skyBlue.base} />
+        <Text style={styles.loadingText}>Loading camera...</Text>
       </View>
     );
   }
 
   if (!hasPermission) {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={styles.deviceContainer}>
         <Text>No camera permission.</Text>
       </View>
     );
   }
 
   return (
-    <SafeMainProvider content={'dark-content'}>
+    <View style={styles.container}>
       <Camera
         style={styles.scanner}
         device={device}
         codeScanner={codeScanner}
         isActive={true}
       />
-      <View style={styles.icons}>
-        <SvgImage source={ImageResources.bell} />
+      <View style={styles.overlay}>
+        <View style={styles.mask} />
+        <View style={styles.iconContainer}>
+          <SvgImage
+            onPress={() => console.log('Press camera')}
+            color={colors.white}
+            source={ImageResources.camera}
+          />
+        </View>
+        <Text style={styles.text}>Hold the QR code up to the camera</Text>
       </View>
-    </SafeMainProvider>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
   scanner: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: 'blue',
   },
-  icons: {
+  overlay: {
     position: 'absolute',
-    top: 50,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mask: {
+    position: 'absolute',
+    width: '80%',
+    height: '40%',
+    borderColor: 'white',
+    borderWidth: 2,
+    borderRadius: 15,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  iconContainer: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    padding: 10,
+    borderRadius: 25,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  },
+  text: {
+    color: colors.white,
+    fontSize: 18,
+    marginTop: 20,
+    textAlign: 'center',
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black',
+  },
+  deviceContainer: {
+    flex: 1,
+    gap: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.primary.base,
+  },
+  loadingText: {
+    ...TypographyStyles.title3,
   },
 });
