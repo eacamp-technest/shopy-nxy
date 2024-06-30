@@ -30,6 +30,7 @@ export enum StackRoutes {
   delivered = 'delivered',
   cancelled = 'cancelled',
   search = 'search',
+  scanner = 'scanner',
 }
 
 export enum TabRoutes {

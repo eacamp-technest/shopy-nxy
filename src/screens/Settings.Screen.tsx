@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment} from 'react';
 import {StyleSheet, ScrollView, Alert, Linking} from 'react-native';
 import {colors} from 'theme/colors';
 import {settings} from 'mock/settings';
@@ -19,10 +19,13 @@ export const SettingsScreen: React.FC<
 > = ({navigation}) => {
   const {logout} = useUserStoreActions();
 
-  const screensArray = [StackRoutes.profile, StackRoutes.order];
+  const screensArray: (keyof typeof StackRoutes)[] = [
+    StackRoutes.profile,
+    StackRoutes.order,
+  ];
 
   const handleNextScreen = (id: number) => {
-    navigation.navigate(screensArray[id]);
+    navigation.navigate(screensArray[id] as never);
   };
 
   const checkCameraPermission = async () => {
@@ -43,12 +46,11 @@ export const SettingsScreen: React.FC<
           },
         ],
       );
+      return;
     }
-  };
 
-  useEffect(() => {
-    checkCameraPermission();
-  }, []);
+    navigation.navigate(StackRoutes.scanner);
+  };
 
   const handlePermissionMedia = () => {
     console.log('Permissions media');
