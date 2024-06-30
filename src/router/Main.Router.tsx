@@ -4,6 +4,7 @@ import {Routes, StackRoutes} from './routes';
 import {OrderScreen} from 'screens/Order.Screen';
 import {SearchScreen} from 'screens/Search.Screen';
 import {ProfileScreen} from 'screens/Profile.Screen';
+import {ScannerScreen} from 'screens/Scanner.Screen';
 import {NavigationParamList} from 'types/navigation.types';
 import {searchScreenOptions} from 'configs/navigation.configs';
 import {ReviewRatingScreen} from 'screens/ReviewRating.Screen';
@@ -50,6 +51,7 @@ export const MainRouter = () => {
         component={SearchScreen}
         options={searchScreenOptions}
       />
+      <MainStack.Screen name={StackRoutes.scanner} component={ScannerScreen} />
     </MainStack.Navigator>
   );
 };

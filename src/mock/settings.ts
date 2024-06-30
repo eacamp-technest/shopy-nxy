@@ -41,4 +41,16 @@ export const settings = [
     leftIcon: require('../assets/vectors/logOut.svg'),
     rightIcon: require('../assets/vectors/chevronRight.svg'),
   },
+  // {
+  //   id: 6,
+  //   title: 'Camera permission',
+  //   leftIcon: require('../assets/vectors/camera.svg'),
+  //   rightIcon: require('../assets/vectors/chevronRight.svg'),
+  // },
+  // {
+  //   id: 7,
+  //   title: 'Media permission',
+  //   leftIcon: require('../assets/vectors/info.svg'),
+  //   rightIcon: require('../assets/vectors/chevronRight.svg'),
+  // },
 ];

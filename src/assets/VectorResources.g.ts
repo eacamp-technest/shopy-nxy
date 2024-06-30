@@ -54,4 +54,5 @@ export const ImageResources = {
   notificationTab: require('./vectors/notificationTab.svg'),
   settingsTab: require('./vectors/settings.svg'),
   rightActionable: require('./vectors/rightActionable.svg'),
+  media: require('./vectors/media.svg'),
 };
