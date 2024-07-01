@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  ActivityIndicator,
   Alert,
   Linking,
+  StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import {StackRoutes} from 'router/routes';
 import {NavigationParamList} from 'types/navigation.types';
@@ -15,12 +15,16 @@ import {
   useCameraDevice,
 } from 'react-native-vision-camera';
 import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
+import {NavBar} from 'components/NavBar';
 import {TypographyStyles} from 'theme/typography';
+import {ImageResources} from 'assets/VectorResources.g';
+import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export const ScannerScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.scanner>
-> = () => {
+> = ({navigation}) => {
   const [isScanning, setIsScanning] = useState(true);
   const [hasPermission, setHasPermission] = useState(false);
 
@@ -40,7 +44,7 @@ export const ScannerScreen: React.FC<
         Alert.alert('Scanned Codes', codes.map(code => code.value).join(', '), [
           {
             text: 'Open Link',
-            onPress: () => Linking.openURL(codes[0].value),
+            onPress: () => codes[0]?.value && Linking.openURL(codes[0].value),
           },
           {
             text: 'Cancel',
@@ -72,6 +76,17 @@ export const ScannerScreen: React.FC<
 
   return (
     <View style={styles.container}>
+      <View style={styles.navContainer}>
+        <SafeTopProvider content={'light-content'}>
+          <NavBar
+            leftColor={colors.white}
+            styleTitle={colors.white}
+            title={'Scanner QR Code'}
+            leftOnPress={navigation.goBack}
+            leftIcon={ImageResources.chevronLeft}
+          />
+        </SafeTopProvider>
+      </View>
       <Camera
         style={styles.scanner}
         device={device}
@@ -87,6 +102,15 @@ export const ScannerScreen: React.FC<
 };
 
 const styles = StyleSheet.create({
+  navContainer: {
+    width: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1,
+    paddingHorizontal: normalize('horizontal', 24),
+  },
   container: {
     flex: 1,
     backgroundColor: 'black',
