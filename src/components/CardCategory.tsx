@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   largeImage: {
-    height: 282,
+    height: 287,
     width: normalize('width', 350),
   },
   smallContainer: {
