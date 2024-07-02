@@ -5,10 +5,11 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 export type AppNavigation = NativeStackNavigationProp<NavigationParamList>;
+import {ICardProduct} from 'components/CardProduct';
 
 interface ISearchInterface extends NativeStackNavigationOptions {
-  items?: string[];
-  onItemPress?: (item: string) => void;
+  items?: ICardProduct[];
+  onItemPress?: (item: ICardProduct) => void;
 }
 
 export type NavigationParamList = {

@@ -1,30 +1,36 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {
-  Text,
+  View,
+  StyleSheet,
   TouchableOpacity,
   NativeSyntheticEvent,
   TextInputFocusEventData,
-  FlatList,
 } from 'react-native';
+import {normalize} from 'theme/metrics';
 import {StackRoutes} from 'router/routes';
+import {FlashList} from '@shopify/flash-list';
 import {NavigationParamList} from 'types/navigation.types';
 import {searchScreenOptions} from 'configs/navigation.configs';
+import {CardProduct, ICardProduct} from 'components/CardProduct';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+
+const ItemSeparatorComponent = () => {
+  return <View style={styles.flashVertical} />;
+};
 
 export const SearchScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.search>
 > = ({navigation, route}) => {
   const {onItemPress, items, ...rest} = route.params;
-
-  const [data, setData] = useState<string[]>(items ?? []);
+  const [data, setData] = useState<ICardProduct[]>(items ?? []);
 
   const onChangeText = useCallback(
     (event: NativeSyntheticEvent<TextInputFocusEventData>) => {
-      const text = event.nativeEvent.text;
-      const filtered = items?.filter(item => {
-        return item.toLowerCase().includes(text.toLocaleLowerCase());
-      });
+      const text = event.nativeEvent.text.toLowerCase();
 
+      const filtered = items?.filter(item => {
+        return item.title.toLowerCase().includes(text);
+      });
       setData(filtered ?? []);
     },
     [items],
@@ -38,7 +44,13 @@ export const SearchScreen: React.FC<
             onItemPress?.(item);
             navigation.pop();
           }}>
-          <Text>{item}</Text>
+          <CardProduct
+            key={item.id}
+            type={'list'}
+            image={item.image}
+            title={item.title}
+            price={item.price}
+          />
         </TouchableOpacity>
       );
     },
@@ -57,10 +69,29 @@ export const SearchScreen: React.FC<
   }, [navigation, rest, onChangeText]);
 
   return (
-    <FlatList
-      data={data}
-      renderItem={renderItem}
-      contentInsetAdjustmentBehavior={'automatic'}
-    />
+    <View style={[styles.root]}>
+      <FlashList
+        data={data}
+        renderItem={renderItem}
+        estimatedItemSize={200}
+        showsVerticalScrollIndicator={false}
+        contentInsetAdjustmentBehavior={'automatic'}
+        ItemSeparatorComponent={ItemSeparatorComponent}
+        contentContainerStyle={styles.contentContainerStyle}
+      />
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    paddingHorizontal: normalize('horizontal', 24),
+  },
+  contentContainerStyle: {
+    paddingTop: normalize('vertical', 20),
+  },
+  flashVertical: {
+    height: normalize('height', 24),
+  },
+});
