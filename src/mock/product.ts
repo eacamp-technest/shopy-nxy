@@ -61,4 +61,52 @@ export const product: ICardProduct[] = [
     price: 75,
     image: require('../assets/images/product3.png'),
   },
+  {
+    id: 10,
+    title: 'Puma Force 1 Shoe',
+    price: 100,
+    image: require('../assets/images/puma1.png'),
+  },
+  {
+    id: 11,
+    title: 'Puma Full 2020',
+    price: 75,
+    image: require('../assets/images/puma2.png'),
+  },
+  {
+    id: 12,
+    title: 'Adidas Excee',
+    price: 75,
+    image: require('../assets/images/adidas1.png'),
+  },
+  {
+    id: 13,
+    title: 'Adidas Model 2024',
+    price: 75,
+    image: require('../assets/images/adidas2.png'),
+  },
+  {
+    id: 14,
+    title: 'Lumberjack New',
+    price: 75,
+    image: require('../assets/images/lumberjack1.png'),
+  },
+  {
+    id: 15,
+    title: 'Lumberjack 2024',
+    price: 75,
+    image: require('../assets/images/lumberjack2.png'),
+  },
+  {
+    id: 16,
+    title: 'Nike Air Max 90',
+    price: 75,
+    image: require('../assets/images/product1.png'),
+  },
+  {
+    id: 17,
+    title: 'Mecon 3 Shoes',
+    price: 75,
+    image: require('../assets/images/product3.png'),
+  },
 ];

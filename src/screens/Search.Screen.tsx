@@ -22,16 +22,15 @@ export const SearchScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.search>
 > = ({navigation, route}) => {
   const {onItemPress, items, ...rest} = route.params;
-
   const [data, setData] = useState<ICardProduct[]>(items ?? []);
 
   const onChangeText = useCallback(
     (event: NativeSyntheticEvent<TextInputFocusEventData>) => {
-      const text = event.nativeEvent.text;
-      const filtered = items?.filter(item => {
-        return item;
-      });
+      const text = event.nativeEvent.text.toLowerCase();
 
+      const filtered = items?.filter(item => {
+        return item.title.toLowerCase().includes(text);
+      });
       setData(filtered ?? []);
     },
     [items],
@@ -70,15 +69,15 @@ export const SearchScreen: React.FC<
   }, [navigation, rest, onChangeText]);
 
   return (
-    <View style={styles.root}>
+    <View style={[styles.root]}>
       <FlashList
         data={data}
-        contentContainerStyle={styles.contentContainerStyle}
         renderItem={renderItem}
         estimatedItemSize={200}
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior={'automatic'}
         ItemSeparatorComponent={ItemSeparatorComponent}
+        contentContainerStyle={styles.contentContainerStyle}
       />
     </View>
   );
