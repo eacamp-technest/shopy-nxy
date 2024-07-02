@@ -3,8 +3,12 @@ import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {TabRoutes} from 'router/routes';
 import {SvgImage} from 'components/SvgImage';
+import {screenHeight} from 'theme/const.styles';
 import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
+
+const tabHeight = screenHeight <= 667 ? 55 : 90;
+const tabBottom = screenHeight <= 667 ? 15 : 30;
 
 export const defaultScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
@@ -42,10 +46,10 @@ export const searchScreenOptions: ISearchScreenOption = {
     inputType: 'text',
     textColor: 'gray',
     hideWhenScrolling: false,
-    onChangeText(e) {
-      const text = e.nativeEvent.text;
-      console.log(text);
-    },
+    // onChangeText(e) {
+    //   const text = e.nativeEvent.text;
+    //   console.log(text);
+    // },
   },
 };
 
@@ -60,8 +64,9 @@ export const tabBottomScreenOption: BottomTabNavigationOptions = {
   tabBarStyle: {
     shadowOpacity: 0.05,
     borderTopWidth: 0.05,
-    height: normalize('height', 90),
+    height: tabHeight,
     paddingHorizontal: normalize('horizontal', 25),
+    paddingBottom: normalize('vertical', tabBottom),
   },
 };
 
