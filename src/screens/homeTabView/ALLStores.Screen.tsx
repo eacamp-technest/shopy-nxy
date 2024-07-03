@@ -1,12 +1,31 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Alert} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {Tables} from 'components/Tables';
+import {Button} from 'components/Button';
 import {TypographyStyles} from 'theme/typography';
+import {fetch} from '@react-native-community/netinfo';
 import {SceneRendererProps} from 'react-native-tab-view';
 
 export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
+  const handleOnPress = async () => {
+    const connection = await fetch();
+    if (connection.type !== 'wifi' && connection.type === 'cellular') {
+      Alert.alert('Warning', 'You are using cellular data. Continue?', [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => console.log('install something'),
+        },
+      ]);
+    }
+  };
+
   return (
     <View style={styles.root}>
       <Tables
@@ -18,6 +37,9 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
           </Text>
         }
       />
+      <View style={{paddingHorizontal: 24}}>
+        <Button onPress={handleOnPress} position={'center'} text={'Download'} />
+      </View>
     </View>
   );
 };
