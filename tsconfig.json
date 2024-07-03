@@ -18,7 +18,8 @@
       "theme/*": ["./src/theme/*"],
       "constants/*": ["./src/constants/*"],
       "types/*": ["./src/types/*"],
-      "utils/*": ["./src/utils/*"]
+      "utils/*": ["./src/utils/*"],
+      "localization/*": ["./src/localization/*"]
     }
   }
 }
