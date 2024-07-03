@@ -1,6 +1,7 @@
 import React from 'react';
 import {StatusBar, StyleSheet, View} from 'react-native';
 import Router from 'router';
+import 'configs/IMLocalize';
 import {colors} from 'theme/colors';
 import {Toast} from 'components/Toast';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
