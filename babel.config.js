@@ -32,6 +32,7 @@ module.exports = {
           types: './src/types',
           constants: './src/constants',
           utils: './src/utils',
+          localization: './src/localization',
         },
       },
     ],
