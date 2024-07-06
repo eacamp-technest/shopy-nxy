@@ -115,4 +115,16 @@ export const product: ICardProduct[] = [
     price: 75,
     image: require('../assets/images/product3.png'),
   },
+  {
+    id: 19,
+    title: 'Nike Air Max 90',
+    price: 75,
+    image: require('../assets/images/product1.png'),
+  },
+  {
+    id: 20,
+    title: 'Mecon 3 Shoes',
+    price: 75,
+    image: require('../assets/images/product3.png'),
+  },
 ];

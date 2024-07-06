@@ -1,18 +1,13 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
 import {colors} from 'theme/colors';
 import {product} from 'mock/product';
 import {normalize} from 'theme/metrics';
 import {Tables} from 'components/Tables';
-import {FlashList} from '@shopify/flash-list';
 import {cardWidth} from 'utils/home.screen.size';
 import {TypographyStyles} from 'theme/typography';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
-
-const ItemSeparatorComponent = () => {
-  return <View style={styles.flashVertical} />;
-};
 
 export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
   const renderProduct = ({
@@ -47,14 +42,12 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
         }
       />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
-        <FlashList
+        <FlatList
           data={product}
           numColumns={2}
           scrollEnabled={false}
-          estimatedItemSize={200}
           renderItem={renderProduct}
           showsHorizontalScrollIndicator={false}
-          ItemSeparatorComponent={ItemSeparatorComponent}
           contentContainerStyle={styles.contentContainerStyle}
         />
       </ScrollView>
@@ -71,7 +64,6 @@ const styles = StyleSheet.create({
   scroll: {
     flex: 1,
     minHeight: '100%',
-    minWidth: '100%',
     paddingHorizontal: normalize('horizontal', 24),
   },
   tableRight: {
@@ -79,16 +71,16 @@ const styles = StyleSheet.create({
     color: colors.primary.base,
   },
   card: {
-    width: '100%',
+    width: '51.8%',
   },
   imageStyles: {
     width: cardWidth,
   },
   contentContainerStyle: {
-    paddingLeft: 10,
-    paddingBottom: normalize('vertical', 50),
+    gap: normalize('vertical', 25),
+    paddingBottom: normalize('vertical', 70),
   },
   flashVertical: {
-    height: normalize('height', 30),
+    height: normalize('height', 25),
   },
 });

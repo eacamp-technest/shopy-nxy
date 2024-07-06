@@ -2,13 +2,13 @@ import React, {Fragment, useState} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   Image,
-  ImageSourcePropType,
-  TouchableOpacity,
   StyleProp,
   ViewStyle,
   ImageStyle,
+  StyleSheet,
+  TouchableOpacity,
+  ImageSourcePropType,
 } from 'react-native';
 import {Steppers} from './Steppers';
 import {SvgImage} from './SvgImage';
@@ -129,6 +129,8 @@ const styles = StyleSheet.create({
   },
   imageNormal: {
     borderRadius: 8,
+    borderWidth: 0.5,
+    borderColor: '#b0c4de',
     height: normalize('height', 78),
     width: normalize('width', 78),
   },
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
     width: normalize('width', 100),
   },
   imageLarge: {
-    borderRadius: 8,
+    borderRadius: 11,
     height: normalize('height', 156),
     width: normalize('width', 141),
   },
