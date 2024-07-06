@@ -1,31 +1,29 @@
 import React from 'react';
-import {View, Text, StyleSheet, Alert} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {Tables} from 'components/Tables';
-import {Button} from 'components/Button';
+import {FlashList} from '@shopify/flash-list';
 import {TypographyStyles} from 'theme/typography';
-import {fetch} from '@react-native-community/netinfo';
 import {SceneRendererProps} from 'react-native-tab-view';
+import {product} from 'mock/product';
+import {CardProduct} from 'components/CardProduct';
+import {cardWidth} from 'utils/home.screen.size';
 
 export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
-  const handleOnPress = async () => {
-    const connection = await fetch();
-    if (connection.type !== 'wifi' && connection.type === 'cellular') {
-      Alert.alert('Warning', 'You are using cellular data. Continue?', [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => console.log('install something'),
-        },
-      ]);
-    }
+  const renderProduct = ({item}) => {
+    return (
+      <CardProduct
+        style={{width: '100%'}}
+        imageStyle={{width: cardWidth}}
+        type={'product'}
+        image={item.image}
+        key={item.index}
+        price={item.price}
+        title={item.title}
+      />
+    );
   };
-
   return (
     <View style={styles.root}>
       <Tables
@@ -37,9 +35,25 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
           </Text>
         }
       />
-      <View style={{paddingHorizontal: 24}}>
-        <Button onPress={handleOnPress} position={'center'} text={'Download'} />
-      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{backgroundColor: 'yellow'}}
+        style={styles.scroll}>
+        <View style={styles.flashSize}>
+          <FlashList
+            numColumns={2}
+            scrollEnabled={false}
+            contentContainerStyle={styles.contentContainerStyle}
+            showsHorizontalScrollIndicator={false}
+            data={product}
+            renderItem={renderProduct}
+            estimatedItemSize={200}
+            ItemSeparatorComponent={() => (
+              <View style={styles.flashHorizontal} />
+            )}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -50,8 +64,26 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     paddingVertical: normalize('vertical', 8),
   },
+  scroll: {
+    flex: 1,
+    height: 50,
+    paddingHorizontal: 24,
+    backgroundColor: 'red',
+  },
+  flashSize: {
+    flex: 1,
+    minHeight: '100%',
+    minWidth: '100%',
+  },
+  contentContainerStyle: {
+    backgroundColor: 'green',
+    borderWidth: 1,
+  },
   tableRight: {
     ...TypographyStyles.RegularTightSemibold,
     color: colors.primary.base,
+  },
+  flashHorizontal: {
+    width: 16,
   },
 });

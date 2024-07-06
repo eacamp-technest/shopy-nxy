@@ -6,6 +6,9 @@ import {
   Image,
   ImageSourcePropType,
   TouchableOpacity,
+  StyleProp,
+  ViewStyle,
+  ImageStyle,
 } from 'react-native';
 import {Steppers} from './Steppers';
 import {SvgImage} from './SvgImage';
@@ -23,6 +26,8 @@ export interface ICardProduct {
   type?: TTypeCard;
   image?: ImageSourcePropType;
   onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
+  imageStyle?: StyleProp<ImageStyle>;
 }
 
 export const CardProduct: React.FC<ICardProduct> = ({
@@ -30,7 +35,9 @@ export const CardProduct: React.FC<ICardProduct> = ({
   image,
   title,
   price,
+  style,
   onPress,
+  imageStyle,
 }) => {
   const [heartSvg, setHeartSvg] = useState<boolean>(false);
 
@@ -51,6 +58,7 @@ export const CardProduct: React.FC<ICardProduct> = ({
           styles.imageNormal,
           isSave && styles.imageMedium,
           isProduct && styles.imageLarge,
+          imageStyle,
         ]}
       />
     </TouchableOpacity>
@@ -100,7 +108,7 @@ export const CardProduct: React.FC<ICardProduct> = ({
   );
 
   return (
-    <View style={[styles.root, isProduct ? styles.product : null]}>
+    <View style={[styles.root, isProduct ? styles.product : null, style]}>
       {renderImage()}
       <Fragment>{isProduct ? renderProductInfo() : renderListInfo()}</Fragment>
     </View>
