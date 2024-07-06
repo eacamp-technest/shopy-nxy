@@ -86,6 +86,8 @@ const styles = StyleSheet.create({
   },
   contentContainerStyle: {
     paddingBottom: normalize('vertical', 50),
+    backgroundColor: 'red',
+    paddingLeft: normalize('horizontal', 10),
   },
   flashVertical: {
     height: normalize('height', 30),
