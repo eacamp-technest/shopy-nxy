@@ -85,9 +85,8 @@ const styles = StyleSheet.create({
     width: cardWidth,
   },
   contentContainerStyle: {
+    paddingLeft: 10,
     paddingBottom: normalize('vertical', 50),
-    backgroundColor: 'red',
-    paddingLeft: normalize('horizontal', 10),
   },
   flashVertical: {
     height: normalize('height', 30),
