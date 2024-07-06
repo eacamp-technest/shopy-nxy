@@ -1,29 +1,40 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {colors} from 'theme/colors';
+import {product} from 'mock/product';
 import {normalize} from 'theme/metrics';
 import {Tables} from 'components/Tables';
 import {FlashList} from '@shopify/flash-list';
+import {cardWidth} from 'utils/home.screen.size';
 import {TypographyStyles} from 'theme/typography';
 import {SceneRendererProps} from 'react-native-tab-view';
-import {product} from 'mock/product';
-import {CardProduct} from 'components/CardProduct';
-import {cardWidth} from 'utils/home.screen.size';
+import {CardProduct, ICardProduct} from 'components/CardProduct';
+
+const ItemSeparatorComponent = () => {
+  return <View style={styles.flashVertical} />;
+};
 
 export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
-  const renderProduct = ({item}) => {
+  const renderProduct = ({
+    item,
+    index,
+  }: {
+    index: number;
+    item: ICardProduct;
+  }) => {
     return (
       <CardProduct
-        style={{width: '100%'}}
-        imageStyle={{width: cardWidth}}
+        key={index}
         type={'product'}
         image={item.image}
-        key={item.index}
         price={item.price}
         title={item.title}
+        style={styles.card}
+        imageStyle={styles.imageStyles}
       />
     );
   };
+
   return (
     <View style={styles.root}>
       <Tables
@@ -35,24 +46,17 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
           </Text>
         }
       />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{backgroundColor: 'yellow'}}
-        style={styles.scroll}>
-        <View style={styles.flashSize}>
-          <FlashList
-            numColumns={2}
-            scrollEnabled={false}
-            contentContainerStyle={styles.contentContainerStyle}
-            showsHorizontalScrollIndicator={false}
-            data={product}
-            renderItem={renderProduct}
-            estimatedItemSize={200}
-            ItemSeparatorComponent={() => (
-              <View style={styles.flashHorizontal} />
-            )}
-          />
-        </View>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
+        <FlashList
+          data={product}
+          numColumns={2}
+          scrollEnabled={false}
+          estimatedItemSize={200}
+          renderItem={renderProduct}
+          showsHorizontalScrollIndicator={false}
+          ItemSeparatorComponent={ItemSeparatorComponent}
+          contentContainerStyle={styles.contentContainerStyle}
+        />
       </ScrollView>
     </View>
   );
@@ -66,24 +70,24 @@ const styles = StyleSheet.create({
   },
   scroll: {
     flex: 1,
-    height: 50,
-    paddingHorizontal: 24,
-    backgroundColor: 'red',
-  },
-  flashSize: {
-    flex: 1,
     minHeight: '100%',
     minWidth: '100%',
-  },
-  contentContainerStyle: {
-    backgroundColor: 'green',
-    borderWidth: 1,
+    paddingHorizontal: normalize('horizontal', 24),
   },
   tableRight: {
     ...TypographyStyles.RegularTightSemibold,
     color: colors.primary.base,
   },
-  flashHorizontal: {
-    width: 16,
+  card: {
+    width: '100%',
+  },
+  imageStyles: {
+    width: cardWidth,
+  },
+  contentContainerStyle: {
+    paddingBottom: normalize('vertical', 50),
+  },
+  flashVertical: {
+    height: normalize('height', 30),
   },
 });
