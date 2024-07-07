@@ -1,29 +1,33 @@
 import React from 'react';
-import {View, Text, StyleSheet, Alert} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
 import {colors} from 'theme/colors';
+import {product} from 'mock/product';
 import {normalize} from 'theme/metrics';
 import {Tables} from 'components/Tables';
-import {Button} from 'components/Button';
+import {cardWidth} from 'utils/home.screen.size';
 import {TypographyStyles} from 'theme/typography';
-import {fetch} from '@react-native-community/netinfo';
 import {SceneRendererProps} from 'react-native-tab-view';
+import {CardProduct, ICardProduct} from 'components/CardProduct';
 
 export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
-  const handleOnPress = async () => {
-    const connection = await fetch();
-    if (connection.type !== 'wifi' && connection.type === 'cellular') {
-      Alert.alert('Warning', 'You are using cellular data. Continue?', [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => console.log('install something'),
-        },
-      ]);
-    }
+  const renderProduct = ({
+    item,
+    index,
+  }: {
+    index: number;
+    item: ICardProduct;
+  }) => {
+    return (
+      <CardProduct
+        key={index}
+        type={'product'}
+        image={item.image}
+        price={item.price}
+        title={item.title}
+        style={styles.card}
+        imageStyle={styles.imageStyles}
+      />
+    );
   };
 
   return (
@@ -37,9 +41,16 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
           </Text>
         }
       />
-      <View style={{paddingHorizontal: 24}}>
-        <Button onPress={handleOnPress} position={'center'} text={'Download'} />
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
+        <FlatList
+          data={product}
+          numColumns={2}
+          scrollEnabled={false}
+          renderItem={renderProduct}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.contentContainerStyle}
+        />
+      </ScrollView>
     </View>
   );
 };
@@ -50,8 +61,26 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     paddingVertical: normalize('vertical', 8),
   },
+  scroll: {
+    flex: 1,
+    minHeight: '100%',
+    paddingHorizontal: normalize('horizontal', 24),
+  },
   tableRight: {
     ...TypographyStyles.RegularTightSemibold,
     color: colors.primary.base,
+  },
+  card: {
+    width: '51.8%',
+  },
+  imageStyles: {
+    width: cardWidth,
+  },
+  contentContainerStyle: {
+    gap: normalize('vertical', 25),
+    paddingBottom: normalize('vertical', 70),
+  },
+  flashVertical: {
+    height: normalize('height', 25),
   },
 });

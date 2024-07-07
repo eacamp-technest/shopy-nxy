@@ -2,10 +2,13 @@ import React, {Fragment, useState} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   Image,
-  ImageSourcePropType,
+  StyleProp,
+  ViewStyle,
+  ImageStyle,
+  StyleSheet,
   TouchableOpacity,
+  ImageSourcePropType,
 } from 'react-native';
 import {Steppers} from './Steppers';
 import {SvgImage} from './SvgImage';
@@ -23,6 +26,8 @@ export interface ICardProduct {
   type?: TTypeCard;
   image?: ImageSourcePropType;
   onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
+  imageStyle?: StyleProp<ImageStyle>;
 }
 
 export const CardProduct: React.FC<ICardProduct> = ({
@@ -30,7 +35,9 @@ export const CardProduct: React.FC<ICardProduct> = ({
   image,
   title,
   price,
+  style,
   onPress,
+  imageStyle,
 }) => {
   const [heartSvg, setHeartSvg] = useState<boolean>(false);
 
@@ -51,6 +58,7 @@ export const CardProduct: React.FC<ICardProduct> = ({
           styles.imageNormal,
           isSave && styles.imageMedium,
           isProduct && styles.imageLarge,
+          imageStyle,
         ]}
       />
     </TouchableOpacity>
@@ -100,7 +108,7 @@ export const CardProduct: React.FC<ICardProduct> = ({
   );
 
   return (
-    <View style={[styles.root, isProduct ? styles.product : null]}>
+    <View style={[styles.root, isProduct ? styles.product : null, style]}>
       {renderImage()}
       <Fragment>{isProduct ? renderProductInfo() : renderListInfo()}</Fragment>
     </View>
@@ -121,6 +129,8 @@ const styles = StyleSheet.create({
   },
   imageNormal: {
     borderRadius: 8,
+    borderWidth: 0.5,
+    borderColor: '#b0c4de',
     height: normalize('height', 78),
     width: normalize('width', 78),
   },
@@ -130,7 +140,7 @@ const styles = StyleSheet.create({
     width: normalize('width', 100),
   },
   imageLarge: {
-    borderRadius: 8,
+    borderRadius: 11,
     height: normalize('height', 156),
     width: normalize('width', 141),
   },
