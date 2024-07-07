@@ -6,6 +6,7 @@ import {normalize} from 'theme/metrics';
 import {Tables} from 'components/Tables';
 import {cardWidth} from 'utils/home.screen.size';
 import {TypographyStyles} from 'theme/typography';
+import {CategoryFilter} from 'components/CategoryFilter';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
 
@@ -41,6 +42,9 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
           </Text>
         }
       />
+      <View style={styles.categoryFilter}>
+        <CategoryFilter onPress={() => 'pressable'} />
+      </View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         <FlatList
           data={product}
@@ -60,6 +64,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     paddingVertical: normalize('vertical', 8),
+  },
+  categoryFilter: {
+    paddingTop: normalize('vertical', 8),
+    paddingBottom: normalize('vertical', 32),
+    paddingLeft: normalize('horizontal', 24),
   },
   scroll: {
     flex: 1,
