@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
@@ -12,14 +12,29 @@ const itemSeparatorComponent = () => {
 
 interface ICategoryFilter {
   title?: string;
-  onPress: () => void;
 }
 
 export const CategoryFilter: React.FC<ICategoryFilter> = ({}) => {
+  const [activeButton, setActiveButton] = useState<number>(0);
+
+  const handleCategoryButton = (id: number) => setActiveButton(id);
+
   const renderCategory = ({item}: any) => {
     return (
-      <TouchableOpacity style={styles.main}>
-        <Text style={styles.title}>{item.title}</Text>
+      <TouchableOpacity
+        key={item.id}
+        onPress={() => handleCategoryButton(item.id)}
+        style={[
+          styles.main,
+          activeButton === item.id ? styles.mainPress : null,
+        ]}>
+        <Text
+          style={[
+            styles.title,
+            activeButton === item.id ? styles.titlePress : null,
+          ]}>
+          {item.title}
+        </Text>
       </TouchableOpacity>
     );
   };
@@ -47,6 +62,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize('horizontal', 16),
     ...TypographyStyles.RegularNoneRegular,
     color: colors.ink.base,
+  },
+  mainPress: {
+    backgroundColor: colors.primary.base,
+  },
+  titlePress: {
+    color: colors.white,
   },
   itemSeparatorComponent: {
     width: normalize('width', 8),

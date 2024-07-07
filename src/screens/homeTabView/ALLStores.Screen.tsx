@@ -43,7 +43,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
         }
       />
       <View style={styles.categoryFilter}>
-        <CategoryFilter onPress={() => 'pressable'} />
+        <CategoryFilter />
       </View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         <FlatList
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   contentContainerStyle: {
     gap: normalize('vertical', 25),
-    paddingBottom: normalize('vertical', 70),
+    paddingBottom: normalize('vertical', 150),
   },
   flashVertical: {
     height: normalize('height', 25),
