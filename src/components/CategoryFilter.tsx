@@ -10,11 +10,7 @@ const itemSeparatorComponent = () => {
   return <View style={styles.itemSeparatorComponent} />;
 };
 
-interface ICategoryFilter {
-  title?: string;
-}
-
-export const CategoryFilter: React.FC<ICategoryFilter> = ({}) => {
+export const CategoryFilter = () => {
   const [activeButton, setActiveButton] = useState<number>(0);
 
   const handleCategoryButton = (id: number) => setActiveButton(id);
@@ -22,7 +18,6 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({}) => {
   const renderCategory = ({item}: any) => {
     return (
       <TouchableOpacity
-        key={item.id}
         onPress={() => handleCategoryButton(item.id)}
         style={[
           styles.main,
@@ -44,8 +39,10 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({}) => {
       horizontal
       data={category}
       estimatedItemSize={30}
+      extraData={activeButton}
       renderItem={renderCategory}
       showsHorizontalScrollIndicator={false}
+      keyExtractor={item => item.id.toString()}
       ItemSeparatorComponent={itemSeparatorComponent}
       contentContainerStyle={styles.contentContainerStyle}
     />
