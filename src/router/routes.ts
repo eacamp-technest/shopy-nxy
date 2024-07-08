@@ -31,6 +31,7 @@ export enum StackRoutes {
   cancelled = 'cancelled',
   search = 'search',
   scanner = 'scanner',
+  mostPopular = 'mostPopular',
 }
 
 export enum TabRoutes {

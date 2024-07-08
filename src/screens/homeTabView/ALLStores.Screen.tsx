@@ -43,7 +43,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
         }
       />
       <View style={styles.categoryFilter}>
-        <CategoryFilter />
+        <CategoryFilter backgroundColor={styles.filterButton} />
       </View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         <FlatList
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     gap: normalize('vertical', 25),
     paddingBottom: normalize('vertical', 150),
   },
-  flashVertical: {
-    height: normalize('height', 25),
+  filterButton: {
+    backgroundColor: colors.skyLightest,
   },
 });
