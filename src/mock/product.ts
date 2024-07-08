@@ -127,4 +127,10 @@ export const product: ICardProduct[] = [
     price: 75,
     image: require('../assets/images/product3.png'),
   },
+  {
+    id: 21,
+    title: 'Mecon 3 Shoes',
+    price: 75,
+    image: require('../assets/images/product4.png'),
+  },
 ];
