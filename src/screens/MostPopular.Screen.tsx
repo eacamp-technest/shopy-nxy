@@ -58,7 +58,7 @@ export const MostPopularScreen: React.FC<
           backgroundColor={styles.filterButton}
         />
       </View>
-      <View style={styles.extraContainer} />
+      {/* <View style={styles.extraContainer} /> */}
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         <FlatList
           data={product}
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     minHeight: '100%',
+    paddingTop: normalize('vertical', 20),
     paddingHorizontal: normalize('horizontal', 24),
   },
   card: {

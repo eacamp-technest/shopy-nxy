@@ -12,7 +12,10 @@ import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {FlashList} from '@shopify/flash-list';
 import {category} from 'mock/category-filter';
+import {isIos} from 'constants/common.consts';
 import {TypographyStyles} from 'theme/typography';
+
+const deviceLineHeight = isIos ? 0 : 20;
 
 interface ICategoryFilter {
   titleColor?: StyleProp<TextStyle>;
@@ -76,6 +79,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize('horizontal', 16),
     ...TypographyStyles.RegularNoneRegular,
     color: colors.ink.base,
+    lineHeight: deviceLineHeight,
   },
   mainPress: {
     backgroundColor: colors.primary.base,
