@@ -60,6 +60,7 @@ export const HomeScreen: React.FC<
           styleTitle={colors.white}
           leftIcon={ImageResources.menu}
           rightIcon={ImageResources.shoppingBag}
+          rightOnPress={() => navigation.navigate(StackRoutes.mostPopular)}
         />
         <Input
           type={'text'}

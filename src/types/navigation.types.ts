@@ -47,6 +47,7 @@ export type NavigationParamList = {
   [StackRoutes.delivered]: undefined;
   [StackRoutes.cancelled]: undefined;
   [StackRoutes.scanner]: undefined;
+  [StackRoutes.mostPopular]: undefined;
 };
 
 export type BottomTabNavigationOptions = {};

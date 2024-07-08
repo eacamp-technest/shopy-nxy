@@ -6,6 +6,7 @@ import {SearchScreen} from 'screens/Search.Screen';
 import {ProfileScreen} from 'screens/Profile.Screen';
 import {ScannerScreen} from 'screens/Scanner.Screen';
 import {NavigationParamList} from 'types/navigation.types';
+import {MostPopularScreen} from 'screens/MostPopular.Screen';
 import {searchScreenOptions} from 'configs/navigation.configs';
 import {ReviewRatingScreen} from 'screens/ReviewRating.Screen';
 import {ListManScreen} from 'screens/item-lists/ListMan.Screen';
@@ -52,6 +53,10 @@ export const MainRouter = () => {
         options={searchScreenOptions}
       />
       <MainStack.Screen name={StackRoutes.scanner} component={ScannerScreen} />
+      <MainStack.Screen
+        name={StackRoutes.mostPopular}
+        component={MostPopularScreen}
+      />
     </MainStack.Navigator>
   );
 };
