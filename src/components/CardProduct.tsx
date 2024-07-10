@@ -54,7 +54,7 @@ export const CardProduct: React.FC<ICardProduct> = ({
     <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
       <Image
         resizeMode="cover"
-        source={{uri: image}}
+        source={typeof image === 'string' ? {uri: image} : image}
         style={[
           styles.imageNormal,
           isSave && styles.imageMedium,

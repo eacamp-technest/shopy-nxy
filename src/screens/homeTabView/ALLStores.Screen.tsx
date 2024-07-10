@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
 import axios from 'axios';
 import {colors} from 'theme/colors';
-import {product} from 'mock/product';
 import {normalize} from 'theme/metrics';
 import {Tables} from 'components/Tables';
 import {ENDPOINTS} from 'services/Endpoints';
@@ -14,21 +13,7 @@ import {CardProduct, ICardProduct} from 'components/CardProduct';
 
 export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
   const [productData, setProductData] = useState();
-
-  const onSubmit = async () => {
-    const res = await axios({
-      method: 'GET',
-      url: ENDPOINTS.products.products,
-    });
-
-    setProductData(res.data);
-
-    if (res.status === 200) {
-      console.log('Status-200');
-    } else {
-      console.log('Error');
-    }
-  };
+  const [categories, setCategories] = useState<any>({});
 
   const renderProduct = ({
     item,
@@ -50,19 +35,60 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
     );
   };
 
+  useEffect(() => {
+    const fetchCategory = async () => {
+      const res = await axios({
+        method: 'GET',
+        url: ENDPOINTS.products.categories,
+      });
+
+      if (res.status === 200) {
+        const categoriesWithId = res.data.map((item: any, index: number) => ({
+          ...item,
+          id: item.id ?? index,
+        }));
+        setCategories(categoriesWithId);
+      } else {
+        console.log('Error');
+      }
+    };
+    fetchCategory();
+  }, []);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const res = await axios({
+        method: 'GET',
+        url: ENDPOINTS.products.products,
+      });
+
+      if (res.status === 200) {
+        setProductData(res.data);
+      } else {
+        console.log('Error');
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <View style={styles.root}>
       <Tables
         content="CATEGORIES"
         contentStyle={TypographyStyles.title3}
         Right={
-          <Text onPress={onSubmit} style={styles.tableRight}>
+          <Text
+            onPress={() => console.log('handle ')}
+            style={styles.tableRight}>
             See All
           </Text>
         }
       />
       <View style={styles.categoryFilter}>
-        <CategoryFilter backgroundColor={styles.filterButton} />
+        <CategoryFilter
+          categories={categories}
+          backgroundColor={styles.filterButton}
+        />
       </View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         <FlatList
