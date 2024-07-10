@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
+import axios from 'axios';
 import {colors} from 'theme/colors';
 import {product} from 'mock/product';
 import {normalize} from 'theme/metrics';
 import {Tables} from 'components/Tables';
+import {ENDPOINTS} from 'services/Endpoints';
 import {cardWidth} from 'utils/home.screen.size';
 import {TypographyStyles} from 'theme/typography';
 import {CategoryFilter} from 'components/CategoryFilter';
@@ -11,6 +13,23 @@ import {SceneRendererProps} from 'react-native-tab-view';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
 
 export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
+  const [productData, setProductData] = useState();
+
+  const onSubmit = async () => {
+    const res = await axios({
+      method: 'GET',
+      url: ENDPOINTS.products.products,
+    });
+
+    setProductData(res.data);
+
+    if (res.status === 200) {
+      console.log('Status-200');
+    } else {
+      console.log('Error');
+    }
+  };
+
   const renderProduct = ({
     item,
     index,
@@ -37,7 +56,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
         content="CATEGORIES"
         contentStyle={TypographyStyles.title3}
         Right={
-          <Text onPress={() => console.log('-->')} style={styles.tableRight}>
+          <Text onPress={onSubmit} style={styles.tableRight}>
             See All
           </Text>
         }
@@ -47,7 +66,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
       </View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         <FlatList
-          data={product}
+          data={productData}
           numColumns={2}
           scrollEnabled={false}
           renderItem={renderProduct}

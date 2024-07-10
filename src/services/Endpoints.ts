@@ -3,6 +3,6 @@ export const ENDPOINTS = {
     login: 'https://dummyjson.com/auth/login',
   },
   products: {
-    productData: 'https://fakestoreapi.com/products',
+    products: 'https://fakestoreapi.com/products',
   },
 };

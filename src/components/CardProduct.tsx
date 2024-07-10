@@ -53,7 +53,8 @@ export const CardProduct: React.FC<ICardProduct> = ({
   const renderImage = () => (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
       <Image
-        source={image}
+        resizeMode="cover"
+        source={{uri: image}}
         style={[
           styles.imageNormal,
           isSave && styles.imageMedium,
@@ -154,6 +155,7 @@ const styles = StyleSheet.create({
     gap: normalize('vertical', 8),
   },
   title: {
+    width: '90%',
     ...TypographyStyles.RegularNoneSemibold,
     color: colors.ink.base,
   },
