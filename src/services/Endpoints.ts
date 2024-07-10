@@ -3,6 +3,7 @@ export const ENDPOINTS = {
     login: 'https://dummyjson.com/auth/login',
   },
   products: {
-    products: 'https://fakestoreapi.com/products',
+    categories: 'https://dummyjson.com/products/categories',
+    products: 'https://dummyjson.com/products',
   },
 };

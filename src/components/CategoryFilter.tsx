@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -8,10 +8,11 @@ import {
   TextStyle,
   TouchableOpacity,
 } from 'react-native';
+import axios from 'axios';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {ENDPOINTS} from 'services/Endpoints';
 import {FlashList} from '@shopify/flash-list';
-import {category} from 'mock/category-filter';
 import {isIos} from 'constants/common.consts';
 import {TypographyStyles} from 'theme/typography';
 
@@ -31,8 +32,29 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
   backgroundColor,
 }) => {
   const [activeButton, setActiveButton] = useState<number>(0);
+  const [categories, setCategories] = useState<any>({});
 
   const handleCategoryButton = (id: number) => setActiveButton(id);
+
+  useEffect(() => {
+    const onSubmit = async () => {
+      const res = await axios({
+        method: 'GET',
+        url: ENDPOINTS.products.categories,
+      });
+
+      if (res.status === 200) {
+        const categoriesWithId = res.data.map((item: any, index: number) => ({
+          ...item,
+          id: item.id ?? index,
+        }));
+        setCategories(categoriesWithId);
+      } else {
+        console.log('Error');
+      }
+    };
+    onSubmit();
+  }, []);
 
   const renderCategory = ({item}: any) => {
     return (
@@ -49,7 +71,7 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
             titleColor,
             activeButton === item.id ? styles.titlePress : null,
           ]}>
-          {item.title}
+          {item.name}
         </Text>
       </TouchableOpacity>
     );
@@ -58,7 +80,7 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
   return (
     <FlashList
       horizontal
-      data={category}
+      data={categories}
       estimatedItemSize={30}
       extraData={activeButton}
       renderItem={renderCategory}
