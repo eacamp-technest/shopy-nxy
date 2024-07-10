@@ -85,7 +85,7 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
       extraData={activeButton}
       renderItem={renderCategory}
       showsHorizontalScrollIndicator={false}
-      keyExtractor={item => item.id.toString()}
+      keyExtractor={(item: any) => item.id.toString()}
       ItemSeparatorComponent={itemSeparatorComponent}
       contentContainerStyle={styles.contentContainerStyle}
     />
