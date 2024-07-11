@@ -31,7 +31,7 @@ export const MostPopularScreen: React.FC<
       <CardProduct
         key={index}
         type={'product'}
-        image={item.image}
+        images={item.images}
         price={item.price}
         title={item.title}
         style={styles.card}
@@ -44,7 +44,7 @@ export const MostPopularScreen: React.FC<
     const fetchCategory = async () => {
       const res = await axios({
         method: 'GET',
-        url: ENDPOINTS.products.categories,
+        url: ENDPOINTS.store.categories,
       });
 
       if (res.status === 200) {
