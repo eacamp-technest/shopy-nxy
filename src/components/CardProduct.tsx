@@ -24,7 +24,9 @@ export interface ICardProduct {
   title: string;
   price?: number;
   type?: TTypeCard;
-  image?: ImageSourcePropType;
+  star?: any;
+  rating?: any;
+  images?: ImageSourcePropType;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   imageStyle?: StyleProp<ImageStyle>;
@@ -32,11 +34,12 @@ export interface ICardProduct {
 
 export const CardProduct: React.FC<ICardProduct> = ({
   type,
-  image,
+  images,
   title,
   price,
   style,
   onPress,
+  star,
   imageStyle,
 }) => {
   const [heartSvg, setHeartSvg] = useState<boolean>(false);
@@ -53,7 +56,8 @@ export const CardProduct: React.FC<ICardProduct> = ({
   const renderImage = () => (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
       <Image
-        source={image}
+        resizeMode="cover"
+        source={typeof images === 'string' ? {uri: images} : images}
         style={[
           styles.imageNormal,
           isSave && styles.imageMedium,
@@ -65,7 +69,7 @@ export const CardProduct: React.FC<ICardProduct> = ({
   );
 
   const renderTitle = () => (
-    <Text style={styles.title} numberOfLines={2}>
+    <Text style={styles.title} numberOfLines={1}>
       {title}
     </Text>
   );
@@ -76,7 +80,7 @@ export const CardProduct: React.FC<ICardProduct> = ({
     <View style={styles.main}>
       {renderTitle()}
       {renderPrice()}
-      <Text style={styles.link}>nike.com</Text>
+      <View style={styles.stars}>{star}</View>
     </View>
   );
 
@@ -154,6 +158,7 @@ const styles = StyleSheet.create({
     gap: normalize('vertical', 8),
   },
   title: {
+    width: '90%',
     ...TypographyStyles.RegularNoneSemibold,
     color: colors.ink.base,
   },
@@ -165,5 +170,9 @@ const styles = StyleSheet.create({
   link: {
     ...TypographyStyles.TinyNormalRegular,
     color: colors.ink.lighter,
+  },
+  stars: {
+    flexDirection: 'row',
+    gap: normalize('horizontal', 5),
   },
 });

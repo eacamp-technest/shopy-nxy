@@ -11,13 +11,13 @@ import {
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {FlashList} from '@shopify/flash-list';
-import {category} from 'mock/category-filter';
 import {isIos} from 'constants/common.consts';
 import {TypographyStyles} from 'theme/typography';
 
 const deviceLineHeight = isIos ? 0 : 20;
 
 interface ICategoryFilter {
+  categories?: any;
   titleColor?: StyleProp<TextStyle>;
   backgroundColor?: StyleProp<ViewStyle>;
 }
@@ -29,8 +29,11 @@ const itemSeparatorComponent = () => {
 export const CategoryFilter: React.FC<ICategoryFilter> = ({
   titleColor,
   backgroundColor,
+  categories,
 }) => {
   const [activeButton, setActiveButton] = useState<number>(0);
+
+  console.log(categories);
 
   const handleCategoryButton = (id: number) => setActiveButton(id);
 
@@ -49,7 +52,7 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
             titleColor,
             activeButton === item.id ? styles.titlePress : null,
           ]}>
-          {item.title}
+          {item.name}
         </Text>
       </TouchableOpacity>
     );
@@ -58,13 +61,13 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
   return (
     <FlashList
       horizontal
-      data={category}
+      data={categories}
       estimatedItemSize={30}
       extraData={activeButton}
       renderItem={renderCategory}
       showsHorizontalScrollIndicator={false}
-      keyExtractor={item => item.id.toString()}
       ItemSeparatorComponent={itemSeparatorComponent}
+      keyExtractor={(item: any) => item.id.toString()}
       contentContainerStyle={styles.contentContainerStyle}
     />
   );

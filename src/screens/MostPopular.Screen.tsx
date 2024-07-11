@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, ScrollView, FlatList} from 'react-native';
+import axios from 'axios';
 import {colors} from 'theme/colors';
 import {product} from 'mock/product';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
+import {ENDPOINTS} from 'services/Endpoints';
 import {cardWidth} from 'utils/home.screen.size';
 import {ImageResources} from 'assets/VectorResources.g';
 import {CategoryFilter} from 'components/CategoryFilter';
@@ -16,6 +18,8 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 export const MostPopularScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.mostPopular>
 > = ({navigation}) => {
+  const [categories, setCategories] = useState<any>({});
+
   const renderProduct = ({
     item,
     index,
@@ -27,7 +31,7 @@ export const MostPopularScreen: React.FC<
       <CardProduct
         key={index}
         type={'product'}
-        image={item.image}
+        images={item.images}
         price={item.price}
         title={item.title}
         style={styles.card}
@@ -35,6 +39,26 @@ export const MostPopularScreen: React.FC<
       />
     );
   };
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      const res = await axios({
+        method: 'GET',
+        url: ENDPOINTS.store.categories,
+      });
+
+      if (res.status === 200) {
+        const categoriesWithId = res.data.map((item: any, index: number) => ({
+          ...item,
+          id: item.id ?? index,
+        }));
+        setCategories(categoriesWithId);
+      } else {
+        console.log('Error');
+      }
+    };
+    fetchCategory();
+  }, []);
 
   return (
     <SafeTopProvider
@@ -54,6 +78,7 @@ export const MostPopularScreen: React.FC<
       </View>
       <View style={styles.categoryFilter}>
         <CategoryFilter
+          categories={categories}
           titleColor={styles.titleFilterColor}
           backgroundColor={styles.filterButton}
         />
@@ -78,6 +103,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize('horizontal', 24),
   },
   categoryFilter: {
+    height: normalize('height', 100),
     paddingTop: normalize('vertical', 24),
     paddingLeft: normalize('horizontal', 24),
     paddingBottom: normalize('vertical', 32),

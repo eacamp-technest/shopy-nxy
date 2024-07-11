@@ -47,7 +47,7 @@ export const SearchScreen: React.FC<
           <CardProduct
             key={item.id}
             type={'list'}
-            image={item.image}
+            images={item.images}
             title={item.title}
             price={item.price}
           />

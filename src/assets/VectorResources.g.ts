@@ -55,4 +55,5 @@ export const ImageResources = {
   settingsTab: require('./vectors/settings.svg'),
   rightActionable: require('./vectors/rightActionable.svg'),
   media: require('./vectors/media.svg'),
+  rating: require('./vectors/rayting.svg'),
 };
