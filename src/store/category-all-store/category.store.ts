@@ -9,8 +9,6 @@ export const useCategoryStore = create<ICategoryStore>(set => ({
   ...initial,
   actions: {
     addCategory(name) {
-      console.log(name);
-
       set({name});
     },
     reset: () => set({...initial}),
