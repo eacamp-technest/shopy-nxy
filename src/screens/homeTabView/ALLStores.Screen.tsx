@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+  Keyboard,
+  Pressable,
+} from 'react-native';
 import axios from 'axios';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
@@ -93,11 +100,20 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
 
       if (res.status === 200) {
         const categoriesWithId = res.data.map((item: any, index: number) => ({
-          all: 'All',
           ...item,
           id: item.id ?? index,
         }));
-        setCategories(categoriesWithId);
+
+        categoriesWithId.unshift({id: 0, name: 'All'});
+
+        const updatedCategories = categoriesWithId.map(
+          (item: any, index: number) => ({
+            ...item,
+            id: index,
+          }),
+        );
+
+        setCategories(updatedCategories);
       } else {
         console.log('Error');
       }
@@ -122,17 +138,17 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
   }, []);
 
   return (
-    <View style={styles.root}>
+    <Pressable onPress={Keyboard.dismiss} style={styles.root}>
       <Tables
         content="CATEGORIES"
         contentStyle={TypographyStyles.title3}
-        Right={
-          <Text
-            onPress={() => console.log('handle ')}
-            style={styles.tableRight}>
-            See All
-          </Text>
-        }
+        // Right={
+        //   <Text
+        //     onPress={() => console.log('handle ')}
+        //     style={styles.tableRight}>
+        //     See All
+        //   </Text>
+        // }
       />
       <View style={styles.categoryFilter}>
         <CategoryFilter
@@ -150,7 +166,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
           contentContainerStyle={styles.contentContainerStyle}
         />
       </ScrollView>
-    </View>
+    </Pressable>
   );
 };
 

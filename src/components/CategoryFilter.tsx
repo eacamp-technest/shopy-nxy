@@ -33,8 +33,6 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
 }) => {
   const [activeButton, setActiveButton] = useState<number>(0);
 
-  console.log(categories);
-
   const handleCategoryButton = (id: number) => setActiveButton(id);
 
   const renderCategory = ({item}: any) => {
