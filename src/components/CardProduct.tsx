@@ -9,6 +9,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageSourcePropType,
+  ActivityIndicator,
 } from 'react-native';
 import {Steppers} from './Steppers';
 import {SvgImage} from './SvgImage';
@@ -43,6 +44,15 @@ export const CardProduct: React.FC<ICardProduct> = ({
   imageStyle,
 }) => {
   const [heartSvg, setHeartSvg] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
+
+  const handleLoadStart = () => {
+    setLoading(true);
+  };
+
+  const handleLoadEnd = () => {
+    setLoading(false);
+  };
 
   const heartColor = () => {
     setHeartSvg(!heartSvg);
@@ -55,8 +65,17 @@ export const CardProduct: React.FC<ICardProduct> = ({
 
   const renderImage = () => (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+      {loading ? (
+        <ActivityIndicator
+          style={styles.activityIndicator}
+          size="small"
+          color={colors.bdazzledBlue.darkest}
+        />
+      ) : null}
       <Image
         resizeMode="cover"
+        onLoadEnd={handleLoadEnd}
+        onLoadStart={handleLoadStart}
         source={typeof images === 'string' ? {uri: images} : images}
         style={[
           styles.imageNormal,
@@ -174,5 +193,12 @@ const styles = StyleSheet.create({
   stars: {
     flexDirection: 'row',
     gap: normalize('horizontal', 5),
+  },
+  activityIndicator: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
 });

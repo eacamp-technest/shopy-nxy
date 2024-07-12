@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList, Keyboard, Pressable} from 'react-native';
 import axios from 'axios';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
@@ -12,10 +12,50 @@ import {ImageResources} from 'assets/VectorResources.g';
 import {CategoryFilter} from 'components/CategoryFilter';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
+import {useCategoryStore} from 'store/category-all-store/category.store';
+import Animated, {
+  runOnJS,
+  withTiming,
+  useSharedValue,
+  useDerivedValue,
+  useAnimatedStyle,
+  useAnimatedScrollHandler,
+} from 'react-native-reanimated';
 
 export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
   const [productData, setProductData] = useState();
   const [categories, setCategories] = useState<any>({});
+  const [disabledCategory, setDisabledCategory] = useState(true);
+
+  const translateY = useSharedValue(0);
+  const scrollOffset = useSharedValue(0);
+
+  const scrollHandler = useAnimatedScrollHandler(event => {
+    scrollOffset.value = event.contentOffset.y;
+    translateY.value = withTiming(event.contentOffset.y > 0 ? -120 : 0);
+  });
+
+  useDerivedValue(() => {
+    if (scrollOffset.value > 50 && disabledCategory) {
+      runOnJS(setDisabledCategory)(false);
+    } else if (scrollOffset.value <= 50 && !disabledCategory) {
+      runOnJS(setDisabledCategory)(true);
+    }
+  }, [scrollOffset, disabledCategory]);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{translateY: translateY.value}],
+    };
+  });
+
+  const scrollViewStyle = useAnimatedStyle(() => {
+    return {
+      paddingTop: disabledCategory ? 0 : 0,
+    };
+  });
+
+  const name = useCategoryStore().name.toLocaleLowerCase();
 
   const renderProduct = ({
     item,
@@ -92,12 +132,13 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
       });
 
       if (res.status === 200) {
-        const categoriesWithId = res.data.map((item: any, index: number) => ({
-          all: 'All',
-          ...item,
-          id: item.id ?? index,
-        }));
-        setCategories(categoriesWithId);
+        const categories = res.data;
+        categories.unshift('all');
+
+        const updatedCategories = categories.map((category: string) => {
+          return category.charAt(0).toUpperCase() + category.slice(1);
+        });
+        setCategories(updatedCategories);
       } else {
         console.log('Error');
       }
@@ -107,9 +148,23 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      if (name === 'all') {
+        const res = await axios({
+          method: 'GET',
+          url: ENDPOINTS.store.products,
+        });
+
+        if (res.status === 200) {
+          setProductData(res.data.products);
+        } else {
+          console.log('Error');
+        }
+        return;
+      }
+
       const res = await axios({
         method: 'GET',
-        url: ENDPOINTS.store.products,
+        url: `${ENDPOINTS.store.productsByCategory}/${name}`,
       });
 
       if (res.status === 200) {
@@ -119,28 +174,26 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
       }
     };
     fetchProducts();
-  }, []);
+  }, [name]);
 
   return (
-    <View style={styles.root}>
-      <Tables
-        content="CATEGORIES"
-        contentStyle={TypographyStyles.title3}
-        Right={
-          <Text
-            onPress={() => console.log('handle ')}
-            style={styles.tableRight}>
-            See All
-          </Text>
-        }
-      />
-      <View style={styles.categoryFilter}>
-        <CategoryFilter
-          categories={categories}
-          backgroundColor={styles.filterButton}
-        />
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
+    <Pressable onPress={Keyboard.dismiss} style={styles.root}>
+      {disabledCategory ? (
+        <Animated.View style={[styles.header, animatedStyle]}>
+          <Tables content="CATEGORIES" contentStyle={TypographyStyles.title3} />
+          <View style={styles.categoryFilter}>
+            <CategoryFilter
+              categories={categories}
+              backgroundColor={styles.filterButton}
+            />
+          </View>
+        </Animated.View>
+      ) : null}
+      <Animated.ScrollView
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
+        style={[styles.scroll, scrollViewStyle]}>
         <FlatList
           data={productData}
           numColumns={2}
@@ -149,8 +202,8 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.contentContainerStyle}
         />
-      </ScrollView>
-    </View>
+      </Animated.ScrollView>
+    </Pressable>
   );
 };
 
@@ -186,5 +239,8 @@ const styles = StyleSheet.create({
   },
   filterButton: {
     backgroundColor: colors.skyLightest,
+  },
+  header: {
+    zIndex: 1,
   },
 });

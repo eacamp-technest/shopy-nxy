@@ -52,6 +52,7 @@ export const MostPopularScreen: React.FC<
           ...item,
           id: item.id ?? index,
         }));
+
         setCategories(categoriesWithId);
       } else {
         console.log('Error');

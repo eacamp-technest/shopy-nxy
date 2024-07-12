@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, Pressable, Keyboard} from 'react-native';
 import {colors} from 'theme/colors';
 import {product} from 'mock/product';
 import {Input} from 'components/Input';
@@ -52,7 +52,7 @@ export const HomeScreen: React.FC<
       content={'light-content'}
       backColorSafeProvider={colors.bdazzledBlue.darkest}
       statusBarColorAndroid={colors.bdazzledBlue.darkest}>
-      <View style={styles.header}>
+      <Pressable onPress={Keyboard.dismiss} style={styles.header}>
         <NavBar
           title={'SHOPPAY'}
           leftColor={colors.white}
@@ -74,7 +74,7 @@ export const HomeScreen: React.FC<
             })
           }
         />
-      </View>
+      </Pressable>
       <TabView
         swipeEnabled={true}
         onIndexChange={setIndex}
