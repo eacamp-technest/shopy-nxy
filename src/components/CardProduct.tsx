@@ -66,7 +66,11 @@ export const CardProduct: React.FC<ICardProduct> = ({
   const renderImage = () => (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
       {loading ? (
-        <ActivityIndicator size="small" color={colors.bdazzledBlue.blueBase} />
+        <ActivityIndicator
+          style={styles.activityIndicator}
+          size="small"
+          color={colors.bdazzledBlue.darkest}
+        />
       ) : null}
       <Image
         resizeMode="cover"
@@ -189,5 +193,12 @@ const styles = StyleSheet.create({
   stars: {
     flexDirection: 'row',
     gap: normalize('horizontal', 5),
+  },
+  activityIndicator: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
 });
