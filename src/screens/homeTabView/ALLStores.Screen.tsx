@@ -19,10 +19,13 @@ import {ImageResources} from 'assets/VectorResources.g';
 import {CategoryFilter} from 'components/CategoryFilter';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
+import {useCategoryStore} from 'store/category-all-store/category.store';
 
 export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
   const [productData, setProductData] = useState();
   const [categories, setCategories] = useState<any>({});
+
+  const name = useCategoryStore().name.toLocaleLowerCase();
 
   const renderProduct = ({
     item,
@@ -99,20 +102,12 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
       });
 
       if (res.status === 200) {
-        const categoriesWithId = res.data.map((item: any, index: number) => ({
-          ...item,
-          id: item.id ?? index,
-        }));
+        const categories = res.data;
+        categories.unshift('all');
 
-        categoriesWithId.unshift({id: 0, name: 'All'});
-
-        const updatedCategories = categoriesWithId.map(
-          (item: any, index: number) => ({
-            ...item,
-            id: index,
-          }),
-        );
-
+        const updatedCategories = categories.map((category: string) => {
+          return category.charAt(0).toUpperCase() + category.slice(1);
+        });
         setCategories(updatedCategories);
       } else {
         console.log('Error');
@@ -123,9 +118,23 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      if (name === 'all') {
+        const res = await axios({
+          method: 'GET',
+          url: ENDPOINTS.store.products,
+        });
+
+        if (res.status === 200) {
+          setProductData(res.data.products);
+        } else {
+          console.log('Error');
+        }
+        return;
+      }
+
       const res = await axios({
         method: 'GET',
-        url: ENDPOINTS.store.products,
+        url: `${ENDPOINTS.store.productsByCategory}/${name}`,
       });
 
       if (res.status === 200) {
@@ -135,21 +144,11 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
       }
     };
     fetchProducts();
-  }, []);
+  }, [name]);
 
   return (
     <Pressable onPress={Keyboard.dismiss} style={styles.root}>
-      <Tables
-        content="CATEGORIES"
-        contentStyle={TypographyStyles.title3}
-        // Right={
-        //   <Text
-        //     onPress={() => console.log('handle ')}
-        //     style={styles.tableRight}>
-        //     See All
-        //   </Text>
-        // }
-      />
+      <Tables content="CATEGORIES" contentStyle={TypographyStyles.title3} />
       <View style={styles.categoryFilter}>
         <CategoryFilter
           categories={categories}

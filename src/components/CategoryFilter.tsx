@@ -13,11 +13,14 @@ import {normalize} from 'theme/metrics';
 import {FlashList} from '@shopify/flash-list';
 import {isIos} from 'constants/common.consts';
 import {TypographyStyles} from 'theme/typography';
+import {useCategoryStoreActions} from 'store/category-all-store';
 
 const deviceLineHeight = isIos ? 0 : 20;
 
 interface ICategoryFilter {
   categories?: any;
+  activeButton?: number;
+  activeName?: string;
   titleColor?: StyleProp<TextStyle>;
   backgroundColor?: StyleProp<ViewStyle>;
 }
@@ -33,24 +36,29 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
 }) => {
   const [activeButton, setActiveButton] = useState<number>(0);
 
-  const handleCategoryButton = (id: number) => setActiveButton(id);
+  const {addCategory} = useCategoryStoreActions();
 
-  const renderCategory = ({item}: any) => {
+  const handleCategoryButton = (id: number, name: string) => {
+    addCategory(name);
+    setActiveButton(id);
+  };
+
+  const renderCategory = ({item, index}: any) => {
     return (
       <TouchableOpacity
-        onPress={() => handleCategoryButton(item.id)}
+        onPress={() => handleCategoryButton(index, item)}
         style={[
           styles.main,
           backgroundColor,
-          activeButton === item.id ? styles.mainPress : null,
+          activeButton === index ? styles.mainPress : null,
         ]}>
         <Text
           style={[
             styles.title,
             titleColor,
-            activeButton === item.id ? styles.titlePress : null,
+            activeButton === index ? styles.titlePress : null,
           ]}>
-          {item.name}
+          {item}
         </Text>
       </TouchableOpacity>
     );
@@ -65,7 +73,6 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
       renderItem={renderCategory}
       showsHorizontalScrollIndicator={false}
       ItemSeparatorComponent={itemSeparatorComponent}
-      keyExtractor={(item: any) => item.id.toString()}
       contentContainerStyle={styles.contentContainerStyle}
     />
   );
