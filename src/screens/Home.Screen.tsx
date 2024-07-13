@@ -11,18 +11,18 @@ import {StackRoutes, TabRoutes} from 'router/routes';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
-import {InStoresScreenTab} from './homeTabView/InStores.Screen';
+import {ProductInfosScreenTab} from './homeTabView/ProductInfo.Screen';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {ALLStoresScreenTab} from './homeTabView/ALLStores.Screen';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 const renderScene = SceneMap({
   [StackRoutes.allStores]: ALLStoresScreenTab,
-  [StackRoutes.inStores]: InStoresScreenTab,
+  [StackRoutes.productInfo]: ProductInfosScreenTab,
 });
 const routes = [
   {key: StackRoutes.allStores, title: 'All Stores'},
-  {key: StackRoutes.inStores, title: 'In-Store'},
+  {key: StackRoutes.productInfo, title: 'Product-Info'},
 ];
 
 export const HomeScreen: React.FC<

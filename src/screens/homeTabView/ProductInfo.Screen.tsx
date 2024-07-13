@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {SceneRendererProps} from 'react-native-tab-view';
 
-export const InStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
+export const ProductInfosScreenTab: React.FC<SceneRendererProps> = ({}) => {
   return (
     <View style={styles.root}>
       <Text style={styles.text}>InStore</Text>
