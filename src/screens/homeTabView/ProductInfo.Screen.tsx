@@ -1,14 +1,24 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {colors} from 'theme/colors';
 import {SceneRendererProps} from 'react-native-tab-view';
+import {useProductInfoStore} from 'store/product-info/productInfo.store';
 
 export const ProductInfosScreenTab: React.FC<SceneRendererProps> = ({}) => {
-  return (
-    <View style={styles.root}>
-      <Text style={styles.text}>InStore</Text>
-    </View>
-  );
+  const {data} = useProductInfoStore();
+
+  const renderProduct = ({item, index}: any) => {
+    return (
+      <View style={styles.root}>
+        <Text>{item.id}</Text>
+        <Text>{item.category}</Text>
+        <Text>{item.description}</Text>
+        <Text>{item.rating}</Text>
+      </View>
+    );
+  };
+
+  return <FlatList data={data} renderItem={renderProduct} />;
 };
 
 const styles = StyleSheet.create({

@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   activityIndicator: {
     position: 'absolute',
     left: 0,
-    right: 0,
+    right: 12,
     top: 0,
     bottom: 0,
   },

@@ -21,11 +21,15 @@ import Animated, {
   useAnimatedStyle,
   useAnimatedScrollHandler,
 } from 'react-native-reanimated';
+import {StackRoutes} from 'router/routes';
+import {useProductInfoStoreActions} from 'store/product-info';
 
-export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
+export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
   const [productData, setProductData] = useState();
   const [categories, setCategories] = useState<any>({});
   const [disabledCategory, setDisabledCategory] = useState(true);
+
+  const {addProduct} = useProductInfoStoreActions();
 
   const translateY = useSharedValue(0);
   const scrollOffset = useSharedValue(0);
@@ -93,13 +97,13 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
 
     const renderOfStars = () => {
       let numberOfStars;
-      if (item.rating <= 2) {
+      if (item.rating <= 3) {
         numberOfStars = 1;
       } else if (item.rating > 3 && item.rating < 4) {
-        numberOfStars = 3;
-      } else if (item.rating >= 4) {
         numberOfStars = 4;
-      } else if (item.rating > 4.5) {
+      } else if (item.rating >= 4) {
+        numberOfStars = 5;
+      } else if (item.rating >= 4.1) {
         numberOfStars = 6;
       } else {
         numberOfStars = 0;
@@ -110,6 +114,26 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
 
     const numOfStars = renderOfStars();
 
+    const handleDateProductInfo = (idProduct: number) => {
+      const fetchProducts = async () => {
+        const res = await axios({
+          method: 'GET',
+          url: `${ENDPOINTS.store.productsByCategory}/${name}`,
+        });
+
+        if (res.status === 200) {
+          const filterDataProduct = res.data.products.filter(
+            item => item.id === idProduct,
+          );
+          addProduct(filterDataProduct);
+        } else {
+          console.log('Error');
+        }
+      };
+      fetchProducts();
+      jumpTo(StackRoutes.productInfo);
+    };
+
     return (
       <CardProduct
         key={index}
@@ -118,6 +142,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({}) => {
         price={item.price}
         title={item.title}
         style={styles.card}
+        onPress={() => handleDateProductInfo(item.id)}
         star={renderStars(numOfStars)}
         imageStyle={styles.imageStyles}
       />
