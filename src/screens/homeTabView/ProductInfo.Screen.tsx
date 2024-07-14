@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
 import {colors} from 'theme/colors';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {useProductInfoStore} from 'store/product-info/productInfo.store';
@@ -14,6 +14,8 @@ export const ProductInfosScreenTab: React.FC<SceneRendererProps> = ({}) => {
         <Text>{item.category}</Text>
         <Text>{item.description}</Text>
         <Text>{item.rating}</Text>
+        <Text>{item.price}</Text>
+        <Image height={100} width={100} source={{uri: item.images[0]}} />
       </View>
     );
   };
