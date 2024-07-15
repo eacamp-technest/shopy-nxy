@@ -114,7 +114,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
 
     const numOfStars = renderOfStars();
 
-    const handleDateProductInfo = (idProduct: number) => {
+    const handleDateProductInfo = (idProduct?: number) => {
       const fetchProducts = async () => {
         const res = await axios({
           method: 'GET',
@@ -123,7 +123,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
 
         if (res.status === 200) {
           const filterDataProduct = res.data.products.filter(
-            item => item.id === idProduct,
+            itemProduct => itemProduct.id === idProduct,
           );
           addProduct(filterDataProduct);
         } else {

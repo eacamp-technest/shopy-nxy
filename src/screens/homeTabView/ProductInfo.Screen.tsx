@@ -1,37 +1,99 @@
-import React from 'react';
-import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import {colors} from 'theme/colors';
+import {normalize} from 'theme/metrics';
+import {TypographyStyles} from 'theme/typography';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {useProductInfoStore} from 'store/product-info/productInfo.store';
+import {CommonStyles} from 'theme/commonStyles';
 
 export const ProductInfosScreenTab: React.FC<SceneRendererProps> = ({}) => {
   const {data} = useProductInfoStore();
 
+  const [loading, setLoading] = useState(true);
+
+  const handleLoadStart = () => {
+    setLoading(true);
+  };
+
+  const handleLoadEnd = () => {
+    setLoading(false);
+  };
+
   const renderProduct = ({item, index}: any) => {
     return (
-      <View style={styles.root}>
-        <Text>{item.id}</Text>
-        <Text>{item.category}</Text>
-        <Text>{item.description}</Text>
-        <Text>{item.rating}</Text>
-        <Text>{item.price}</Text>
-        <Image height={100} width={100} source={{uri: item.images[0]}} />
+      <View key={index} style={styles.root}>
+        <Text style={styles.price}>{item.title}</Text>
+        <Text style={styles.description}>{item.description}</Text>
+        {loading ? (
+          <ActivityIndicator
+            style={styles.activityIndicator}
+            size="large"
+            color={colors.bdazzledBlue.darkest}
+          />
+        ) : null}
+        <Image
+          height={300}
+          width={300}
+          onLoadEnd={handleLoadEnd}
+          onLoadStart={handleLoadStart}
+          source={{uri: item.images[0]}}
+        />
+        <Text style={styles.price}>{`Rating: ${item.rating}`}</Text>
+        <Text style={styles.price}>{`Price: ${item.price}$`}</Text>
       </View>
     );
   };
 
-  return <FlatList data={data} renderItem={renderProduct} />;
+  return (
+    <View style={styles.main}>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.contentContainerStyle}
+        data={data}
+        renderItem={renderProduct}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
   root: {
+    gap: normalize('vertical', 10),
+    paddingHorizontal: normalize('horizontal', 24),
+    ...CommonStyles.alignJustifyCenter,
+  },
+  main: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
+  },
+  contentContainerStyle: {
+    paddingVertical: normalize('vertical', 30),
   },
   text: {
-    fontSize: 40,
+    fontSize: normalize('font', 40),
     color: colors.bdazzledBlue.darkest,
+  },
+  description: {
+    ...TypographyStyles.RegularNormalRegular,
+    color: colors.ink.base,
+  },
+  price: {
+    ...TypographyStyles.RegularNoneSemibold,
+    color: colors.ink.base,
+  },
+  activityIndicator: {
+    position: 'absolute',
+    left: 0,
+    right: 12,
+    top: 0,
+    bottom: 0,
   },
 });
