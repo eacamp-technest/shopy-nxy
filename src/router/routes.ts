@@ -23,7 +23,7 @@ export enum StackRoutes {
   allItems = 'allItems',
   boards = 'boards',
   allStores = 'allStores',
-  inStores = 'inStores',
+  productInfo = 'productInfo',
   profile = 'profile',
   order = 'order',
   processing = 'processing',

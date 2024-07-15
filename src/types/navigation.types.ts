@@ -40,7 +40,7 @@ export type NavigationParamList = {
   [StackRoutes.allItems]: undefined;
   [StackRoutes.boards]: undefined;
   [StackRoutes.allStores]: undefined;
-  [StackRoutes.inStores]: undefined;
+  [StackRoutes.productInfo]: undefined;
   [StackRoutes.profile]: undefined;
   [StackRoutes.order]: undefined;
   [StackRoutes.processing]: undefined;
