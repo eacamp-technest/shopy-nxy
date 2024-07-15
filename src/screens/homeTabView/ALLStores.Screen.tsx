@@ -123,7 +123,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
 
         if (res.status === 200) {
           const filterDataProduct = res.data.products.filter(
-            itemProduct => itemProduct.id === idProduct,
+            (itemProduct: ICardProduct) => itemProduct.id === idProduct,
           );
           addProduct(filterDataProduct);
         } else {
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
   },
   contentContainerStyle: {
     gap: normalize('vertical', 25),
-    paddingBottom: normalize('vertical', 150),
+    paddingBottom: normalize('vertical', 50),
   },
   filterButton: {
     backgroundColor: colors.skyLightest,

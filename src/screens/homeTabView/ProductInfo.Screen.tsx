@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {useProductInfoStore} from 'store/product-info/productInfo.store';
-import {CommonStyles} from 'theme/commonStyles';
 
 export const ProductInfosScreenTab: React.FC<SceneRendererProps> = ({}) => {
   const {data} = useProductInfoStore();
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   activityIndicator: {
     position: 'absolute',
     left: 0,
-    right: 12,
+    right: 0,
     top: 0,
     bottom: 0,
   },
