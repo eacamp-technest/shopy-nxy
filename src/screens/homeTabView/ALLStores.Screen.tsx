@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     color: colors.primary.base,
   },
   card: {
-    width: '51.8%',
+    width: '52%',
   },
   imageStyles: {
     width: cardWidth,

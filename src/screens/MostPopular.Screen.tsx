@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, ScrollView, FlatList} from 'react-native';
 import axios from 'axios';
 import {colors} from 'theme/colors';
-import {product} from 'mock/product';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
@@ -14,11 +13,15 @@ import {NavigationParamList} from 'types/navigation.types';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useCategoryStore} from 'store/category-all-store/category.store';
 
 export const MostPopularScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.mostPopular>
 > = ({navigation}) => {
-  const [categories, setCategories] = useState<any>({});
+  const [categoriesState, setCategoriesState] = useState<any>({});
+  const [productData, setProductData] = useState();
+
+  const name = useCategoryStore().name.toLocaleLowerCase();
 
   const renderProduct = ({
     item,
@@ -48,18 +51,49 @@ export const MostPopularScreen: React.FC<
       });
 
       if (res.status === 200) {
-        const categoriesWithId = res.data.map((item: any, index: number) => ({
-          ...item,
-          id: item.id ?? index,
-        }));
+        const categories = res.data;
+        categories.unshift('all');
 
-        setCategories(categoriesWithId);
+        const updatedCategories = categories.map((category: string) => {
+          return category.charAt(0).toUpperCase() + category.slice(1);
+        });
+        setCategoriesState(updatedCategories);
       } else {
         console.log('Error');
       }
     };
     fetchCategory();
   }, []);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      if (name === 'all') {
+        const res = await axios({
+          method: 'GET',
+          url: ENDPOINTS.store.products,
+        });
+
+        if (res.status === 200) {
+          setProductData(res.data.products);
+        } else {
+          console.log('Error');
+        }
+        return;
+      }
+
+      const res = await axios({
+        method: 'GET',
+        url: `${ENDPOINTS.store.productsByCategory}/${name}`,
+      });
+
+      if (res.status === 200) {
+        setProductData(res.data.products);
+      } else {
+        console.log('Error');
+      }
+    };
+    fetchProducts();
+  }, [name]);
 
   return (
     <SafeTopProvider
@@ -79,7 +113,7 @@ export const MostPopularScreen: React.FC<
       </View>
       <View style={styles.categoryFilter}>
         <CategoryFilter
-          categories={categories}
+          categories={categoriesState}
           titleColor={styles.titleFilterColor}
           backgroundColor={styles.filterButton}
         />
@@ -87,7 +121,7 @@ export const MostPopularScreen: React.FC<
       {/* <View style={styles.extraContainer} /> */}
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         <FlatList
-          data={product}
+          data={productData}
           numColumns={2}
           scrollEnabled={false}
           renderItem={renderProduct}
@@ -121,14 +155,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize('horizontal', 24),
   },
   card: {
-    width: '51.8%',
+    width: '50.7%',
   },
   imageStyles: {
     width: cardWidth,
   },
   contentContainerStyle: {
     gap: normalize('vertical', 25),
-    paddingBottom: normalize('vertical', 200),
+    paddingBottom: normalize('vertical', 230),
   },
   extraContainer: {
     height: 100,

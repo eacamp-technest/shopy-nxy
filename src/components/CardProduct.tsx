@@ -64,13 +64,14 @@ export const CardProduct: React.FC<ICardProduct> = ({
   const isProduct = type === 'product';
 
   const renderImage = () => (
-    <TouchableOpacity
-      style={CommonStyles.alignJustifyCenter}
-      onPress={onPress}
-      activeOpacity={0.8}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
       {loading ? (
         <ActivityIndicator
-          style={styles.activityIndicator}
+          style={[
+            isProduct
+              ? styles.activityIndicatorIsProduct
+              : styles.activityIndicator,
+          ]}
           size="small"
           color={colors.bdazzledBlue.darkest}
         />
@@ -201,6 +202,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
+    top: 0,
+    bottom: 0,
+  },
+  activityIndicatorIsProduct: {
+    position: 'absolute',
+    left: 0,
+    right: 12,
     top: 0,
     bottom: 0,
   },
