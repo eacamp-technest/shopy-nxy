@@ -64,7 +64,10 @@ export const CardProduct: React.FC<ICardProduct> = ({
   const isProduct = type === 'product';
 
   const renderImage = () => (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+    <TouchableOpacity
+      style={CommonStyles.alignJustifyCenter}
+      onPress={onPress}
+      activeOpacity={0.8}>
       {loading ? (
         <ActivityIndicator
           style={styles.activityIndicator}
