@@ -51,12 +51,24 @@ export const ProductInfosScreenTab: React.FC<SceneRendererProps> = ({
           />
         ) : null}
         <Image
-          height={300}
-          width={300}
+          height={250}
+          width={250}
           onLoadEnd={handleLoadEnd}
           onLoadStart={handleLoadStart}
           source={{uri: item.images[0]}}
         />
+        <Text style={styles.price}>{`Category: ${item.category}`}</Text>
+        <Text
+          style={styles.price}>{`Warranty: ${item.warrantyInformation}`}</Text>
+        <Text style={styles.price}>Dimensions</Text>
+        <Text
+          style={styles.description}>{`Depth: ${item.dimensions.depth}`}</Text>
+        <Text
+          style={
+            styles.description
+          }>{`Height: ${item.dimensions.height}`}</Text>
+        <Text
+          style={styles.description}>{`Width: ${item.dimensions.width}`}</Text>
         <Text style={styles.price}>{`Rating: ${item.rating}`}</Text>
         <Text style={styles.price}>{`Price: ${item.price}$`}</Text>
       </View>
@@ -121,6 +133,7 @@ const styles = StyleSheet.create({
     color: colors.bdazzledBlue.darkest,
   },
   description: {
+    textAlign: 'center',
     ...TypographyStyles.RegularNormalRegular,
     color: colors.ink.base,
   },
