@@ -184,9 +184,10 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
         </View>
       </View>
       <ScrollView
+        style={styles.scroll}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
-        style={styles.scroll}>
+        contentContainerStyle={styles.contentContainerStyleScroll}>
         <FlatList
           data={productData}
           numColumns={2}
@@ -230,6 +231,10 @@ const styles = StyleSheet.create({
     gap: normalize('vertical', 25),
     paddingBottom: normalize('vertical', 50),
   },
+  contentContainerStyleScroll: {
+    paddingBottom: normalize('vertical', 120),
+  },
+
   filterButton: {
     backgroundColor: colors.skyLightest,
   },
