@@ -2,22 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  FlatList,
   Image,
-  ActivityIndicator,
   Alert,
   Modal,
-  Pressable,
+  FlatList,
+  StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {StackRoutes} from 'router/routes';
 import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {useProductInfoStore} from 'store/product-info/productInfo.store';
-import {StackRoutes} from 'router/routes';
 
 export const ProductInfosScreenTab: React.FC<SceneRendererProps> = ({
   jumpTo,
@@ -31,11 +30,7 @@ export const ProductInfosScreenTab: React.FC<SceneRendererProps> = ({
   const handleLoadEnd = () => setLoading(false);
 
   useEffect(() => {
-    if (data) {
-      setModalVisible(true);
-      return;
-    }
-    setModalVisible(false);
+    data?.length === 0 && setModalVisible(true);
   }, [data]);
 
   const handleModal = () => {
@@ -70,7 +65,7 @@ export const ProductInfosScreenTab: React.FC<SceneRendererProps> = ({
 
   return (
     <View style={styles.main}>
-      {data === null || data.length === 0 ? (
+      {modalVisible ? (
         <View style={styles.centeredView}>
           <Modal
             animationType="fade"
@@ -140,18 +135,17 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
   },
-
   centeredView: {
     flex: 1,
+    marginTop: normalize('vertical', 22),
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
   },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
     padding: 35,
+    borderRadius: 20,
+    backgroundColor: colors.white,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -165,13 +159,9 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: colors.bdazzledBlue.blueBase,
   },
   textStyle: {
     color: 'white',
@@ -179,7 +169,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   modalText: {
-    marginBottom: 15,
     textAlign: 'center',
+    marginBottom: normalize('vertical', 15),
+    ...TypographyStyles.title3,
   },
 });
