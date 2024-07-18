@@ -1,9 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, FlatList, Keyboard, Pressable} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Keyboard,
+  Pressable,
+  ScrollView,
+} from 'react-native';
 import axios from 'axios';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {Tables} from 'components/Tables';
+import {StackRoutes} from 'router/routes';
 import {ENDPOINTS} from 'services/Endpoints';
 import {SvgImage} from 'components/SvgImage';
 import {cardWidth} from 'utils/home.screen.size';
@@ -13,51 +21,14 @@ import {CategoryFilter} from 'components/CategoryFilter';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
 import {useCategoryStore} from 'store/category-all-store/category.store';
-import Animated, {
-  runOnJS,
-  withTiming,
-  useSharedValue,
-  useDerivedValue,
-  useAnimatedStyle,
-  useAnimatedScrollHandler,
-} from 'react-native-reanimated';
-import {StackRoutes} from 'router/routes';
+
 import {useProductInfoStoreActions} from 'store/product-info';
 
 export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
   const [productData, setProductData] = useState();
   const [categories, setCategories] = useState<any>({});
-  const [disabledCategory, setDisabledCategory] = useState(true);
 
   const {addProduct} = useProductInfoStoreActions();
-
-  const translateY = useSharedValue(0);
-  const scrollOffset = useSharedValue(0);
-
-  const scrollHandler = useAnimatedScrollHandler(event => {
-    scrollOffset.value = event.contentOffset.y;
-    translateY.value = withTiming(event.contentOffset.y > 0 ? -120 : 0);
-  });
-
-  useDerivedValue(() => {
-    if (scrollOffset.value > 50 && disabledCategory) {
-      runOnJS(setDisabledCategory)(false);
-    } else if (scrollOffset.value <= 50 && !disabledCategory) {
-      runOnJS(setDisabledCategory)(true);
-    }
-  }, [scrollOffset, disabledCategory]);
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{translateY: translateY.value}],
-    };
-  });
-
-  const scrollViewStyle = useAnimatedStyle(() => {
-    return {
-      paddingTop: disabledCategory ? 0 : 0,
-    };
-  });
 
   const name = useCategoryStore().name.toLocaleLowerCase();
 
@@ -203,22 +174,19 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
 
   return (
     <Pressable onPress={Keyboard.dismiss} style={styles.root}>
-      {disabledCategory ? (
-        <Animated.View style={[styles.header, animatedStyle]}>
-          <Tables content="CATEGORIES" contentStyle={TypographyStyles.title3} />
-          <View style={styles.categoryFilter}>
-            <CategoryFilter
-              categories={categories}
-              backgroundColor={styles.filterButton}
-            />
-          </View>
-        </Animated.View>
-      ) : null}
-      <Animated.ScrollView
-        onScroll={scrollHandler}
+      <View style={styles.header}>
+        <Tables content="CATEGORIES" contentStyle={TypographyStyles.title3} />
+        <View style={styles.categoryFilter}>
+          <CategoryFilter
+            categories={categories}
+            backgroundColor={styles.filterButton}
+          />
+        </View>
+      </View>
+      <ScrollView
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
-        style={[styles.scroll, scrollViewStyle]}>
+        style={styles.scroll}>
         <FlatList
           data={productData}
           numColumns={2}
@@ -227,7 +195,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.contentContainerStyle}
         />
-      </Animated.ScrollView>
+      </ScrollView>
     </Pressable>
   );
 };
