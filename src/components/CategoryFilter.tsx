@@ -7,10 +7,10 @@ import {
   StyleSheet,
   TextStyle,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
-import {FlashList} from '@shopify/flash-list';
 import {isIos} from 'constants/common.consts';
 import {TypographyStyles} from 'theme/typography';
 import {useCategoryStoreActions} from 'store/category-all-store';
@@ -65,10 +65,10 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
   };
 
   return (
-    <FlashList
+    <FlatList
       horizontal
       data={categories}
-      estimatedItemSize={30}
+      // estimatedItemSize={30}
       extraData={activeButton}
       renderItem={renderCategory}
       showsHorizontalScrollIndicator={false}

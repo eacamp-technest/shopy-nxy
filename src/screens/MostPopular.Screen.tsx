@@ -11,17 +11,20 @@ import {ImageResources} from 'assets/VectorResources.g';
 import {CategoryFilter} from 'components/CategoryFilter';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
+import {useMostPopularStoreActions} from 'store/most-popular';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useCategoryStore} from 'store/category-all-store/category.store';
+import {useMostPopularStore} from 'store/most-popular/mostPopular.store';
 
 export const MostPopularScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.mostPopular>
 > = ({navigation}) => {
-  const [categoriesState, setCategoriesState] = useState<any>({});
   const [productData, setProductData] = useState();
 
   const name = useCategoryStore().name.toLocaleLowerCase();
+  const {categories} = useMostPopularStore();
+  const {fetchCategories} = useMostPopularStoreActions();
 
   const renderProduct = ({
     item,
@@ -44,26 +47,10 @@ export const MostPopularScreen: React.FC<
   };
 
   useEffect(() => {
-    const fetchCategory = async () => {
-      const res = await axios({
-        method: 'GET',
-        url: ENDPOINTS.store.categories,
-      });
-
-      if (res.status === 200) {
-        const categories = res.data;
-        categories.unshift('all');
-
-        const updatedCategories = categories.map((category: string) => {
-          return category.charAt(0).toUpperCase() + category.slice(1);
-        });
-        setCategoriesState(updatedCategories);
-      } else {
-        console.log('Error');
-      }
-    };
-    fetchCategory();
-  }, []);
+    if (categories.length === 0) {
+      fetchCategories();
+    }
+  }, [categories, fetchCategories]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -113,7 +100,7 @@ export const MostPopularScreen: React.FC<
       </View>
       <View style={styles.categoryFilter}>
         <CategoryFilter
-          categories={categoriesState}
+          categories={categories}
           titleColor={styles.titleFilterColor}
           backgroundColor={styles.filterButton}
         />
@@ -137,7 +124,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize('horizontal', 24),
   },
   categoryFilter: {
-    height: normalize('height', 100),
     paddingTop: normalize('vertical', 24),
     paddingLeft: normalize('horizontal', 24),
     paddingBottom: normalize('vertical', 32),
