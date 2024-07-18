@@ -118,7 +118,6 @@ export const MostPopularScreen: React.FC<
           backgroundColor={styles.filterButton}
         />
       </View>
-      {/* <View style={styles.extraContainer} /> */}
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         <FlatList
           data={productData}
@@ -163,10 +162,6 @@ const styles = StyleSheet.create({
   contentContainerStyle: {
     gap: normalize('vertical', 25),
     paddingBottom: normalize('vertical', 230),
-  },
-  extraContainer: {
-    height: 100,
-    backgroundColor: colors.bdazzledBlue.darkest,
   },
   filterButton: {
     backgroundColor: colors.bdazzledBlue.blueBase,
