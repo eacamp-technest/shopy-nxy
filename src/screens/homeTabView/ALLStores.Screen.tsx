@@ -220,7 +220,6 @@ const styles = StyleSheet.create({
     paddingBottom: normalize('vertical', 50),
   },
   contentContainerStyleScroll: {
-    flex: 1,
     paddingBottom: normalize('vertical', 120),
   },
 

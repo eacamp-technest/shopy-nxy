@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize('horizontal', 24),
   },
   contentContainer: {
-    flex: 1,
     paddingVertical: normalize('vertical', 32),
   },
   flashVertical: {
