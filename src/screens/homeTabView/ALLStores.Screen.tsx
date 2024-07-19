@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {
   View,
-  StyleSheet,
   FlatList,
   Keyboard,
   Pressable,
+  StyleSheet,
   ScrollView,
 } from 'react-native';
 import axios from 'axios';
@@ -113,9 +113,9 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
         price={item.price}
         title={item.title}
         style={styles.card}
-        onPress={() => handleDateProductInfo(item.id)}
         star={renderStars(numOfStars)}
         imageStyle={styles.imageStyles}
+        onPress={() => handleDateProductInfo(item.id)}
       />
     );
   };
@@ -128,15 +128,13 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
       });
 
       if (res.status === 200) {
-        const categories = res.data;
-        categories.unshift('all');
+        const categoriesAll = res.data;
+        categoriesAll.unshift('all');
 
-        const updatedCategories = categories.map((category: string) => {
+        const updatedCategories = categoriesAll.map((category: string) => {
           return category.charAt(0).toUpperCase() + category.slice(1);
         });
         setCategories(updatedCategories);
-      } else {
-        console.log('Error');
       }
     };
     fetchCategory();
@@ -149,12 +147,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
           method: 'GET',
           url: ENDPOINTS.store.products,
         });
-
-        if (res.status === 200) {
-          setProductData(res.data.products);
-        } else {
-          console.log('Error');
-        }
+        res.status === 200 && setProductData(res.data.products);
         return;
       }
 
@@ -162,12 +155,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
         method: 'GET',
         url: `${ENDPOINTS.store.productsByCategory}/${name}`,
       });
-
-      if (res.status === 200) {
-        setProductData(res.data.products);
-      } else {
-        console.log('Error');
-      }
+      res.status === 200 && setProductData(res.data.products);
     };
     fetchProducts();
   }, [name]);
@@ -232,6 +220,7 @@ const styles = StyleSheet.create({
     paddingBottom: normalize('vertical', 50),
   },
   contentContainerStyleScroll: {
+    flex: 1,
     paddingBottom: normalize('vertical', 120),
   },
 
