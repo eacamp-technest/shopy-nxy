@@ -21,11 +21,12 @@ const ItemSeparatorComponent = () => {
   return <View style={styles.flashVertical} />;
 };
 
-export const ALLItemsScreen: React.FC<SceneRendererProps> = ({}) => {
-  const [newData, setNewData] = useState<IProduct[]>();
+export const ALLItemsScreen: React.FC<SceneRendererProps> = () => {
   const {navigate} = useNavigation();
 
-  const {category} = useAllItemsStore();
+  const [newData, setNewData] = useState<IProduct[]>();
+
+  const {allCategory} = useAllItemsStore();
   const {fetchCategory} = useAllItemsStoreActions();
 
   const handleNavigate = (id?: number) => {
@@ -60,12 +61,6 @@ export const ALLItemsScreen: React.FC<SceneRendererProps> = ({}) => {
       />
     );
   };
-
-  // useEffect(() => {
-  //   if (category.length > 0) {
-  //     setCat(category[0].name);
-  //   }
-  // }, [category]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -106,6 +101,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize('horizontal', 24),
   },
   contentContainer: {
+    flex: 1,
     paddingVertical: normalize('vertical', 32),
   },
   flashVertical: {

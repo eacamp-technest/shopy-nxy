@@ -113,9 +113,9 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
         price={item.price}
         title={item.title}
         style={styles.card}
-        onPress={() => handleDateProductInfo(item.id)}
         star={renderStars(numOfStars)}
         imageStyle={styles.imageStyles}
+        onPress={() => handleDateProductInfo(item.id)}
       />
     );
   };
@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
     paddingBottom: normalize('vertical', 50),
   },
   contentContainerStyleScroll: {
+    flex: 1,
     paddingBottom: normalize('vertical', 120),
   },
 

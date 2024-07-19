@@ -22,7 +22,7 @@ export type TTypeCard = 'product' | 'list' | 'add' | 'save';
 
 export interface ICardProduct {
   id?: number;
-  title: string;
+  title?: string;
   price?: number;
   type?: TTypeCard;
   star?: any;

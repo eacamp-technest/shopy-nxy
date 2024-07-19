@@ -4,8 +4,8 @@ import {ENDPOINTS} from 'services/Endpoints';
 import {IAllItemsStore} from './all-items.types';
 
 const initial: Omit<IAllItemsStore, 'actions'> = {
-  category: [],
-  items: '',
+  allCategory: [],
+  items: [],
 };
 
 export const useAllItemsStore = create<IAllItemsStore>(set => ({
@@ -19,7 +19,7 @@ export const useAllItemsStore = create<IAllItemsStore>(set => ({
 
       if (res.status === 200) {
         set(state => ({
-          category: [...state.category, ...res.data],
+          allCategory: [...state.allCategory, ...res.data],
         }));
       } else {
         console.log('Error');

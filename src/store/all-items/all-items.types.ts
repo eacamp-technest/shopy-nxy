@@ -3,7 +3,7 @@ interface IAllItemsStoreActions {
 }
 
 export interface IAllItemsStore {
-  category: any[];
-  items: string;
+  allCategory: any[];
+  items: string[];
   actions: IAllItemsStoreActions;
 }
