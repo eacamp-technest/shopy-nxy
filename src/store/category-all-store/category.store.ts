@@ -2,7 +2,7 @@ import {create} from 'zustand';
 import {ICategoryStore} from './category.types';
 
 const initial: Omit<ICategoryStore, 'actions'> = {
-  name: '',
+  name: 'all',
 };
 
 export const useCategoryStore = create<ICategoryStore>(set => ({
