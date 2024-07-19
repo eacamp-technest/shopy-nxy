@@ -1,5 +1,11 @@
-import React, {Fragment} from 'react';
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import React, {Fragment, useState} from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ImageBackground,
+  ActivityIndicator,
+} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {Button} from 'components/Button';
@@ -12,13 +18,28 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export const ProductDetailScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.productDetail>
-> = ({navigation}) => {
+> = ({navigation, route}) => {
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const handleLoadStart = () => setLoading(true);
+  const handleLoadEnd = () => setLoading(false);
   return (
     <Fragment>
       <ImageBackground
+        onLoadStart={handleLoadStart}
+        onLoadEnd={handleLoadEnd}
         style={styles.root}
-        source={require('../assets/images/productLarge1.png')}>
+        source={{uri: route.params.images}}>
         <SafeTopProvider>
+          <Fragment>
+            {loading ? (
+              <ActivityIndicator
+                size="large"
+                color={colors.primary.base}
+                style={styles.activityIndicator}
+              />
+            ) : null}
+          </Fragment>
           <View style={styles.navbar}>
             <NavBar
               leftColor={colors.ink.base}
@@ -50,5 +71,12 @@ const styles = StyleSheet.create({
   },
   main: {
     paddingHorizontal: mainPadding,
+  },
+  activityIndicator: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
 });

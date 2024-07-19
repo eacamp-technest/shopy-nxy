@@ -46,15 +46,10 @@ export const CardProduct: React.FC<ICardProduct> = ({
   imageStyle,
 }) => {
   const [heartSvg, setHeartSvg] = useState<boolean>(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const handleLoadStart = () => {
-    setLoading(true);
-  };
-
-  const handleLoadEnd = () => {
-    setLoading(false);
-  };
+  const handleLoadStart = () => setLoading(true);
+  const handleLoadEnd = () => setLoading(false);
 
   const heartColor = () => {
     setHeartSvg(!heartSvg);

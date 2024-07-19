@@ -128,10 +128,10 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
       });
 
       if (res.status === 200) {
-        const categories = res.data;
-        categories.unshift('all');
+        const categoriesAll = res.data;
+        categoriesAll.unshift('all');
 
-        const updatedCategories = categories.map((category: string) => {
+        const updatedCategories = categoriesAll.map((category: string) => {
           return category.charAt(0).toUpperCase() + category.slice(1);
         });
         setCategories(updatedCategories);
