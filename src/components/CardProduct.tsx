@@ -27,6 +27,7 @@ export interface ICardProduct {
   type?: TTypeCard;
   star?: any;
   rating?: any;
+  brand?: string;
   images?: ImageSourcePropType;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
@@ -41,6 +42,7 @@ export const CardProduct: React.FC<ICardProduct> = ({
   style,
   onPress,
   star,
+  brand,
   imageStyle,
 }) => {
   const [heartSvg, setHeartSvg] = useState<boolean>(false);
@@ -121,7 +123,7 @@ export const CardProduct: React.FC<ICardProduct> = ({
         <Fragment>
           {renderPrice()}
           <View style={CommonStyles.alignCenterJustifyBetweenRow}>
-            <Text style={styles.textSave}>Move to Bag</Text>
+            <Text style={styles.textSave}>{brand}</Text>
             <SvgImage
               isPressable={true}
               onPress={heartColor}
