@@ -18,6 +18,9 @@ export interface IProduct {
   title: string;
   images: string;
   price: string;
+  height: string;
+  width: string;
+  dimensions: any;
 }
 
 const ItemSeparatorComponent = () => {
@@ -37,6 +40,8 @@ export const ALLItemsScreen: React.FC<SceneRendererProps> = () => {
     let category;
     let title;
     let price;
+    let height;
+    let width;
 
     newData?.forEach((item: IProduct) => {
       if (item.id === id) {
@@ -44,6 +49,8 @@ export const ALLItemsScreen: React.FC<SceneRendererProps> = () => {
         category = item.category?.toLocaleUpperCase();
         title = item.title;
         price = item.price;
+        width = item.dimensions.width;
+        height = item.dimensions.height;
       }
     });
 
@@ -52,6 +59,8 @@ export const ALLItemsScreen: React.FC<SceneRendererProps> = () => {
       title,
       price,
       category,
+      height,
+      width,
     });
   };
 

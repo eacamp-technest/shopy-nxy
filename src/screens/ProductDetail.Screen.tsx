@@ -14,6 +14,7 @@ import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
 import {Divider} from 'components/Divider';
 import {SvgImage} from 'components/SvgImage';
+import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
@@ -58,25 +59,33 @@ export const ProductDetailScreen: React.FC<
       </ImageBackground>
       <View style={styles.main}>
         <Text style={styles.category}>{route.params.category}</Text>
-        <View style={styles.container}>
+        <View style={CommonStyles.alignCenterJustifyBetweenRow}>
           <Text style={styles.title}>{route.params.title}</Text>
           <SvgImage
             color={colors.primary.base}
             source={ImageResources.heartWhite}
           />
         </View>
-        <View style={styles.container}>
+        <View style={CommonStyles.alignCenterJustifyBetweenRow}>
           <Text>STARTS</Text>
           <Text style={styles.price}>{`$${route.params.price}`}</Text>
         </View>
         <Divider height={'small'} />
-        <View style={styles.sizeContainer}>
+        <View style={CommonStyles.alignCenterJustifyBetweenRow}>
           <View style={styles.size}>
-            <Text>SIZE</Text>
-            <Text>W-xsax H-sxas</Text>
+            <Text style={TypographyStyles.RegularNoneSemibold}>SIZE</Text>
+            <Text
+              style={
+                styles.sizeText
+              }>{`H-${route.params.height} / W-${route.params.width}`}</Text>
           </View>
           <Text>ICON</Text>
         </View>
+        <View style={CommonStyles.alignCenterJustifyBetweenRow}>
+          <Text style={TypographyStyles.RegularNoneSemibold}>COLORS</Text>
+          <Text>COLOR ICON</Text>
+        </View>
+        <View style={styles.extraView} />
         <Button position={'center'} text={'Add to cart'} />
       </View>
     </ScrollView>
@@ -96,7 +105,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: mainPadding,
     paddingTop: normalize('vertical', 32),
     paddingBottom: normalize('vertical', 21),
-    gap: normalize('vertical', 22),
+    gap: normalize('vertical', 24),
   },
   activityIndicator: {
     position: 'absolute',
@@ -104,11 +113,6 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-  },
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
   category: {
     ...TypographyStyles.RegularTightSemibold,
@@ -125,9 +129,11 @@ const styles = StyleSheet.create({
   size: {
     gap: normalize('vertical', 8),
   },
-  sizeContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  sizeText: {
+    ...TypographyStyles.SmallTightRegular,
+    color: colors.skyDark,
+  },
+  extraView: {
+    height: normalize('height', 20),
   },
 });
