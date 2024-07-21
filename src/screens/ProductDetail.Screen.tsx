@@ -5,12 +5,16 @@ import {
   StyleSheet,
   ImageBackground,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {Button} from 'components/Button';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
+import {Divider} from 'components/Divider';
+import {SvgImage} from 'components/SvgImage';
+import {TypographyStyles} from 'theme/typography';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
@@ -24,7 +28,7 @@ export const ProductDetailScreen: React.FC<
   const handleLoadStart = () => setLoading(true);
   const handleLoadEnd = () => setLoading(false);
   return (
-    <Fragment>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <ImageBackground
         onLoadStart={handleLoadStart}
         onLoadEnd={handleLoadEnd}
@@ -53,10 +57,29 @@ export const ProductDetailScreen: React.FC<
         </SafeTopProvider>
       </ImageBackground>
       <View style={styles.main}>
-        <Text>HELLO</Text>
+        <Text style={styles.category}>{route.params.category}</Text>
+        <View style={styles.container}>
+          <Text style={styles.title}>{route.params.title}</Text>
+          <SvgImage
+            color={colors.primary.base}
+            source={ImageResources.heartWhite}
+          />
+        </View>
+        <View style={styles.container}>
+          <Text>STARTS</Text>
+          <Text style={styles.price}>{`$${route.params.price}`}</Text>
+        </View>
+        <Divider height={'small'} />
+        <View style={styles.sizeContainer}>
+          <View style={styles.size}>
+            <Text>SIZE</Text>
+            <Text>W-xsax H-sxas</Text>
+          </View>
+          <Text>ICON</Text>
+        </View>
         <Button position={'center'} text={'Add to cart'} />
       </View>
-    </Fragment>
+    </ScrollView>
   );
 };
 
@@ -71,6 +94,9 @@ const styles = StyleSheet.create({
   },
   main: {
     paddingHorizontal: mainPadding,
+    paddingTop: normalize('vertical', 32),
+    paddingBottom: normalize('vertical', 21),
+    gap: normalize('vertical', 22),
   },
   activityIndicator: {
     position: 'absolute',
@@ -78,5 +104,30 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
+  },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  category: {
+    ...TypographyStyles.RegularTightSemibold,
+    color: colors.primary.base,
+  },
+  title: {
+    ...TypographyStyles.title3,
+    color: colors.ink.base,
+  },
+  price: {
+    ...TypographyStyles.LargeNoneSemibold,
+    color: colors.ink.base,
+  },
+  size: {
+    gap: normalize('vertical', 8),
+  },
+  sizeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });

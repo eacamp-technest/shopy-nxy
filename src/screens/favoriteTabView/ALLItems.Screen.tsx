@@ -12,9 +12,12 @@ import {SceneRendererProps} from 'react-native-tab-view';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
 import {useAllItemsStore} from 'store/all-items/all-Items.store';
 
-interface IProduct {
+export interface IProduct {
   id: number;
-  images: string[];
+  category: string;
+  title: string;
+  images: string;
+  price: string;
 }
 
 const ItemSeparatorComponent = () => {
@@ -30,15 +33,25 @@ export const ALLItemsScreen: React.FC<SceneRendererProps> = () => {
   const {fetchCategory} = useAllItemsStoreActions();
 
   const handleNavigate = (id?: number) => {
-    let dataProductDetail;
+    let images;
+    let category;
+    let title;
+    let price;
+
     newData?.forEach((item: IProduct) => {
       if (item.id === id) {
-        dataProductDetail = item.images[0];
+        images = item.images[0];
+        category = item.category?.toLocaleUpperCase();
+        title = item.title;
+        price = item.price;
       }
     });
 
     navigate(StackRoutes.productDetail, {
-      images: dataProductDetail,
+      images,
+      title,
+      price,
+      category,
     });
   };
 
