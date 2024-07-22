@@ -21,20 +21,24 @@ import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useProductDetailStore} from 'store/product-detail/productDetail.store';
 
 export const ProductDetailScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.productDetail>
 > = ({navigation, route}) => {
   const [loading, setLoading] = useState<boolean>(true);
 
+  const {color} = useProductDetailStore();
+
   const handleLoadStart = () => setLoading(true);
   const handleLoadEnd = () => setLoading(false);
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <ImageBackground
         onLoadStart={handleLoadStart}
         onLoadEnd={handleLoadEnd}
-        style={styles.root}
+        style={[styles.root, color ? {backgroundColor: color} : null]}
         source={{uri: route.params.images}}>
         <SafeTopProvider>
           <Fragment>
@@ -68,7 +72,7 @@ export const ProductDetailScreen: React.FC<
           />
         </View>
         <View style={CommonStyles.alignCenterJustifyBetweenRow}>
-          <Text>STARTS</Text>
+          <Text style={styles.category}>{`Rating ${route.params.rating}`}</Text>
           <Text style={styles.price}>{`$${route.params.price}`}</Text>
         </View>
         <Divider height={'small'} />
@@ -80,7 +84,7 @@ export const ProductDetailScreen: React.FC<
                 styles.sizeText
               }>{`H-${route.params.height} / W-${route.params.width}`}</Text>
           </View>
-          <Text>ICON</Text>
+          <SvgImage source={ImageResources.plus} color={colors.ink.darkest} />
         </View>
         <View style={styles.colorContainer}>
           <PartialsColor title="COLOR" position="horizontal" />
@@ -104,13 +108,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: mainPadding,
     paddingTop: normalize('vertical', 32),
     paddingBottom: normalize('vertical', 21),
-    gap: normalize('vertical', 26),
+    gap: normalize('vertical', 22),
   },
   activityIndicator: {
     position: 'absolute',
+    top: 0,
     left: 0,
     right: 0,
-    top: 0,
     bottom: 0,
   },
   category: {
@@ -134,5 +138,6 @@ const styles = StyleSheet.create({
   },
   colorContainer: {
     gap: normalize('vertical', 21),
+    paddingTop: normalize('vertical', 24),
   },
 });

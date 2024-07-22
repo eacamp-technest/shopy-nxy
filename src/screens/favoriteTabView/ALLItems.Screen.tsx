@@ -20,6 +20,7 @@ export interface IProduct {
   price: string;
   height: string;
   width: string;
+  rating: string;
   dimensions: any;
 }
 
@@ -32,36 +33,31 @@ export const ALLItemsScreen: React.FC<SceneRendererProps> = () => {
 
   const [newData, setNewData] = useState<IProduct[]>();
 
-  const {allCategory} = useAllItemsStore();
+  // const {allCategory} = useAllItemsStore();
   const {fetchCategory} = useAllItemsStoreActions();
 
   const handleNavigate = (id?: number) => {
-    let images;
-    let category;
-    let title;
-    let price;
-    let height;
-    let width;
+    const items = newData?.find((item: IProduct) => item.id === id);
 
-    newData?.forEach((item: IProduct) => {
-      if (item.id === id) {
-        images = item.images[0];
-        category = item.category?.toLocaleUpperCase();
-        title = item.title;
-        price = item.price;
-        width = item.dimensions.width;
-        height = item.dimensions.height;
-      }
-    });
-
-    navigate(StackRoutes.productDetail, {
-      images,
-      title,
-      price,
-      category,
-      height,
-      width,
-    });
+    if (items) {
+      const {
+        images,
+        category,
+        title,
+        price,
+        dimensions: {width, height},
+        reviews,
+      } = items;
+      navigate(StackRoutes.productDetail, {
+        images: images[0],
+        category: category?.toLocaleUpperCase(),
+        title,
+        price,
+        width,
+        height,
+        rating: reviews[0].rating,
+      });
+    }
   };
 
   const renderProduct = ({

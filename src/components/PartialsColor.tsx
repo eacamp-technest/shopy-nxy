@@ -4,6 +4,7 @@ import {normalize} from 'theme/metrics';
 import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import {colorsHorizontal, colorsVertical} from 'theme/colors';
+import {useProductDetailActions} from 'store/product-detail';
 
 type TPosition = 'vertical' | 'horizontal';
 
@@ -16,11 +17,13 @@ export const PartialsColor: React.FC<IColors> = ({
   title,
   position = 'vertical',
 }) => {
-  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedColor, setSelectedColor] = useState<string>('');
+
+  const {handleColor} = useProductDetailActions();
 
   const data = position === 'horizontal' ? colorsHorizontal : colorsVertical;
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item}: {item: string}) => {
     return (
       <TouchableOpacity
         style={[
@@ -28,9 +31,14 @@ export const PartialsColor: React.FC<IColors> = ({
           {backgroundColor: item},
           selectedColor === item ? styles.selected : null,
         ]}
-        onPress={() => setSelectedColor(item)}
+        onPress={() => changeColor(item)}
       />
     );
+  };
+
+  const changeColor = (item: any) => {
+    setSelectedColor(item);
+    handleColor(item);
   };
 
   return (
@@ -54,9 +62,8 @@ export const PartialsColor: React.FC<IColors> = ({
 
 const styles = StyleSheet.create({
   horizontal: {
-    // backgroundColor: 'red',
-    gap: 85,
-    ...CommonStyles.alignCenterJustifyBetweenRow,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   vertical: {
     gap: normalize('vertical', 16),
@@ -69,12 +76,12 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
   },
   selected: {
-    borderColor: '#000',
     borderWidth: 1,
+    borderColor: '#000',
   },
   contentContainerStyle: {
-    gap: 16,
     flex: 1,
-    // backgroundColor: 'red',
+    justifyContent: 'flex-end',
+    gap: normalize('horizontal', 16),
   },
 });
