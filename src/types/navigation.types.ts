@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/native-stack';
 export type AppNavigation = NativeStackNavigationProp<NavigationParamList>;
 import {ICardProduct} from 'components/CardProduct';
+import {IProduct} from 'screens/favoriteTabView/ALLItems.Screen';
 
 interface ISearchInterface extends NativeStackNavigationOptions {
   items?: ICardProduct[];
@@ -35,7 +36,7 @@ export type NavigationParamList = {
   [StackRoutes.listMan]: undefined;
   [StackRoutes.listKids]: undefined;
   [StackRoutes.listTeens]: undefined;
-  [StackRoutes.productDetail]: {images?: string};
+  [StackRoutes.productDetail]: IProduct;
   [StackRoutes.reviewRating]: undefined;
   [StackRoutes.allItems]: undefined;
   [StackRoutes.boards]: undefined;

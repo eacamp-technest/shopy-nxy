@@ -12,9 +12,16 @@ import {SceneRendererProps} from 'react-native-tab-view';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
 import {useAllItemsStore} from 'store/all-items/all-Items.store';
 
-interface IProduct {
+export interface IProduct {
   id: number;
-  images: string[];
+  category: string;
+  title: string;
+  images: string;
+  price: string;
+  height: string;
+  width: string;
+  rating: string;
+  dimensions: any;
 }
 
 const ItemSeparatorComponent = () => {
@@ -26,20 +33,31 @@ export const ALLItemsScreen: React.FC<SceneRendererProps> = () => {
 
   const [newData, setNewData] = useState<IProduct[]>();
 
-  const {allCategory} = useAllItemsStore();
+  // const {allCategory} = useAllItemsStore();
   const {fetchCategory} = useAllItemsStoreActions();
 
   const handleNavigate = (id?: number) => {
-    let dataProductDetail;
-    newData?.forEach((item: IProduct) => {
-      if (item.id === id) {
-        dataProductDetail = item.images[0];
-      }
-    });
+    const items = newData?.find((item: IProduct) => item.id === id);
 
-    navigate(StackRoutes.productDetail, {
-      images: dataProductDetail,
-    });
+    if (items) {
+      const {
+        images,
+        category,
+        title,
+        price,
+        dimensions: {width, height},
+        reviews,
+      } = items;
+      navigate(StackRoutes.productDetail, {
+        images: images[0],
+        category: category?.toLocaleUpperCase(),
+        title,
+        price,
+        width,
+        height,
+        rating: reviews[0].rating,
+      });
+    }
   };
 
   const renderProduct = ({
