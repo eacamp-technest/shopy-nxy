@@ -87,3 +87,14 @@ export const colors = {
   inkDisabled: '#8d92b5',
   modal: '#131515CC',
 };
+
+export const colorsVertical = [
+  '#D9D9D9',
+  '#A9A9A9',
+  '#E4572E',
+  '#FFD791',
+  '#3A5BA0',
+  '#888888',
+];
+
+export const colorsHorizontal = ['#D9D9D9', '#E4572E', '#FFD791', '#3A5BA0'];

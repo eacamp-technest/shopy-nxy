@@ -16,6 +16,7 @@ import {Divider} from 'components/Divider';
 import {SvgImage} from 'components/SvgImage';
 import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
+import {PartialsColor} from 'components/PartialsColor';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
@@ -81,12 +82,10 @@ export const ProductDetailScreen: React.FC<
           </View>
           <Text>ICON</Text>
         </View>
-        <View style={CommonStyles.alignCenterJustifyBetweenRow}>
-          <Text style={TypographyStyles.RegularNoneSemibold}>COLORS</Text>
-          <Text>COLOR ICON</Text>
+        <View style={styles.colorContainer}>
+          <PartialsColor title="COLOR" position="horizontal" />
+          <Button position={'center'} text={'Add to cart'} />
         </View>
-        <View style={styles.extraView} />
-        <Button position={'center'} text={'Add to cart'} />
       </View>
     </ScrollView>
   );
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: mainPadding,
     paddingTop: normalize('vertical', 32),
     paddingBottom: normalize('vertical', 21),
-    gap: normalize('vertical', 24),
+    gap: normalize('vertical', 26),
   },
   activityIndicator: {
     position: 'absolute',
@@ -133,7 +132,7 @@ const styles = StyleSheet.create({
     ...TypographyStyles.SmallTightRegular,
     color: colors.skyDark,
   },
-  extraView: {
-    height: normalize('height', 20),
+  colorContainer: {
+    gap: normalize('vertical', 21),
   },
 });
