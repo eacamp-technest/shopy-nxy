@@ -4,10 +4,10 @@ import {isAndroid} from 'constants/common.consts';
 import {StyleProp, ViewStyle} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 
-type TStatusBar = 'light-content' | 'dark-content';
+export type TStatusBar = 'light-content' | 'dark-content';
 
 export interface ISafeContainer {
-  content?: TStatusBar | string;
+  content?: TStatusBar;
   statusBarColorAndroid?: string;
   backColorSafeProvider?: string;
   customStyles?: StyleProp<ViewStyle>;

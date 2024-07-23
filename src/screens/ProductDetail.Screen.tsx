@@ -16,6 +16,7 @@ import {Divider} from 'components/Divider';
 import {SvgImage} from 'components/SvgImage';
 import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
+import {TStatusBar} from 'types/safe.provider.types';
 import {PartialsColor} from 'components/PartialsColor';
 import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
@@ -29,7 +30,7 @@ export const ProductDetailScreen: React.FC<
   const [loading, setLoading] = useState<boolean>(true);
   const [stars, setStars] = useState<React.JSX.Element[]>([]);
   const [navColor, setNavColor] = useState<boolean>(true);
-  const [contentColor, setContentColor] = useState<string>('');
+  const [contentColor, setContentColor] = useState<TStatusBar>('dark-content');
 
   const {color} = useProductDetailStore();
 
@@ -95,11 +96,11 @@ export const ProductDetailScreen: React.FC<
           </Fragment>
           <View style={styles.navbar}>
             <NavBar
-              leftColor={navColor ? colors.ink.base : colors.white}
-              rightColor={navColor ? colors.ink.base : colors.white}
               leftIcon={ImageResources.chevronLeft}
               leftOnPress={() => navigation.goBack()}
               rightIcon={ImageResources.rightActionable}
+              leftColor={navColor ? colors.black : colors.white}
+              rightColor={navColor ? colors.black : colors.white}
               rightOnPress={() => navigation.navigate(StackRoutes.reviewRating)}
             />
           </View>
