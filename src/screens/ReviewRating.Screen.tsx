@@ -52,6 +52,8 @@ export const ReviewRatingScreen: React.FC<
     );
   };
 
+  const renderBackDrop = () => <View style={styles.backdrop} />;
+
   return (
     <SafeTopProvider backColorSafeProvider={colors.white}>
       <View style={styles.root}>
@@ -84,10 +86,11 @@ export const ReviewRatingScreen: React.FC<
         </View>
         <BottomSheetModal
           index={0}
-          ref={bottomSheetModalRef}
           snapPoints={snapPoints}
+          ref={bottomSheetModalRef}
           enablePanDownToClose={true}
           onChange={handleSheetChanges}
+          backdropComponent={renderBackDrop}
           handleIndicatorStyle={styles.handleIndicatorStyle}>
           <BottomSheetView style={styles.contentContainer}>
             <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
@@ -183,5 +186,9 @@ const styles = StyleSheet.create({
     height: normalize('height', 100),
     ...TypographyStyles.RegularNormalRegular,
     color: colors.ink.base,
+  },
+  backdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(19, 21, 21, 0.9)',
   },
 });
