@@ -2,7 +2,7 @@ import {create} from 'zustand';
 import {IProductDetail} from './productDetail.types';
 
 const initial: Omit<IProductDetail, 'actions'> = {
-  color: '',
+  color: '#D9D9D9',
 };
 
 export const useProductDetailStore = create<IProductDetail>(set => ({

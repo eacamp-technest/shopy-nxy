@@ -7,7 +7,7 @@ import {useFocusEffect} from '@react-navigation/native';
 type TStatusBar = 'light-content' | 'dark-content';
 
 export interface ISafeContainer {
-  content?: TStatusBar;
+  content?: TStatusBar | string;
   statusBarColorAndroid?: string;
   backColorSafeProvider?: string;
   customStyles?: StyleProp<ViewStyle>;

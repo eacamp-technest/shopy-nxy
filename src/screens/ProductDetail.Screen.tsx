@@ -28,8 +28,20 @@ export const ProductDetailScreen: React.FC<
 > = ({navigation, route}) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [stars, setStars] = useState<React.JSX.Element[]>([]);
+  const [navColor, setNavColor] = useState<boolean>(true);
+  const [contentColor, setContentColor] = useState<string>('');
 
   const {color} = useProductDetailStore();
+
+  useEffect(() => {
+    if (color === '#D9D9D9' || color === '#FFD791') {
+      setNavColor(true);
+      setContentColor('dark-content');
+      return;
+    }
+    setNavColor(false);
+    setContentColor('light-content');
+  }, [color, navColor]);
 
   const handleLoadStart = () => setLoading(true);
   const handleLoadEnd = () => setLoading(false);
@@ -71,7 +83,7 @@ export const ProductDetailScreen: React.FC<
         onLoadEnd={handleLoadEnd}
         style={[styles.root, color ? {backgroundColor: color} : null]}
         source={{uri: route.params.images}}>
-        <SafeTopProvider>
+        <SafeTopProvider content={contentColor}>
           <Fragment>
             {loading ? (
               <ActivityIndicator
@@ -83,8 +95,8 @@ export const ProductDetailScreen: React.FC<
           </Fragment>
           <View style={styles.navbar}>
             <NavBar
-              leftColor={colors.ink.base}
-              rightColor={colors.ink.base}
+              leftColor={navColor ? colors.ink.base : colors.white}
+              rightColor={navColor ? colors.ink.base : colors.white}
               leftIcon={ImageResources.chevronLeft}
               leftOnPress={() => navigation.goBack()}
               rightIcon={ImageResources.rightActionable}
