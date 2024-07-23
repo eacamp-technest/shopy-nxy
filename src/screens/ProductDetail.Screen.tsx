@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -27,11 +27,42 @@ export const ProductDetailScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.productDetail>
 > = ({navigation, route}) => {
   const [loading, setLoading] = useState<boolean>(true);
+  const [stars, setStars] = useState<React.JSX.Element[]>([]);
 
   const {color} = useProductDetailStore();
 
   const handleLoadStart = () => setLoading(true);
   const handleLoadEnd = () => setLoading(false);
+
+  useEffect(() => {
+    const handleStars = () => {
+      const totalStars = 6;
+      const starElements = [];
+
+      for (let index = 1; index <= totalStars; index++) {
+        if (Number(route.params.rating) >= index) {
+          starElements.push(
+            <SvgImage
+              key={index}
+              source={ImageResources.rating}
+              color={colors.yellow.base}
+            />,
+          );
+        } else {
+          starElements.push(
+            <SvgImage
+              key={index}
+              source={ImageResources.rating}
+              color={colors.skyLight}
+            />,
+          );
+        }
+      }
+      setStars(starElements);
+    };
+
+    handleStars();
+  }, [route.params.rating]);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -66,13 +97,14 @@ export const ProductDetailScreen: React.FC<
         <Text style={styles.category}>{route.params.category}</Text>
         <View style={CommonStyles.alignCenterJustifyBetweenRow}>
           <Text style={styles.title}>{route.params.title}</Text>
-          <SvgImage
-            color={colors.primary.base}
-            source={ImageResources.heartWhite}
-          />
+          <SvgImage color={colors.primary.base} source={ImageResources.heart} />
         </View>
         <View style={CommonStyles.alignCenterJustifyBetweenRow}>
-          <Text style={styles.category}>{`Rating ${route.params.rating}`}</Text>
+          <View style={styles.stars}>
+            {stars.map(el => (
+              <Fragment>{el}</Fragment>
+            ))}
+          </View>
           <Text style={styles.price}>{`$${route.params.price}`}</Text>
         </View>
         <Divider height={'small'} />
@@ -139,5 +171,9 @@ const styles = StyleSheet.create({
   colorContainer: {
     gap: normalize('vertical', 21),
     paddingTop: normalize('vertical', 24),
+  },
+  stars: {
+    flexDirection: 'row',
+    gap: normalize('horizontal', 3),
   },
 });
