@@ -77,6 +77,7 @@ export const colors = {
   },
   mellowApricot: '#FCF0E2',
   white: '#ffff',
+  black: '#000000',
   skyLight: '#DADADC',
   skyDark: '#8D8D8E',
   skyBase: '#CFCFD1',

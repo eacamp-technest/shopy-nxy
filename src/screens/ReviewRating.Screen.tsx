@@ -1,5 +1,5 @@
 import React, {useRef, useCallback, useMemo} from 'react';
-import {View, StyleSheet, ScrollView, Text} from 'react-native';
+import {View, StyleSheet, ScrollView, Text, TextInput} from 'react-native';
 import {review} from 'mock/review';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
@@ -97,10 +97,12 @@ export const ReviewRatingScreen: React.FC<
                 Please share your opinion about the product
               </Text>
               <View style={styles.descriptionContainer}>
-                <Text style={styles.description} numberOfLines={3}>
-                  The Nike Air Zoom Structure 24 is supportive neutral trainer
-                  which can handle most types of runs
-                </Text>
+                <TextInput
+                  multiline={true}
+                  style={styles.input}
+                  placeholder=" The Nike Air Zoom Structure 24 is supportive neutral trainer
+                  which can handle most types of runs.........."
+                />
               </View>
               <View style={styles.photoContainer}>
                 <AddPhoto icon={ImageResources.camera} title="Add photo" />
@@ -169,12 +171,16 @@ const styles = StyleSheet.create({
   },
   descriptionContainer: {
     alignItems: 'center',
-    padding: 16,
     borderWidth: 1,
     borderRadius: 8,
+    paddingHorizontal: normalize('horizontal', 16),
     borderColor: colors.skyLight,
   },
-  description: {
+  input: {
+    textAlignVertical: 'top',
+    width: '100%',
+    padding: 16,
+    height: normalize('height', 100),
     ...TypographyStyles.RegularNormalRegular,
     color: colors.ink.base,
   },

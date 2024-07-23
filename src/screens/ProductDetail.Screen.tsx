@@ -76,7 +76,7 @@ export const ProductDetailScreen: React.FC<
             {loading ? (
               <ActivityIndicator
                 size="large"
-                color={colors.primary.base}
+                color={colors.black}
                 style={styles.activityIndicator}
               />
             ) : null}
