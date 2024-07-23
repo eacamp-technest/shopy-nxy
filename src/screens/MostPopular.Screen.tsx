@@ -37,7 +37,7 @@ export const MostPopularScreen: React.FC<
       <CardProduct
         key={index}
         type={'product'}
-        images={item.images}
+        images={item.images[0]}
         price={item.price}
         title={item.title}
         style={styles.card}

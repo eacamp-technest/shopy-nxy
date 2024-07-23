@@ -74,7 +74,7 @@ export const ALLItemsScreen: React.FC<SceneRendererProps> = () => {
         brand={item.brand}
         title={item.title}
         price={item.price}
-        images={item.images}
+        images={item.images[0]}
         onPress={() => handleNavigate(item.id)}
       />
     );

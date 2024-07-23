@@ -28,7 +28,7 @@ export interface ICardProduct {
   star?: any;
   rating?: any;
   brand?: string;
-  images?: ImageSourcePropType;
+  images?: ImageSourcePropType | any;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   imageStyle?: StyleProp<ImageStyle>;
