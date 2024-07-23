@@ -101,8 +101,8 @@ export const ProductDetailScreen: React.FC<
         </View>
         <View style={CommonStyles.alignCenterJustifyBetweenRow}>
           <View style={styles.stars}>
-            {stars.map(el => (
-              <Fragment>{el}</Fragment>
+            {stars.map((el, index) => (
+              <Fragment key={index}>{el}</Fragment>
             ))}
           </View>
           <Text style={styles.price}>{`$${route.params.price}`}</Text>
