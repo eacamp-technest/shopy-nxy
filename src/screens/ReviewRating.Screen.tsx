@@ -16,6 +16,7 @@ import {FlexBottomSheet} from 'components/FlexBottomSheet';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {SvgImage} from 'components/SvgImage';
 
 const ItemSeparatorComponent = () => {
   return <View style={styles.flashVertical} />;
@@ -73,10 +74,47 @@ export const ReviewRatingScreen: React.FC<
             text={'Write a review'}
           />
         </View>
-        <FlexBottomSheet height={630} ref={bottomSheetModalRef}>
+        <FlexBottomSheet height={640} ref={bottomSheetModalRef}>
           <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
           <View style={styles.main}>
-            <Text>STARs</Text>
+            <View style={styles.stars}>
+              <SvgImage
+                height={36}
+                width={36}
+                color={colors.yellow.base}
+                source={ImageResources.rating}
+              />
+              <SvgImage
+                height={36}
+                width={36}
+                color={colors.yellow.base}
+                source={ImageResources.rating}
+              />
+              <SvgImage
+                height={36}
+                width={36}
+                color={colors.yellow.base}
+                source={ImageResources.rating}
+              />
+              <SvgImage
+                height={36}
+                width={36}
+                color={colors.yellow.base}
+                source={ImageResources.rating}
+              />
+              <SvgImage
+                height={36}
+                width={36}
+                color={colors.skyLight}
+                source={ImageResources.rating}
+              />
+              <SvgImage
+                height={36}
+                width={36}
+                color={colors.skyLight}
+                source={ImageResources.rating}
+              />
+            </View>
             <Text style={styles.text}>
               Please share your opinion about the product
             </Text>
@@ -130,6 +168,11 @@ const styles = StyleSheet.create({
   },
   main: {
     gap: normalize('vertical', 32),
+  },
+  stars: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: normalize('horizontal', 16),
   },
   handleIndicatorStyle: {
     backgroundColor: colors.skyBase,
