@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useMemo} from 'react';
+import React, {useRef} from 'react';
 import {View, StyleSheet, ScrollView, Text, TextInput} from 'react-native';
 import {review} from 'mock/review';
 import {colors} from 'theme/colors';
@@ -10,11 +10,12 @@ import {AddPhoto} from 'components/AddPhoto';
 import {FlashList} from '@shopify/flash-list';
 import {TypographyStyles} from 'theme/typography';
 import {IReview, Review} from 'components/Review';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {ImageResources} from 'assets/VectorResources.g';
+import {FlexBottomSheet} from 'components/FlexBottomSheet';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {BottomSheetModal, BottomSheetView} from '@gorhom/bottom-sheet';
 
 const ItemSeparatorComponent = () => {
   return <View style={styles.flashVertical} />;
@@ -25,19 +26,9 @@ export const ReviewRatingScreen: React.FC<
 > = ({navigation}) => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['75%'], []);
-
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
-
-  // const openPress = () => bottomSheetRef.current?.expand();
-
-  // const closePress = () => bottomSheetModalRef.current?.close();
-
-  const handlePresentModalPress = useCallback(() => {
+  const handlePresentModalPress = () => {
     bottomSheetModalRef.current?.present();
-  }, []);
+  };
 
   const renderReview = ({index, item}: {index: number; item: IReview}) => {
     return (
@@ -51,8 +42,6 @@ export const ReviewRatingScreen: React.FC<
       />
     );
   };
-
-  const renderBackDrop = () => <View style={styles.backdrop} />;
 
   return (
     <SafeTopProvider backColorSafeProvider={colors.white}>
@@ -84,38 +73,29 @@ export const ReviewRatingScreen: React.FC<
             text={'Write a review'}
           />
         </View>
-        <BottomSheetModal
-          index={0}
-          snapPoints={snapPoints}
-          ref={bottomSheetModalRef}
-          enablePanDownToClose={true}
-          onChange={handleSheetChanges}
-          backdropComponent={renderBackDrop}
-          handleIndicatorStyle={styles.handleIndicatorStyle}>
-          <BottomSheetView style={styles.contentContainer}>
-            <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
-            <View style={styles.main}>
-              <Text>STARs</Text>
-              <Text style={styles.text}>
-                Please share your opinion about the product
-              </Text>
-              <View style={styles.descriptionContainer}>
-                <TextInput
-                  multiline={true}
-                  style={styles.input}
-                  placeholder=" The Nike Air Zoom Structure 24 is supportive neutral trainer
+        <FlexBottomSheet height={630} ref={bottomSheetModalRef}>
+          <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
+          <View style={styles.main}>
+            <Text>STARs</Text>
+            <Text style={styles.text}>
+              Please share your opinion about the product
+            </Text>
+            <View style={styles.descriptionContainer}>
+              <TextInput
+                multiline={true}
+                style={styles.input}
+                placeholder=" The Nike Air Zoom Structure 24 is supportive neutral trainer
                   which can handle most types of runs.........."
-                />
-              </View>
-              <View style={styles.photoContainer}>
-                <AddPhoto icon={ImageResources.camera} title="Add photo" />
-                <AddPhoto image={require('../assets/images/product2.png')} />
-                <AddPhoto image={require('../assets/images/product1.png')} />
-              </View>
-              <Button text={'Send review'} position={'center'} />
+              />
             </View>
-          </BottomSheetView>
-        </BottomSheetModal>
+            <View style={styles.photoContainer}>
+              <AddPhoto icon={ImageResources.camera} title="Add photo" />
+              <AddPhoto image={require('../assets/images/product2.png')} />
+              <AddPhoto image={require('../assets/images/product1.png')} />
+            </View>
+            <Button text={'Send review'} position={'center'} />
+          </View>
+        </FlexBottomSheet>
       </View>
     </SafeTopProvider>
   );
