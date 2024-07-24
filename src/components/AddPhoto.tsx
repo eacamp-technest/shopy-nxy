@@ -27,12 +27,15 @@ export const AddPhoto: React.FC<IAddPhoto> = ({
   image,
 }) => {
   return (
-    <View style={[styles.root, !title ? styles.imageContainer : null]}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={onPress}
+      style={[styles.root, !title ? styles.imageContainer : null]}>
       {title ? (
         <Fragment>
-          <TouchableOpacity onPress={onPress} style={styles.camera}>
+          <View style={styles.camera}>
             <SvgImage source={icon} />
-          </TouchableOpacity>
+          </View>
           <Text
             style={
               (TypographyStyles.TinyNormalRegular, {color: colors.inkBase})
@@ -43,13 +46,13 @@ export const AddPhoto: React.FC<IAddPhoto> = ({
       ) : (
         <Image style={styles.image} source={image} />
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    gap: 8,
+    gap: normalize('vertical', 8),
     borderWidth: 1,
     borderRadius: 8,
     borderColor: colors.blue.base,
@@ -62,8 +65,11 @@ const styles = StyleSheet.create({
     borderWidth: 0,
   },
   image: {
-    width: normalize('width', 100),
-    height: normalize('height', 104),
+    width: 100,
+    height: 104,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: colors.blue.base,
   },
   camera: {
     padding: 12,

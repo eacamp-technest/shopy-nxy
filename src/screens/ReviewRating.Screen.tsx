@@ -6,6 +6,7 @@ import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {Button} from 'components/Button';
 import {StackRoutes} from 'router/routes';
+import {SvgImage} from 'components/SvgImage';
 import {AddPhoto} from 'components/AddPhoto';
 import {FlashList} from '@shopify/flash-list';
 import {TypographyStyles} from 'theme/typography';
@@ -16,7 +17,6 @@ import {FlexBottomSheet} from 'components/FlexBottomSheet';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {SvgImage} from 'components/SvgImage';
 
 const ItemSeparatorComponent = () => {
   return <View style={styles.flashVertical} />;
@@ -68,10 +68,10 @@ export const ReviewRatingScreen: React.FC<
         </ScrollView>
         <View style={styles.buttonContainer}>
           <Button
-            onPress={handlePresentModalPress}
             style={styles.button}
-            icon={ImageResources.edit2}
             text={'Write a review'}
+            icon={ImageResources.edit2}
+            onPress={handlePresentModalPress}
           />
         </View>
         <FlexBottomSheet height={640} ref={bottomSheetModalRef}>
