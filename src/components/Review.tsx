@@ -2,10 +2,12 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Avatar} from './Avatar';
 import {Divider} from './Divider';
+import {SvgImage} from './SvgImage';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
-import {TypographyStyles} from 'theme/typography';
 import {CommonStyles} from 'theme/commonStyles';
+import {TypographyStyles} from 'theme/typography';
+import {ImageResources} from 'assets/VectorResources.g';
 
 export interface IReview {
   date?: string;
@@ -31,7 +33,44 @@ export const Review: React.FC<IReview> = ({
           <View style={styles.stars}>
             <View>
               <Text style={styles.user}>{`${name} ${surname}`}</Text>
-              <Text>STARS</Text>
+              <View style={styles.starsSvg}>
+                <SvgImage
+                  height={16}
+                  width={16}
+                  color={colors.yellow.base}
+                  source={ImageResources.rating}
+                />
+                <SvgImage
+                  height={16}
+                  width={16}
+                  color={colors.yellow.base}
+                  source={ImageResources.rating}
+                />
+                <SvgImage
+                  height={16}
+                  width={16}
+                  color={colors.yellow.base}
+                  source={ImageResources.rating}
+                />
+                <SvgImage
+                  height={16}
+                  width={16}
+                  color={colors.yellow.base}
+                  source={ImageResources.rating}
+                />
+                <SvgImage
+                  height={16}
+                  width={16}
+                  color={colors.skyLight}
+                  source={ImageResources.rating}
+                />
+                <SvgImage
+                  height={16}
+                  width={16}
+                  color={colors.skyLight}
+                  source={ImageResources.rating}
+                />
+              </View>
             </View>
             <Text style={styles.date}>{date}</Text>
           </View>
@@ -56,6 +95,10 @@ const styles = StyleSheet.create({
   stars: {
     paddingBottom: normalize('vertical', 16),
     ...CommonStyles.justifyBetweenRow,
+  },
+  starsSvg: {
+    flexDirection: 'row',
+    gap: normalize('horizontal', 2),
   },
   user: {
     paddingBottom: normalize('vertical', 4),
