@@ -17,6 +17,9 @@ import {FlexBottomSheet} from 'components/FlexBottomSheet';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {screenHeight} from 'theme/const.styles';
+
+const height = screenHeight <= 700 ? 510 : 640;
 
 const ItemSeparatorComponent = () => {
   return <View style={styles.flashVertical} />;
@@ -74,7 +77,7 @@ export const ReviewRatingScreen: React.FC<
             onPress={handlePresentModalPress}
           />
         </View>
-        <FlexBottomSheet height={640} ref={bottomSheetModalRef}>
+        <FlexBottomSheet height={height} ref={bottomSheetModalRef}>
           <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
           <View style={styles.main}>
             <View style={styles.stars}>
