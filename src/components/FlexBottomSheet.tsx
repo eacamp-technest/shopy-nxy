@@ -36,7 +36,12 @@ export const FlexBottomSheet = forwardRef<BottomSheetModal, IFlexBottomSheet>(
       bottomSheetModalRef.current?.present();
     }, []);
 
-    const renderBackDrop = () => <View style={styles.backdrop} />;
+    const renderBackDrop = () => (
+      <Pressable
+        style={styles.backdrop}
+        onPress={() => bottomSheetModalRef.current?.close()}
+      />
+    );
 
     return (
       <Pressable onPress={onPress || handlePresentModalPress}>
@@ -79,7 +84,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(19, 21, 21, 0.9)',
   },
   backgroundStyle: {
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
   },
 });
