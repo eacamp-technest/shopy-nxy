@@ -1,16 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, ScrollView, FlatList} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {View, StyleSheet, ScrollView, FlatList, Text} from 'react-native';
 import axios from 'axios';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {Button} from 'components/Button';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
 import {ENDPOINTS} from 'services/Endpoints';
+import {SvgImage} from 'components/SvgImage';
+import {CommonStyles} from 'theme/commonStyles';
 import {cardWidth} from 'utils/home.screen.size';
+import {TypographyStyles} from 'theme/typography';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {ImageResources} from 'assets/VectorResources.g';
 import {CategoryFilter} from 'components/CategoryFilter';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
+import {FlexBottomSheet} from 'components/FlexBottomSheet';
 import {useMostPopularStoreActions} from 'store/most-popular';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -21,6 +27,19 @@ export const MostPopularScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.mostPopular>
 > = ({navigation}) => {
   const [productData, setProductData] = useState();
+  const [content, setContent] = useState<boolean>(true);
+
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const handlePresentModalPress = () => {
+    setContent(false);
+    bottomSheetModalRef.current?.present();
+  };
+
+  const handleSheetDismiss = () => {
+    setContent(true);
+    bottomSheetModalRef.current?.close();
+  };
 
   const name = useCategoryStore().name.toLocaleLowerCase();
   const {categories} = useMostPopularStore();
@@ -37,10 +56,10 @@ export const MostPopularScreen: React.FC<
       <CardProduct
         key={index}
         type={'product'}
-        images={item.images[0]}
         price={item.price}
         title={item.title}
         style={styles.card}
+        images={item.images[0]}
         imageStyle={styles.imageStyles}
       />
     );
@@ -84,7 +103,7 @@ export const MostPopularScreen: React.FC<
 
   return (
     <SafeTopProvider
-      content={'light-content'}
+      content={content ? 'light-content' : 'dark-content'}
       backColorSafeProvider={colors.bdazzledBlue.darkest}
       statusBarColorAndroid={colors.bdazzledBlue.darkest}>
       <View style={styles.header}>
@@ -96,6 +115,7 @@ export const MostPopularScreen: React.FC<
           rightIcon={ImageResources.sliders}
           leftIcon={ImageResources.chevronLeft}
           leftOnPress={() => navigation.goBack()}
+          rightOnPress={handlePresentModalPress}
         />
       </View>
       <View style={styles.categoryFilter}>
@@ -115,6 +135,27 @@ export const MostPopularScreen: React.FC<
           contentContainerStyle={styles.contentContainerStyle}
         />
       </ScrollView>
+      <FlexBottomSheet
+        height={400}
+        ref={bottomSheetModalRef}
+        handleSheetDismiss={handleSheetDismiss}>
+        <View style={styles.main}>
+          <Text style={styles.title}>SORT BY</Text>
+          <View style={styles.container}>
+            <View style={CommonStyles.alignCenterJustifyBetweenRow}>
+              <Text style={styles.text}>Lowest price</Text>
+              <SvgImage source={ImageResources.bell} />
+            </View>
+            <View style={CommonStyles.alignCenterJustifyBetweenRow}>
+              <Text style={styles.text}>Relevance</Text>
+              <SvgImage source={ImageResources.bell} />
+            </View>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button position={'center'} text={'Apply'} />
+          </View>
+        </View>
+      </FlexBottomSheet>
     </SafeTopProvider>
   );
 };
@@ -134,8 +175,8 @@ const styles = StyleSheet.create({
   },
   scroll: {
     flex: 1,
-    backgroundColor: colors.white,
     minHeight: '100%',
+    backgroundColor: colors.white,
     paddingTop: normalize('vertical', 20),
     paddingHorizontal: normalize('horizontal', 24),
   },
@@ -154,5 +195,25 @@ const styles = StyleSheet.create({
   },
   titleFilterColor: {
     color: colors.white,
+  },
+  main: {
+    flex: 1,
+    gap: normalize('vertical', 29),
+  },
+  title: {
+    ...TypographyStyles.title3,
+    color: colors.ink.darkest,
+  },
+  container: {
+    gap: normalize('vertical', 24),
+  },
+  text: {
+    ...TypographyStyles.RegularTightRegular,
+    color: colors.ink.darkest,
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingBottom: normalize('vertical', 50),
   },
 });

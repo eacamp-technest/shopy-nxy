@@ -19,13 +19,14 @@ import {FlashList} from '@shopify/flash-list';
 import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import {IReview, Review} from 'components/Review';
+import {getCurrentDate} from 'utils/currentDate';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {ImageResources} from 'assets/VectorResources.g';
 import {FlexBottomSheet} from 'components/FlexBottomSheet';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {screenHeight, standardHitSlopSize} from 'theme/const.styles';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 const height = screenHeight <= 700 ? 510 : 640;
 
@@ -36,22 +37,54 @@ const ItemSeparatorComponent = () => {
 export const ReviewRatingScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.reviewRating>
 > = ({navigation}) => {
+  const [text, setText] = useState<string>('');
   const [disabled, setDisabled] = useState<boolean>(false);
+  const [disabledSend, setDisabledSend] = useState<boolean>(true);
+  const [reviewText, setReviewText] = useState<any>(review);
   const [bottomHeight, setBottomHeight] = useState<number>(height);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handlePresentModalPress = () => bottomSheetModalRef.current?.present();
 
+  const {date, month, year} = getCurrentDate();
+
   const handleCloseModalPress = () => {
+    bottomSheetModalRef.current?.close();
     setDisabled(false);
     setBottomHeight(height);
-    bottomSheetModalRef.current?.close();
+    setDisabledSend(true);
   };
 
   const handleOnFocusInput = () => {
     setDisabled(true);
     setBottomHeight(900);
+  };
+
+  const handleOnChangeText = (newText: string) => {
+    if (newText) {
+      setText(newText);
+      setDisabledSend(false);
+      return;
+    }
+    setDisabledSend(true);
+  };
+
+  const handleSendReview = () => {
+    const newReview = {
+      id: reviewText.length + 1,
+      description: text,
+      name: 'Nadir',
+      surname: 'Musayev',
+      image: require('../assets/images/nadir.jpeg'),
+      date: `${month} ${date} ${year}`.toString(),
+    };
+    setReviewText((prevReviews: any) => [...prevReviews, newReview]);
+    bottomSheetModalRef.current?.close();
+    setBottomHeight(height);
+    setText('');
+    setDisabled(false);
+    setDisabledSend(true);
   };
 
   const renderReview = ({index, item}: {index: number; item: IReview}) => {
@@ -82,9 +115,9 @@ export const ReviewRatingScreen: React.FC<
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scroll}>
           <FlashList
-            data={review}
+            data={reviewText}
             scrollEnabled={false}
-            estimatedItemSize={200}
+            estimatedItemSize={500}
             renderItem={renderReview}
             ItemSeparatorComponent={ItemSeparatorComponent}
           />
@@ -163,9 +196,12 @@ export const ReviewRatingScreen: React.FC<
               </Text>
               <View style={styles.descriptionContainer}>
                 <TextInput
-                  onFocus={handleOnFocusInput}
+                  maxLength={100}
                   multiline={true}
+                  blurOnSubmit={true}
                   style={styles.input}
+                  onFocus={handleOnFocusInput}
+                  onChangeText={handleOnChangeText}
                   placeholder=" The Nike Air Zoom Structure 24 is supportive neutral trainer
                   which can handle most types of runs.........."
                 />
@@ -175,7 +211,12 @@ export const ReviewRatingScreen: React.FC<
                 <AddPhoto image={require('../assets/images/product2.png')} />
                 <AddPhoto image={require('../assets/images/product1.png')} />
               </View>
-              <Button text={'Send review'} position={'center'} />
+              <Button
+                position={'center'}
+                text={'Send review'}
+                disabled={disabledSend}
+                onPress={handleSendReview}
+              />
             </View>
           </ScrollView>
         </FlexBottomSheet>
