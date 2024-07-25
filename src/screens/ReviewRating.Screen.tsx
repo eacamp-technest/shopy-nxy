@@ -24,8 +24,8 @@ import {ImageResources} from 'assets/VectorResources.g';
 import {FlexBottomSheet} from 'components/FlexBottomSheet';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {screenHeight, standardHitSlopSize} from 'theme/const.styles';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 const height = screenHeight <= 700 ? 510 : 640;
 
@@ -36,7 +36,9 @@ const ItemSeparatorComponent = () => {
 export const ReviewRatingScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.reviewRating>
 > = ({navigation}) => {
+  const [text, setText] = useState<string>('');
   const [disabled, setDisabled] = useState<boolean>(false);
+  const [reviewText, setReviewText] = useState<string[]>([]);
   const [bottomHeight, setBottomHeight] = useState<number>(height);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -53,6 +55,17 @@ export const ReviewRatingScreen: React.FC<
     setDisabled(true);
     setBottomHeight(900);
   };
+
+  const handleOnChangeText = (newText: string) => setText(newText);
+
+  const handleSendReview = () => {
+    setReviewText(previewText => [...previewText, text]);
+    setText('');
+    setBottomHeight(height);
+    bottomSheetModalRef.current?.close();
+  };
+
+  console.log(reviewText);
 
   const renderReview = ({index, item}: {index: number; item: IReview}) => {
     return (
@@ -163,9 +176,12 @@ export const ReviewRatingScreen: React.FC<
               </Text>
               <View style={styles.descriptionContainer}>
                 <TextInput
-                  onFocus={handleOnFocusInput}
+                  maxLength={100}
                   multiline={true}
+                  blurOnSubmit={true}
                   style={styles.input}
+                  onFocus={handleOnFocusInput}
+                  onChangeText={handleOnChangeText}
                   placeholder=" The Nike Air Zoom Structure 24 is supportive neutral trainer
                   which can handle most types of runs.........."
                 />
@@ -175,7 +191,11 @@ export const ReviewRatingScreen: React.FC<
                 <AddPhoto image={require('../assets/images/product2.png')} />
                 <AddPhoto image={require('../assets/images/product1.png')} />
               </View>
-              <Button text={'Send review'} position={'center'} />
+              <Button
+                text={'Send review'}
+                position={'center'}
+                onPress={handleSendReview}
+              />
             </View>
           </ScrollView>
         </FlexBottomSheet>
