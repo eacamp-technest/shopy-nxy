@@ -199,6 +199,7 @@ export const ReviewRatingScreen: React.FC<
                 <TextInput
                   maxLength={100}
                   multiline={true}
+                  autoCorrect={false}
                   blurOnSubmit={true}
                   style={styles.input}
                   onFocus={handleOnFocusInput}
