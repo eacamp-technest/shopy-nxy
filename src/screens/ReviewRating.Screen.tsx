@@ -38,6 +38,7 @@ export const ReviewRatingScreen: React.FC<
 > = ({navigation}) => {
   const [text, setText] = useState<string>('');
   const [disabled, setDisabled] = useState<boolean>(false);
+  const [disabledSend, setDisabledSend] = useState<boolean>(true);
   const [reviewText, setReviewText] = useState<string[]>([]);
   const [bottomHeight, setBottomHeight] = useState<number>(height);
 
@@ -46,9 +47,10 @@ export const ReviewRatingScreen: React.FC<
   const handlePresentModalPress = () => bottomSheetModalRef.current?.present();
 
   const handleCloseModalPress = () => {
+    bottomSheetModalRef.current?.close();
     setDisabled(false);
     setBottomHeight(height);
-    bottomSheetModalRef.current?.close();
+    setDisabledSend(true);
   };
 
   const handleOnFocusInput = () => {
@@ -56,16 +58,23 @@ export const ReviewRatingScreen: React.FC<
     setBottomHeight(900);
   };
 
-  const handleOnChangeText = (newText: string) => setText(newText);
+  const handleOnChangeText = (newText: string) => {
+    if (newText) {
+      setText(newText);
+      setDisabledSend(false);
+      return;
+    }
+    setDisabledSend(true);
+  };
 
   const handleSendReview = () => {
     setReviewText(previewText => [...previewText, text]);
     setText('');
     setBottomHeight(height);
     bottomSheetModalRef.current?.close();
+    setDisabled(false);
+    setDisabledSend(true);
   };
-
-  console.log(reviewText);
 
   const renderReview = ({index, item}: {index: number; item: IReview}) => {
     return (
@@ -79,6 +88,8 @@ export const ReviewRatingScreen: React.FC<
       />
     );
   };
+
+  console.log(reviewText);
 
   return (
     <SafeTopProvider backColorSafeProvider={colors.white}>
@@ -192,8 +203,9 @@ export const ReviewRatingScreen: React.FC<
                 <AddPhoto image={require('../assets/images/product1.png')} />
               </View>
               <Button
-                text={'Send review'}
                 position={'center'}
+                text={'Send review'}
+                disabled={disabledSend}
                 onPress={handleSendReview}
               />
             </View>
