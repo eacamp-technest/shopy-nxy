@@ -17,9 +17,9 @@ import {SvgImage} from 'components/SvgImage';
 import {AddPhoto} from 'components/AddPhoto';
 import {FlashList} from '@shopify/flash-list';
 import {CommonStyles} from 'theme/commonStyles';
+import {getCurrentDate} from 'utils/currentDate';
 import {TypographyStyles} from 'theme/typography';
 import {IReview, Review} from 'components/Review';
-import {getCurrentDate} from 'utils/currentDate';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {ImageResources} from 'assets/VectorResources.g';
 import {FlexBottomSheet} from 'components/FlexBottomSheet';
@@ -133,7 +133,8 @@ export const ReviewRatingScreen: React.FC<
         <FlexBottomSheet
           disabled={disabled}
           height={bottomHeight}
-          ref={bottomSheetModalRef}>
+          ref={bottomSheetModalRef}
+          style={disabled ? styles.borderRadiusDisabled : null}>
           <ScrollView>
             <View style={CommonStyles.alignCenterJustifyBetweenRow}>
               <View style={styles.extraView} />
@@ -307,5 +308,9 @@ const styles = StyleSheet.create({
     width: '15%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+  },
+  borderRadiusDisabled: {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
   },
 });

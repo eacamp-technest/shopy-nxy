@@ -20,7 +20,7 @@ interface IFlexBottomSheet {
 }
 
 export const FlexBottomSheet = forwardRef<BottomSheetModal, IFlexBottomSheet>(
-  ({children, onPress, height, disabled, handleSheetDismiss}, ref) => {
+  ({children, onPress, height, disabled, handleSheetDismiss, style}, ref) => {
     const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
     useImperativeHandle(ref, () => ({
@@ -54,7 +54,7 @@ export const FlexBottomSheet = forwardRef<BottomSheetModal, IFlexBottomSheet>(
           onChange={handleSheetChanges}
           onDismiss={handleSheetDismiss}
           backdropComponent={renderBackDrop}
-          backgroundStyle={styles.backgroundStyle}
+          backgroundStyle={[styles.backgroundStyle, style]}
           handleIndicatorStyle={[
             styles.handleIndicatorStyle,
             disabled ? styles.disabledIndicatorStyle : null,
