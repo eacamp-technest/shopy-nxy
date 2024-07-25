@@ -3,10 +3,14 @@ import {View, StyleSheet, ScrollView, FlatList, Text} from 'react-native';
 import axios from 'axios';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {Button} from 'components/Button';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
 import {ENDPOINTS} from 'services/Endpoints';
+import {SvgImage} from 'components/SvgImage';
+import {CommonStyles} from 'theme/commonStyles';
 import {cardWidth} from 'utils/home.screen.size';
+import {TypographyStyles} from 'theme/typography';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {ImageResources} from 'assets/VectorResources.g';
 import {CategoryFilter} from 'components/CategoryFilter';
@@ -132,10 +136,25 @@ export const MostPopularScreen: React.FC<
         />
       </ScrollView>
       <FlexBottomSheet
-        handleSheetDismiss={handleSheetDismiss}
+        height={400}
         ref={bottomSheetModalRef}
-        height={400}>
-        <Text>HELLO</Text>
+        handleSheetDismiss={handleSheetDismiss}>
+        <View style={styles.main}>
+          <Text style={styles.title}>SORT BY</Text>
+          <View style={styles.container}>
+            <View style={CommonStyles.alignCenterJustifyBetweenRow}>
+              <Text style={styles.text}>Lowest price</Text>
+              <SvgImage source={ImageResources.bell} />
+            </View>
+            <View style={CommonStyles.alignCenterJustifyBetweenRow}>
+              <Text style={styles.text}>Relevance</Text>
+              <SvgImage source={ImageResources.bell} />
+            </View>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button position={'center'} text={'Apply'} />
+          </View>
+        </View>
       </FlexBottomSheet>
     </SafeTopProvider>
   );
@@ -156,8 +175,8 @@ const styles = StyleSheet.create({
   },
   scroll: {
     flex: 1,
-    backgroundColor: colors.white,
     minHeight: '100%',
+    backgroundColor: colors.white,
     paddingTop: normalize('vertical', 20),
     paddingHorizontal: normalize('horizontal', 24),
   },
@@ -176,5 +195,25 @@ const styles = StyleSheet.create({
   },
   titleFilterColor: {
     color: colors.white,
+  },
+  main: {
+    flex: 1,
+    gap: normalize('vertical', 29),
+  },
+  title: {
+    ...TypographyStyles.title3,
+    color: colors.ink.darkest,
+  },
+  container: {
+    gap: normalize('vertical', 24),
+  },
+  text: {
+    ...TypographyStyles.RegularTightRegular,
+    color: colors.ink.darkest,
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingBottom: normalize('vertical', 50),
   },
 });
