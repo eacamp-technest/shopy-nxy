@@ -41,19 +41,17 @@ export const ReviewRatingScreen: React.FC<
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const handlePresentModalPress = () => {
-    bottomSheetModalRef.current?.present();
+  const handlePresentModalPress = () => bottomSheetModalRef.current?.present();
+
+  const handleCloseModalPress = () => {
+    setDisabled(false);
+    setBottomHeight(height);
+    bottomSheetModalRef.current?.close();
   };
 
   const handleOnFocusInput = () => {
     setDisabled(true);
     setBottomHeight(900);
-  };
-
-  const closeBottomSheet = () => {
-    setDisabled(false);
-    setBottomHeight(height);
-    bottomSheetModalRef.current?.close();
   };
 
   const renderReview = ({index, item}: {index: number; item: IReview}) => {
@@ -111,8 +109,8 @@ export const ReviewRatingScreen: React.FC<
                 {disabled ? (
                   <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={closeBottomSheet}
-                    hitSlop={standardHitSlopSize}>
+                    hitSlop={standardHitSlopSize}
+                    onPress={handleCloseModalPress}>
                     <SvgImage
                       color={colors.skyLight}
                       source={ImageResources.xButton}
