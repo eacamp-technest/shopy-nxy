@@ -56,4 +56,5 @@ export const ImageResources = {
   rightActionable: require('./vectors/rightActionable.svg'),
   media: require('./vectors/media.svg'),
   rating: require('./vectors/rayting.svg'),
+  xButton: require('./vectors/x-button.svg'),
 };

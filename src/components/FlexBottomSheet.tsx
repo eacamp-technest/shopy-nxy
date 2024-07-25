@@ -12,13 +12,14 @@ import {BottomSheetModal, BottomSheetView} from '@gorhom/bottom-sheet';
 
 interface IFlexBottomSheet {
   height: number;
+  disabled?: boolean;
   children?: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   onPress?: () => void;
 }
 
 export const FlexBottomSheet = forwardRef<BottomSheetModal, IFlexBottomSheet>(
-  ({children, onPress, height}, ref) => {
+  ({children, onPress, height, disabled}, ref) => {
     const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
     useImperativeHandle(ref, () => ({
@@ -47,7 +48,10 @@ export const FlexBottomSheet = forwardRef<BottomSheetModal, IFlexBottomSheet>(
           onChange={handleSheetChanges}
           backdropComponent={renderBackDrop}
           backgroundStyle={styles.backgroundStyle}
-          handleIndicatorStyle={styles.handleIndicatorStyle}>
+          handleIndicatorStyle={[
+            styles.handleIndicatorStyle,
+            disabled ? styles.disabledIndicatorStyle : null,
+          ]}>
           <BottomSheetView style={styles.contentContainer}>
             {children}
           </BottomSheetView>
@@ -66,6 +70,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.skyBase,
     width: normalize('width', 48),
     height: normalize('height', 5),
+  },
+  disabledIndicatorStyle: {
+    backgroundColor: colors.white,
   },
   backdrop: {
     ...StyleSheet.absoluteFillObject,

@@ -1,5 +1,12 @@
-import React, {useRef} from 'react';
-import {View, StyleSheet, ScrollView, Text, TextInput} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import {review} from 'mock/review';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
@@ -17,7 +24,8 @@ import {FlexBottomSheet} from 'components/FlexBottomSheet';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {screenHeight} from 'theme/const.styles';
+import {screenHeight, standardHitSlopSize} from 'theme/const.styles';
+import {CommonStyles} from 'theme/commonStyles';
 
 const height = screenHeight <= 700 ? 510 : 640;
 
@@ -28,10 +36,24 @@ const ItemSeparatorComponent = () => {
 export const ReviewRatingScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.reviewRating>
 > = ({navigation}) => {
+  const [disabled, setDisabled] = useState<boolean>(false);
+  const [bottomHeight, setBottomHeight] = useState<number>(height);
+
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handlePresentModalPress = () => {
     bottomSheetModalRef.current?.present();
+  };
+
+  const handleOnFocusInput = () => {
+    setDisabled(true);
+    setBottomHeight(900);
+  };
+
+  const closeBottomSheet = () => {
+    setDisabled(false);
+    setBottomHeight(height);
+    bottomSheetModalRef.current?.close();
   };
 
   const renderReview = ({index, item}: {index: number; item: IReview}) => {
@@ -77,65 +99,87 @@ export const ReviewRatingScreen: React.FC<
             onPress={handlePresentModalPress}
           />
         </View>
-        <FlexBottomSheet height={height} ref={bottomSheetModalRef}>
-          <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
-          <View style={styles.main}>
-            <View style={styles.stars}>
-              <SvgImage
-                height={36}
-                width={36}
-                color={colors.yellow.base}
-                source={ImageResources.rating}
-              />
-              <SvgImage
-                height={36}
-                width={36}
-                color={colors.yellow.base}
-                source={ImageResources.rating}
-              />
-              <SvgImage
-                height={36}
-                width={36}
-                color={colors.yellow.base}
-                source={ImageResources.rating}
-              />
-              <SvgImage
-                height={36}
-                width={36}
-                color={colors.yellow.base}
-                source={ImageResources.rating}
-              />
-              <SvgImage
-                height={36}
-                width={36}
-                color={colors.skyLight}
-                source={ImageResources.rating}
-              />
-              <SvgImage
-                height={36}
-                width={36}
-                color={colors.skyLight}
-                source={ImageResources.rating}
-              />
+        <FlexBottomSheet
+          disabled={disabled}
+          height={bottomHeight}
+          ref={bottomSheetModalRef}>
+          <ScrollView>
+            <View style={CommonStyles.alignCenterJustifyBetweenRow}>
+              <View style={styles.extraView} />
+              <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
+              <View style={styles.xButton}>
+                {disabled ? (
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={closeBottomSheet}
+                    hitSlop={standardHitSlopSize}>
+                    <SvgImage
+                      color={colors.skyLight}
+                      source={ImageResources.xButton}
+                    />
+                  </TouchableOpacity>
+                ) : null}
+              </View>
             </View>
-            <Text style={styles.text}>
-              Please share your opinion about the product
-            </Text>
-            <View style={styles.descriptionContainer}>
-              <TextInput
-                multiline={true}
-                style={styles.input}
-                placeholder=" The Nike Air Zoom Structure 24 is supportive neutral trainer
+            <View style={styles.main}>
+              <View style={styles.stars}>
+                <SvgImage
+                  height={36}
+                  width={36}
+                  color={colors.yellow.base}
+                  source={ImageResources.rating}
+                />
+                <SvgImage
+                  height={36}
+                  width={36}
+                  color={colors.yellow.base}
+                  source={ImageResources.rating}
+                />
+                <SvgImage
+                  height={36}
+                  width={36}
+                  color={colors.yellow.base}
+                  source={ImageResources.rating}
+                />
+                <SvgImage
+                  height={36}
+                  width={36}
+                  color={colors.yellow.base}
+                  source={ImageResources.rating}
+                />
+                <SvgImage
+                  height={36}
+                  width={36}
+                  color={colors.skyLight}
+                  source={ImageResources.rating}
+                />
+                <SvgImage
+                  height={36}
+                  width={36}
+                  color={colors.skyLight}
+                  source={ImageResources.rating}
+                />
+              </View>
+              <Text style={styles.text}>
+                Please share your opinion about the product
+              </Text>
+              <View style={styles.descriptionContainer}>
+                <TextInput
+                  onFocus={handleOnFocusInput}
+                  multiline={true}
+                  style={styles.input}
+                  placeholder=" The Nike Air Zoom Structure 24 is supportive neutral trainer
                   which can handle most types of runs.........."
-              />
+                />
+              </View>
+              <View style={styles.photoContainer}>
+                <AddPhoto icon={ImageResources.camera} title="Add photo" />
+                <AddPhoto image={require('../assets/images/product2.png')} />
+                <AddPhoto image={require('../assets/images/product1.png')} />
+              </View>
+              <Button text={'Send review'} position={'center'} />
             </View>
-            <View style={styles.photoContainer}>
-              <AddPhoto icon={ImageResources.camera} title="Add photo" />
-              <AddPhoto image={require('../assets/images/product2.png')} />
-              <AddPhoto image={require('../assets/images/product1.png')} />
-            </View>
-            <Button text={'Send review'} position={'center'} />
-          </View>
+          </ScrollView>
         </FlexBottomSheet>
       </View>
     </SafeTopProvider>
@@ -196,7 +240,7 @@ const styles = StyleSheet.create({
   },
   photoContainer: {
     flexDirection: 'row',
-    gap: normalize('horizontal', 16),
+    gap: normalize('horizontal', 13),
   },
   descriptionContainer: {
     alignItems: 'center',
@@ -216,5 +260,13 @@ const styles = StyleSheet.create({
   backdrop: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(19, 21, 21, 0.9)',
+  },
+  extraView: {
+    width: '15%',
+  },
+  xButton: {
+    width: '15%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 });
