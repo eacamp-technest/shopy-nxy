@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useImperativeHandle,
 } from 'react';
-import {View, StyleProp, ViewStyle, StyleSheet, Pressable} from 'react-native';
+import {StyleProp, ViewStyle, StyleSheet, Pressable} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {BottomSheetModal, BottomSheetView} from '@gorhom/bottom-sheet';

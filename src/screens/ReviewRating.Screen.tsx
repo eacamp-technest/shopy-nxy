@@ -16,6 +16,7 @@ import {StackRoutes} from 'router/routes';
 import {SvgImage} from 'components/SvgImage';
 import {AddPhoto} from 'components/AddPhoto';
 import {FlashList} from '@shopify/flash-list';
+import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import {IReview, Review} from 'components/Review';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
@@ -25,7 +26,6 @@ import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {screenHeight, standardHitSlopSize} from 'theme/const.styles';
-import {CommonStyles} from 'theme/commonStyles';
 
 const height = screenHeight <= 700 ? 510 : 640;
 
