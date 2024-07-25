@@ -19,6 +19,7 @@ import {FlashList} from '@shopify/flash-list';
 import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import {IReview, Review} from 'components/Review';
+import {getCurrentDate} from 'utils/currentDate';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {ImageResources} from 'assets/VectorResources.g';
 import {FlexBottomSheet} from 'components/FlexBottomSheet';
@@ -39,12 +40,14 @@ export const ReviewRatingScreen: React.FC<
   const [text, setText] = useState<string>('');
   const [disabled, setDisabled] = useState<boolean>(false);
   const [disabledSend, setDisabledSend] = useState<boolean>(true);
-  const [reviewText, setReviewText] = useState<string[]>([]);
+  const [reviewText, setReviewText] = useState<any>(review);
   const [bottomHeight, setBottomHeight] = useState<number>(height);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handlePresentModalPress = () => bottomSheetModalRef.current?.present();
+
+  const {date, month, year} = getCurrentDate();
 
   const handleCloseModalPress = () => {
     bottomSheetModalRef.current?.close();
@@ -68,10 +71,18 @@ export const ReviewRatingScreen: React.FC<
   };
 
   const handleSendReview = () => {
-    setReviewText(previewText => [...previewText, text]);
-    setText('');
-    setBottomHeight(height);
+    const newReview = {
+      id: reviewText.length + 1,
+      description: text,
+      name: 'Nadir',
+      surname: 'Musayev',
+      image: require('../assets/images/nadir.jpeg'),
+      date: `${month} ${date} ${year}`.toString(),
+    };
+    setReviewText((prevReviews: any) => [...prevReviews, newReview]);
     bottomSheetModalRef.current?.close();
+    setBottomHeight(height);
+    setText('');
     setDisabled(false);
     setDisabledSend(true);
   };
@@ -89,8 +100,6 @@ export const ReviewRatingScreen: React.FC<
     );
   };
 
-  console.log(reviewText);
-
   return (
     <SafeTopProvider backColorSafeProvider={colors.white}>
       <View style={styles.root}>
@@ -106,9 +115,9 @@ export const ReviewRatingScreen: React.FC<
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scroll}>
           <FlashList
-            data={review}
+            data={reviewText}
             scrollEnabled={false}
-            estimatedItemSize={200}
+            estimatedItemSize={500}
             renderItem={renderReview}
             ItemSeparatorComponent={ItemSeparatorComponent}
           />
