@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {Fragment, useRef, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -59,6 +59,11 @@ export const ReviewRatingScreen: React.FC<
   const handleOnFocusInput = () => {
     setDisabled(true);
     setBottomHeight(900);
+  };
+
+  const handleOnBlurFocusInput = () => {
+    setDisabled(false);
+    setBottomHeight(height);
   };
 
   const handleOnChangeText = (newText: string) => {
@@ -135,14 +140,14 @@ export const ReviewRatingScreen: React.FC<
           height={bottomHeight}
           ref={bottomSheetModalRef}
           style={disabled ? styles.borderRadiusDisabled : null}>
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={
-              disabled ? styles.contentContainerStyleSheet : null
-            }>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={CommonStyles.alignCenterJustifyBetweenRow}>
               <View style={styles.extraView} />
-              <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
+              {!disabled ? (
+                <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
+              ) : (
+                <Text style={styles.mainText}>What are your thoughts?</Text>
+              )}
               <View style={styles.xButton}>
                 {disabled ? (
                   <TouchableOpacity
@@ -150,6 +155,7 @@ export const ReviewRatingScreen: React.FC<
                     hitSlop={standardHitSlopSize}
                     onPress={handleCloseModalPress}>
                     <SvgImage
+                      onPress={handleCloseModalPress}
                       color={colors.skyLight}
                       source={ImageResources.xButton}
                     />
@@ -158,47 +164,51 @@ export const ReviewRatingScreen: React.FC<
               </View>
             </View>
             <View style={styles.main}>
-              <View style={styles.stars}>
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.yellow.base}
-                  source={ImageResources.rating}
-                />
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.yellow.base}
-                  source={ImageResources.rating}
-                />
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.yellow.base}
-                  source={ImageResources.rating}
-                />
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.yellow.base}
-                  source={ImageResources.rating}
-                />
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.skyLight}
-                  source={ImageResources.rating}
-                />
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.skyLight}
-                  source={ImageResources.rating}
-                />
-              </View>
-              <Text style={styles.text}>
-                Please share your opinion about the product
-              </Text>
+              {!disabled ? (
+                <Fragment>
+                  <View style={styles.stars}>
+                    <SvgImage
+                      height={36}
+                      width={36}
+                      color={colors.yellow.base}
+                      source={ImageResources.rating}
+                    />
+                    <SvgImage
+                      height={36}
+                      width={36}
+                      color={colors.yellow.base}
+                      source={ImageResources.rating}
+                    />
+                    <SvgImage
+                      height={36}
+                      width={36}
+                      color={colors.yellow.base}
+                      source={ImageResources.rating}
+                    />
+                    <SvgImage
+                      height={36}
+                      width={36}
+                      color={colors.yellow.base}
+                      source={ImageResources.rating}
+                    />
+                    <SvgImage
+                      height={36}
+                      width={36}
+                      color={colors.skyLight}
+                      source={ImageResources.rating}
+                    />
+                    <SvgImage
+                      height={36}
+                      width={36}
+                      color={colors.skyLight}
+                      source={ImageResources.rating}
+                    />
+                  </View>
+                  <Text style={styles.text}>
+                    Please share your opinion about the product
+                  </Text>
+                </Fragment>
+              ) : null}
               <View style={styles.descriptionContainer}>
                 <TextInput
                   maxLength={100}
@@ -207,6 +217,7 @@ export const ReviewRatingScreen: React.FC<
                   blurOnSubmit={true}
                   style={styles.input}
                   onFocus={handleOnFocusInput}
+                  onBlur={handleOnBlurFocusInput}
                   onChangeText={handleOnChangeText}
                   placeholder=" The Nike Air Zoom Structure 24 is supportive neutral trainer
                   which can handle most types of runs.........."
@@ -214,8 +225,17 @@ export const ReviewRatingScreen: React.FC<
               </View>
               <View style={styles.photoContainer}>
                 <AddPhoto icon={ImageResources.camera} title="Add photo" />
-                <AddPhoto image={require('../assets/images/product2.png')} />
-                <AddPhoto image={require('../assets/images/product1.png')} />
+                <ScrollView
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={styles.contentContainerStyleAddPhoto}
+                  horizontal>
+                  <AddPhoto image={require('../assets/images/product2.png')} />
+                  <AddPhoto image={require('../assets/images/product1.png')} />
+                  <AddPhoto image={require('../assets/images/product2.png')} />
+                  <AddPhoto image={require('../assets/images/product1.png')} />
+                  <AddPhoto image={require('../assets/images/product2.png')} />
+                  <AddPhoto image={require('../assets/images/product1.png')} />
+                </ScrollView>
               </View>
               <Button
                 position={'center'}
@@ -318,7 +338,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
-  contentContainerStyleSheet: {
-    paddingBottom: normalize('vertical', 350),
+  contentContainerStyleAddPhoto: {
+    gap: normalize('horizontal', 13),
   },
 });
