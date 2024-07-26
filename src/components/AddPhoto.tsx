@@ -15,9 +15,10 @@ import {SvgImage, SvgImageProps} from './SvgImage';
 
 interface IAddPhoto {
   title?: string;
-  image?: ImageSourcePropType;
+  image?: ImageSourcePropType | any;
   icon?: SvgImageProps;
   onPress?: () => void;
+  disabled?: boolean;
 }
 
 export const AddPhoto: React.FC<IAddPhoto> = ({
@@ -25,11 +26,13 @@ export const AddPhoto: React.FC<IAddPhoto> = ({
   icon,
   onPress,
   image,
+  disabled,
 }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onPress}
+      disabled={disabled}
       style={[styles.root, !title ? styles.imageContainer : null]}>
       {title ? (
         <Fragment>
@@ -44,7 +47,10 @@ export const AddPhoto: React.FC<IAddPhoto> = ({
           </Text>
         </Fragment>
       ) : (
-        <Image style={styles.image} source={image} />
+        <Image
+          style={styles.image}
+          source={typeof image === 'string' ? {uri: image} : image}
+        />
       )}
     </TouchableOpacity>
   );

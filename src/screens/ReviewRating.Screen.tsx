@@ -1,10 +1,10 @@
 import React, {Fragment, useRef, useState} from 'react';
 import {
+  Text,
   View,
+  TextInput,
   StyleSheet,
   ScrollView,
-  Text,
-  TextInput,
   TouchableOpacity,
 } from 'react-native';
 import {review} from 'mock/review';
@@ -20,8 +20,10 @@ import {CommonStyles} from 'theme/commonStyles';
 import {getCurrentDate} from 'utils/currentDate';
 import {TypographyStyles} from 'theme/typography';
 import {IReview, Review} from 'components/Review';
+import {usePermissions} from 'hook/usePermissions';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {ImageResources} from 'assets/VectorResources.g';
+import ImagePicker from 'react-native-image-crop-picker';
 import {FlexBottomSheet} from 'components/FlexBottomSheet';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
@@ -37,17 +39,45 @@ const ItemSeparatorComponent = () => {
 export const ReviewRatingScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.reviewRating>
 > = ({navigation}) => {
+  const [image, setImage] = useState<string[]>([]);
   const [text, setText] = useState<string>('');
+  const [reviewText, setReviewText] = useState<any>(review);
   const [disabled, setDisabled] = useState<boolean>(false);
   const [disabledSend, setDisabledSend] = useState<boolean>(true);
-  const [reviewText, setReviewText] = useState<any>(review);
   const [bottomHeight, setBottomHeight] = useState<number>(height);
-
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-  const handlePresentModalPress = () => bottomSheetModalRef.current?.present();
-
   const {date, month, year} = getCurrentDate();
+  const requestPermission = usePermissions();
+
+  const handleGalleryAccess = async () => {
+    requestPermission('MEDIA', status => {
+      if (status === 'granted') {
+        console.log('Gallery access granted');
+        openGallery();
+      } else {
+        console.log('Gallery access denied');
+      }
+    });
+  };
+
+  const openGallery = () => {
+    ImagePicker.openPicker({
+      cropping: true,
+    })
+      .then((photo: any) => {
+        setImage(prev => [...prev, photo.path]);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const removeImage = (index: number) => {
+    console.log(index);
+  };
+
+  const handlePresentModalPress = () => bottomSheetModalRef.current?.present();
 
   const handleCloseModalPress = () => {
     bottomSheetModalRef.current?.close();
@@ -61,7 +91,7 @@ export const ReviewRatingScreen: React.FC<
     setBottomHeight(900);
   };
 
-  const handleOnBlurFocusInput = () => {
+  const handleOnBlurInput = () => {
     setDisabled(false);
     setBottomHeight(height);
   };
@@ -215,25 +245,35 @@ export const ReviewRatingScreen: React.FC<
                   autoCorrect={false}
                   blurOnSubmit={true}
                   style={styles.input}
+                  onBlur={handleOnBlurInput}
                   onFocus={handleOnFocusInput}
-                  onBlur={handleOnBlurFocusInput}
                   onChangeText={handleOnChangeText}
                   placeholder=" The Nike Air Zoom Structure 24 is supportive neutral trainer
                   which can handle most types of runs.........."
                 />
               </View>
               <View style={styles.photoContainer}>
-                <AddPhoto icon={ImageResources.camera} title="Add photo" />
+                <AddPhoto
+                  onPress={handleGalleryAccess}
+                  icon={ImageResources.camera}
+                  title="Add photo"
+                />
                 <ScrollView
                   showsHorizontalScrollIndicator={false}
                   contentContainerStyle={styles.contentContainerStyleAddPhoto}
                   horizontal>
-                  <AddPhoto image={require('../assets/images/product2.png')} />
-                  <AddPhoto image={require('../assets/images/product1.png')} />
-                  <AddPhoto image={require('../assets/images/product2.png')} />
-                  <AddPhoto image={require('../assets/images/product1.png')} />
-                  <AddPhoto image={require('../assets/images/product2.png')} />
-                  <AddPhoto image={require('../assets/images/product1.png')} />
+                  <Fragment>
+                    {image.map((item, index) => (
+                      <>
+                        <View style={styles.removeButton} />
+                        <AddPhoto
+                          key={index}
+                          image={item}
+                          onPress={() => removeImage(index)}
+                        />
+                      </>
+                    ))}
+                  </Fragment>
                 </ScrollView>
               </View>
               <Button
@@ -339,5 +379,17 @@ const styles = StyleSheet.create({
   },
   contentContainerStyleAddPhoto: {
     gap: normalize('horizontal', 13),
+  },
+  removeButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    // left: 0,
+    bottom: 0,
+    zIndex: 999,
+    height: 30,
+    width: 30,
+    borderRadius: 100,
+    backgroundColor: 'red',
   },
 });
