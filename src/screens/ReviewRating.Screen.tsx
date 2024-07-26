@@ -135,7 +135,11 @@ export const ReviewRatingScreen: React.FC<
           height={bottomHeight}
           ref={bottomSheetModalRef}
           style={disabled ? styles.borderRadiusDisabled : null}>
-          <ScrollView>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={
+              disabled ? styles.contentContainerStyleSheet : null
+            }>
             <View style={CommonStyles.alignCenterJustifyBetweenRow}>
               <View style={styles.extraView} />
               <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
@@ -313,5 +317,8 @@ const styles = StyleSheet.create({
   borderRadiusDisabled: {
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
+  },
+  contentContainerStyleSheet: {
+    paddingBottom: normalize('vertical', 350),
   },
 });
