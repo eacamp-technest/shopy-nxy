@@ -155,7 +155,6 @@ export const ReviewRatingScreen: React.FC<
                     hitSlop={standardHitSlopSize}
                     onPress={handleCloseModalPress}>
                     <SvgImage
-                      onPress={handleCloseModalPress}
                       color={colors.skyLight}
                       source={ImageResources.xButton}
                     />
