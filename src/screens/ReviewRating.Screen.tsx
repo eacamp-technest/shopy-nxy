@@ -39,8 +39,8 @@ const ItemSeparatorComponent = () => {
 export const ReviewRatingScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.reviewRating>
 > = ({navigation}) => {
-  const [image, setImage] = useState<string[]>([]);
   const [text, setText] = useState<string>('');
+  const [image, setImage] = useState<string[]>([]);
   const [reviewText, setReviewText] = useState<any>(review);
   const [disabled, setDisabled] = useState<boolean>(false);
   const [disabledSend, setDisabledSend] = useState<boolean>(true);
@@ -51,14 +51,7 @@ export const ReviewRatingScreen: React.FC<
   const requestPermission = usePermissions();
 
   const handleGalleryAccess = async () => {
-    requestPermission('MEDIA', status => {
-      if (status === 'granted') {
-        console.log('Gallery access granted');
-        openGallery();
-      } else {
-        console.log('Gallery access denied');
-      }
-    });
+    requestPermission('MEDIA', status => status === 'granted' && openGallery());
   };
 
   const openGallery = () => {
@@ -254,18 +247,27 @@ export const ReviewRatingScreen: React.FC<
               </View>
               <View style={styles.photoContainer}>
                 <AddPhoto
-                  onPress={handleGalleryAccess}
+                  title="Add Photo"
+                  style={styles.addPhotoMargin}
                   icon={ImageResources.camera}
-                  title="Add photo"
+                  onPress={handleGalleryAccess}
                 />
                 <ScrollView
+                  horizontal
+                  style={styles.addPhotoPadding}
                   showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={styles.contentContainerStyleAddPhoto}
-                  horizontal>
+                  contentContainerStyle={styles.contentContainerStyleAddPhoto}>
                   <Fragment>
                     {image.map((item, index) => (
                       <>
-                        <View style={styles.removeButton} />
+                        <TouchableOpacity
+                          activeOpacity={0.8}
+                          style={styles.removeButton}>
+                          <SvgImage
+                            color={colors.skyLight}
+                            source={ImageResources.xButton}
+                          />
+                        </TouchableOpacity>
                         <AddPhoto
                           key={index}
                           image={item}
@@ -318,7 +320,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize('horizontal', 24),
   },
   main: {
-    gap: normalize('vertical', 32),
+    gap: normalize('vertical', 25),
   },
   stars: {
     flexDirection: 'row',
@@ -339,6 +341,7 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
+    paddingTop: 10,
     ...TypographyStyles.RegularNormalSemiBold,
     color: colors.ink.dark,
   },
@@ -381,15 +384,17 @@ const styles = StyleSheet.create({
     gap: normalize('horizontal', 13),
   },
   removeButton: {
-    position: 'absolute',
-    top: 0,
     right: 0,
-    // left: 0,
+    left: 80,
+    top: -12,
     bottom: 0,
+    position: 'absolute',
     zIndex: 999,
-    height: 30,
-    width: 30,
-    borderRadius: 100,
-    backgroundColor: 'red',
+  },
+  addPhotoPadding: {
+    paddingTop: normalize('vertical', 10),
+  },
+  addPhotoMargin: {
+    marginTop: normalize('vertical', 10),
   },
 });
