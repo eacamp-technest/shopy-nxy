@@ -68,7 +68,10 @@ export const ReviewRatingScreen: React.FC<
   };
 
   const removeImage = (index: number) => {
-    console.log(index);
+    setReviewText((prevReviews: string) => [
+      ...prevReviews,
+      image.splice(index, 1),
+    ]);
   };
 
   const handlePresentModalPress = () => bottomSheetModalRef.current?.present();
@@ -109,7 +112,7 @@ export const ReviewRatingScreen: React.FC<
       image: require('../assets/images/nadir.jpeg'),
       date: `${month} ${date} ${year}`.toString(),
     };
-    setReviewText((prevReviews: any) => [...prevReviews, newReview]);
+    setReviewText((prevReviews: string) => [...prevReviews, newReview]);
     bottomSheetModalRef.current?.close();
     setBottomHeight(height);
     setText('');
