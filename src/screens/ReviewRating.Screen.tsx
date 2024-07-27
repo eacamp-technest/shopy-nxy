@@ -74,9 +74,9 @@ export const ReviewRatingScreen: React.FC<
   const handlePresentModalPress = () => bottomSheetModalRef.current?.present();
 
   const handleBottomSheet = () => {
+    !text && setDisabledSend(true);
     setDisabled(false);
     setBottomHeight(height);
-    setDisabledSend(true);
   };
 
   const handleCloseModalPress = () => {
