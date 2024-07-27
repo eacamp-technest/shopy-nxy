@@ -58,4 +58,6 @@ export const ImageResources = {
   rating: require('./vectors/rayting.svg'),
   xButton: require('./vectors/x-button.svg'),
   xCircle: require('./vectors/x-circle.svg'),
+  checkBoxBlue: require('./vectors/checkBox.svg'),
+  checkBoxWhite: require('./vectors/checkBoxWhite.svg'),
 };
