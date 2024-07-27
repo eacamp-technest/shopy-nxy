@@ -1,10 +1,11 @@
-import React, {useRef, useState} from 'react';
+import React, {Fragment, useRef, useState} from 'react';
 import {
+  Text,
   View,
+  Pressable,
+  TextInput,
   StyleSheet,
   ScrollView,
-  Text,
-  TextInput,
   TouchableOpacity,
 } from 'react-native';
 import {review} from 'mock/review';
@@ -20,8 +21,10 @@ import {CommonStyles} from 'theme/commonStyles';
 import {getCurrentDate} from 'utils/currentDate';
 import {TypographyStyles} from 'theme/typography';
 import {IReview, Review} from 'components/Review';
+import {usePermissions} from 'hook/usePermissions';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {ImageResources} from 'assets/VectorResources.g';
+import ImagePicker from 'react-native-image-crop-picker';
 import {FlexBottomSheet} from 'components/FlexBottomSheet';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
@@ -38,16 +41,46 @@ export const ReviewRatingScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.reviewRating>
 > = ({navigation}) => {
   const [text, setText] = useState<string>('');
+  const [image, setImage] = useState<string[]>([]);
+  const [reviewText, setReviewText] = useState<any>(review);
   const [disabled, setDisabled] = useState<boolean>(false);
   const [disabledSend, setDisabledSend] = useState<boolean>(true);
-  const [reviewText, setReviewText] = useState<any>(review);
   const [bottomHeight, setBottomHeight] = useState<number>(height);
-
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  const {date, month, year} = getCurrentDate();
+  const requestPermission = usePermissions();
+
+  const handleGalleryAccess = async () => {
+    requestPermission('MEDIA', status => status === 'granted' && openGallery());
+  };
+
+  const openGallery = () => {
+    ImagePicker.openPicker({
+      cropping: true,
+    })
+      .then((photo: any) => {
+        setImage(prev => [...prev, photo.path]);
+      })
+      .catch(error => {
+        console.log('ImagePicker', error);
+      });
+  };
+
+  const removeImage = (index: number) => {
+    setReviewText((prevReviews: string) => [
+      ...prevReviews,
+      image.splice(index, 1),
+    ]);
+  };
 
   const handlePresentModalPress = () => bottomSheetModalRef.current?.present();
 
-  const {date, month, year} = getCurrentDate();
+  const handleBottomSheet = () => {
+    !text && setDisabledSend(true);
+    setDisabled(false);
+    setBottomHeight(height);
+  };
 
   const handleCloseModalPress = () => {
     bottomSheetModalRef.current?.close();
@@ -79,7 +112,7 @@ export const ReviewRatingScreen: React.FC<
       image: require('../assets/images/nadir.jpeg'),
       date: `${month} ${date} ${year}`.toString(),
     };
-    setReviewText((prevReviews: any) => [...prevReviews, newReview]);
+    setReviewText((prevReviews: string) => [...prevReviews, newReview]);
     bottomSheetModalRef.current?.close();
     setBottomHeight(height);
     setText('');
@@ -137,93 +170,132 @@ export const ReviewRatingScreen: React.FC<
           style={disabled ? styles.borderRadiusDisabled : null}>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={
-              disabled ? styles.contentContainerStyleSheet : null
-            }>
-            <View style={CommonStyles.alignCenterJustifyBetweenRow}>
-              <View style={styles.extraView} />
-              <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
-              <View style={styles.xButton}>
-                {disabled ? (
-                  <TouchableOpacity
-                    activeOpacity={0.7}
-                    hitSlop={standardHitSlopSize}
-                    onPress={handleCloseModalPress}>
-                    <SvgImage
-                      color={colors.skyLight}
-                      source={ImageResources.xButton}
-                    />
-                  </TouchableOpacity>
+            contentContainerStyle={CommonStyles.flex}>
+            <Pressable style={CommonStyles.flex} onPress={handleBottomSheet}>
+              <View
+                style={[
+                  styles.mainPadding,
+                  CommonStyles.alignCenterJustifyBetweenRow,
+                ]}>
+                <View style={styles.extraView} />
+                {!disabled ? (
+                  <Text style={styles.mainText}>WHAT IS YOUR RATE?</Text>
+                ) : (
+                  <Text style={styles.mainText}>What are your thoughts?</Text>
+                )}
+                <View style={styles.xButton}>
+                  {disabled ? (
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      hitSlop={standardHitSlopSize}
+                      onPress={handleCloseModalPress}>
+                      <SvgImage
+                        color={colors.skyLight}
+                        source={ImageResources.xButton}
+                      />
+                    </TouchableOpacity>
+                  ) : null}
+                </View>
+              </View>
+              <View style={styles.main}>
+                {!disabled ? (
+                  <Fragment>
+                    <View style={styles.stars}>
+                      <SvgImage
+                        height={36}
+                        width={36}
+                        color={colors.yellow.base}
+                        source={ImageResources.rating}
+                      />
+                      <SvgImage
+                        height={36}
+                        width={36}
+                        color={colors.yellow.base}
+                        source={ImageResources.rating}
+                      />
+                      <SvgImage
+                        height={36}
+                        width={36}
+                        color={colors.yellow.base}
+                        source={ImageResources.rating}
+                      />
+                      <SvgImage
+                        height={36}
+                        width={36}
+                        color={colors.yellow.base}
+                        source={ImageResources.rating}
+                      />
+                      <SvgImage
+                        height={36}
+                        width={36}
+                        color={colors.skyLight}
+                        source={ImageResources.rating}
+                      />
+                      <SvgImage
+                        height={36}
+                        width={36}
+                        color={colors.skyLight}
+                        source={ImageResources.rating}
+                      />
+                    </View>
+                    <Text style={styles.text}>
+                      Please share your opinion about the product
+                    </Text>
+                  </Fragment>
                 ) : null}
-              </View>
-            </View>
-            <View style={styles.main}>
-              <View style={styles.stars}>
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.yellow.base}
-                  source={ImageResources.rating}
-                />
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.yellow.base}
-                  source={ImageResources.rating}
-                />
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.yellow.base}
-                  source={ImageResources.rating}
-                />
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.yellow.base}
-                  source={ImageResources.rating}
-                />
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.skyLight}
-                  source={ImageResources.rating}
-                />
-                <SvgImage
-                  height={36}
-                  width={36}
-                  color={colors.skyLight}
-                  source={ImageResources.rating}
-                />
-              </View>
-              <Text style={styles.text}>
-                Please share your opinion about the product
-              </Text>
-              <View style={styles.descriptionContainer}>
-                <TextInput
-                  maxLength={100}
-                  multiline={true}
-                  autoCorrect={false}
-                  blurOnSubmit={true}
-                  style={styles.input}
-                  onFocus={handleOnFocusInput}
-                  onChangeText={handleOnChangeText}
-                  placeholder=" The Nike Air Zoom Structure 24 is supportive neutral trainer
+                <View style={styles.descriptionContainer}>
+                  <TextInput
+                    maxLength={100}
+                    multiline={true}
+                    autoCorrect={false}
+                    blurOnSubmit={true}
+                    style={styles.input}
+                    onFocus={handleOnFocusInput}
+                    onChangeText={handleOnChangeText}
+                    placeholder=" The Nike Air Zoom Structure 24 is supportive neutral trainer
                   which can handle most types of runs.........."
-                />
+                  />
+                </View>
+                <View style={styles.photoContainer}>
+                  <AddPhoto
+                    title="Add Photo"
+                    style={styles.addPhotoMargin}
+                    icon={ImageResources.camera}
+                    onPress={handleGalleryAccess}
+                  />
+                  <ScrollView
+                    horizontal
+                    style={styles.addPhotoPadding}
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.containerAddPhoto}>
+                    <Fragment>
+                      {image.map((item, index) => (
+                        <View key={index} style={styles.imageContainer}>
+                          <TouchableOpacity
+                            activeOpacity={0.8}
+                            onPress={() => removeImage(index)}
+                            style={styles.removeButton}>
+                            <SvgImage
+                              color={colors.skyLight}
+                              source={ImageResources.xButton}
+                            />
+                          </TouchableOpacity>
+                          <AddPhoto disabled key={index} image={item} />
+                        </View>
+                      ))}
+                    </Fragment>
+                  </ScrollView>
+                </View>
+                <View style={styles.mainPadding}>
+                  <Button
+                    position={'center'}
+                    text={'Send review'}
+                    disabled={disabledSend}
+                    onPress={handleSendReview}
+                  />
+                </View>
               </View>
-              <View style={styles.photoContainer}>
-                <AddPhoto icon={ImageResources.camera} title="Add photo" />
-                <AddPhoto image={require('../assets/images/product2.png')} />
-                <AddPhoto image={require('../assets/images/product1.png')} />
-              </View>
-              <Button
-                position={'center'}
-                text={'Send review'}
-                disabled={disabledSend}
-                onPress={handleSendReview}
-              />
-            </View>
+            </Pressable>
           </ScrollView>
         </FlexBottomSheet>
       </View>
@@ -259,7 +331,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize('horizontal', 24),
   },
   main: {
-    gap: normalize('vertical', 32),
+    gap: normalize('vertical', 25),
   },
   stars: {
     flexDirection: 'row',
@@ -280,11 +352,14 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
+    paddingTop: 10,
+    paddingHorizontal: normalize('horizontal', 24),
     ...TypographyStyles.RegularNormalSemiBold,
     color: colors.ink.dark,
   },
   photoContainer: {
     flexDirection: 'row',
+    paddingLeft: normalize('horizontal', 24),
     gap: normalize('horizontal', 13),
   },
   descriptionContainer: {
@@ -292,6 +367,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: normalize('horizontal', 16),
+    marginHorizontal: 24,
     borderColor: colors.skyLight,
   },
   input: {
@@ -318,7 +394,27 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
-  contentContainerStyleSheet: {
-    paddingBottom: normalize('vertical', 350),
+  containerAddPhoto: {
+    gap: normalize('horizontal', 13),
+  },
+  removeButton: {
+    left: 80,
+    top: -12,
+    bottom: 0,
+    position: 'absolute',
+    zIndex: 999,
+  },
+  imageContainer: {
+    position: 'relative',
+    marginRight: 10,
+  },
+  addPhotoPadding: {
+    paddingTop: normalize('vertical', 10),
+  },
+  addPhotoMargin: {
+    marginTop: normalize('vertical', 10),
+  },
+  mainPadding: {
+    paddingHorizontal: normalize('horizontal', 24),
   },
 });

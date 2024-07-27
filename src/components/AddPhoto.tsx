@@ -6,6 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageSourcePropType,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
@@ -15,9 +17,11 @@ import {SvgImage, SvgImageProps} from './SvgImage';
 
 interface IAddPhoto {
   title?: string;
-  image?: ImageSourcePropType;
+  image?: ImageSourcePropType | any;
   icon?: SvgImageProps;
   onPress?: () => void;
+  disabled?: boolean;
+  style?: StyleProp<ViewStyle>;
 }
 
 export const AddPhoto: React.FC<IAddPhoto> = ({
@@ -25,12 +29,15 @@ export const AddPhoto: React.FC<IAddPhoto> = ({
   icon,
   onPress,
   image,
+  disabled,
+  style,
 }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onPress}
-      style={[styles.root, !title ? styles.imageContainer : null]}>
+      disabled={disabled}
+      style={[styles.root, !title ? styles.imageContainer : null, style]}>
       {title ? (
         <Fragment>
           <View style={styles.camera}>
@@ -44,7 +51,10 @@ export const AddPhoto: React.FC<IAddPhoto> = ({
           </Text>
         </Fragment>
       ) : (
-        <Image style={styles.image} source={image} />
+        <Image
+          style={styles.image}
+          source={typeof image === 'string' ? {uri: image} : image}
+        />
       )}
     </TouchableOpacity>
   );

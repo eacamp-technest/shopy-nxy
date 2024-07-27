@@ -8,6 +8,7 @@ import React, {
 import {StyleProp, ViewStyle, StyleSheet, Pressable} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {CommonStyles} from 'theme/commonStyles';
 import {BottomSheetModal, BottomSheetView} from '@gorhom/bottom-sheet';
 
 interface IFlexBottomSheet {
@@ -59,7 +60,7 @@ export const FlexBottomSheet = forwardRef<BottomSheetModal, IFlexBottomSheet>(
             styles.handleIndicatorStyle,
             disabled ? styles.disabledIndicatorStyle : null,
           ]}>
-          <BottomSheetView style={styles.contentContainer}>
+          <BottomSheetView style={CommonStyles.flex}>
             {children}
           </BottomSheetView>
         </BottomSheetModal>
@@ -69,10 +70,6 @@ export const FlexBottomSheet = forwardRef<BottomSheetModal, IFlexBottomSheet>(
 );
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-    paddingHorizontal: normalize('horizontal', 24),
-  },
   handleIndicatorStyle: {
     backgroundColor: colors.skyBase,
     width: normalize('width', 48),
