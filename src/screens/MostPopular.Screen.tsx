@@ -6,8 +6,8 @@ import {normalize} from 'theme/metrics';
 import {Button} from 'components/Button';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
+import {CheckBox} from 'components/CheckBox';
 import {ENDPOINTS} from 'services/Endpoints';
-import {SvgImage} from 'components/SvgImage';
 import {CommonStyles} from 'theme/commonStyles';
 import {cardWidth} from 'utils/home.screen.size';
 import {TypographyStyles} from 'theme/typography';
@@ -66,9 +66,7 @@ export const MostPopularScreen: React.FC<
   };
 
   useEffect(() => {
-    if (categories.length === 0) {
-      fetchCategories();
-    }
+    categories.length === 0 && fetchCategories();
   }, [categories, fetchCategories]);
 
   useEffect(() => {
@@ -78,12 +76,7 @@ export const MostPopularScreen: React.FC<
           method: 'GET',
           url: ENDPOINTS.store.products,
         });
-
-        if (res.status === 200) {
-          setProductData(res.data.products);
-        } else {
-          console.log('Error');
-        }
+        res.status === 200 && setProductData(res.data.products);
         return;
       }
 
@@ -91,12 +84,7 @@ export const MostPopularScreen: React.FC<
         method: 'GET',
         url: `${ENDPOINTS.store.productsByCategory}/${name}`,
       });
-
-      if (res.status === 200) {
-        setProductData(res.data.products);
-      } else {
-        console.log('Error');
-      }
+      res.status === 200 && setProductData(res.data.products);
     };
     fetchProducts();
   }, [name]);
@@ -144,11 +132,11 @@ export const MostPopularScreen: React.FC<
           <View style={styles.container}>
             <View style={CommonStyles.alignCenterJustifyBetweenRow}>
               <Text style={styles.text}>Lowest price</Text>
-              <SvgImage source={ImageResources.bell} />
+              <CheckBox />
             </View>
             <View style={CommonStyles.alignCenterJustifyBetweenRow}>
               <Text style={styles.text}>Relevance</Text>
-              <SvgImage source={ImageResources.bell} />
+              <CheckBox />
             </View>
           </View>
           <View style={styles.buttonContainer}>
@@ -199,6 +187,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     gap: normalize('vertical', 29),
+    paddingHorizontal: normalize('horizontal', 24),
   },
   title: {
     ...TypographyStyles.title3,
