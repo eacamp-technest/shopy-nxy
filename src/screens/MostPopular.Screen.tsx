@@ -28,7 +28,6 @@ export const MostPopularScreen: React.FC<
 > = ({navigation}) => {
   const [productData, setProductData] = useState();
   const [content, setContent] = useState<boolean>(true);
-
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   const handlePresentModalPress = () => {
@@ -140,7 +139,11 @@ export const MostPopularScreen: React.FC<
             </View>
           </View>
           <View style={styles.buttonContainer}>
-            <Button position={'center'} text={'Apply'} />
+            <Button
+              text={'Apply'}
+              position={'center'}
+              onPress={() => bottomSheetModalRef.current?.close()}
+            />
           </View>
         </View>
       </FlexBottomSheet>
