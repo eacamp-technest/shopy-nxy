@@ -58,13 +58,7 @@ export const ReviewRatingScreen: React.FC<
   const openGallery = () => {
     ImagePicker.openPicker({
       cropping: true,
-    })
-      .then((photo: any) => {
-        setImage(prev => [...prev, photo.path]);
-      })
-      .catch(error => {
-        console.log('ImagePicker', error);
-      });
+    }).then((photo: any) => setImage(prev => [...prev, photo.path]));
   };
 
   const removeImage = (index: number) => {
@@ -406,7 +400,6 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     position: 'relative',
-    marginRight: 10,
   },
   addPhotoPadding: {
     paddingTop: normalize('vertical', 10),
