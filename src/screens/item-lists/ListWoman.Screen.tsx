@@ -25,7 +25,11 @@ export const ListWomanScreen: React.FC<
         url: `${ENDPOINTS.store.productsByCategory}/womens-dresses`,
       });
 
-      res.status === 200 && navigation.navigate(StackRoutes.extra, res.data);
+      res.status === 200 &&
+        navigation.navigate(StackRoutes.extra, {
+          ...res.data,
+          color: colors.red.base,
+        });
     };
     fetchProducts();
   };

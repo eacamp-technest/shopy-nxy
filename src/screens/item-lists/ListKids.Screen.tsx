@@ -25,7 +25,11 @@ export const ListKidsScreen: React.FC<
         url: `${ENDPOINTS.store.productsByCategory}/sports-accessories`,
       });
 
-      res.status === 200 && navigation.navigate(StackRoutes.extra, res.data);
+      res.status === 200 &&
+        navigation.navigate(StackRoutes.extra, {
+          ...res.data,
+          color: colors.skyBlue.base,
+        });
     };
     fetchProducts();
   };

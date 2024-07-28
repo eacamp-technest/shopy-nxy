@@ -8,32 +8,36 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {colors} from 'theme/colors';
-import {StackRoutes} from 'router/routes';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
+import {StackRoutes} from 'router/routes';
 import {TypographyStyles} from 'theme/typography';
 import {ImageResources} from 'assets/VectorResources.g';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
+interface IParams {
+  color: string;
+  [key: string]: any;
+}
+
 export const ExtraScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.extra>
 > = ({navigation, route}) => {
   const [loading, setLoading] = useState<boolean>(true);
 
-  const data = route.params?.products;
+  const params = (route.params ?? {}) as IParams;
+  const {color, ...otherData} = params;
 
   const handleLoadStart = () => setLoading(true);
   const handleLoadEnd = () => setLoading(false);
 
   return (
-    <SafeTopProvider
-      content={'light-content'}
-      backColorSafeProvider={colors.blue.base}>
+    <SafeTopProvider content={'light-content'} backColorSafeProvider={color}>
       <View style={styles.main}>
         <NavBar
-          title={data[0].category}
+          title={otherData.products[0].category}
           leftColor={colors.white}
           styleTitle={colors.white}
           leftOnPress={navigation.goBack}
@@ -41,10 +45,10 @@ export const ExtraScreen: React.FC<
         />
       </View>
       <ScrollView
-        style={styles.scrollContainer}
+        style={{backgroundColor: color}}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.contentContainerStyle}>
-        {data.map((item: any, index: number) => {
+        {otherData.products.map((item: any, index: number) => {
           return (
             <View key={index} style={styles.container}>
               {loading ? (

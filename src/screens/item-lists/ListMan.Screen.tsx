@@ -25,7 +25,11 @@ export const ListManScreen: React.FC<
         url: `${ENDPOINTS.store.productsByCategory}/mens-shoes`,
       });
 
-      res.status === 200 && navigation.navigate(StackRoutes.extra, res.data);
+      res.status === 200 &&
+        navigation.navigate(StackRoutes.extra, {
+          ...res.data,
+          color: colors.blue.base,
+        });
     };
     fetchProducts();
   };
