@@ -1,10 +1,12 @@
 import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
+import axios from 'axios';
 import {man} from 'mock/item-list';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
+import {ENDPOINTS} from 'services/Endpoints';
 import {FlashList} from '@shopify/flash-list';
 import {IMainTab, MainTab} from 'components/MainTab';
 import {CardCategory} from 'components/CardCategory';
@@ -16,6 +18,18 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 export const ListManScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.listMan>
 > = ({navigation}) => {
+  const handleDataMans = () => {
+    const fetchProducts = async () => {
+      const res = await axios({
+        method: 'GET',
+        url: `${ENDPOINTS.store.productsByCategory}/mens-shoes`,
+      });
+
+      res.status === 200 && navigation.navigate(StackRoutes.extra, res.data);
+    };
+    fetchProducts();
+  };
+
   const renderTabList = ({
     index,
     item: {title, leftIcon},
@@ -23,7 +37,14 @@ export const ListManScreen: React.FC<
     index: number;
     item: IMainTab;
   }) => {
-    return <MainTab key={index} title={title} rightIcon={leftIcon} />;
+    return (
+      <MainTab
+        key={index}
+        title={title}
+        rightIcon={leftIcon}
+        onPress={handleDataMans}
+      />
+    );
   };
   return (
     <SafeTopProvider

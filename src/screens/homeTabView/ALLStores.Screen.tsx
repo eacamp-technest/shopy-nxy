@@ -19,10 +19,9 @@ import {TypographyStyles} from 'theme/typography';
 import {ImageResources} from 'assets/VectorResources.g';
 import {CategoryFilter} from 'components/CategoryFilter';
 import {SceneRendererProps} from 'react-native-tab-view';
+import {useProductInfoStoreActions} from 'store/product-info';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
 import {useCategoryStore} from 'store/category-all-store/category.store';
-
-import {useProductInfoStoreActions} from 'store/product-info';
 
 export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
   const [productData, setProductData] = useState();
@@ -97,8 +96,6 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
             (itemProduct: ICardProduct) => itemProduct.id === idProduct,
           );
           addProduct(filterDataProduct);
-        } else {
-          console.log('Error');
         }
       };
       fetchProducts();

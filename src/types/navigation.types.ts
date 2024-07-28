@@ -36,6 +36,7 @@ export type NavigationParamList = {
   [StackRoutes.listMan]: undefined;
   [StackRoutes.listKids]: undefined;
   [StackRoutes.listTeens]: undefined;
+  [StackRoutes.extra]: undefined;
   [StackRoutes.productDetail]: IProduct;
   [StackRoutes.reviewRating]: undefined;
   [StackRoutes.allItems]: undefined;

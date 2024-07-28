@@ -5,6 +5,7 @@ import {OrderScreen} from 'screens/Order.Screen';
 import {SearchScreen} from 'screens/Search.Screen';
 import {ProfileScreen} from 'screens/Profile.Screen';
 import {ScannerScreen} from 'screens/Scanner.Screen';
+import {ExtraScreen} from 'screens/item-lists/ExtraScreen';
 import {NavigationParamList} from 'types/navigation.types';
 import {MostPopularScreen} from 'screens/MostPopular.Screen';
 import {searchScreenOptions} from 'configs/navigation.configs';
@@ -37,6 +38,7 @@ export const MainRouter = () => {
         name={StackRoutes.listTeens}
         component={ListTeensScreen}
       />
+      <MainStack.Screen name={StackRoutes.extra} component={ExtraScreen} />
       <MainStack.Screen
         name={StackRoutes.productDetail}
         component={ProductDetailScreen}

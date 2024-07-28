@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
+import axios from 'axios';
 import {colors} from 'theme/colors';
 import {teens} from 'mock/item-list';
 import {normalize} from 'theme/metrics';
@@ -12,10 +13,23 @@ import {ImageResources} from 'assets/VectorResources.g';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {NavigationParamList} from 'types/navigation.types';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {ENDPOINTS} from 'services/Endpoints';
 
 export const ListTeensScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.listTeens>
 > = ({navigation}) => {
+  const handleDataTeens = () => {
+    const fetchProducts = async () => {
+      const res = await axios({
+        method: 'GET',
+        url: `${ENDPOINTS.store.productsByCategory}/beauty`,
+      });
+
+      res.status === 200 && navigation.navigate(StackRoutes.extra, res.data);
+    };
+    fetchProducts();
+  };
+
   const renderTabList = ({
     index,
     item: {title, leftIcon},
@@ -23,7 +37,14 @@ export const ListTeensScreen: React.FC<
     index: number;
     item: IMainTab;
   }) => {
-    return <MainTab key={index} title={title} rightIcon={leftIcon} />;
+    return (
+      <MainTab
+        key={index}
+        title={title}
+        rightIcon={leftIcon}
+        onPress={handleDataTeens}
+      />
+    );
   };
   return (
     <SafeTopProvider
