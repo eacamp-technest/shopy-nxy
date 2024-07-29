@@ -8,8 +8,8 @@ import {
   ImageStyle,
   StyleSheet,
   TouchableOpacity,
-  ImageSourcePropType,
   ActivityIndicator,
+  ImageSourcePropType,
 } from 'react-native';
 import {Steppers} from './Steppers';
 import {SvgImage} from './SvgImage';
@@ -211,5 +211,7 @@ const styles = StyleSheet.create({
   },
   priceContainer: {
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 });

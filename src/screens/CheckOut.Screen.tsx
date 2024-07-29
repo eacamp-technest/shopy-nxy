@@ -1,14 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {NavBar} from 'components/NavBar';
 import {StackRoutes} from 'router/routes';
+import {CardProduct} from 'components/CardProduct';
 import {ImageResources} from 'assets/VectorResources.g';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeMainProvider} from 'containers/SafeMainProvider';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {CardProduct} from 'components/CardProduct';
 
 interface IItems {
   images: string;
@@ -19,7 +19,7 @@ interface IItems {
 export const CheckOutScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.checkout>
 > = ({navigation, route}) => {
-  const {images, title, price} = route.params as IItems;
+  const {images, title, price} = route.params as unknown as IItems;
 
   return (
     <SafeMainProvider>
