@@ -16,6 +16,7 @@ import {ListKidsScreen} from 'screens/item-lists/ListKids.Screen';
 import {ListWomanScreen} from 'screens/item-lists/ListWoman.Screen';
 import {ListTeensScreen} from 'screens/item-lists/ListTeens.Screen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {CheckOutScreen} from 'screens/CheckOut.Screen';
 
 const MainStack = createNativeStackNavigator<NavigationParamList>();
 
@@ -58,6 +59,10 @@ export const MainRouter = () => {
       <MainStack.Screen
         name={StackRoutes.mostPopular}
         component={MostPopularScreen}
+      />
+      <MainStack.Screen
+        name={StackRoutes.checkout}
+        component={CheckOutScreen}
       />
     </MainStack.Navigator>
   );

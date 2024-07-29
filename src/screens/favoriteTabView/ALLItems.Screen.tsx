@@ -10,7 +10,6 @@ import {useNavigation} from '@react-navigation/native';
 import {useAllItemsStoreActions} from 'store/all-items';
 import {SceneRendererProps} from 'react-native-tab-view';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
-import {useAllItemsStore} from 'store/all-items/all-Items.store';
 
 export interface IProduct {
   id: number;
@@ -33,7 +32,6 @@ export const ALLItemsScreen: React.FC<SceneRendererProps> = () => {
 
   const [newData, setNewData] = useState<IProduct[]>();
 
-  // const {allCategory} = useAllItemsStore();
   const {fetchCategory} = useAllItemsStoreActions();
 
   const handleNavigate = (id?: number) => {

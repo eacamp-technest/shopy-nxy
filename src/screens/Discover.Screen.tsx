@@ -22,7 +22,7 @@ export const DiscoverScreen: React.FC<
   const navigateToScreen = (id: number) => {
     const screenName = screensArray[id];
     if (screenName) {
-      navigation.navigate(screenName);
+      navigation.navigate(screenName as never);
     }
   };
 
