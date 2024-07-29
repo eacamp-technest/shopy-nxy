@@ -19,7 +19,8 @@ interface IItems {
 export const CheckOutScreen: React.FC<
   NativeStackScreenProps<NavigationParamList, StackRoutes.checkout>
 > = ({navigation, route}) => {
-  const {images, title, price} = route.params as unknown as IItems;
+  const {images, title, price: rawPrice} = route.params as unknown as IItems;
+  const price = Math.round(rawPrice);
 
   const [count, setCount] = useState<number>(1);
   const [disabled, setDisabled] = useState<boolean>(false);
