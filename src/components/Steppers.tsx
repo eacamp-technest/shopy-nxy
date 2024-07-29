@@ -10,7 +10,7 @@ type TType = 'normal' | 'noCounter' | 'transparent';
 interface ISteppers {
   size: TSize;
   type: TType;
-  count: number;
+  count?: number;
   disabled?: boolean;
   increment?: () => void;
   decrement?: () => void;

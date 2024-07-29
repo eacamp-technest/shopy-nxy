@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
@@ -21,6 +21,24 @@ export const CheckOutScreen: React.FC<
 > = ({navigation, route}) => {
   const {images, title, price} = route.params as unknown as IItems;
 
+  const [count, setCount] = useState<number>(1);
+  const [disabled, setDisabled] = useState<boolean>(false);
+  const [newPrice, setPriceNewPrice] = useState(price);
+
+  const handlePlus = () => {
+    setDisabled(false);
+    setCount(prev => prev + 1);
+    setPriceNewPrice(prev => prev + price);
+  };
+  const handleMinus = () => {
+    if (count === 1) {
+      setDisabled(true);
+      return;
+    }
+    setCount(prev => prev - 1);
+    setPriceNewPrice(newPrice - price);
+  };
+
   return (
     <SafeMainProvider>
       <View style={styles.root}>
@@ -35,8 +53,12 @@ export const CheckOutScreen: React.FC<
         />
         <CardProduct
           type="add"
-          price={price}
+          count={count}
           title={title}
+          price={newPrice}
+          disabled={disabled}
+          increment={handlePlus}
+          decrement={handleMinus}
           images={{uri: images[0]}}
         />
       </View>
