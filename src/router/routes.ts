@@ -33,6 +33,7 @@ export enum StackRoutes {
   scanner = 'scanner',
   mostPopular = 'mostPopular',
   extra = 'extra',
+  checkout = 'checkout',
 }
 
 export enum TabRoutes {
