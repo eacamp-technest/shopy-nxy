@@ -27,9 +27,13 @@ export interface ICardProduct {
   type?: TTypeCard;
   star?: any;
   rating?: any;
+  count?: number;
+  disabled?: boolean;
   brand?: string;
   images?: ImageSourcePropType | any;
   onPress?: () => void;
+  increment?: () => void;
+  decrement?: () => void;
   style?: StyleProp<ViewStyle>;
   imageStyle?: StyleProp<ImageStyle>;
 }
@@ -44,6 +48,10 @@ export const CardProduct: React.FC<ICardProduct> = ({
   star,
   brand,
   imageStyle,
+  count,
+  increment,
+  decrement,
+  disabled,
 }) => {
   const [heartSvg, setHeartSvg] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -94,7 +102,9 @@ export const CardProduct: React.FC<ICardProduct> = ({
     </Text>
   );
 
-  const renderPrice = () => <Text style={styles.title}>{`$${price}`}</Text>;
+  const renderPrice = () => (
+    <Text numberOfLines={1} style={styles.title}>{`$${price}`}</Text>
+  );
 
   const renderProductInfo = () => (
     <View style={styles.main}>
@@ -111,7 +121,14 @@ export const CardProduct: React.FC<ICardProduct> = ({
         renderPrice()
       ) : isAdd ? (
         <View style={CommonStyles.alignCenterJustifyBetweenRow}>
-          <Steppers type="normal" size="small" count={0} />
+          <Steppers
+            disabled={disabled}
+            type="normal"
+            size="small"
+            count={count}
+            increment={increment}
+            decrement={decrement}
+          />
           <View style={styles.priceContainer}>{renderPrice()}</View>
         </View>
       ) : (
