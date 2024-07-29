@@ -17,6 +17,7 @@ import {CategoryFilter} from 'components/CategoryFilter';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
 import {FlexBottomSheet} from 'components/FlexBottomSheet';
+import {IProduct} from './favoriteTabView/ALLItems.Screen';
 import {useMostPopularStoreActions} from 'store/most-popular';
 import {CardProduct, ICardProduct} from 'components/CardProduct';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -44,6 +45,11 @@ export const MostPopularScreen: React.FC<
   const {categories} = useMostPopularStore();
   const {fetchCategories} = useMostPopularStoreActions();
 
+  const handleNavigation = (id?: number) => {
+    const items = productData?.find((item: IProduct) => item.id === id);
+    items && navigation.navigate(StackRoutes.checkout, {...items});
+  };
+
   const renderProduct = ({
     item,
     index,
@@ -60,6 +66,7 @@ export const MostPopularScreen: React.FC<
         style={styles.card}
         images={item.images[0]}
         imageStyle={styles.imageStyles}
+        onPress={() => handleNavigation(item.id)}
       />
     );
   };

@@ -111,8 +111,8 @@ export const CardProduct: React.FC<ICardProduct> = ({
         renderPrice()
       ) : isAdd ? (
         <View style={CommonStyles.alignCenterJustifyBetweenRow}>
-          <Steppers type="transparent" size="small" count={0} />
-          {renderPrice()}
+          <Steppers type="normal" size="small" count={0} />
+          <View style={styles.priceContainer}>{renderPrice()}</View>
         </View>
       ) : (
         <Fragment>
@@ -208,5 +208,8 @@ const styles = StyleSheet.create({
     right: 12,
     top: 0,
     bottom: 0,
+  },
+  priceContainer: {
+    flex: 1,
   },
 });
