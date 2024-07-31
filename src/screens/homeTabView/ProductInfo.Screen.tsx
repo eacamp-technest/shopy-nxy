@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
     color: colors.ink.base,
   },
   price: {
+    textAlign: 'center',
     ...TypographyStyles.RegularNoneSemibold,
     color: colors.ink.base,
   },
