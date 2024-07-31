@@ -105,10 +105,10 @@ export const ProductInfosScreenTab: React.FC<SceneRendererProps> = ({
         </View>
       ) : (
         <FlatList
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.contentContainerStyle}
           data={data}
           renderItem={renderProduct}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.contentContainerStyle}
         />
       )}
     </View>

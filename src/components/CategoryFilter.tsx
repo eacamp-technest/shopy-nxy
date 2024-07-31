@@ -50,13 +50,13 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
         style={[
           styles.main,
           backgroundColor,
-          activeButton === index ? styles.mainPress : null,
+          activeButton === index && styles.mainPress,
         ]}>
         <Text
           style={[
             styles.title,
             titleColor,
-            activeButton === index ? styles.titlePress : null,
+            activeButton === index && styles.titlePress,
           ]}>
           {item}
         </Text>

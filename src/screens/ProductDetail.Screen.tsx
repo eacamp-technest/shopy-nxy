@@ -44,9 +44,6 @@ export const ProductDetailScreen: React.FC<
     setContentColor('light-content');
   }, [color, navColor]);
 
-  const handleLoadStart = () => setLoading(true);
-  const handleLoadEnd = () => setLoading(false);
-
   useEffect(() => {
     const handleStars = () => {
       const totalStars = 6;
@@ -80,8 +77,8 @@ export const ProductDetailScreen: React.FC<
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <ImageBackground
-        onLoadStart={handleLoadStart}
-        onLoadEnd={handleLoadEnd}
+        onLoadStart={() => setLoading(true)}
+        onLoadEnd={() => setLoading(false)}
         style={[styles.root, color ? {backgroundColor: color} : null]}
         source={{uri: route.params.images}}>
         <SafeTopProvider content={contentColor}>

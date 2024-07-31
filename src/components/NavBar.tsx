@@ -67,9 +67,9 @@ export const NavBar: React.FC<INavBar> = ({
         {rightIcon || textRight ? (
           <View style={styles.rightContainer}>
             <Pressable
+              onPress={rightOnPress}
               hitSlop={standardHitSlopSize}
-              style={({pressed}) => [{opacity: pressed ? 0.5 : 1}]}
-              onPress={rightOnPress}>
+              style={({pressed}) => [{opacity: pressed ? 0.5 : 1}]}>
               {rightIcon ? (
                 <SvgImage source={rightIcon} color={rightColor} />
               ) : (

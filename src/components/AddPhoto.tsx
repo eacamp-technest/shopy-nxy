@@ -37,7 +37,7 @@ export const AddPhoto: React.FC<IAddPhoto> = ({
       activeOpacity={0.7}
       onPress={onPress}
       disabled={disabled}
-      style={[styles.root, !title ? styles.imageContainer : null, style]}>
+      style={[styles.root, !title && styles.imageContainer, style]}>
       {title ? (
         <Fragment>
           <View style={styles.camera}>

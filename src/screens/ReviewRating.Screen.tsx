@@ -161,7 +161,7 @@ export const ReviewRatingScreen: React.FC<
           disabled={disabled}
           height={bottomHeight}
           ref={bottomSheetModalRef}
-          style={disabled ? styles.borderRadiusDisabled : null}>
+          style={disabled && styles.borderRadiusDisabled}>
           <ScrollView
             showsVerticalScrollIndicator={false}
             contentContainerStyle={CommonStyles.flex}>
