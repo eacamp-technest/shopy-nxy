@@ -13,7 +13,7 @@ export const SliderColor: React.FC = () => {
     <View style={styles.root}>
       <View style={styles.slider}>
         <Text style={TypographyStyles.title3}>PRICE RANGE</Text>
-        <View style={styles.price}>
+        <View style={CommonStyles.justifyBetweenRow}>
           <Text style={TypographyStyles.RegularTightSemibold}>{'$69'}</Text>
           <Text style={TypographyStyles.RegularTightSemibold}>{'$321'}</Text>
         </View>
@@ -40,12 +40,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize('horizontal', 24),
   },
   slider: {
-    gap: normalize('vertical', 16),
     width: '100%',
-  },
-  price: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    gap: normalize('vertical', 16),
   },
   markerStyle: {
     borderWidth: 0,
