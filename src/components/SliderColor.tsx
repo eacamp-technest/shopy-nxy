@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
+import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
@@ -21,12 +22,13 @@ export const SliderColor: React.FC = () => {
           max={2}
           step={1}
           values={values}
-          sliderLength={280}
+          sliderLength={310}
           onValuesChange={setValues}
           trackStyle={styles.trackStyle}
           markerStyle={styles.markerStyle}
           selectedStyle={styles.selectedStyle}
           unselectedStyle={styles.unselectedStyle}
+          containerStyle={CommonStyles.alignCenterRow}
         />
       </View>
     </View>
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
   },
   slider: {
     gap: normalize('vertical', 16),
-    // backgroundColor: 'green',
+    width: '100%',
   },
   price: {
     flexDirection: 'row',
