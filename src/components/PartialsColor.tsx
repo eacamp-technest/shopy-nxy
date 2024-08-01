@@ -53,7 +53,7 @@ export const PartialsColor: React.FC<IColors> = ({
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={[
           styles.contentContainerStyle,
-          position === 'vertical' ? CommonStyles.flexJustifyCenter : null,
+          position === 'vertical' && CommonStyles.flexJustifyCenter,
         ]}
       />
     </View>
