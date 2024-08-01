@@ -8,19 +8,19 @@ import {TypographyStyles} from 'theme/typography';
 import {StackRoutes, TabRoutes} from 'router/routes';
 import {NavigationParamList} from 'types/navigation.types';
 import {SafeTopProvider} from 'containers/SafeTopProvider';
-import {BoardsScreen} from './favoriteTabView/Boards.Screen';
+import {FilterScreen} from './favoriteTabView/Filter.Screen';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {ALLItemsScreen} from './favoriteTabView/ALLItems.Screen';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 const renderScene = SceneMap({
   [StackRoutes.allItems]: ALLItemsScreen,
-  [StackRoutes.boards]: BoardsScreen,
+  [StackRoutes.boards]: FilterScreen,
 });
 
 const routes = [
   {key: StackRoutes.allItems, title: 'All Items'},
-  {key: StackRoutes.boards, title: 'Boards'},
+  {key: StackRoutes.boards, title: 'Filters'},
 ];
 
 export const FavoriteScreen: React.FC<
