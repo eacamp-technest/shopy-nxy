@@ -90,9 +90,9 @@ export const colors = {
 };
 
 export const colorsVertical = [
+  '#E4572E',
   '#1DA1F2',
   '#5D8DEA',
-  '#E4572E',
   '#FFD791',
   '#3A5BA0',
   '#B671DB',

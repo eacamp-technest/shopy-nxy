@@ -5,7 +5,6 @@ import {normalize} from 'theme/metrics';
 import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import {useProductDetailStore} from 'store/product-detail/productDetail.store';
 
 interface ISlider {
   sliderColor?: StyleProp<ViewStyle>;

@@ -6,7 +6,6 @@ import {normalize} from 'theme/metrics';
 import {Tables} from 'components/Tables';
 import {Divider} from 'components/Divider';
 import {ENDPOINTS} from 'services/Endpoints';
-import {cardWidth} from 'utils/home.screen.size';
 import {TypographyStyles} from 'theme/typography';
 import {SliderColor} from 'components/SliderColor';
 import {PartialsColor} from 'components/PartialsColor';
@@ -19,7 +18,8 @@ export const FilterScreen: React.FC<SceneRendererProps> = ({}) => {
   const [productData, setProductData] = useState();
   const [categories, setCategories] = useState<any>({});
 
-  const name = useCategoryStore().name.toLocaleLowerCase();
+  const sliderCategoryName =
+    useCategoryStore().sliderCategoryName.toLocaleLowerCase();
   const {sliderColor} = useProductDetailStore();
 
   useEffect(() => {
@@ -45,12 +45,12 @@ export const FilterScreen: React.FC<SceneRendererProps> = ({}) => {
     const fetchProducts = async () => {
       const res = await axios({
         method: 'GET',
-        url: `${ENDPOINTS.store.productsByCategory}/${name}`,
+        url: `${ENDPOINTS.store.productsByCategory}/${sliderCategoryName}`,
       });
       res.status === 200 && setProductData(res.data.products);
     };
     fetchProducts();
-  }, [name]);
+  }, [sliderCategoryName]);
 
   return (
     <ScrollView
@@ -66,16 +66,14 @@ export const FilterScreen: React.FC<SceneRendererProps> = ({}) => {
         <PartialsColor position={'vertical'} title={'COLORS'} />
       </View>
       <Divider height={'large'} />
-      <Pressable onPress={Keyboard.dismiss} style={styles.rootCategories}>
-        <View style={styles.header}>
-          <Tables content="CATEGORIES" contentStyle={TypographyStyles.title3} />
-          <View style={styles.categoryFilter}>
-            <CategoryFilter
-              categories={categories}
-              backgroundColor={styles.filterButton}
-              pressColor={{backgroundColor: sliderColor}}
-            />
-          </View>
+      <Pressable onPress={Keyboard.dismiss}>
+        <Tables content="CATEGORIES" contentStyle={TypographyStyles.title3} />
+        <View style={styles.categoryFilter}>
+          <CategoryFilter
+            categories={categories}
+            backgroundColor={styles.filterButton}
+            pressColor={{backgroundColor: sliderColor}}
+          />
         </View>
       </Pressable>
     </ScrollView>
@@ -96,35 +94,12 @@ const styles = StyleSheet.create({
   partial: {
     paddingHorizontal: normalize('horizontal', 24),
   },
-  rootCategories: {
-    flex: 1,
-    backgroundColor: colors.white,
-    paddingVertical: normalize('vertical', 8),
-  },
   categoryFilter: {
     paddingTop: normalize('vertical', 8),
     paddingBottom: normalize('vertical', 32),
     paddingLeft: normalize('horizontal', 24),
   },
-  scroll: {
-    flex: 1,
-    minHeight: '100%',
-    paddingHorizontal: normalize('horizontal', 24),
-  },
-  tableRight: {
-    ...TypographyStyles.RegularTightSemibold,
-    color: colors.primary.base,
-  },
-  imageStyles: {
-    width: cardWidth,
-  },
   filterButton: {
     backgroundColor: colors.skyLightest,
-  },
-  header: {
-    zIndex: 1,
-  },
-  pressColor: {
-    backgroundColor: 'red',
   },
 });

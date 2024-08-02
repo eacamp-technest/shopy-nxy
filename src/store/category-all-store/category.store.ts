@@ -3,6 +3,7 @@ import {ICategoryStore} from './category.types';
 
 const initial: Omit<ICategoryStore, 'actions'> = {
   name: 'all',
+  sliderCategoryName: 'beauty',
 };
 
 export const useCategoryStore = create<ICategoryStore>(set => ({
@@ -10,6 +11,9 @@ export const useCategoryStore = create<ICategoryStore>(set => ({
   actions: {
     addCategory(name) {
       set({name});
+    },
+    addSliderCategory(sliderCategoryName) {
+      set({sliderCategoryName});
     },
     reset: () => set({...initial}),
   },
