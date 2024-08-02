@@ -90,12 +90,12 @@ export const colors = {
 };
 
 export const colorsVertical = [
-  '#D9D9D9',
-  '#A9A9A9',
+  '#1DA1F2',
+  '#5D8DEA',
   '#E4572E',
   '#FFD791',
   '#3A5BA0',
-  '#888888',
+  '#B671DB',
 ];
 
 export const colorsHorizontal = ['#D9D9D9', '#E4572E', '#FFD791', '#3A5BA0'];

@@ -5,9 +5,12 @@ import {normalize} from 'theme/metrics';
 import {CommonStyles} from 'theme/commonStyles';
 import {TypographyStyles} from 'theme/typography';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import {useProductDetailStore} from 'store/product-detail/productDetail.store';
 
 export const SliderColor: React.FC = () => {
   const [values, setValues] = useState([1, 5]);
+
+  const {sliderColor} = useProductDetailStore();
 
   return (
     <View style={styles.root}>
@@ -25,10 +28,10 @@ export const SliderColor: React.FC = () => {
           sliderLength={310}
           onValuesChange={setValues}
           trackStyle={styles.trackStyle}
-          markerStyle={styles.markerStyle}
-          selectedStyle={styles.selectedStyle}
           unselectedStyle={styles.unselectedStyle}
           containerStyle={CommonStyles.alignCenterRow}
+          markerStyle={[styles.markerStyle, {backgroundColor: sliderColor}]}
+          selectedStyle={{backgroundColor: sliderColor}}
         />
       </View>
     </View>
@@ -48,15 +51,11 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     height: normalize('height', 32),
     width: normalize('width', 32),
-    backgroundColor: colors.primary.base,
   },
   unselectedStyle: {
     backgroundColor: colors.skyLight,
   },
   trackStyle: {
     height: normalize('height', 2),
-  },
-  selectedStyle: {
-    backgroundColor: colors.primary.base,
   },
 });

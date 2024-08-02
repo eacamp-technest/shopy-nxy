@@ -18,8 +18,9 @@ export const PartialsColor: React.FC<IColors> = ({
   position = 'vertical',
 }) => {
   const [selectedColor, setSelectedColor] = useState<string>('');
+  const [sliderColor, setSliderColor] = useState<string>('');
 
-  const {handleColor} = useProductDetailActions();
+  const {handleColor, handleSliderColor} = useProductDetailActions();
 
   const data = position === 'horizontal' ? colorsHorizontal : colorsVertical;
 
@@ -29,7 +30,9 @@ export const PartialsColor: React.FC<IColors> = ({
         style={[
           styles.colorBox,
           {backgroundColor: item},
-          selectedColor === item ? styles.selected : null,
+          selectedColor === item || sliderColor === item
+            ? styles.selected
+            : null,
         ]}
         onPress={() => changeColor(item)}
       />
@@ -37,8 +40,13 @@ export const PartialsColor: React.FC<IColors> = ({
   };
 
   const changeColor = (item: any) => {
-    setSelectedColor(item);
-    handleColor(item);
+    if (position === 'horizontal') {
+      setSelectedColor(item);
+      handleColor(item);
+      return;
+    }
+    setSliderColor(item);
+    handleSliderColor(item);
   };
 
   return (
