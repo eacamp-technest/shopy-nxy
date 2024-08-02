@@ -21,6 +21,7 @@ interface ICategoryFilter {
   categories?: any;
   activeButton?: number;
   activeName?: string;
+  pressColor?: StyleProp<ViewStyle>;
   titleColor?: StyleProp<TextStyle>;
   backgroundColor?: StyleProp<ViewStyle>;
 }
@@ -33,6 +34,7 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
   titleColor,
   backgroundColor,
   categories,
+  pressColor,
 }) => {
   const [activeButton, setActiveButton] = useState<number>(0);
 
@@ -50,7 +52,7 @@ export const CategoryFilter: React.FC<ICategoryFilter> = ({
         style={[
           styles.main,
           backgroundColor,
-          activeButton === index && styles.mainPress,
+          activeButton === index && pressColor,
         ]}>
         <Text
           style={[
@@ -88,9 +90,6 @@ const styles = StyleSheet.create({
     ...TypographyStyles.RegularNoneRegular,
     color: colors.ink.base,
     lineHeight: deviceLineHeight,
-  },
-  mainPress: {
-    backgroundColor: colors.primary.base,
   },
   titlePress: {
     color: colors.white,

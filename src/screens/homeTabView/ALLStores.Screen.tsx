@@ -164,6 +164,7 @@ export const ALLStoresScreenTab: React.FC<SceneRendererProps> = ({jumpTo}) => {
         <View style={styles.categoryFilter}>
           <CategoryFilter
             categories={categories}
+            pressColor={styles.pressColor}
             backgroundColor={styles.filterButton}
           />
         </View>
@@ -225,5 +226,8 @@ const styles = StyleSheet.create({
   },
   header: {
     zIndex: 1,
+  },
+  pressColor: {
+    backgroundColor: colors.primary.base,
   },
 });

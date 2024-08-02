@@ -115,6 +115,7 @@ export const MostPopularScreen: React.FC<
       <View style={styles.categoryFilter}>
         <CategoryFilter
           categories={categories}
+          pressColor={styles.pressColor}
           titleColor={styles.titleFilterColor}
           backgroundColor={styles.filterButton}
         />
@@ -214,5 +215,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     paddingBottom: normalize('vertical', 50),
+  },
+  pressColor: {
+    backgroundColor: colors.primary.base,
   },
 });

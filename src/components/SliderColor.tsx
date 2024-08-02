@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, StyleProp, ViewStyle} from 'react-native';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
 import {CommonStyles} from 'theme/commonStyles';
@@ -7,10 +7,16 @@ import {TypographyStyles} from 'theme/typography';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import {useProductDetailStore} from 'store/product-detail/productDetail.store';
 
-export const SliderColor: React.FC = () => {
-  const [values, setValues] = useState([1, 5]);
+interface ISlider {
+  sliderColor?: StyleProp<ViewStyle>;
+  selectedStyle?: StyleProp<ViewStyle>;
+}
 
-  const {sliderColor} = useProductDetailStore();
+export const SliderColor: React.FC<ISlider> = ({
+  sliderColor,
+  selectedStyle,
+}) => {
+  const [values, setValues] = useState([1, 5]);
 
   return (
     <View style={styles.root}>
@@ -28,10 +34,10 @@ export const SliderColor: React.FC = () => {
           sliderLength={310}
           onValuesChange={setValues}
           trackStyle={styles.trackStyle}
+          selectedStyle={selectedStyle}
           unselectedStyle={styles.unselectedStyle}
           containerStyle={CommonStyles.alignCenterRow}
-          markerStyle={[styles.markerStyle, {backgroundColor: sliderColor}]}
-          selectedStyle={{backgroundColor: sliderColor}}
+          markerStyle={[styles.markerStyle, sliderColor]}
         />
       </View>
     </View>
