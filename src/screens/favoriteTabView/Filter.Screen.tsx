@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, ScrollView, Pressable, Keyboard} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+  Keyboard,
+  Text,
+} from 'react-native';
 import axios from 'axios';
 import {colors} from 'theme/colors';
 import {normalize} from 'theme/metrics';
